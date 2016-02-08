@@ -13,45 +13,43 @@ define(function( require ) {
 
 	UiMini.prototype.initButtonsSongs = function () {
 
-		for(var type in ressources)
-		{
-			
-			var buttonSong=$('<div class="button instrument"></div>');
+		var types=ResourcesHandler.getTypes();
 
-			buttonSong.attr('type',type);
-			buttonSong.attr('data-song-id', -1);
+	   	for (var i = 1; i < 9; i++) {
+	   		var type="type-"+i;
+	        var buttonSong=$('<div class="button instrument"></div>');
+	        buttonSong.attr('type',type);
 
-			$('#buttons-songs').append(buttonSong);
-
-		}
+	        $('#buttons-songs').append(buttonSong);
+	   	};
 
 		$('#myModal').modal('show');
 	}
 
 	UiMini.prototype.initButtonsModal = function () {
 
-		var songsByType = ResourcesHandler.getSongsByType();
+
+	    var songsByType = ResourcesHandler.songsDirectories;
 
 		for ( var type in songsByType )
 		{
 			var line=$("<div type="+type+"></div>");
 			$("#choose-song").append(line);
 			
-			for ( var song in songsByType[type])
-			{
+			var songs=songsByType[type];
+			for (var i = 0; i < songs.length; i++){
+
+				var song=songs[i];
+
 				var buttonSong=$('<div class="button instrument"></div>');
 				buttonSong.attr('type',type);
-				buttonSong.attr('data-song-id', songsByType[type][song].id);
+				buttonSong.attr('data-song-id', song.id);
 
-				if( song.loaded )
-					buttonSong.addClass('active');
-
-				buttonSong.append("<span>" + ++song  + "</span>");
+				buttonSong.append("<span>" +i+ "</span>");
 
 				line.append(buttonSong);
 			}
 		}
-
 	}
 
 	UiMini.prototype.initTimelineHeight = function() {

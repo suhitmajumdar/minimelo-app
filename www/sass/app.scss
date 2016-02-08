@@ -41,24 +41,29 @@ ul{
 }
 
 
-/*.instrument{
-    background-image:url("../img/buttons_left.png");
-    background-size: cover;
-    width: 50px;
-    height: 55px;
-    display:inline-block;
+.button{
+    	background-image:url("../img/buttons_sprite.png");
+		background-size: cover;
+		width: 55px;
+		height: 55px;
 
-    &[type="voice"]{background-position:0 0px;}
-	&[type="flute"]{background-position:0 -60px;}
-	&[type="violin"]{background-position:0 -123px;}
-	&[type="piano"]{background-position:0 -183px;}
-	&[type="cymbal"]{background-position:0 -245px;}
-	&[type="drum"]{background-position:0 -311px;}
-	&[type="guitar"]{background-position:0 -372px;}
-	&[type="trumpet"]{background-position:0 -434px;}
-	&[type="plus_instru"]{background-position:0 -492px;}
+		&:hover{
+			background-position:0 33%;
+		}
 
-}*/
+		&[type="type-1"]{ background-color: $red; }/* RED */
+		&[type="type-2"]{ background-color: $orange; }/* ORANGE */
+		&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
+		&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
+		&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
+		&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
+		&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
+		&[type="type-8"]{ background-color: $purple; }/* PURPLE */
+
+		&.disabled{
+			background-color: grey;
+		}
+	}
 
 /* Portrait layout (default) */
 
@@ -190,44 +195,44 @@ header{
 			}
 
 			/* RED */
-			&[type="drum"]{
+			&[type="type-1"]{
 				background-color: $red;
 				border: 5px solid $red;
 			}
 
 			/* ORANGE */
-			&[type="cymbal"]{
+			&[type="type-2"]{
 			 background-color: $orange;
 			 border: 5px solid $orange; 
 			 }
 
 			/* YELLOW */
-			&[type="flute"]{ 
+			&[type="type-3"]{ 
 				background-color: $yellow; 
 				border: 5px solid $yellow;
 			}
 			/* CLEAR GREEN */
-			&[type="piano"]{ 
+			&[type="type-4"]{ 
 				background-color: $clear_green;
 				border: 5px solid $clear_green;
 			}
 			 /* DARK  GREEN */
-			&[type="violin"]{
+			&[type="type-5"]{
 				background-color: $dark_green; 
 				border: 5px solid $dark_green;
 			}
 			/* DARK  BLUE */
-			&[type="trumpet"]{
+			&[type="type-6"]{
 				background-color: $dark_blue;
 				border: 5px solid $dark_blue;
 			}
 			/* CLEAR BLUE */
-			&[type="guitar"]{ 
+			&[type="type-7"]{ 
 				background-color: $clear_blue; 
 				border: 5px solid $clear_blue;
 			}
 			/* PURPLE */
-			&[type="voice"]{
+			&[type="type-8"]{
 				background-color: $purple; 
 				border: 5px solid $purple;
 			}
@@ -310,7 +315,7 @@ header{
 			background-size: cover;
 			display: inline-block;
 			position:relative;
-			opacity:0.8;
+			opacity:0.2;
 
 			&.active{
 				background-position:0 33%;

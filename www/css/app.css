@@ -1,13 +1,3 @@
-/*$red : #eb3816;
-$orange : #ff7800;
-$yellow : #ffe400;
-$clear_green : #aaf400;
-$dark_green : #00a134;
-$dark_blue : #0085ff;
-$clear_blue : #84d6ff;
-$purple : #9b0080;
-$black : #000000;
-*/
 html {
   height: 100%; }
 
@@ -41,24 +31,40 @@ ul {
     -webkit-user-select: none;
     cursor: pointer; }
 
-/*.instrument{
-    background-image:url("../img/buttons_left.png");
-    background-size: cover;
-    width: 50px;
-    height: 55px;
-    display:inline-block;
+.button {
+  background-image: url("../img/buttons_sprite.png");
+  background-size: cover;
+  width: 55px;
+  height: 55px;
+  /* RED */
+  /* ORANGE */
+  /* YELLOW */
+  /* CLEAR GREEN */
+  /* DARK  GREEN */
+  /* DARK  BLUE */
+  /* CLEAR BLUE */
+  /* PURPLE */ }
+  .button:hover {
+    background-position: 0 33%; }
+  .button[type="type-1"] {
+    background-color: rgba(235, 56, 22, 0.8); }
+  .button[type="type-2"] {
+    background-color: rgba(255, 120, 0, 0.8); }
+  .button[type="type-3"] {
+    background-color: rgba(255, 228, 0, 0.8); }
+  .button[type="type-4"] {
+    background-color: rgba(170, 244, 0, 0.8); }
+  .button[type="type-5"] {
+    background-color: rgba(0, 161, 52, 0.8); }
+  .button[type="type-6"] {
+    background-color: rgba(0, 133, 255, 0.8); }
+  .button[type="type-7"] {
+    background-color: rgba(132, 214, 255, 0.8); }
+  .button[type="type-8"] {
+    background-color: rgba(155, 0, 128, 0.8); }
+  .button.disabled {
+    background-color: grey; }
 
-    &[type="voice"]{background-position:0 0px;}
-	&[type="flute"]{background-position:0 -60px;}
-	&[type="violin"]{background-position:0 -123px;}
-	&[type="piano"]{background-position:0 -183px;}
-	&[type="cymbal"]{background-position:0 -245px;}
-	&[type="drum"]{background-position:0 -311px;}
-	&[type="guitar"]{background-position:0 -372px;}
-	&[type="trumpet"]{background-position:0 -434px;}
-	&[type="plus_instru"]{background-position:0 -492px;}
-
-}*/
 /* Portrait layout (default) */
 .app {
   width: 100%;
@@ -188,28 +194,28 @@ header {
       #timeline .piste .song.inDrag {
         opacity: 0.7;
         z-index: 3; }
-      #timeline .piste .song[type="drum"] {
+      #timeline .piste .song[type="type-1"] {
         background-color: rgba(235, 56, 22, 0.8);
         border: 5px solid rgba(235, 56, 22, 0.8); }
-      #timeline .piste .song[type="cymbal"] {
+      #timeline .piste .song[type="type-2"] {
         background-color: rgba(255, 120, 0, 0.8);
         border: 5px solid rgba(255, 120, 0, 0.8); }
-      #timeline .piste .song[type="flute"] {
+      #timeline .piste .song[type="type-3"] {
         background-color: rgba(255, 228, 0, 0.8);
         border: 5px solid rgba(255, 228, 0, 0.8); }
-      #timeline .piste .song[type="piano"] {
+      #timeline .piste .song[type="type-4"] {
         background-color: rgba(170, 244, 0, 0.8);
         border: 5px solid rgba(170, 244, 0, 0.8); }
-      #timeline .piste .song[type="violin"] {
+      #timeline .piste .song[type="type-5"] {
         background-color: rgba(0, 161, 52, 0.8);
         border: 5px solid rgba(0, 161, 52, 0.8); }
-      #timeline .piste .song[type="trumpet"] {
+      #timeline .piste .song[type="type-6"] {
         background-color: rgba(0, 133, 255, 0.8);
         border: 5px solid rgba(0, 133, 255, 0.8); }
-      #timeline .piste .song[type="guitar"] {
+      #timeline .piste .song[type="type-7"] {
         background-color: rgba(132, 214, 255, 0.8);
         border: 5px solid rgba(132, 214, 255, 0.8); }
-      #timeline .piste .song[type="voice"] {
+      #timeline .piste .song[type="type-8"] {
         background-color: rgba(155, 0, 128, 0.8);
         border: 5px solid rgba(155, 0, 128, 0.8); }
     #timeline .piste .box {
@@ -270,7 +276,7 @@ header {
     background-size: cover;
     display: inline-block;
     position: relative;
-    opacity: 0.8; }
+    opacity: 0.2; }
     #myModal #choose-song .button.active {
       background-position: 0 33%;
       opacity: 1;

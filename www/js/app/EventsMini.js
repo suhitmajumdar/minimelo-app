@@ -83,7 +83,7 @@ define(function(require) {
 
 	EventsMini.prototype.initDragAndDrop = function () {
 
-  		document.ontouchmove=document.onmousemove=function (event){
+  		document.ontouchmove=function (event){
   			var clientX;
   			var clientY;
 
@@ -237,16 +237,18 @@ define(function(require) {
 
 		$(".validate_btn.button").click(function(){
 
-			$("#choose-song div .button.active").each(function(){
+			$("#choose-song div .button.active:not(.disabled)").each(function(){
 
 				var typeSong = $(this).attr('type');
 				var buttonToReplace= $("#buttons-songs .button[type='"+typeSong+"']");
 				
 				var idNewSong=$(this).attr('data-song-id');
 
-				ResourcesHandler.getSong(idNewSong).load();
+				
 
 				buttonToReplace.attr('data-song-id',idNewSong);
+
+				ResourcesHandler.loadSong(idNewSong);
 			
 			});
 
@@ -254,11 +256,16 @@ define(function(require) {
     }
 
     EventsMini.prototype.initSongClick=function (){
-    	$( document ).on( "mousedown", ".button[data-song-id]", function() {
-      		ResourcesHandler.getSong($(this).attr('data-song-id')).playOnce();
-	        
+    	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled)", function() {
+
+	        var idSong=$(this).attr('data-song-id');
+	        ResourcesHandler.playPreview(idSong);
+
 	        if($(this).parent().attr('id')=="buttons-songs"){
 	        	$("#buttons-songs .button").removeClass("active");
+	        }
+	        else if($(this).parent().parent().attr('id')=="choose-song"){
+	        	$(this).parent().find('.button').removeClass("active");
 	        }
 	        $(this).addClass("active");
     	});

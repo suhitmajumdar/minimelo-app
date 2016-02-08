@@ -15,21 +15,21 @@ define(function( require ) {
 		this.stopTime  = 0;
 	}
 
-	Song.prototype.load = function () {
-		var self = this;
+	// Song.prototype.load = function () {
+	// 	var self = this;
 
-		$.ajax({
-			url: self.url,
-			xhrFields : {responseType : 'arraybuffer'},
-		}).done(function(arrayBuffer){
+	// 	$.ajax({
+	// 		url: self.url,
+	// 		xhrFields : {responseType : 'arraybuffer'},
+	// 	}).done(function(arrayBuffer){
 
-			audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
-				self.buffer = buffer;
+	// 		audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
+	// 			self.buffer = buffer;
 				
-		  }, function(e) {"Error with decoding audio data" + e.err;} );  
-		});
+	// 	  }, function(e) {"Error with decoding audio data" + e.err;} );  
+	// 	});
 
-	}
+	// }
 
 	Song.prototype.loadAndPlayOnce = function ( ) {
 		var self = this;
@@ -50,6 +50,60 @@ define(function( require ) {
 		  }, function(e) {"Error with decoding audio data" + e.err;} );  
 		});
 
+	}
+
+	Song.prototype.loadByFile = function () {
+		var self = this;
+
+		return new Promise(function (resolve, reject) {
+			
+			window.resolveLocalFileSystemURL(self.url,resolve,reject);
+			
+		}).then(function(fileEntry){
+
+			return new Promise(function(resolve,reject){
+				fileEntry.file(resolve,reject);
+			});
+
+		}).then(function(file){
+			
+			return new Promise(function(resolve,reject){
+				var reader = new FileReader();
+
+                reader.onloadend = resolve;
+
+                reader.readAsArrayBuffer(file);
+				
+			});
+
+		}).then(function(e){
+			var arrayBuffer=e.target.result;
+			return new Promise(function(resolve,reject){
+				audioCtx.decodeAudioData(arrayBuffer,resolve,reject);  
+			});
+		}).then(
+
+			function(audioBuffer){
+				// console.log(audioBuffer);
+				self.buffer=audioBuffer;
+			},
+			function(){
+				console.log("Impossible de lire "+self.url);
+				$('.button[data-song-id="'+self.id+'"]').addClass('disabled');
+				
+			}
+		);
+
+	}
+
+	Song.prototype.playForPreview = function ( ) {
+		var self = this;
+
+		return self.loadByFile().then(function(){
+			var source=self.play();
+			self.buffer=null;
+			return Promise.resolve(source);
+		});
 	}
 
 	Song.prototype.playWithTime = function ( time ) {

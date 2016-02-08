@@ -24,17 +24,19 @@ $(document).ready(function() {
 
             onDeviceReady : function () {
 
-                ressources.loadSongs();
                 var uiMini   = new UiMini();
                 var eventsMini   = new EventsMini(uiMini);
+
                 uiMini.initUiMini();
                 eventsMini.initEventsMini();
-                
+                ressources.loadSongs().then(function(data){
+                    uiMini.initButtonsModal();
+                    console.log(ressources);
+                });
+
             }
         };
 
-
-        // application.init();
 
         application.onDeviceReady();
     });
