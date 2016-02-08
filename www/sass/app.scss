@@ -1,0 +1,489 @@
+$red : rgba(235, 56, 22, 0.8);
+$orange : rgba(255, 120, 0, 0.8);
+$yellow : rgba(255, 228, 0, 0.8);
+$clear_green : rgba(170, 244, 0, 0.8);
+$dark_green : rgba(0, 161, 52, 0.8);
+$dark_blue : rgba(0, 133, 255, 0.8);
+$clear_blue : rgba(132, 214, 255, 0.8);
+$purple : rgba(155, 0, 128, 0.8);
+
+html{
+	height: 100%;
+}
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:14px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+    background-color:#FFF;
+}
+
+@font-face {
+    font-family: "Orange";
+    src: url(../fonts/orange_juice.ttf);
+}
+/*General style elements*/
+aside{width:20%;}
+
+
+ul{
+	-webkit-user-select: none;
+	cursor: pointer;
+	li{
+		-webkit-user-select: none;
+		cursor: pointer;
+	}
+}
+
+
+/*.instrument{
+    background-image:url("../img/buttons_left.png");
+    background-size: cover;
+    width: 50px;
+    height: 55px;
+    display:inline-block;
+
+    &[type="voice"]{background-position:0 0px;}
+	&[type="flute"]{background-position:0 -60px;}
+	&[type="violin"]{background-position:0 -123px;}
+	&[type="piano"]{background-position:0 -183px;}
+	&[type="cymbal"]{background-position:0 -245px;}
+	&[type="drum"]{background-position:0 -311px;}
+	&[type="guitar"]{background-position:0 -372px;}
+	&[type="trumpet"]{background-position:0 -434px;}
+	&[type="plus_instru"]{background-position:0 -492px;}
+
+}*/
+
+/* Portrait layout (default) */
+
+.app{
+
+	width:100%;
+    height: 100%;
+    .row{
+    	margin:0;
+    }
+	h1{
+	    font-size:48px;
+	    display:inline-block;
+	    overflow:visible;
+	    font-family:"Orange";
+	    margin: 0px;
+	    padding: 10px;
+	}
+}
+
+header{
+	width:100%;
+	height:auto;
+
+	img
+	{
+		max-width:100%;
+	}
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+    
+    }
+}
+
+#buttons-songs{
+	.button{margin-top:10px;}
+}
+
+#buttons-songs, 
+#buttons-songs-modal{
+
+	.button{
+    	background-image:url("../img/buttons_sprite.png");
+		background-size: cover;
+		width: 55px;
+		height: 55px;
+
+		&:hover{
+			background-position:0 33%;
+		}
+
+		&[type="drum"]{ background-color: $red; }/* RED */
+		&[type="cymbal"]{ background-color: $orange; }/* ORANGE */
+		&[type="flute"]{ background-color: $yellow; }/* YELLOW */
+		&[type="piano"]{ background-color: $clear_green; }/* CLEAR GREEN */
+		&[type="violin"]{ background-color: $dark_green; }/* DARK  GREEN */
+		&[type="trumpet"]{ background-color: $dark_blue; }/* DARK  BLUE */
+		&[type="guitar"]{ background-color: $clear_blue; }/* CLEAR BLUE */
+		&[type="voice"]{ background-color: $purple; }/* PURPLE */
+	}
+
+	/*.button.active{
+	    transform:scale(1.1);
+	}*/
+}
+
+/*#buttons-songs-modal{
+
+	border-right:1px solid #000;
+	padding-right:10px;
+
+	.button.active{
+	    transform:scale(1.2);
+	}
+
+}*/
+
+
+
+#buttons-songs-modal{
+
+	.button span{font-size:32px;
+				font-family:"Orange";
+				position:absolute;
+				top:4px;
+				text-align:center;
+				width:100%;
+				padding-left:5px;}
+
+	.button{position:relative;}
+}
+
+#timeline{
+	
+	width: 100%;
+    overflow-x: auto;
+    position: relative;
+    max-height: 100%;
+    height: 500px;
+    background: #f4f6fe;
+
+    .piste {
+    	border-bottom:1px solid white;
+    	height: 25%;
+    	position: relative;
+
+    	.song{
+    		/*border-left:1px solid black;
+    		border-right:1px solid black;*/
+    		position: absolute;
+    		height:100%;
+    		display: inline-block;
+    		z-index: 1;
+    		box-sizing:border-box;
+			background-image: url("../img/texture_crayon-1.png");
+			background-repeat-x: repeat;
+			border-radius:3px;
+
+    		&.active{
+				/*border: 1px solid white;*/
+    			opacity: 0.6;
+			}
+			&.inDrag{
+				opacity: 0.7;
+				z-index: 3;
+			}
+
+			/* RED */
+			&[type="drum"]{
+				background-color: $red;
+				border: 5px solid $red;
+			}
+
+			/* ORANGE */
+			&[type="cymbal"]{
+			 background-color: $orange;
+			 border: 5px solid $orange; 
+			 }
+
+			/* YELLOW */
+			&[type="flute"]{ 
+				background-color: $yellow; 
+				border: 5px solid $yellow;
+			}
+			/* CLEAR GREEN */
+			&[type="piano"]{ 
+				background-color: $clear_green;
+				border: 5px solid $clear_green;
+			}
+			 /* DARK  GREEN */
+			&[type="violin"]{
+				background-color: $dark_green; 
+				border: 5px solid $dark_green;
+			}
+			/* DARK  BLUE */
+			&[type="trumpet"]{
+				background-color: $dark_blue;
+				border: 5px solid $dark_blue;
+			}
+			/* CLEAR BLUE */
+			&[type="guitar"]{ 
+				background-color: $clear_blue; 
+				border: 5px solid $clear_blue;
+			}
+			/* PURPLE */
+			&[type="voice"]{
+				background-color: $purple; 
+				border: 5px solid $purple;
+			}
+    	}
+		.box{
+			height:60px;
+		    width: 60px;
+		    vertical-align: top;
+			box-sizing:border-box;
+			border:1px solid;
+			text-align: center;
+
+			.instrument{
+				background-color: rgba(0,0,0,0.5);
+				width: 100%;
+				height: 100%;
+			}
+			.instrument.active{
+				transform:scale(1.3);
+			}
+		}
+		.box:nth-child(4n+1) {
+		  border-left: 2px solid black;
+		}
+		.box:nth-child(4n) {
+		  border-right: 2px solid black;
+		}
+	}
+
+	#line{
+		top: 0px;
+		width: 0px;
+		background: rgba(72,197,72,0.51);
+		height: 100%;
+		position: absolute;
+		left: 0px;
+		display: inline-block;
+		border-right: 1px solid rgba(97,102,127,0.2);;
+	    background: rgb(238, 240, 250);
+	}
+}
+
+/*CSS MODAL*/
+#myModal{
+	
+	.modal-dialog {
+	    width: 100%;
+	    height: 100%;
+	    margin: 0;
+	    .modal-content{
+	    	height: 100%;
+
+	    	.modal-body{
+	    		text-align: center;
+	    	}
+	    }
+	}
+
+
+
+	#choose-song{
+	    display: inline-block;
+	    text-align: left;
+
+		div{margin-right:10px;}
+
+		div .button span{font-size:32px;
+					font-family:"Orange";
+					position:absolute;
+					top:4px;
+					text-align:center;
+					width:100%;
+					padding-left:5px;
+					}
+
+		.button{
+			width: 55px;
+			height: 55px;
+	    	background-image:url("../img/buttons_sprite.png");
+			background-size: cover;
+			display: inline-block;
+			position:relative;
+			opacity:0.8;
+
+			&.active{
+				background-position:0 33%;
+			    opacity:1;
+
+			    &[type="drum"]{
+				background-color: $red;
+				}
+
+				/* ORANGE */
+				&[type="cymbal"]{
+				 background-color: $orange;
+				 }
+
+				/* YELLOW */
+				&[type="flute"]{ 
+					background-color: $yellow; 
+				}
+				/* CLEAR GREEN */
+				&[type="piano"]{ 
+					background-color: $clear_green;
+				}
+				 /* DARK  GREEN */
+				&[type="violin"]{
+					background-color: $dark_green; 
+				}
+				/* DARK  BLUE */
+				&[type="trumpet"]{
+					background-color: $dark_blue;
+				}
+				/* CLEAR BLUE */
+				&[type="guitar"]{ 
+					background-color: $clear_blue; 
+				}
+				/* PURPLE */
+				&[type="voice"]{
+					background-color: $purple; 
+				}
+
+			}
+
+
+		}
+
+
+
+	}
+
+	.round_btn{
+	    display: inline-block;
+	    background: url('../img/round_button_sprite.png') no-repeat;
+	    background-size: cover;
+	    width: 50px;
+	    height: 50px;
+
+	&.validate_btn{ 
+	    background-position-y: -300px;
+	    text-align:center;
+	    &:active{ background-position-y: -850px; }
+	    }
+	}
+
+	
+
+}
+/*---------*/
+
+#deck-buttons{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	div:nth-of-type(3) {
+		text-align:right;
+	}
+	
+	div:nth-of-type(1){
+		p{
+			font-family:"Orange";
+		}
+	}
+	
+	img{
+		margin-left:10px;
+        width:40px;
+        height:40px;
+    }
+
+
+    .round_btn{
+	    display: inline-block;
+	    width: 50px;
+	    height: 50px;
+	   	background-image: url("../img/buttons_sprite.png");
+	    background-size: cover;
+		background-position: 0 67%;
+	    
+	    &:hover{
+			background-position: 0 101%;
+			&:after{
+				top:3px;
+				left:-3px;
+			}
+	    }
+
+	    &:after{
+			content:"";
+		    background-image: url("../img/circle_icon_sprite.png");
+			background-position:0 67%;
+			position: relative;
+			display: inline-block;
+			width:50px;
+			height: 50px;
+			background-repeat: no-repeat;
+			background-size: 100%;
+			background-color: transparent;	
+		}
+
+	    &.trash_btn:after{    background-position-y: 0; }
+		&.validate_btn:after{ background-position-y: -50px; }
+		&.scissors_btn:after{ background-position-y: -100px; }
+		&.unzoom_btn:after{   background-position-y: -150px; }
+		&.zoom_btn:after{     background-position-y: -200px; }
+		&.play_btn:after{     background-position-y: -250px; }
+		&.pause_btn:after{    background-position-y: -300px; }
+		&.stop_btn:after{     background-position-y: -350px; }
+		&.begin_btn:after{    background-position-y: -400px; }
+		&.end_btn:after{      background-position-y: -450px; }
+		&.sound_btn:after{    background-position-y: -500px; }
+		&.close_btn:after{    background-position-y: -550px; }
+		&.plus_btn:after{     background-position-y: -600px; }
+
+	}
+}
+/*
+	    &.validate_btn{ 
+	    	background-position-y: -300px;
+	    	&:after{ background-position-y: -100px;  }
+	    }
+
+	    &.trash_btn{
+	    	background-position:0 -250px;
+	    	&:active{ background-position:0 -800px; }
+	    }
+		
+		&.play_btn{ 
+			background-position:0 0;
+			&:active{ background-position:0 -550px; }
+		}
+		
+		&.pause_btn{ 
+			background-position:0 -50px; 
+			&:active{ background-position:0 -600px; }
+		}
+
+		&.stop_btn{
+			background-position:0 -100px;
+			&:active{ background-position:0 -650px; }
+		}
+
+		&.begin_btn{
+			background-position:0 -350px;
+			&:active{ background-position:0 -900px; }
+		}
+
+		&.end_btn{ 
+			background-position:0 -400px;
+			&:active{ background-position:0 -950px; }
+		}
+*/
+
+
+#debug {
+	background-color: black;
+	color: #33FF33;
+}
+
+

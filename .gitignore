@@ -1,0 +1,17 @@
+# android
+platforms/android
+platforms/browser
+
+plugins/
+
+
+# gulpfiles
+node_modules
+www/node_modules
+
+www/*.log
+www/audio/*
+
+*~
+**~
+.directory

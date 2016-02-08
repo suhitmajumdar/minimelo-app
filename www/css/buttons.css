@@ -1,0 +1,104 @@
+.square_btn, .round_btn{
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-image: url("img/buttons_sprite.png");
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: cyan;	
+}
+.square_btn:hover{
+	background-position:0 33%;
+}
+
+.round_btn{
+	background-position:0 67%;
+}
+
+.round_btn:hover{
+	background-position:0 101%;
+}
+
+.square_btn:after, .round_btn:after{
+	content:"";
+	position: relative;
+	display: inline-block;
+	width:100px;
+	height: 100px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-color: transparent;	
+}
+/* SQUARE BUTTON PICTOGRAMS */
+.square_btn:after{ background-image: url("img/square_icon_sprite.png"); }
+
+.square_btn:hover:after{
+	top:6px;
+	left:-7px;
+}
+
+.square_btn.micro_btn:after  { background-position: 0 0; }
+.square_btn.harp_btn:after   { background-position: 0 -100px; }
+.square_btn.maracas_btn:after{ background-position: 0 -200px; }
+.square_btn.piano_btn:after  { background-position: 0 -300px; }
+.square_btn.cimbals_btn:after{ background-position: 0 -400px; }
+.square_btn.drum_btn:after   { background-position: 0 -500px; }
+.square_btn.guitare_btn:after{ background-position: 0 -600px; }
+.square_btn.trumpet_btn:after{ background-position: 0 -700px; }
+.square_btn.plus_btn:after   { background-position: 0 -800px; }
+
+/* ROUND BUTTON PICTOGRAM */
+.round_btn:after{  background-image: url("img/circle_icon_sprite.png"); }
+
+.round_btn.trash_btn:after{    background-position-y: 0; }
+.round_btn.validate_btn:after{ background-position-y: -100px; }
+.round_btn.scissors_btn:after{ background-position-y: -200px; }
+.round_btn.unzoom_btn:after{   background-position-y: -300px; }
+.round_btn.zoom_btn:after{     background-position-y: -400px; }
+.round_btn.play_btn:after{     background-position-y: -500px; }
+.round_btn.pause_btn:after{    background-position-y: -600px; }
+.round_btn.stop_btn:after{     background-position-y: -700px; }
+.round_btn.begin_btn:after{    background-position-y: -800px; }
+.round_btn.end_btn:after{      background-position-y: -900px; }
+.round_btn.sound_btn:after{    background-position-y: -1000px; }
+.round_btn.close_btn:after{    background-position-y: -1100px; }
+.round_btn.plus_btn:after{     background-position-y: -1200px; }
+
+
+/* SQUARE BUTTON WITH PICTOGRAM 
+.square_btn:after{
+    position: relative;
+    left: 50%;
+    top:13px;
+}
+.square_btn:hover:after{
+	top: 20px;
+}
+/* MICRO 
+.square_btn.micro_btn:after{
+    width: 28px;
+    margin-left: -8px;
+}
+.square_btn:hover.micro_btn:after{
+    margin-left: -12px;
+}
+/* HARP 
+.square_btn.harp_btn:after{
+	background-position: -28px;
+    margin-left: -17px;
+    width: 47px;
+}
+.square_btn:hover.harp_btn:after{
+    margin-left: -25px;
+}
+/* MARACAS 
+.square_btn.maracas_btn:after{
+	background-position: -75px;
+    margin-left: -23px;
+    width: 59px;
+}
+.square_btn:hover.maracas_btn:after{
+    margin-left: -28px;
+}
+
+

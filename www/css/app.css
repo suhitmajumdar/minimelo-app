@@ -1,0 +1,413 @@
+/*$red : #eb3816;
+$orange : #ff7800;
+$yellow : #ffe400;
+$clear_green : #aaf400;
+$dark_green : #00a134;
+$dark_blue : #0085ff;
+$clear_blue : #84d6ff;
+$purple : #9b0080;
+$black : #000000;
+*/
+html {
+  height: 100%; }
+
+body {
+  -webkit-touch-callout: none;
+  /* prevent callout to copy image, etc when tap to hold */
+  -webkit-text-size-adjust: none;
+  /* prevent webkit from resizing text to fit */
+  -webkit-user-select: none;
+  /* prevent copy paste, to allow, change 'none' to 'text' */
+  font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  background-color: #FFF; }
+
+@font-face {
+  font-family: "Orange";
+  src: url(../fonts/orange_juice.ttf); }
+
+/*General style elements*/
+aside {
+  width: 20%; }
+
+ul {
+  -webkit-user-select: none;
+  cursor: pointer; }
+  ul li {
+    -webkit-user-select: none;
+    cursor: pointer; }
+
+/*.instrument{
+    background-image:url("../img/buttons_left.png");
+    background-size: cover;
+    width: 50px;
+    height: 55px;
+    display:inline-block;
+
+    &[type="voice"]{background-position:0 0px;}
+	&[type="flute"]{background-position:0 -60px;}
+	&[type="violin"]{background-position:0 -123px;}
+	&[type="piano"]{background-position:0 -183px;}
+	&[type="cymbal"]{background-position:0 -245px;}
+	&[type="drum"]{background-position:0 -311px;}
+	&[type="guitar"]{background-position:0 -372px;}
+	&[type="trumpet"]{background-position:0 -434px;}
+	&[type="plus_instru"]{background-position:0 -492px;}
+
+}*/
+/* Portrait layout (default) */
+.app {
+  width: 100%;
+  height: 100%; }
+  .app .row {
+    margin: 0; }
+  .app h1 {
+    font-size: 48px;
+    display: inline-block;
+    overflow: visible;
+    font-family: "Orange";
+    margin: 0px;
+    padding: 10px; }
+
+header {
+  width: 100%;
+  height: auto; }
+  header img {
+    max-width: 100%; }
+
+/* Landscape layout (with min-width) */
+#buttons-songs .button {
+  margin-top: 10px; }
+
+#buttons-songs,
+#buttons-songs-modal {
+  /*.button.active{
+	    transform:scale(1.1);
+	}*/ }
+  #buttons-songs .button,
+  #buttons-songs-modal .button {
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    width: 55px;
+    height: 55px;
+    /* RED */
+    /* ORANGE */
+    /* YELLOW */
+    /* CLEAR GREEN */
+    /* DARK  GREEN */
+    /* DARK  BLUE */
+    /* CLEAR BLUE */
+    /* PURPLE */ }
+    #buttons-songs .button:hover,
+    #buttons-songs-modal .button:hover {
+      background-position: 0 33%; }
+    #buttons-songs .button[type="drum"],
+    #buttons-songs-modal .button[type="drum"] {
+      background-color: rgba(235, 56, 22, 0.8); }
+    #buttons-songs .button[type="cymbal"],
+    #buttons-songs-modal .button[type="cymbal"] {
+      background-color: rgba(255, 120, 0, 0.8); }
+    #buttons-songs .button[type="flute"],
+    #buttons-songs-modal .button[type="flute"] {
+      background-color: rgba(255, 228, 0, 0.8); }
+    #buttons-songs .button[type="piano"],
+    #buttons-songs-modal .button[type="piano"] {
+      background-color: rgba(170, 244, 0, 0.8); }
+    #buttons-songs .button[type="violin"],
+    #buttons-songs-modal .button[type="violin"] {
+      background-color: rgba(0, 161, 52, 0.8); }
+    #buttons-songs .button[type="trumpet"],
+    #buttons-songs-modal .button[type="trumpet"] {
+      background-color: rgba(0, 133, 255, 0.8); }
+    #buttons-songs .button[type="guitar"],
+    #buttons-songs-modal .button[type="guitar"] {
+      background-color: rgba(132, 214, 255, 0.8); }
+    #buttons-songs .button[type="voice"],
+    #buttons-songs-modal .button[type="voice"] {
+      background-color: rgba(155, 0, 128, 0.8); }
+
+/*#buttons-songs-modal{
+
+	border-right:1px solid #000;
+	padding-right:10px;
+
+	.button.active{
+	    transform:scale(1.2);
+	}
+
+}*/
+#buttons-songs-modal .button span {
+  font-size: 32px;
+  font-family: "Orange";
+  position: absolute;
+  top: 4px;
+  text-align: center;
+  width: 100%;
+  padding-left: 5px; }
+
+#buttons-songs-modal .button {
+  position: relative; }
+
+#timeline {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+  max-height: 100%;
+  height: 500px;
+  background: #f4f6fe; }
+  #timeline .piste {
+    border-bottom: 1px solid white;
+    height: 25%;
+    position: relative; }
+    #timeline .piste .song {
+      /*border-left:1px solid black;
+    		border-right:1px solid black;*/
+      position: absolute;
+      height: 100%;
+      display: inline-block;
+      z-index: 1;
+      box-sizing: border-box;
+      background-image: url("../img/texture_crayon-1.png");
+      background-repeat-x: repeat;
+      border-radius: 3px;
+      /* RED */
+      /* ORANGE */
+      /* YELLOW */
+      /* CLEAR GREEN */
+      /* DARK  GREEN */
+      /* DARK  BLUE */
+      /* CLEAR BLUE */
+      /* PURPLE */ }
+      #timeline .piste .song.active {
+        /*border: 1px solid white;*/
+        opacity: 0.6; }
+      #timeline .piste .song.inDrag {
+        opacity: 0.7;
+        z-index: 3; }
+      #timeline .piste .song[type="drum"] {
+        background-color: rgba(235, 56, 22, 0.8);
+        border: 5px solid rgba(235, 56, 22, 0.8); }
+      #timeline .piste .song[type="cymbal"] {
+        background-color: rgba(255, 120, 0, 0.8);
+        border: 5px solid rgba(255, 120, 0, 0.8); }
+      #timeline .piste .song[type="flute"] {
+        background-color: rgba(255, 228, 0, 0.8);
+        border: 5px solid rgba(255, 228, 0, 0.8); }
+      #timeline .piste .song[type="piano"] {
+        background-color: rgba(170, 244, 0, 0.8);
+        border: 5px solid rgba(170, 244, 0, 0.8); }
+      #timeline .piste .song[type="violin"] {
+        background-color: rgba(0, 161, 52, 0.8);
+        border: 5px solid rgba(0, 161, 52, 0.8); }
+      #timeline .piste .song[type="trumpet"] {
+        background-color: rgba(0, 133, 255, 0.8);
+        border: 5px solid rgba(0, 133, 255, 0.8); }
+      #timeline .piste .song[type="guitar"] {
+        background-color: rgba(132, 214, 255, 0.8);
+        border: 5px solid rgba(132, 214, 255, 0.8); }
+      #timeline .piste .song[type="voice"] {
+        background-color: rgba(155, 0, 128, 0.8);
+        border: 5px solid rgba(155, 0, 128, 0.8); }
+    #timeline .piste .box {
+      height: 60px;
+      width: 60px;
+      vertical-align: top;
+      box-sizing: border-box;
+      border: 1px solid;
+      text-align: center; }
+      #timeline .piste .box .instrument {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%; }
+      #timeline .piste .box .instrument.active {
+        transform: scale(1.3); }
+    #timeline .piste .box:nth-child(4n+1) {
+      border-left: 2px solid black; }
+    #timeline .piste .box:nth-child(4n) {
+      border-right: 2px solid black; }
+  #timeline #line {
+    top: 0px;
+    width: 0px;
+    background: rgba(72, 197, 72, 0.51);
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    display: inline-block;
+    border-right: 1px solid rgba(97, 102, 127, 0.2);
+    background: #eef0fa; }
+
+/*CSS MODAL*/
+#myModal .modal-dialog {
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+  #myModal .modal-dialog .modal-content {
+    height: 100%; }
+    #myModal .modal-dialog .modal-content .modal-body {
+      text-align: center; }
+
+#myModal #choose-song {
+  display: inline-block;
+  text-align: left; }
+  #myModal #choose-song div {
+    margin-right: 10px; }
+  #myModal #choose-song div .button span {
+    font-size: 32px;
+    font-family: "Orange";
+    position: absolute;
+    top: 4px;
+    text-align: center;
+    width: 100%;
+    padding-left: 5px; }
+  #myModal #choose-song .button {
+    width: 55px;
+    height: 55px;
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    opacity: 0.8; }
+    #myModal #choose-song .button.active {
+      background-position: 0 33%;
+      opacity: 1;
+      /* ORANGE */
+      /* YELLOW */
+      /* CLEAR GREEN */
+      /* DARK  GREEN */
+      /* DARK  BLUE */
+      /* CLEAR BLUE */
+      /* PURPLE */ }
+      #myModal #choose-song .button.active[type="drum"] {
+        background-color: rgba(235, 56, 22, 0.8); }
+      #myModal #choose-song .button.active[type="cymbal"] {
+        background-color: rgba(255, 120, 0, 0.8); }
+      #myModal #choose-song .button.active[type="flute"] {
+        background-color: rgba(255, 228, 0, 0.8); }
+      #myModal #choose-song .button.active[type="piano"] {
+        background-color: rgba(170, 244, 0, 0.8); }
+      #myModal #choose-song .button.active[type="violin"] {
+        background-color: rgba(0, 161, 52, 0.8); }
+      #myModal #choose-song .button.active[type="trumpet"] {
+        background-color: rgba(0, 133, 255, 0.8); }
+      #myModal #choose-song .button.active[type="guitar"] {
+        background-color: rgba(132, 214, 255, 0.8); }
+      #myModal #choose-song .button.active[type="voice"] {
+        background-color: rgba(155, 0, 128, 0.8); }
+
+#myModal .round_btn {
+  display: inline-block;
+  background: url("../img/round_button_sprite.png") no-repeat;
+  background-size: cover;
+  width: 50px;
+  height: 50px; }
+  #myModal .round_btn.validate_btn {
+    background-position-y: -300px;
+    text-align: center; }
+    #myModal .round_btn.validate_btn:active {
+      background-position-y: -850px; }
+
+/*---------*/
+#deck-buttons {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+  #deck-buttons div:nth-of-type(3) {
+    text-align: right; }
+  #deck-buttons div:nth-of-type(1) p {
+    font-family: "Orange"; }
+  #deck-buttons img {
+    margin-left: 10px;
+    width: 40px;
+    height: 40px; }
+  #deck-buttons .round_btn {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    background-position: 0 67%; }
+    #deck-buttons .round_btn:hover {
+      background-position: 0 101%; }
+      #deck-buttons .round_btn:hover:after {
+        top: 3px;
+        left: -3px; }
+    #deck-buttons .round_btn:after {
+      content: "";
+      background-image: url("../img/circle_icon_sprite.png");
+      background-position: 0 67%;
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-color: transparent; }
+    #deck-buttons .round_btn.trash_btn:after {
+      background-position-y: 0; }
+    #deck-buttons .round_btn.validate_btn:after {
+      background-position-y: -50px; }
+    #deck-buttons .round_btn.scissors_btn:after {
+      background-position-y: -100px; }
+    #deck-buttons .round_btn.unzoom_btn:after {
+      background-position-y: -150px; }
+    #deck-buttons .round_btn.zoom_btn:after {
+      background-position-y: -200px; }
+    #deck-buttons .round_btn.play_btn:after {
+      background-position-y: -250px; }
+    #deck-buttons .round_btn.pause_btn:after {
+      background-position-y: -300px; }
+    #deck-buttons .round_btn.stop_btn:after {
+      background-position-y: -350px; }
+    #deck-buttons .round_btn.begin_btn:after {
+      background-position-y: -400px; }
+    #deck-buttons .round_btn.end_btn:after {
+      background-position-y: -450px; }
+    #deck-buttons .round_btn.sound_btn:after {
+      background-position-y: -500px; }
+    #deck-buttons .round_btn.close_btn:after {
+      background-position-y: -550px; }
+    #deck-buttons .round_btn.plus_btn:after {
+      background-position-y: -600px; }
+
+/*
+	    &.validate_btn{ 
+	    	background-position-y: -300px;
+	    	&:after{ background-position-y: -100px;  }
+	    }
+
+	    &.trash_btn{
+	    	background-position:0 -250px;
+	    	&:active{ background-position:0 -800px; }
+	    }
+		
+		&.play_btn{ 
+			background-position:0 0;
+			&:active{ background-position:0 -550px; }
+		}
+		
+		&.pause_btn{ 
+			background-position:0 -50px; 
+			&:active{ background-position:0 -600px; }
+		}
+
+		&.stop_btn{
+			background-position:0 -100px;
+			&:active{ background-position:0 -650px; }
+		}
+
+		&.begin_btn{
+			background-position:0 -350px;
+			&:active{ background-position:0 -900px; }
+		}
+
+		&.end_btn{ 
+			background-position:0 -400px;
+			&:active{ background-position:0 -950px; }
+		}
+*/
+#debug {
+  background-color: black;
+  color: #33FF33; }
