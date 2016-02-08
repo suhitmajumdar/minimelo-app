@@ -2,10 +2,11 @@
 <widget id="io.cordova.minimelo" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Mini Mélo</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Mini Mélo is an educational app for recognizing and playing with sounds. 
+        You can use the defaults sounds or record your voice or sounds to play with them too !
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="minimelo.appli@gmail.com" href="">
+        Minimelo Team
     </author>
     <content src="index.html" />
     <preference name="Fullscreen" value="true" />
