@@ -41,31 +41,77 @@ ul{
 }
 
 
+
+.song,.button{
+	&[type="type-1"]{ background-color: $red; }/* RED */
+	&[type="type-2"]{ background-color: $orange; }/* ORANGE */
+	&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
+	&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
+	&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
+	&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
+	&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
+	&[type="type-8"]{ background-color: $purple; }/* PURPLE */
+}
+
 .button{
-    	background-image:url("../img/buttons_sprite.png");
-		background-size: cover;
-		width: 55px;
-		height: 55px;
+	background-image:url("../img/buttons_sprite.png");
+	background-size: cover;
+	width: 55px;
+	height: 55px;
 
-		&:hover{
-			background-position:0 33%;
-		}
-
-		&[type="type-1"]{ background-color: $red; }/* RED */
-		&[type="type-2"]{ background-color: $orange; }/* ORANGE */
-		&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
-		&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
-		&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
-		&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
-		&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-		&[type="type-8"]{ background-color: $purple; }/* PURPLE */
-
-		&.disabled{
-			background-color: grey;
-		}
+	&:hover{
+		background-position:0 33%;
 	}
 
-/* Portrait layout (default) */
+	&.disabled{
+		background-color: grey;
+	}
+}
+
+ .round_btn{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+   	background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+	background-position: 0 67%;
+    
+    &:hover{
+		background-position: 0 101%;
+		&:after{
+			top:3px;
+			left:-3px;
+		}
+    }
+
+    &:after{
+		content:"";
+	    background-image: url("../img/circle_icon_sprite.png");
+		background-position:0 67%;
+		position: relative;
+		display: inline-block;
+		width:50px;
+		height: 50px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-color: transparent;	
+	}
+
+    &.trash_btn:after{    background-position-y: 0; }
+	&.validate_btn:after{ background-position-y: -50px; }
+	&.scissors_btn:after{ background-position-y: -100px; }
+	&.unzoom_btn:after{   background-position-y: -150px; }
+	&.zoom_btn:after{     background-position-y: -200px; }
+	&.play_btn:after{     background-position-y: -250px; }
+	&.pause_btn:after{    background-position-y: -300px; }
+	&.stop_btn:after{     background-position-y: -350px; }
+	&.begin_btn:after{    background-position-y: -400px; }
+	&.end_btn:after{      background-position-y: -450px; }
+	&.sound_btn:after{    background-position-y: -500px; }
+	&.close_btn:after{    background-position-y: -550px; }
+	&.plus_btn:after{     background-position-y: -600px; }
+
+}
 
 .app{
 
@@ -94,57 +140,9 @@ header{
 	}
 }
 
-/* Landscape layout (with min-width) */
-@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
-    .app {
-    
-    }
-}
-
 #buttons-songs{
 	.button{margin-top:10px;}
 }
-
-#buttons-songs, 
-#buttons-songs-modal{
-
-	.button{
-    	background-image:url("../img/buttons_sprite.png");
-		background-size: cover;
-		width: 55px;
-		height: 55px;
-
-		&:hover{
-			background-position:0 33%;
-		}
-
-		&[type="drum"]{ background-color: $red; }/* RED */
-		&[type="cymbal"]{ background-color: $orange; }/* ORANGE */
-		&[type="flute"]{ background-color: $yellow; }/* YELLOW */
-		&[type="piano"]{ background-color: $clear_green; }/* CLEAR GREEN */
-		&[type="violin"]{ background-color: $dark_green; }/* DARK  GREEN */
-		&[type="trumpet"]{ background-color: $dark_blue; }/* DARK  BLUE */
-		&[type="guitar"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-		&[type="voice"]{ background-color: $purple; }/* PURPLE */
-	}
-
-	/*.button.active{
-	    transform:scale(1.1);
-	}*/
-}
-
-/*#buttons-songs-modal{
-
-	border-right:1px solid #000;
-	padding-right:10px;
-
-	.button.active{
-	    transform:scale(1.2);
-	}
-
-}*/
-
-
 
 #buttons-songs-modal{
 
@@ -174,8 +172,6 @@ header{
     	position: relative;
 
     	.song{
-    		/*border-left:1px solid black;
-    		border-right:1px solid black;*/
     		position: absolute;
     		height:100%;
     		display: inline-block;
@@ -186,7 +182,6 @@ header{
 			border-radius:3px;
 
     		&.active{
-				/*border: 1px solid white;*/
     			opacity: 0.6;
 			}
 			&.inDrag{
@@ -291,8 +286,6 @@ header{
 	    }
 	}
 
-
-
 	#choose-song{
 	    display: inline-block;
 	    text-align: left;
@@ -320,66 +313,11 @@ header{
 			&.active{
 				background-position:0 33%;
 			    opacity:1;
-
-			    &[type="drum"]{
-				background-color: $red;
-				}
-
-				/* ORANGE */
-				&[type="cymbal"]{
-				 background-color: $orange;
-				 }
-
-				/* YELLOW */
-				&[type="flute"]{ 
-					background-color: $yellow; 
-				}
-				/* CLEAR GREEN */
-				&[type="piano"]{ 
-					background-color: $clear_green;
-				}
-				 /* DARK  GREEN */
-				&[type="violin"]{
-					background-color: $dark_green; 
-				}
-				/* DARK  BLUE */
-				&[type="trumpet"]{
-					background-color: $dark_blue;
-				}
-				/* CLEAR BLUE */
-				&[type="guitar"]{ 
-					background-color: $clear_blue; 
-				}
-				/* PURPLE */
-				&[type="voice"]{
-					background-color: $purple; 
-				}
-
 			}
-
 
 		}
 
-
-
 	}
-
-	.round_btn{
-	    display: inline-block;
-	    background: url('../img/round_button_sprite.png') no-repeat;
-	    background-size: cover;
-	    width: 50px;
-	    height: 50px;
-
-	&.validate_btn{ 
-	    background-position-y: -300px;
-	    text-align:center;
-	    &:active{ background-position-y: -850px; }
-	    }
-	}
-
-	
-
 }
 /*---------*/
 
@@ -401,90 +339,7 @@ header{
         width:40px;
         height:40px;
     }
-
-
-    .round_btn{
-	    display: inline-block;
-	    width: 50px;
-	    height: 50px;
-	   	background-image: url("../img/buttons_sprite.png");
-	    background-size: cover;
-		background-position: 0 67%;
-	    
-	    &:hover{
-			background-position: 0 101%;
-			&:after{
-				top:3px;
-				left:-3px;
-			}
-	    }
-
-	    &:after{
-			content:"";
-		    background-image: url("../img/circle_icon_sprite.png");
-			background-position:0 67%;
-			position: relative;
-			display: inline-block;
-			width:50px;
-			height: 50px;
-			background-repeat: no-repeat;
-			background-size: 100%;
-			background-color: transparent;	
-		}
-
-	    &.trash_btn:after{    background-position-y: 0; }
-		&.validate_btn:after{ background-position-y: -50px; }
-		&.scissors_btn:after{ background-position-y: -100px; }
-		&.unzoom_btn:after{   background-position-y: -150px; }
-		&.zoom_btn:after{     background-position-y: -200px; }
-		&.play_btn:after{     background-position-y: -250px; }
-		&.pause_btn:after{    background-position-y: -300px; }
-		&.stop_btn:after{     background-position-y: -350px; }
-		&.begin_btn:after{    background-position-y: -400px; }
-		&.end_btn:after{      background-position-y: -450px; }
-		&.sound_btn:after{    background-position-y: -500px; }
-		&.close_btn:after{    background-position-y: -550px; }
-		&.plus_btn:after{     background-position-y: -600px; }
-
-	}
 }
-/*
-	    &.validate_btn{ 
-	    	background-position-y: -300px;
-	    	&:after{ background-position-y: -100px;  }
-	    }
-
-	    &.trash_btn{
-	    	background-position:0 -250px;
-	    	&:active{ background-position:0 -800px; }
-	    }
-		
-		&.play_btn{ 
-			background-position:0 0;
-			&:active{ background-position:0 -550px; }
-		}
-		
-		&.pause_btn{ 
-			background-position:0 -50px; 
-			&:active{ background-position:0 -600px; }
-		}
-
-		&.stop_btn{
-			background-position:0 -100px;
-			&:active{ background-position:0 -650px; }
-		}
-
-		&.begin_btn{
-			background-position:0 -350px;
-			&:active{ background-position:0 -900px; }
-		}
-
-		&.end_btn{ 
-			background-position:0 -400px;
-			&:active{ background-position:0 -950px; }
-		}
-*/
-
 
 #debug {
 	background-color: black;

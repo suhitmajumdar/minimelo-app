@@ -33,21 +33,23 @@ define(function( require ) {
 
 		for ( var type in songsByType )
 		{
-			var line=$("<div type="+type+"></div>");
-			$("#choose-song").append(line);
-			
-			var songs=songsByType[type];
-			for (var i = 0; i < songs.length; i++){
+			if(type!="indefini"){
+				var line=$("<div type="+type+"></div>");
+				$("#choose-song").append(line);
+				
+				var songs=songsByType[type];
+				for (var i = 0; i < songs.length; i++){
 
-				var song=songs[i];
+					var song=songs[i];
 
-				var buttonSong=$('<div class="button instrument"></div>');
-				buttonSong.attr('type',type);
-				buttonSong.attr('data-song-id', song.id);
+					var buttonSong=$('<div class="button instrument"></div>');
+					buttonSong.attr('type',type);
+					buttonSong.attr('data-song-id', song.id);
 
-				buttonSong.append("<span>" +i+ "</span>");
+					buttonSong.append("<span>" +i+ "</span>");
 
-				line.append(buttonSong);
+					line.append(buttonSong);
+				}
 			}
 		}
 	}

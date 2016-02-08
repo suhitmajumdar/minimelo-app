@@ -15,43 +15,6 @@ define(function( require ) {
 		this.stopTime  = 0;
 	}
 
-	// Song.prototype.load = function () {
-	// 	var self = this;
-
-	// 	$.ajax({
-	// 		url: self.url,
-	// 		xhrFields : {responseType : 'arraybuffer'},
-	// 	}).done(function(arrayBuffer){
-
-	// 		audioCtx.decodeAudioData(arrayBuffer, function(buffer) {
-	// 			self.buffer = buffer;
-				
-	// 	  }, function(e) {"Error with decoding audio data" + e.err;} );  
-	// 	});
-
-	// }
-
-	Song.prototype.loadAndPlayOnce = function ( ) {
-		var self = this;
-
-		$.ajax({
-			url: self.url,
-			xhrFields : {responseType : 'arraybuffer'},
-		}).done(function(arrayBuffer){
-
-			audioCtx.decodeAudioData(arrayBuffer, function( buffer ) {
-				var source    = audioCtx.createBufferSource();
-				source.buffer = buffer;
-				source.connect(audioCtx.destination);
-				source.start(audioCtx.currentTime);
-
-				return source;
-				
-		  }, function(e) {"Error with decoding audio data" + e.err;} );  
-		});
-
-	}
-
 	Song.prototype.loadByFile = function () {
 		var self = this;
 
@@ -84,7 +47,6 @@ define(function( require ) {
 		}).then(
 
 			function(audioBuffer){
-				// console.log(audioBuffer);
 				self.buffer=audioBuffer;
 			},
 			function(){
@@ -124,20 +86,6 @@ define(function( require ) {
 		return this.playWithTime(0);
 	};
 
-	Song.prototype.playOnce = function () 
-	{
-		var self = this;
-
-		if( self.buffer != null ) 
-		{
-			this.play();
-		}
-		else
-		{
-			this.loadAndPlayOnce();
-		}
-	};
-
 	Song.prototype.getDuration = function (){
 		return this.buffer.duration;
 	};
@@ -149,4 +97,3 @@ define(function( require ) {
 	return Song;
 
 });
-

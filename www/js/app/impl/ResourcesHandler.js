@@ -20,9 +20,6 @@ define(function( require ){
 		this.sourceInPreview=null;
 	}
 
-
-
-
 	ResourcesHandler.prototype.playPreview=function(idSong){
 		var self=this;
 
@@ -55,6 +52,7 @@ define(function( require ){
 				window.resolveLocalFileSystemURL("file:///sdcard/Minimelo",resolve,reject);
 			
 			}).then(function(fileSystem){
+				console.log("test");
 				var directoryReader = fileSystem.createReader();
 
 				return new Promise(function(resolve,reject){

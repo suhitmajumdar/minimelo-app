@@ -97,10 +97,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		$("#line").css('width',0);
   	};
 
-	Timeline.prototype.getNbSteps = function () {
-		return this.bars * this.stepByBars;
-	};
-
 	Timeline.prototype.secondsToPxInTimeline =function (second){
 		return second*this.ratioSecondPixel;
 	}

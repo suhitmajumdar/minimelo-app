@@ -13,9 +13,6 @@ $(document).ready(function() {
 
         'use strict';
 
-       
-
-
         var application = {
 
             init : function () {
