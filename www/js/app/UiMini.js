@@ -16,7 +16,7 @@ define(function( require ) {
 
 	   	for (var i = 1; i < 9; i++) {
 	   		var type="type-"+i;
-	        var buttonSong=$('<div class="button instrument"></div>');
+	        var buttonSong=$('<div class="button instrument disabled"></div>');
 	        buttonSong.attr('type',type);
 
 	        $('#buttons-songs').append(buttonSong);
@@ -64,44 +64,12 @@ define(function( require ) {
 	UiMini.prototype.initUiMini = function (){
 		this.initTimelineHeight();
 		this.initButtonsSongs();
-		this.initDeckButtons();
 		this.initButtonsModal();
 		this.initPistes();
 	}
 
 	UiMini.prototype.initPistes = function () {
 		$('.piste').css('width', Timeline.getDurationInPx());
-	}
-
-
-	UiMini.prototype.initDeckButtons = function () {
-
-		$(".round_btn.trash_btn").click(function(){
-			$('.piste').empty();
-		});
-
-		$('#play_stop').click(function() {
-			if($(this).hasClass('play_btn'))
-			{
-				$(this).removeClass('play_btn');
-				$(this).addClass('stop_btn');
-				Timeline.play();
-			} else {
-				$(this).removeClass('stop_btn');
-				$(this).addClass('play_btn');
-				Timeline.stop();
-			}
-			
-		});
-
-		$('#zoom').click(function(){
-			Timeline.zoom();
-		});
-
-		$('#unzoom').click(function(){
-			Timeline.unzoom();
-		});
-
 	}
 
 	UiMini.prototype.addSongToPiste = function(songButton,piste,xOnPiste)

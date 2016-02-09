@@ -1,6 +1,7 @@
 define(function(require) {
 
 	var ResourcesHandler = require('app/ResourcesHandler');
+	var Timeline 		 = require('app/Timeline');
 
 	function EventsMini(uiMini){
 		this.uiMini=uiMini;
@@ -11,6 +12,7 @@ define(function(require) {
 		this.initDragAndDrop();
 		this.initModalEvents();
 		this.initSongClick();
+		this.initDeckButtons();
 	}
 
 	EventsMini.prototype.initPisteClick = function(){
@@ -20,18 +22,11 @@ define(function(require) {
 
 		    if($('.piste .song.inDrag').length<1)
 		    {
-			    var xOnPiste=event.clientX-$(this).offset().left;
-			    var songToLoad=$("#buttons-songs .button.active")[0];
-			    // var idSong=$(songToLoad).attr('data-song-id');
-
-			    // var song=self.timeline.songs[idSong];
-			    
-			    var newSongDiv=self.uiMini.addSongToPiste(songToLoad,$(this),xOnPiste);
-
-			    // song.play(self.timeline.audioCtx);
+				var xOnPiste   = event.clientX-$(this).offset().left;
+				var songToLoad = $("#buttons-songs .button.active")[0];
+				var newSongDiv = self.uiMini.addSongToPiste(songToLoad,$(this),xOnPiste);
 
 			    self.setDragOnSong(newSongDiv);
-
 			}
 
 		});
@@ -66,8 +61,6 @@ define(function(require) {
 			$(this).css('top',top);
 
 			$('.piste:first').append($(this));
-
-			
 
 
 			var posSourisOnSongX=clientX-$('.piste .song.inDrag').offset().left;
@@ -219,6 +212,39 @@ define(function(require) {
 
     }
 
+    EventsMini.prototype.initDeckButtons = function () {
+
+		$(".round_btn.trash_btn").click(function() {
+			console.log('hello');
+			$('.piste').empty();
+		});
+
+		$('#play_stop').click(function() {
+			if( $('.piste .song').length > 0) {
+				if($(this).hasClass('play_btn'))
+				{
+					$(this).removeClass('play_btn');
+					$(this).addClass('stop_btn');
+					Timeline.play();
+				} else {
+					$(this).removeClass('stop_btn');
+					$(this).addClass('play_btn');
+					Timeline.stop();
+				}
+			}
+			
+		});
+
+		$('#zoom').click(function(){
+			Timeline.zoom();
+		});
+
+		$('#unzoom').click(function(){
+			Timeline.unzoom();
+		});
+
+	}
+
     EventsMini.prototype.initModalEvents=function(){
     	var self=this;
     	$("#choose-song div .button").click(function(){ 
@@ -244,9 +270,8 @@ define(function(require) {
 				
 				var idNewSong=$(this).attr('data-song-id');
 
-				
-
 				buttonToReplace.attr('data-song-id',idNewSong);
+				buttonToReplace.removeClass('disabled');
 
 				ResourcesHandler.loadSong(idNewSong);
 			
