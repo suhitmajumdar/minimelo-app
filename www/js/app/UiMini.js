@@ -11,6 +11,11 @@ define(function( require ) {
 		this.timeline = new Timeline();
 	}
 
+	
+	UiMini.prototype.hideLoader = function() {
+		$( ".loader" ).fadeOut( "slow" );
+	}
+
 	UiMini.prototype.initButtonsSongs = function () {
 
 		var types=ResourcesHandler.getTypes();
@@ -19,6 +24,7 @@ define(function( require ) {
 	   		var type="type-"+i;
 	        var buttonSong=$('<div class="button instrument"></div>');
 	        buttonSong.attr('type',type);
+	        buttonSong.append("<span class='numberSong'></span>")
 
 	        $('#buttons-songs').append(buttonSong);
 	   	};
@@ -66,7 +72,6 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initButtonsSongs();
 		this.initDeckButtons();
-		this.initButtonsModal();
 		this.initPistes();
 	}
 

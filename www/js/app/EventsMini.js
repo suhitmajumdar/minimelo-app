@@ -240,7 +240,11 @@ define(function(require) {
 			$("#choose-song div .button.active:not(.disabled)").each(function(){
 
 				var typeSong = $(this).attr('type');
+
+				var numberId = $(this).find("span").text();
+
 				var buttonToReplace= $("#buttons-songs .button[type='"+typeSong+"']");
+				buttonToReplace.find("span").text(numberId);
 				
 				var idNewSong=$(this).attr('data-song-id');
 
@@ -248,12 +252,14 @@ define(function(require) {
 
 				buttonToReplace.attr('data-song-id',idNewSong);
 
+
 				ResourcesHandler.loadSong(idNewSong);
 			
 			});
 
 		});
     }
+
 
     EventsMini.prototype.initSongClick=function (){
     	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled)", function() {
