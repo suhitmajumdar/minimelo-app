@@ -154,6 +154,9 @@ ul{
 
 
 .song{
+
+	&.todelete{opacity:0.5;}
+
 	&[type="type-1"]{ background-color: $red; }/* RED */
 	&[type="type-2"]{ background-color: $orange; }/* ORANGE */
 	&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
@@ -224,8 +227,8 @@ ul{
     background-size: cover;
 	background-position: 0 67%;
     
-    &:hover{
-		background-position: 0 101%;
+    &.active{
+		background-position: 0 100%;
 		&:after{
 			top:3px;
 			left:-3px;
@@ -475,6 +478,7 @@ header{
 	div:nth-of-type(3) {
 		text-align:right;
 	}
+
 	
 	div:nth-of-type(1){
 		p{

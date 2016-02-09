@@ -13,6 +13,7 @@ define(function(require) {
 		this.initModalEvents();
 		this.initSongClick();
 		this.initDeckButtons();
+		this.initSongToDelete();
 	}
 
 	EventsMini.prototype.initPisteClick = function(){
@@ -20,7 +21,7 @@ define(function(require) {
 		var self=this;
 		$('.piste').off().mousedown('click', function(event){
 
-		    if($('.piste .song.inDrag').length<1)
+		    if($('.piste .song.inDrag').length<1 && !$('#trash').hasClass("active") )
 		    {
 				var xOnPiste   = event.clientX-$(this).offset().left;
 				var songToLoad = $("#buttons-songs .button.active")[0];
@@ -50,23 +51,33 @@ define(function(require) {
   				clientY=event.clientY;
   			}
 
-			$(this).addClass('inDrag');
 
-			$(this).attr('posSongX',$(this).position().left);
-			$(this).attr('piste',$(this).parent().attr('id'));
+  			if($(this).hasClass('todelete'))
+  			{
+  				$(this).remove();
+  			}
+  			else
+  			{
+
+				$(this).addClass('inDrag');
+
+				$(this).attr('posSongX',$(this).position().left);
+				$(this).attr('piste',$(this).parent().attr('id'));
 
 
 
-			var top=$(this).parent().position().top;
-			$(this).css('top',top);
+				var top=$(this).parent().position().top;
+				$(this).css('top',top);
 
-			$('.piste:first').append($(this));
+				$('.piste:first').append($(this));
 
 
-			var posSourisOnSongX=clientX-$('.piste .song.inDrag').offset().left;
-			var posSourisOnSongY=clientY-$('.piste .song.inDrag').offset().top;
-			$(this).attr('posSourisX',posSourisOnSongX);
-			$(this).attr('posSourisY',posSourisOnSongY);
+				var posSourisOnSongX=clientX-$('.piste .song.inDrag').offset().left;
+				var posSourisOnSongY=clientY-$('.piste .song.inDrag').offset().top;
+				$(this).attr('posSourisX',posSourisOnSongX);
+				$(this).attr('posSourisY',posSourisOnSongY);
+
+			}
 		}
 
 	    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -214,10 +225,21 @@ define(function(require) {
 
     EventsMini.prototype.initDeckButtons = function () {
 
-		$(".round_btn.trash_btn").click(function() {
-			console.log('hello');
-			$('.piste').empty();
-		});
+    	var self=this;
+
+    	trash.ontouchstart=function(event){
+    		$(this).toggleClass("active");
+
+    		if($(this).hasClass("active"))
+    			$(".song").addClass("todelete");
+    		else
+    			$(".song").removeClass("todelete");
+    	}
+    		
+
+		// $(".round_btn.trash_btn").off().click(function() {
+		// 	self.uiMini.removeSongsFromPiste();
+		// });
 
 		$('#play_stop').click(function() {
 			if( $('.piste .song').length > 0) {
@@ -300,6 +322,12 @@ define(function(require) {
 	        }
 	        $(this).addClass("active");
     	});
+    }
+
+    EventsMini.prototype.initSongToDelete=function (){
+    	// $( document ).on( "mousedown", ".song.todelete", function() {
+    	// 	$(this).remove();
+    	// });
     }
 
 	return EventsMini;

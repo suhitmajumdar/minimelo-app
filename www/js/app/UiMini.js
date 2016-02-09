@@ -70,7 +70,6 @@ define(function( require ) {
 	UiMini.prototype.initUiMini = function (){
 		this.initTimelineHeight();
 		this.initButtonsSongs();
-		this.initDeckButtons();
 		this.initPistes();
 	}
 
@@ -95,6 +94,7 @@ define(function( require ) {
 		divSong.width(widthSong);
 
 		piste.append(divSong);
+
 
 		return divSong;
 	}

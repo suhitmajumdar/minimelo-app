@@ -153,6 +153,8 @@ ul {
   /* DARK  BLUE */
   /* CLEAR BLUE */
   /* PURPLE */ }
+  .song.todelete {
+    opacity: 0.5; }
   .song[type="type-1"] {
     background-color: rgba(235, 56, 22, 0.8); }
   .song[type="type-2"] {
@@ -236,9 +238,9 @@ ul {
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;
   background-position: 0 67%; }
-  .round_btn:hover {
-    background-position: 0 101%; }
-    .round_btn:hover:after {
+  .round_btn.active {
+    background-position: 0 100%; }
+    .round_btn.active:after {
       top: 3px;
       left: -3px; }
   .round_btn:after {
