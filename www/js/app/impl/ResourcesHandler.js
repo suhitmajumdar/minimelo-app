@@ -2,9 +2,10 @@ define(function( require ){
 
 	var Song       = require('app/Song');
 	var Utils      = require('app/Utils');
-	var ressources = require('app/ressources');
 
 	var audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+
+	var unwantedTypes = ['indefini'];
 
 	'use strict';
 
@@ -12,12 +13,9 @@ define(function( require ){
 		this.songs      = [];
 		this.loadedOnes = 0;
 		this.loadable   = 0;
-		this.filesDirectories = {};
-		this.songsDirectories = {};
-		this.numberDirectories=0;
-		this.numberDirectoriesReaded=0;
-		this.initApplication=null;
-		this.sourceInPreview=null;
+		this.filesDirectories  = {};
+		this.songsDirectories  = {};
+		this.sourceInPreview = null;
 	}
 
 	ResourcesHandler.prototype.playPreview=function(idSong){
@@ -49,10 +47,9 @@ define(function( require ){
 
 			return new Promise(function (resolve, reject) {
 				
-				window.resolveLocalFileSystemURL("file:///sdcard/Minimelo",resolve,reject);
+				window.resolveLocalFileSystemURL("file:///sdcard/Minimelo", resolve, reject);
 			
 			}).then(function(fileSystem){
-				console.log("test");
 				var directoryReader = fileSystem.createReader();
 
 				return new Promise(function(resolve,reject){
@@ -60,15 +57,14 @@ define(function( require ){
 				});
 
 			}).then(function(directories){
-				var promises=[];
-				console.log(directories);
+				var promises = [];
 				for (var i = 0; i < directories.length; i++) {
-					var directory=directories[i];
-					var reader=directory.createReader();
-					directory.files=[];
-					self.songsDirectories[directory.name]=[];
+					var directory   = directories[i];
+					var reader      = directory.createReader();
+					directory.files = [];
+					self.songsDirectories[directory.name] = [];
 
-					var promise=new Promise(function(resolve,reject){
+					var promise = new Promise(function(resolve,reject){
 						reader.readEntries(resolve.bind(directory),reject);
 					});
 					promise.then(function(files){
@@ -76,8 +72,8 @@ define(function( require ){
 							var file=files[j];
 	            			this.files.push(file);
 
-	            			var song=new Song(this.name,file.nativeURL);
-							song.fileEntry=file;
+	            			var song = new Song(this.name,file.nativeURL);
+							song.fileEntry = file;
 							self.songs.push(song);
 							self.songsDirectories[this.name].push(song);
 	            		};
@@ -91,37 +87,8 @@ define(function( require ){
 				return Promise.all(promises);
 
 			});
-			// window.resolveLocalFileSystemURL("file:///sdcard/Music/minimelo", function (fileSystem) {
-	
-		 //    var directoryReader = fileSystem.createReader();
-			//     directoryReader.readEntries(function(directories) {
-			//         var i;
-			//         for (i=0; i<directories.length; i++) {
-			//             if(directories[i].isDirectory===true){
-			//             	var directory=directories[i];
-			//             	var reader = directory.createReader();
 
-			//             	directory.filesList=[];
-			//             	reader.readEntries(function(files) {
-			//             		for (var j = 0; j < files.length; j++) {
-			//             			this.filesList.push(files[j]);           			      			
-			//             		};
-			//             		self.callbackDirectoryReaded(this);
-			//             	}.bind(directory));
-			//             }
-			//         }
-			//         self.callbackDirectories(directories.length);
-
-			//     }, function (error) {
-			//         console.log(error);
-			//     });
-
-			// }, function(error){
-			// 	console.log(error);
-			// });
-
-		}
-		else {
+		} else {
 			this.loadTestSongs();
 		}
 
@@ -137,11 +104,11 @@ define(function( require ){
 		var self = this;
 		for ( var type in ressources )
 		{
-			var songsOfType=ressources[type];
+			var songsOfType = ressources[type];
 			for ( var i in songsOfType )
 			{
-				var urlSong=songsOfType[i];
-				self.songs.push(new Song(type,urlSong));
+				var urlSong = songsOfType[i];
+				self.songs.push(new Song(type, urlSong));
 			}
 		}
 	}
@@ -202,121 +169,18 @@ define(function( require ){
 		return this;
 	}
 
-	ResourcesHandler.prototype.getTypes=function(){
+	ResourcesHandler.prototype.getTypes = function() {
 		return Object.keys(this.songsDirectories);
+	}
+
+	ResourcesHandler.prototype.getActivesTypes = function() {
+
+		var actives = this.getTypes().filter(function(x) {
+			return unwantedTypes.indexOf(x) < 0;
+		});
+
+		return actives;
 	}
 
 	return ResourcesHandler;
 });
-
-// define(function( require ){
-
-// 	var Song       = require('app/Song');
-// 	var Utils      = require('app/Utils');
-// 	var ressources = require('app/ressources');
-
-// 	var audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
-
-// 	'use strict';
-
-// 	function ResourcesHandler() {
-// 		this.songs      = [];
-// 		this.loadedOnes = 0;
-// 		this.loadable   = 0;
-// 		this.getSongsByType();
-// 	}
-
-// 	ResourcesHandler.prototype.loadSongs = function() {
-
-
-// 		if (false)
-// 		{} // si on récupère pas la liste du prof
-// 		window.resolveLocalFileSystemURL(cordova.file.dataDirectory, gotFS, fail);
-
-// 		function gotFS(fileSystem) {
-// 			console.log(fileSystem); // what is this shit please ?
-// 			fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-// 		}
-
-// 		function gotFileEntry(fileEntry) {
-// 			fileEntry.createWriter(gotFileWriter, fail);
-// 		}
-
-// 		function gotFileWriter(writer) {
-// 			writer.onwriteend = function(evt) {
-// 				console.log("contents of file now 'some sample text'");
-// 				writer.truncate(11);
-// 				writer.onwriteend = function(evt) {
-// 					console.log("contents of file now 'some sample'");
-// 					writer.seek(4);
-// 					writer.write(" different text");
-// 					writer.onwriteend = function(evt){
-// 						console.log("contents of file now 'some different text'");
-// 					}
-// 				};
-// 			};
-// 			writer.write("some sample text");
-// 		}
-
-// 		function fail(error) {
-// 			console.log(error.code);
-// 		}
-// 		else {
-// 			this.loadTestSongs();
-// 		}
-
-
-// 	}
-
-// 	ResourcesHandler.prototype.loadTestSongs = function() {
-
-// 		var self = this;
-// 		for ( var type in ressources )
-// 		{
-// 			var songsOfType=ressources[type];
-// 			for ( var i in songsOfType )
-// 			{
-// 				var urlSong=songsOfType[i];
-// 				self.songs.push(new Song(type,urlSong));
-// 			}
-// 		}
-// 	}
-
-// 	ResourcesHandler.prototype.getSong = function( id ) {
-
-// 		for ( var song in this.songs )
-// 		{
-// 			if (this.songs[song].id == id) {
-// 				return this.songs[song];
-// 			}
-// 		}
-
-// 		return null;
-// 	}
-
-// 	ResourcesHandler.prototype.getSongs = function() {
-// 		return this.songs;
-// 	}
-
-// 	ResourcesHandler.prototype.getSongsByType = function() {
-// 		var songsByType = {};
-
-// 		for ( var song in this.songs )
-// 		{
-// 			if(songsByType[this.songs[song].type] == null)
-// 			{
-// 				songsByType[this.songs[song].type] = [];
-// 			}
-// 			songsByType[this.songs[song].type].push(this.songs[song]);
-// 		}
-
-// 		return songsByType;
-
-// 	}
-
-// 	ResourcesHandler.prototype.getInstance = function() {
-// 		return this;
-// 	}
-
-// 	return ResourcesHandler;
-// });
