@@ -3,12 +3,11 @@ define(function( require ) {
 	'use strict';
 
 	var ressources 		 = require('app/ressources');
-	var Timeline         = require('app/Timeline');
 	var EventsHandler    = require('app/EventsHandler'); 
 	var ResourcesHandler = require('app/ResourcesHandler');
+	var Timeline         = require('app/Timeline');
 
 	function UiMini(){
-		this.timeline = new Timeline();
 	}
 
 	
@@ -22,7 +21,7 @@ define(function( require ) {
 
 	   	for (var i = 1; i < 9; i++) {
 	   		var type="type-"+i;
-	        var buttonSong=$('<div class="button instrument"></div>');
+	        var buttonSong=$('<div class="button instrument disabled"></div>');
 	        buttonSong.attr('type',type);
 	        buttonSong.append("<span class='numberSong'></span>")
 
@@ -76,47 +75,14 @@ define(function( require ) {
 	}
 
 	UiMini.prototype.initPistes = function () {
-		$('.piste').css('width', this.timeline.getDurationInPx());
-	}
-
-
-	UiMini.prototype.initDeckButtons = function () {
-
-		var self=this;
-
-		$(".round_btn.trash_btn").click(function(){
-			$('.piste').empty();
-		});
-
-		$('#play_stop').click(function() {
-			if($(this).hasClass('play_btn'))
-			{
-				$(this).removeClass('play_btn');
-				$(this).addClass('stop_btn');
-				self.timeline.play();
-			} else {
-				$(this).removeClass('stop_btn');
-				$(this).addClass('play_btn');
-				self.timeline.stop();
-			}
-			
-		});
-
-		$('#zoom').click(function(){
-			self.timeline.zoom();
-		});
-
-		$('#unzoom').click(function(){
-			self.timeline.unzoom();
-		});
-
+		$('.piste').css('width', Timeline.getDurationInPx());
 	}
 
 	UiMini.prototype.addSongToPiste = function(songButton,piste,xOnPiste)
 	{
 		var idSong=$(songButton).attr('data-song-id');
 		var song=ResourcesHandler.getSong(idSong);
-		var widthSong=this.timeline.secondsToPxInTimeline(song.getDuration());
+		var widthSong=Timeline.secondsToPxInTimeline(song.getDuration());
 		
 		var divSong=$("<div class='song'></div>");
 
