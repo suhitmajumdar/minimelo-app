@@ -21,15 +21,12 @@ $(document).ready(function() {
 
             onDeviceReady : function () {
 
-                var uiMini   = new UiMini();
+                var uiMini       = new UiMini();
                 var eventsMini   = new EventsMini(uiMini);
 
-                uiMini.initUiMini();
                 eventsMini.initEventsMini();
                 ressources.loadSongs().then(function(data){
-                    uiMini.initButtonsModal();
-                    uiMini.hideLoader();
-                    console.log(ressources);
+                    uiMini.initUiMini();
                 });
 
             }

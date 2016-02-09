@@ -2,7 +2,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	'use strict';
 
-	var ressources       = require('app/ressources');
 
 	function Timeline() {
 		this.songs       = ResourcesHandler.getSongs();

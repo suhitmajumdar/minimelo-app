@@ -267,8 +267,8 @@ define(function(require) {
 
 	}
 
-    EventsMini.prototype.initModalEvents=function(){
-    	var self=this;
+    EventsMini.prototype.initModalEvents = function(){
+
     	$("#choose-song div .button").click(function(){ 
 
 			var numberId = $(this).find("span").text();
@@ -285,7 +285,7 @@ define(function(require) {
 
 		$(".validate_btn.button").click(function(){
 
-			$("#choose-song div .button.active:not(.disabled)").each(function(){
+			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
 				var typeSong = $(this).attr('type');
 

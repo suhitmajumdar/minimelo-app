@@ -2,7 +2,6 @@ define(function( require ) {
 
 	'use strict';
 
-	var ressources 		 = require('app/ressources');
 	var EventsHandler    = require('app/EventsHandler'); 
 	var ResourcesHandler = require('app/ResourcesHandler');
 	var Timeline         = require('app/Timeline');
@@ -17,16 +16,15 @@ define(function( require ) {
 
 	UiMini.prototype.initButtonsSongs = function () {
 
-		var types=ResourcesHandler.getTypes();
+		var types = ResourcesHandler.getActivesTypes();
 
-	   	for (var i = 1; i < 9; i++) {
-	   		var type="type-"+i;
-	        var buttonSong=$('<div class="button instrument disabled"></div>');
-	        buttonSong.attr('type',type);
-	        buttonSong.append("<span class='numberSong'></span>")
+		for ( var type in types ) {
+			var buttonSong = $('<div class="button instrument disabled"></div>');
+			buttonSong.attr('type', types[type]);
+			buttonSong.append("<span class='numberSong'></span>")
 
-	        $('#buttons-songs').append(buttonSong);
-	   	};
+			$('#buttons-songs').append(buttonSong);
+		}
 
 		$('#myModal').modal('show');
 	}
@@ -34,24 +32,23 @@ define(function( require ) {
 	UiMini.prototype.initButtonsModal = function () {
 
 
-	    var songsByType = ResourcesHandler.songsDirectories;
+		var songsByType = ResourcesHandler.songsDirectories;
 
 		for ( var type in songsByType )
 		{
-			if(type!="indefini"){
+			if(type != "indefini"){
 				var line=$("<div type="+type+"></div>");
 				$("#choose-song").append(line);
 				
-				var songs=songsByType[type];
-				for (var i = 0; i < songs.length; i++){
+				var songs = songsByType[type];
 
-					var song=songs[i];
-
+				for ( var song in songs)
+				{
 					var buttonSong=$('<div class="button instrument"></div>');
 					buttonSong.attr('type',type);
-					buttonSong.attr('data-song-id', song.id);
+					buttonSong.attr('data-song-id', songs[song].id);
 
-					buttonSong.append("<span>" +i+ "</span>");
+					buttonSong.append("<span>" + ++song  + "</span>");
 
 					line.append(buttonSong);
 				}
@@ -71,6 +68,7 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initButtonsSongs();
 		this.initPistes();
+		this.initButtonsModal();
 	}
 
 	UiMini.prototype.initPistes = function () {
@@ -79,14 +77,14 @@ define(function( require ) {
 
 	UiMini.prototype.addSongToPiste = function(songButton,piste,xOnPiste)
 	{
-		var idSong=$(songButton).attr('data-song-id');
-		var song=ResourcesHandler.getSong(idSong);
-		var widthSong=Timeline.secondsToPxInTimeline(song.getDuration());
+		var idSong    = $(songButton).attr('data-song-id');
+		var song      = ResourcesHandler.getSong(idSong);
+		var widthSong = Timeline.secondsToPxInTimeline(song.getDuration());
 		
-		var divSong=$("<div class='song'></div>");
+		var divSong   = $("<div class='song'></div>");
 
 		divSong.attr('type',song.type);
-		var colorClass=divSong.css('background-color');
+		var colorClass = divSong.css('background-color');
 		divSong.attr('data-song-id',idSong);
 		divSong.attr('originalBgColor',colorClass);
 		divSong.css('left',xOnPiste-widthSong/2);
