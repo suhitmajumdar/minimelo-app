@@ -4,7 +4,7 @@ define(function(require) {
 	var Timeline 		 = require('app/Timeline');
 
 	function EventsMini(uiMini){
-		this.uiMini=uiMini;
+		this.uiMini = uiMini;
 	}
 
 	EventsMini.prototype.initEventsMini = function (){
@@ -18,13 +18,14 @@ define(function(require) {
 	EventsMini.prototype.initPisteClick = function(){
 
 		var self=this;
+		
 		$('.piste').off().mousedown('click', function(event){
 
 		    if($('.piste .song.inDrag').length<1)
 		    {
 				var xOnPiste   = event.clientX-$(this).offset().left;
 				var songToLoad = $("#buttons-songs .button.active")[0];
-				var newSongDiv = self.uiMini.addSongToPiste(songToLoad,$(this),xOnPiste);
+				var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
 
 			    self.setDragOnSong(newSongDiv);
 			}
