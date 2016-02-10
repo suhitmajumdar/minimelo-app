@@ -105,7 +105,6 @@ ul {
   position: absolute;
   width: 100%;
   z-index: 9999;
-  display: none;
   background-color: white;
   min-height: 100%; }
   .loader h2 {
@@ -128,21 +127,29 @@ ul {
     .loader .button:hover {
       background-position: 0 33%; }
     .loader .button[type="type-1"] {
-      -webkit-animation: load_one 3s infinite; }
+      -webkit-animation: load_one 3s infinite;
+      background-color: rgba(235, 56, 22, 0.8); }
     .loader .button[type="type-2"] {
-      -webkit-animation: load_two 3s infinite; }
+      -webkit-animation: load_two 3s infinite;
+      background-color: rgba(255, 120, 0, 0.8); }
     .loader .button[type="type-3"] {
-      -webkit-animation: load_three 3s infinite; }
+      -webkit-animation: load_three 3s infinite;
+      background-color: rgba(255, 228, 0, 0.8); }
     .loader .button[type="type-4"] {
-      -webkit-animation: load_four 3s infinite; }
+      -webkit-animation: load_four 3s infinite;
+      background-color: rgba(170, 244, 0, 0.8); }
     .loader .button[type="type-5"] {
-      -webkit-animation: load_five 3s infinite; }
+      -webkit-animation: load_five 3s infinite;
+      background-color: rgba(0, 161, 52, 0.8); }
     .loader .button[type="type-6"] {
-      -webkit-animation: load_six 3s infinite; }
+      -webkit-animation: load_six 3s infinite;
+      background-color: rgba(0, 133, 255, 0.8); }
     .loader .button[type="type-7"] {
-      -webkit-animation: load_seven 3s infinite; }
+      -webkit-animation: load_seven 3s infinite;
+      background-color: rgba(132, 214, 255, 0.8); }
     .loader .button[type="type-8"] {
-      -webkit-animation: load_eight 3s infinite; }
+      -webkit-animation: load_eight 3s infinite;
+      background-color: rgba(155, 0, 128, 0.8); }
 
 .song {
   /* RED */
