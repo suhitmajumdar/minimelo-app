@@ -22,11 +22,12 @@ define(function(require) {
 		
 		$('.piste').off().mousedown('click', function(event){
 
-		    if($('.piste .song.inDrag').length<1 && !$('#trash').hasClass("active") )
+		    if($('.piste .song.inDrag').length < 1 && !$('#trash').hasClass("active") )
 		    {
 				var xOnPiste   = event.clientX-$(this).offset().left;
 				var songToLoad = $("#buttons-songs .button.active")[0];
 				var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
+				$("#buttons-songs .button.active").removeClass('active');
 
 			    self.setDragOnSong(newSongDiv);
 			}
@@ -236,11 +237,6 @@ define(function(require) {
     		else
     			$(".song").removeClass("todelete");
     	}
-    		
-
-		// $(".round_btn.trash_btn").off().click(function() {
-		// 	self.uiMini.removeSongsFromPiste();
-		// });
 
 		$('#play_stop').click(function() {
 			if( $('.piste .song').length > 0) {
