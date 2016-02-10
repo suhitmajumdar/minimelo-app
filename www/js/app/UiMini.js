@@ -2,14 +2,18 @@ define(function( require ) {
 
 	'use strict';
 
-	var EventsHandler    = require('app/EventsHandler'); 
 	var ResourcesHandler = require('app/ResourcesHandler');
 	var Timeline         = require('app/Timeline');
 
 	function UiMini(){
 	}
 
-	
+	UiMini.prototype.initUI = function () {
+		this.initTimelineHeight();
+		this.initPistes();
+		this.initRecorder();
+	} 
+
 	UiMini.prototype.hideLoader = function() {
 		$( ".loader" ).fadeOut( "slow" );
 	}
@@ -64,19 +68,11 @@ define(function( require ) {
 		$("#timeline").css("height", heightApp - (heightHeader + heightFooter));
 	}
 
-	UiMini.prototype.initUiMini = function (){
-		this.initTimelineHeight();
-		this.initButtonsSongs();
-		this.initPistes();
-		this.initButtonsModal();
-		this.initRecorder();
-	}
-
 	UiMini.prototype.initPistes = function () {
 		$('.piste').css('width', Timeline.getDurationInPx());
 	}
 
-	UiMini.prototype.addSongToPiste = function(songButton,piste,xOnPiste)
+	UiMini.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
 	{
 		var idSong    = $(songButton).attr('data-song-id');
 		var song      = ResourcesHandler.getSong(idSong);

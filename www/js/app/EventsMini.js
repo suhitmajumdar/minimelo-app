@@ -6,16 +6,13 @@ define(function(require) {
 	function EventsMini(uiMini,record){
 		this.uiMini=uiMini;
 		this.record=record;
-	}
 
-	EventsMini.prototype.initEventsMini = function (){
 		this.initPisteClick();
 		this.initDragAndDrop();
 		this.initModalEvents();
 		this.initSongClick();
 		this.initDeckButtons();
 		this.initRecorderEvents();
-		this.initSongToDelete();
 	}
 
 	EventsMini.prototype.initPisteClick = function(){
@@ -396,12 +393,6 @@ define(function(require) {
 	        }
 	        $(this).addClass("active");
     	});
-    }
-
-    EventsMini.prototype.initSongToDelete=function (){
-    	// $( document ).on( "mousedown", ".song.todelete", function() {
-    	// 	$(this).remove();
-    	// });
     }
 
 	return EventsMini;

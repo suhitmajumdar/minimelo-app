@@ -383,6 +383,15 @@ header {
       #timeline .piste .song[type="type-8"] {
         background-color: rgba(155, 0, 128, 0.8);
         border: 5px solid rgba(155, 0, 128, 0.8); }
+      #timeline .piste .song span {
+        font-size: 32px;
+        font-family: "Orange";
+        position: absolute;
+        top: 4px;
+        text-align: center;
+        width: 100%;
+        padding-left: 5px;
+        overflow: hidden; }
     #timeline .piste .box {
       height: 60px;
       width: 60px;
