@@ -343,19 +343,19 @@ define(function(require) {
 
     EventsMini.prototype.initModalEvents = function(){
 
-    	$("#choose-song div .button").click(function(){ 
+  //   	$("#choose-song div .button").click(function(){ 
 
-			var numberId = $(this).find("span").text();
-			var typeRight = $(this).attr("type");
+		// 	var numberId = $(this).find("span").text();
+		// 	var typeRight = $(this).attr("type");
 
-			$("#buttons-songs-modal .button[type='"+typeRight+"']").find("span").text(numberId);
+		// 	$("#buttons-songs-modal .button[type='"+typeRight+"']").find("span").text(numberId);
 
-			var urlSong = $(this).attr('data-song-url');
+		// 	var urlSong = $(this).attr('data-song-url');
 
-			$(this).parent().find('.button').removeClass('active');
-			$(this).addClass('active');
+		// 	$(this).parent().find('.button').removeClass('active');
+		// 	$(this).addClass('active');
 
-		});
+		// });
 
 		$(".validate_btn.button").click(function(){
 
@@ -365,16 +365,13 @@ define(function(require) {
 
 				var numberId = $(this).find("span").text();
 
-				var buttonToReplace= $("#buttons-songs .button[type='"+typeSong+"']");
-				buttonToReplace.find("span").text(numberId);
-				
-				var idNewSong=$(this).attr('data-song-id');
+				var dataIdSong=$(this).attr('data-song-id');
 
-				buttonToReplace.attr('data-song-id',idNewSong);
+				var buttonToReplace= $("#buttons-songs > .button[type='"+typeSong+"']");
+				buttonToReplace.find(" > span.numberSong").text(numberId);
+				buttonToReplace.attr('data-song-id',dataIdSong);
 				buttonToReplace.removeClass('disabled');
-
-
-				ResourcesHandler.loadSong(idNewSong);
+				ResourcesHandler.loadSong(dataIdSong);
 			
 			});
 
@@ -383,7 +380,7 @@ define(function(require) {
 
 
     EventsMini.prototype.initSongClick=function (){
-    	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled)", function() {
+    	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen)", function() {
 
 	        var idSong=$(this).attr('data-song-id');
 	        ResourcesHandler.playPreview(idSong);
@@ -391,7 +388,7 @@ define(function(require) {
 	        if($(this).parent().attr('id')=="buttons-songs"){
 	        	$("#buttons-songs .button").removeClass("active");
 	        }
-	        else if($(this).parent().parent().attr('id')=="choose-song"){
+	        else if($(this).parent().parent().parent().attr('id')=="choose-song"){
 	        	$(this).parent().find('.button').removeClass("active");
 	        }
 	        $(this).addClass("active");

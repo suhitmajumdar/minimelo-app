@@ -19,11 +19,30 @@ define(function( require ) {
 		var types = ResourcesHandler.getActivesTypes();
 
 		for ( var type in types ) {
-			var buttonSong = $('<div class="button instrument disabled"></div>');
+			var buttonSong = $('<div class="button disabled"></div>');
 			buttonSong.attr('type', types[type]);
 			buttonSong.append("<span class='numberSong'></span>")
 
 			$('#buttons-songs').append(buttonSong);
+
+			buttonSong[0].ontouchstart=function(event){
+				$(this).attr('xswip',event.touches[0].clientX);
+			}
+			buttonSong[0].ontouchmove=function(event){
+				
+				var xswip=$(this).attr('xswip');
+				if(xswip<event.touches[0].clientX)
+				{
+					$(".quick-select").removeClass('active');
+					$(this).find(".quick-select").addClass('active');
+					$(this).addClass('qsopen');
+				}
+				else{
+					$(this).find(".quick-select").removeClass('active');
+					$(this).removeClass('qsopen');
+				}
+			}
+
 		}
 
 		$('#myModal').modal('show');
@@ -37,14 +56,20 @@ define(function( require ) {
 		for ( var type in songsByType )
 		{
 			if(type != "indefini"){
+				
+				var containerLine=$('<div class="container-line">');
+
 				var line=$("<div type="+type+"></div>");
-				$("#choose-song").append(line);
+
+				containerLine.append(line);
+
+				$("#choose-song").append(containerLine);
 				
 				var songs = songsByType[type];
 
 				for ( var song in songs)
 				{
-					var buttonSong=$('<div class="button instrument"></div>');
+					var buttonSong=$('<div class="button"></div>');
 					buttonSong.attr('type',type);
 					buttonSong.attr('data-song-id', songs[song].id);
 
@@ -52,6 +77,24 @@ define(function( require ) {
 
 					line.append(buttonSong);
 				}
+
+				var cloneLine=line.clone();
+
+				line.css('width',songs.length*$('#choose-song .button').outerWidth());
+				// console.log(songs.length);
+				// console.log($('#choose-song .button').outerWidth());
+
+				cloneLine.addClass('quick-select');
+				cloneLine.append($('<div class="round_btn validate_btn" id="begin"></div>'));
+
+				// cloneLine[0].ontouchmove=function(event){
+				// 	// console.log(this);
+				// 	$(this).removeClass('active');
+				// 	console.log(this,"quick-select");
+				// 	event.preventDefault();
+				// }
+
+				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
 			}
 		}
 	}
