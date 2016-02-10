@@ -151,7 +151,7 @@ ul {
       -webkit-animation: load_eight 3s infinite;
       background-color: rgba(155, 0, 128, 0.8); }
 
-.song {
+.song, .button {
   /* RED */
   /* ORANGE */
   /* YELLOW */
@@ -160,23 +160,23 @@ ul {
   /* DARK  BLUE */
   /* CLEAR BLUE */
   /* PURPLE */ }
-  .song.todelete {
+  .song.todelete, .button.todelete {
     opacity: 0.5; }
-  .song[type="type-1"] {
+  .song[type="type-1"], .button[type="type-1"] {
     background-color: rgba(235, 56, 22, 0.8); }
-  .song[type="type-2"] {
+  .song[type="type-2"], .button[type="type-2"] {
     background-color: rgba(255, 120, 0, 0.8); }
-  .song[type="type-3"] {
+  .song[type="type-3"], .button[type="type-3"] {
     background-color: rgba(255, 228, 0, 0.8); }
-  .song[type="type-4"] {
+  .song[type="type-4"], .button[type="type-4"] {
     background-color: rgba(170, 244, 0, 0.8); }
-  .song[type="type-5"] {
+  .song[type="type-5"], .button[type="type-5"] {
     background-color: rgba(0, 161, 52, 0.8); }
-  .song[type="type-6"] {
+  .song[type="type-6"], .button[type="type-6"] {
     background-color: rgba(0, 133, 255, 0.8); }
-  .song[type="type-7"] {
+  .song[type="type-7"], .button[type="type-7"] {
     background-color: rgba(132, 214, 255, 0.8); }
-  .song[type="type-8"] {
+  .song[type="type-8"], .button[type="type-8"] {
     background-color: rgba(155, 0, 128, 0.8); }
 
 .buttons_left .button, #choose-song .button {
@@ -290,7 +290,8 @@ ul {
 
 .app {
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  position: relative; }
   .app .row {
     margin: 0; }
   .app h1 {
@@ -300,6 +301,16 @@ ul {
     font-family: "Orange";
     margin: 0px;
     padding: 10px; }
+  .app .panel {
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px; }
+    .app .panel.active {
+      opacity: 1;
+      z-index: 1; }
 
 header {
   width: 100%;
@@ -441,6 +452,38 @@ header {
     #myModal #choose-song .button.active {
       background-position: 0 33%;
       opacity: 1; }
+
+#panel-record .round_btn[action="stop"] {
+  background-color: red; }
+
+#panel-record #recordScreen {
+  position: relative;
+  /*width: 100%;*/
+  height: 200px; }
+  #panel-record #recordScreen #selector {
+    background: blue;
+    height: 100%;
+    width: 1px;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0px; }
+  #panel-record #recordScreen #lineRecord {
+    height: 100%;
+    width: 1px;
+    display: inline-block;
+    position: absolute;
+    background: green;
+    top: 0px;
+    left: 0px; }
+  #panel-record #recordScreen canvas {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    background: rgba(2, 34, 3, 0.2); }
+
+#panel-record #controls-record {
+  text-align: center; }
 
 /*---------*/
 #deck-buttons {

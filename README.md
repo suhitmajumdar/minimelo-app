@@ -38,3 +38,7 @@ then run :
 
 	gulp
 
+### Add plugin to application
+cordova plugin add org.apache.cordova.file
+cordova plugin add org.apache.cordova.file-transfer
+cordova plugin add cordova-plugin-chrome-apps-audiocapture --save

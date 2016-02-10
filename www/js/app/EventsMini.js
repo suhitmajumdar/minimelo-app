@@ -3,8 +3,9 @@ define(function(require) {
 	var ResourcesHandler = require('app/ResourcesHandler');
 	var Timeline 		 = require('app/Timeline');
 
-	function EventsMini(uiMini){
+	function EventsMini(uiMini,record){
 		this.uiMini=uiMini;
+		this.record=record;
 	}
 
 	EventsMini.prototype.initEventsMini = function (){
@@ -13,19 +14,22 @@ define(function(require) {
 		this.initModalEvents();
 		this.initSongClick();
 		this.initDeckButtons();
+		this.initRecorderEvents();
 		this.initSongToDelete();
 	}
 
 	EventsMini.prototype.initPisteClick = function(){
 
 		var self=this;
+		
 		$('.piste').off().mousedown('click', function(event){
 
-		    if($('.piste .song.inDrag').length<1 && !$('#trash').hasClass("active") )
+		    if($('.piste .song.inDrag').length < 1 && !$('#trash').hasClass("active") )
 		    {
 				var xOnPiste   = event.clientX-$(this).offset().left;
 				var songToLoad = $("#buttons-songs .button.active")[0];
-				var newSongDiv = self.uiMini.addSongToPiste(songToLoad,$(this),xOnPiste);
+				var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
+				$("#buttons-songs .button.active").removeClass('active');
 
 			    self.setDragOnSong(newSongDiv);
 			}
@@ -84,6 +88,81 @@ define(function(require) {
 				divSong[0].onmousedown=null;
 		}
 	}
+
+	EventsMini.prototype.initRecorderEvents=function(){
+    	var self=this;
+    	playRecord.onmousedown=function(){
+			self.record.playRecord();
+		}
+
+		recordButton.onclick=function(event){
+			if($(this).attr("action")=="record"){
+				self.record.startRecord();
+				$(this).attr("action","stop");
+			}else{
+				self.record.stopRecord();
+				$(this).attr("action","record");
+			}
+		}
+
+		recordScreen.onmousedown=recordScreen.ontouchstart=function(event){
+			var clientX;
+  			var clientY;
+
+  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  				clientX=event.touches[0].clientX;
+  				clientY=event.touches[0].clientY;
+  			}
+  			else
+  			{
+  				clientX=event.clientX;
+  				clientY=event.clientY;
+  			}
+
+			var x=clientX-this.offsetLeft;
+			self.record.startSong=x;
+		}
+
+		recordScreen.onmousemove=recordScreen.ontouchmove=function(event){
+			var clientX;
+  			var clientY;
+  			// console.log(event);
+  			var down=(event.buttons==1);
+  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  				clientX=event.touches[0].clientX;
+  				clientY=event.touches[0].clientY;
+  				down=true;
+  			}
+  			else
+  			{
+  				clientX=event.clientX;
+  				clientY=event.clientY;
+  			}
+  			if(down){
+				var x=clientX-this.offsetLeft;
+				self.record.stopSong=x;
+				self.record.drawSelector();
+			}
+			
+
+		}
+
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+  				recordScreen.onmousedown=null;
+  				recordScreen.onmousemove=null;
+  		}
+
+		cutRecord.onclick=function(){
+			self.record.cutRecord();
+			self.record.drawRecord();
+			selector.style.left='0px';
+			selector.style.width='0px';
+		}
+
+		saveRecord.onclick=function(){
+			self.record.saveRecord();
+		}
+    }
 
 	EventsMini.prototype.initDragAndDrop = function () {
 
@@ -235,11 +314,6 @@ define(function(require) {
     		else
     			$(".song").removeClass("todelete");
     	}
-    		
-
-		// $(".round_btn.trash_btn").off().click(function() {
-		// 	self.uiMini.removeSongsFromPiste();
-		// });
 
 		$('#play_stop').click(function() {
 			if( $('.piste .song').length > 0) {
