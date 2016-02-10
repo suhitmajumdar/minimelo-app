@@ -404,6 +404,19 @@ define(function(require) {
     	// });
     }
 
+    // General Menu Events
+	$('#general-menu-button')       .click(function(){ openGeneralMenu(); });
+	$('#general-menu-help')         .click(function(){ openGeneralMenuHelp(); });
+	$('#general-menu-overlay')      .click(function(){ closeGeneralMenu(); });
+	$('#save-menu-validate')        .click(function(){ saveComposition(); })
+	$('#export-menu-validate')      .click(function(){ exportComposition(); });
+	$('#load-menu-validate')        .click(function(){ loadSave(); })
+	$('#new-menu-validate')         .click(function(){ newComposition(); })
+	$('#micro-menu-validate')       .click(function(){ launchRecordView(); })
+	$('#manage-menu-validate')      .click(function(){ launchSoundManagementView(); })
+	$('#general-menu .sub-menu-btn').click(function(){ openSubMenu($(this).attr('menu')); });
+
+
 	return EventsMini;
 
 });

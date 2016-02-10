@@ -9,7 +9,7 @@ requirejs.config({
 
 $(document).ready(function() {
 
-    require(['app/Timeline', 'app/Utils','app/UiMini','app/EventsMini','app/ResourcesHandler','app/Record'], function(Timeline, Utils, UiMini,EventsMini,ressources,Record) {
+    require(['app/Timeline', 'app/Utils','app/UiMini','app/EventsMini','app/ResourcesHandler','app/Record', 'app/GeneralMenu'], function(Timeline, Utils, UiMini,EventsMini,ressources,Record) {
 
         'use strict';
 
