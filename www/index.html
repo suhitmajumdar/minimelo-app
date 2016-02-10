@@ -36,7 +36,8 @@
     </div>
 
     <div class="app">
-      <div class="row">
+
+      <div class="row panel active" id="panel-compose">
         <div class="col-xs-1 buttons_left" id="buttons-songs">
         </div>
         
@@ -72,10 +73,27 @@
 
         </div>
 
-          
+      </div>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div id="panel-record" class="panel">
+        <div id="recordScreen">
+          <div id='selector'></div>
+          <div id="lineRecord"></div>
+          <canvas id="canvasRecord"></canvas>
+        </div>
+        <div id="controls-record">
+          <div class="round_btn" id="recordButton" action="record"></div>
+          <div class="round_btn play_btn" id="playRecord"></div>
+          <div class="round_btn scissors_btn" id="cutRecord"></div>
+          <div class="round_btn validate_btn button" data-dismiss="modal"></div>
+          <div class="round_btn validate_btn button" id="saveRecord"></div>
+        </div>
 
+      </div>
+
+    </div>
+
+     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-body">
@@ -87,12 +105,7 @@
                 </div>
             </div>
           </div>
-        </div>  
-      </div>
-
-    </div>
-    </div>
-    </div>
+        </div> 
 
     <script type="text/javascript" src="cordova.js"></script>
 

@@ -69,6 +69,7 @@ define(function( require ) {
 		this.initButtonsSongs();
 		this.initPistes();
 		this.initButtonsModal();
+		this.initRecorder();
 	}
 
 	UiMini.prototype.initPistes = function () {
@@ -94,6 +95,13 @@ define(function( require ) {
 		piste.append(divSong);
 
 		return divSong;
+	}
+
+	UiMini.prototype.initRecorder=function(){
+		
+		$('#canvasRecord').attr('width',$('#recordScreen').width());
+		$('#canvasRecord').attr('height',$('#recordScreen').height());
+
 	}
 
 	return UiMini;
