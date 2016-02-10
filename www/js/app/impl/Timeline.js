@@ -33,7 +33,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		self.debutSong=self.audioCtx.currentTime;
 
 		self.lineTimeOut = setInterval(function(){
-			var playingTime=self.audioCtx.currentTime-self.debutSong;
+			var playingTime = self.audioCtx.currentTime-self.debutSong;
 			$("#line").css('width',self.secondsToPxInTimeline(playingTime));
 		},100)
 
@@ -50,10 +50,9 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			var sourcePlaying = self.songs[idSong].playWithTime(beginSong);
 			sourcePlaying.songRef=song;
 
-			var idTimeOutActive;
 			var idTimeOutInactive;
 
-			idTimeOutActive = setTimeout(function(song){
+			var idTimeOutActive = setTimeout(function(song){
 
 				song.classList.add('active');
 
