@@ -80,13 +80,13 @@ define(function( require ) {
 		var idSong    = $(songButton).attr('data-song-id');
 		var song      = ResourcesHandler.getSong(idSong);
 		var widthSong = Timeline.secondsToPxInTimeline(song.getDuration());
-		
 		var divSong   = $("<div class='song'></div>");
+		var colorClass = divSong.css('background-color');
 
 		divSong.attr('type',song.type);
-		var colorClass = divSong.css('background-color');
+		divSong.append("<span class='numberSong'>" + $(songButton).find('span').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
-		divSong.attr('originalBgColor',colorClass);
+		divSong.attr('originalBgColor', colorClass);
 		divSong.css('left',xOnPiste-widthSong/2);
 
 		divSong.width(widthSong);

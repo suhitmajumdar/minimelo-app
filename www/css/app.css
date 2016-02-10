@@ -189,7 +189,7 @@ ul {
   /* DARK  BLUE */
   /* CLEAR BLUE */
   /* PURPLE */ }
-  .buttons_left .button span, #choose-song .button span {
+  .buttons_left .button span, #choose-song .button span, .piste .song span {
     font-size: 32px;
     font-family: "Orange";
     position: absolute;
@@ -197,6 +197,9 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
+  .piste .song span {
+    overflow: hidden;
+  }
   .buttons_left .button[type="type-1"], #choose-song .button[type="type-1"] {
     background-color: rgba(235, 56, 22, 0.8); }
   .buttons_left .button[type="type-2"], #choose-song .button[type="type-2"] {
