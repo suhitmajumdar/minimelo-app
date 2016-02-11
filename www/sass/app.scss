@@ -130,7 +130,7 @@ ul{
 			background-image:url("../img/buttons_sprite.png");
 			background-size: cover;
 
-			&:hover{
+			&.active{
 				background-position:0 33%;
 			}
 
@@ -195,7 +195,7 @@ ul{
 	&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 
 
-		&:hover{
+		&.active{
 		background-position:0 33%;
 	}
 
@@ -359,8 +359,17 @@ header{
     height: 500px;
     background: #f4f6fe;
 
+    /*.lineTempo{
+	    display: inline-block;
+	    position: absolute;
+	    height: 100%;
+	    background: green;
+	    width: 1px;
+	    position: absolute;
+    }*/
+
     .piste {
-    	border-bottom:1px solid white;
+    	border-bottom:1px solid #1E4CF1;
     	height: 25%;
     	position: relative;
 
@@ -464,7 +473,7 @@ header{
 }
 
 /*CSS MODAL*/
-#myModal{
+#songsSelector{
 	
 	.modal-dialog {
 	    width: 100%;
@@ -511,7 +520,7 @@ header{
 			background-size: cover;
 			display: inline-block;
 			position:relative;
-			opacity:0.2;
+			opacity:0.3;
 
 			&.active{
 				background-position:0 33%;

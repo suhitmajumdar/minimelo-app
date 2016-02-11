@@ -15,23 +15,30 @@ define(function(require) {
 		this.initSongClick();
 		this.initDeckButtons();
 		this.initRecorderEvents();
-		this.initSongToDelete();
+		this.initValideQuickSelect();
 	}
 
 	EventsMini.prototype.initPisteClick = function(){
 
 		var self=this;
+
 		
-		$('.piste').off().mousedown('click', function(event){
+		$('.piste').each(function(){
 
-		    if($('.piste .song.inDrag').length < 1 && !$('#trash').hasClass("active") )
-		    {
-				var xOnPiste   = event.clientX-$(this).offset().left;
-				var songToLoad = $("#buttons-songs .button.active")[0];
-				var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
-				$("#buttons-songs .button.active").removeClass('active');
+			this.ontouchstart=function(event){
 
-			    self.setDragOnSong(newSongDiv);
+				var songToLoad = self.getSongToLoad();
+
+				console.log(songToLoad);
+				if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
+			    {
+					var xOnPiste = event.touches[0].clientX-$(this).offset().left;
+					
+					var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
+					$("#buttons-songs .button.active").removeClass('active');
+
+				    self.setDragOnSong(newSongDiv);
+				}
 			}
 
 		});
@@ -39,21 +46,11 @@ define(function(require) {
 
 	EventsMini.prototype.setDragOnSong = function(divSong){
 
-		divSong[0].ontouchstart=divSong[0].onmousedown=function(event){
+		divSong[0].ontouchstart=function(event){
 
 	  		event.preventDefault();
-	  		var clientX;
-  			var clientY;
-
-  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				clientX=event.touches[0].clientX;
-  				clientY=event.touches[0].clientY;
-  			}
-  			else
-  			{
-  				clientX=event.clientX;
-  				clientY=event.clientY;
-  			}
+  			var	clientX=event.touches[0].clientX;
+  			var clientY=event.touches[0].clientY;
 
 
   			if($(this).hasClass('todelete'))
@@ -83,10 +80,6 @@ define(function(require) {
 
 			}
 		}
-
-	    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-				divSong[0].onmousedown=null;
-		}
 	}
 
 	EventsMini.prototype.initRecorderEvents=function(){
@@ -105,52 +98,25 @@ define(function(require) {
 			}
 		}
 
-		recordScreen.onmousedown=recordScreen.ontouchstart=function(event){
-			var clientX;
-  			var clientY;
+		recordScreen.ontouchstart=function(event){
 
-  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				clientX=event.touches[0].clientX;
-  				clientY=event.touches[0].clientY;
-  			}
-  			else
-  			{
-  				clientX=event.clientX;
-  				clientY=event.clientY;
-  			}
+			var clientX=event.touches[0].clientX;
+			var clientY=event.touches[0].clientY;
 
 			var x=clientX-this.offsetLeft;
 			self.record.startSong=x;
 		}
 
 		recordScreen.onmousemove=recordScreen.ontouchmove=function(event){
-			var clientX;
-  			var clientY;
-  			// console.log(event);
-  			var down=(event.buttons==1);
-  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				clientX=event.touches[0].clientX;
-  				clientY=event.touches[0].clientY;
-  				down=true;
-  			}
-  			else
-  			{
-  				clientX=event.clientX;
-  				clientY=event.clientY;
-  			}
-  			if(down){
-				var x=clientX-this.offsetLeft;
-				self.record.stopSong=x;
-				self.record.drawSelector();
-			}
-			
+		
+			var clientX=event.touches[0].clientX;
+			var clientY=event.touches[0].clientY;
+
+			var x=clientX-this.offsetLeft;
+			self.record.stopSong=x;
+			self.record.drawSelector();
 
 		}
-
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				recordScreen.onmousedown=null;
-  				recordScreen.onmousemove=null;
-  		}
 
 		cutRecord.onclick=function(){
 			self.record.cutRecord();
@@ -165,23 +131,17 @@ define(function(require) {
     }
 
 	EventsMini.prototype.initDragAndDrop = function () {
+		var self=this;
+  		timeline.ontouchmove=function (event){
+  			
+  			
+			var clientX=event.touches[0].clientX;
+			var clientY=event.touches[0].clientY;
+  			
 
-  		document.ontouchmove=function (event){
-  			var clientX;
-  			var clientY;
+  			var songDragged=self.getSongDragged();
 
-  			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				clientX=event.touches[0].clientX;
-  				clientY=event.touches[0].clientY;
-  			}
-  			else
-  			{
-  				clientX=event.clientX;
-  				clientY=event.clientY;
-  			}
-
-  			var songDragged=$('.piste .song.inDrag');
-  			if(songDragged.length>0)
+  			if(songDragged!=null)
   			{
   				event.preventDefault();
   				var scrollLeft=$( "#timeline" ).scrollLeft();
@@ -216,35 +176,14 @@ define(function(require) {
 
 				var centerY = songDragged.position().top + songDragged.height() / 2;
 
-				var pisteOverlayed=null;
-
-				$('.piste').each(function(){
-
-					var topPist=$(this).position().top;
-					var bottomPiste=$(this).position().top+$(this).height();
-						
-					if( centerY >= topPist && centerY <= bottomPiste){
-				    	pisteOverlayed=$(this);
-				  	}
-
-				});
+				pisteOverlayed=self.getPisteOverlayed(centerY);
 
 				if(pisteOverlayed!=null)
 				{
 
-					var overSong=false;
+					var overSong=self.isOverSong(songDragged,pisteOverlayed);
 					songDragged.css('background-color',songDragged.attr('originalBgColor'));
-					pisteOverlayed.find('.song').not(songDragged).each(function()
-					{
-						var leftOtherSong=$(this).position().left;
-						var rigthOtherSong=leftOtherSong+$(this).outerWidth();
-						
-						if(! (rigthOtherSong<=positionX || leftOtherSong>=positionX+songDragged.outerWidth() ) ){
-						
-							overSong=true;
-						}
-					});
-
+				
 					if(overSong){
 						songDragged.css('background-color',"red");
 					}
@@ -255,14 +194,12 @@ define(function(require) {
 
       	}
 
-  		document.onmouseup=document.ontouchend=function(event){
+  		timeline.ontouchend=function(event){
 
-			if($('.piste .song.inDrag').length>0)
+  			var songDragged=self.getSongDragged();
+
+			if(songDragged!=null)
 			{
-
-				var songDragged=$('.piste .song.inDrag');
-				
-
 				if(songDragged.attr('overOtherSong')=='false')
 				{
 
@@ -291,15 +228,7 @@ define(function(require) {
 				songDragged.css('top',0);
 				songDragged.css('background-color',songDragged.attr('originalBgColor'));
 			}
-
-
 		}
-
-		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-  				document.onmousedown=null;
-  				document.onmouseup=null;
-  		}
-
     }
 
     EventsMini.prototype.initDeckButtons = function () {
@@ -313,6 +242,10 @@ define(function(require) {
     			$(".song").addClass("todelete");
     		else
     			$(".song").removeClass("todelete");
+    	}
+
+    	showSongsSelector.ontouchstart=function(event){
+    		$('#songsSelector').modal('show');
     	}
 
 		$('#play_stop').click(function() {
@@ -343,20 +276,6 @@ define(function(require) {
 
     EventsMini.prototype.initModalEvents = function(){
 
-  //   	$("#choose-song div .button").click(function(){ 
-
-		// 	var numberId = $(this).find("span").text();
-		// 	var typeRight = $(this).attr("type");
-
-		// 	$("#buttons-songs-modal .button[type='"+typeRight+"']").find("span").text(numberId);
-
-		// 	var urlSong = $(this).attr('data-song-url');
-
-		// 	$(this).parent().find('.button').removeClass('active');
-		// 	$(this).addClass('active');
-
-		// });
-
 		$(".validate_btn.button").click(function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
@@ -385,21 +304,78 @@ define(function(require) {
 	        var idSong=$(this).attr('data-song-id');
 	        ResourcesHandler.playPreview(idSong);
 
-	        if($(this).parent().attr('id')=="buttons-songs"){
-	        	$("#buttons-songs .button").removeClass("active");
-	        }
-	        else if($(this).parent().parent().parent().attr('id')=="choose-song"){
-	        	$(this).parent().find('.button').removeClass("active");
-	        }
+	        $(this).parent().find('.button').removeClass("active");
+	        
 	        $(this).addClass("active");
     	});
     }
 
-    EventsMini.prototype.initSongToDelete=function (){
-    	// $( document ).on( "mousedown", ".song.todelete", function() {
-    	// 	$(this).remove();
-    	// });
+    EventsMini.prototype.initValideQuickSelect=function (){
+    	$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
+    		var numBtnSelected=$(this).parent().find('.button.active');
+    		var idSong=numBtnSelected.find("span").text();
+    		var dataIdSong=numBtnSelected.attr('data-song-id');
+
+    		var buttonToSwitch=$(this).parent().parent();
+    		buttonToSwitch.find('span').text(idSong);
+    		buttonToSwitch.attr('data-song-id',dataIdSong);
+    		buttonToSwitch.removeClass('qsopen');
+    		buttonToSwitch.removeClass('active');
+    		buttonToSwitch.find('.quick-select').removeClass('active');
+    		ResourcesHandler.loadSong(dataIdSong);
+	       
+    	});
     }
+
+    EventsMini.prototype.getSongDragged=function(){
+    	var songDragged=null;
+    	if($('.piste .song.inDrag').length>0){
+    		songDragged=$('.piste .song.inDrag');
+    	}
+    	return songDragged;
+    }
+
+    EventsMini.prototype.getPisteOverlayed=function(y){
+    	var pisteOverlayed=null;
+
+		$('.piste').each(function(){
+
+			var topPist=$(this).position().top;
+			var bottomPiste=$(this).position().top+$(this).height();
+				
+			if( y >= topPist && y <= bottomPiste){
+		    	pisteOverlayed=$(this);
+		  	}
+
+		});
+		return pisteOverlayed;
+    }
+
+    EventsMini.prototype.getSongToLoad=function(y){
+		var song=null;
+		if($("#buttons-songs > .button.active").length>0){
+			song=$("#buttons-songs > .button.active")[0];
+		}
+		return song;
+	
+    }
+
+    EventsMini.prototype.isOverSong=function(songDiv,pisteOverlayed){
+    	var overSong=false;
+    	pisteOverlayed.find('.song').not(songDiv).each(function()
+		{
+			var leftOtherSong=$(this).position().left;
+			var rigthOtherSong=leftOtherSong+$(this).outerWidth();
+			
+			if(! (rigthOtherSong<=songDiv.position().left || leftOtherSong>=songDiv.position().left+songDiv.outerWidth() ) ){
+			
+				overSong=true;
+			}
+		});
+		return overSong;
+    }
+
+
 
 	return EventsMini;
 

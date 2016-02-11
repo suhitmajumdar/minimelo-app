@@ -125,7 +125,7 @@ ul {
     height: 80px;
     background-image: url("../img/buttons_sprite.png");
     background-size: cover; }
-    .loader .button:hover {
+    .loader .button.active {
       background-position: 0 33%; }
     .loader .button[type="type-1"] {
       -webkit-animation: load_one 3s infinite; }
@@ -213,7 +213,7 @@ ul {
     background-color: rgba(132, 214, 255, 0.8); }
   .buttons_left .button[type="type-8"], #choose-song .button[type="type-8"] {
     background-color: rgba(155, 0, 128, 0.8); }
-  .buttons_left .button:hover, #choose-song .button:hover {
+  .buttons_left .button.active, #choose-song .button.active {
     background-position: 0 33%; }
   .buttons_left .button.disabled, #choose-song .button.disabled {
     background-color: grey; }
@@ -350,9 +350,17 @@ header {
   position: relative;
   max-height: 100%;
   height: 500px;
-  background: #f4f6fe; }
+  background: #f4f6fe;
+  /*.lineTempo{
+	    display: inline-block;
+	    position: absolute;
+	    height: 100%;
+	    background: green;
+	    width: 1px;
+	    position: absolute;
+    }*/ }
   #timeline .piste {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid #1E4CF1;
     height: 25%;
     position: relative; }
     #timeline .piste .song {
@@ -430,20 +438,20 @@ header {
     background: #eef0fa; }
 
 /*CSS MODAL*/
-#myModal .modal-dialog {
+#songsSelector .modal-dialog {
   width: 100%;
   height: 100%;
   margin: 0; }
-  #myModal .modal-dialog .modal-content {
+  #songsSelector .modal-dialog .modal-content {
     height: 100%; }
-    #myModal .modal-dialog .modal-content .modal-body {
+    #songsSelector .modal-dialog .modal-content .modal-body {
       text-align: center; }
 
-#myModal #choose-song {
+#songsSelector #choose-song {
   display: inline-block;
   text-align: left;
   width: 100%; }
-  #myModal #choose-song div .button span {
+  #songsSelector #choose-song div .button span {
     font-size: 32px;
     font-family: "Orange";
     position: absolute;
@@ -451,22 +459,22 @@ header {
     text-align: center;
     width: 100%;
     left: 0px; }
-  #myModal #choose-song .container-line {
+  #songsSelector #choose-song .container-line {
     overflow-x: auto;
     width: 100%; }
-    #myModal #choose-song .container-line > div[type] {
+    #songsSelector #choose-song .container-line > div[type] {
       display: inline-block; }
-      #myModal #choose-song .container-line > div[type] .button {
+      #songsSelector #choose-song .container-line > div[type] .button {
         padding: 10px; }
-  #myModal #choose-song .button {
+  #songsSelector #choose-song .button {
     width: 55px;
     height: 55px;
     background-image: url("../img/buttons_sprite.png");
     background-size: cover;
     display: inline-block;
     position: relative;
-    opacity: 0.2; }
-    #myModal #choose-song .button.active {
+    opacity: 0.3; }
+    #songsSelector #choose-song .button.active {
       background-position: 0 33%;
       opacity: 1; }
 

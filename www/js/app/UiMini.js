@@ -45,7 +45,7 @@ define(function( require ) {
 
 		}
 
-		$('#myModal').modal('show');
+		$('#songsSelector').modal('show');
 	}
 
 	UiMini.prototype.initButtonsModal = function () {
@@ -85,7 +85,7 @@ define(function( require ) {
 				// console.log($('#choose-song .button').outerWidth());
 
 				cloneLine.addClass('quick-select');
-				cloneLine.append($('<div class="round_btn validate_btn" id="begin"></div>'));
+				cloneLine.append($('<div class="round_btn validate_btn"></div>'));
 
 				// cloneLine[0].ontouchmove=function(event){
 				// 	// console.log(this);
@@ -100,11 +100,11 @@ define(function( require ) {
 	}
 
 	UiMini.prototype.initTimelineHeight = function() {
-		var heightHeader = $("h1").outerHeight();
+		// var heightHeader = $("h1").outerHeight();
 		var heightFooter = $("#deck-buttons").outerHeight();
 		var heightApp = $(".app").outerHeight();
 
-		$("#timeline").css("height", heightApp - (heightHeader + heightFooter));
+		$("#timeline").css("height", heightApp - ( heightFooter));
 	}
 
 	UiMini.prototype.initUiMini = function (){
@@ -117,6 +117,11 @@ define(function( require ) {
 
 	UiMini.prototype.initPistes = function () {
 		$('.piste').css('width', Timeline.getDurationInPx());
+		// for (var i = 0; i < Timeline.getDurationInPx(); i+=200) {
+		// 	var lineTempo=$('<div class="lineTempo"></div>');
+		// 	lineTempo.css('left',i);
+		// 	$('#timeline').prepend(lineTempo);
+		// };
 	}
 
 	UiMini.prototype.addSongToPiste = function(songButton,piste,xOnPiste)
