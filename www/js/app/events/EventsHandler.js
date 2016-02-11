@@ -1,12 +1,15 @@
-define(function(require) {
+define(function( require ) {
 
 	var ResourcesHandler = require('app/ResourcesHandler');
 	var Timeline 		 = require('app/Timeline');
+	var Menu 			 = require('events/Menu');
 
-	function EventsMini(uiMini,record){
-		this.uiMini=uiMini;
-		this.record=record;
+	function EventsHandler(uiMini, record){
+		this.uiMini = uiMini;
+		this.record = record;
+		this.menu   = new Menu();
 
+		this.handleMenu();
 		this.initPisteClick();
 		this.initDragAndDrop();
 		this.initModalEvents();
@@ -16,7 +19,7 @@ define(function(require) {
 		this.initValideQuickSelect();
 	}
 
-	EventsMini.prototype.initPisteClick = function(){
+	EventsHandler.prototype.initPisteClick = function(){
 
 		var self=this;
 
@@ -42,7 +45,7 @@ define(function(require) {
 		});
 	}
 
-	EventsMini.prototype.setDragOnSong = function(divSong){
+	EventsHandler.prototype.setDragOnSong = function(divSong){
 
 		divSong[0].ontouchstart=function(event){
 
@@ -80,7 +83,7 @@ define(function(require) {
 		}
 	}
 
-	EventsMini.prototype.initRecorderEvents=function(){
+	EventsHandler.prototype.initRecorderEvents=function(){
     	var self=this;
     	playRecord.onmousedown=function(){
 			self.record.playRecord();
@@ -128,7 +131,7 @@ define(function(require) {
 		}
     }
 
-	EventsMini.prototype.initDragAndDrop = function () {
+	EventsHandler.prototype.initDragAndDrop = function () {
 		var self=this;
   		timeline.ontouchmove=function (event){
   			
@@ -227,7 +230,7 @@ define(function(require) {
 		}
     }
 
-    EventsMini.prototype.initDeckButtons = function () {
+    EventsHandler.prototype.initDeckButtons = function () {
 
     	var self=this;
 
@@ -270,7 +273,7 @@ define(function(require) {
 
 	}
 
-    EventsMini.prototype.initModalEvents = function(){
+    EventsHandler.prototype.initModalEvents = function(){
 
 		$(".validate_btn.button").click(function(){
 
@@ -294,7 +297,7 @@ define(function(require) {
     }
 
 
-    EventsMini.prototype.initSongClick=function (){
+    EventsHandler.prototype.initSongClick=function (){
     	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen)", function() {
 
 	        var idSong=$(this).attr('data-song-id');
@@ -306,7 +309,7 @@ define(function(require) {
     	});
     }
 
-    EventsMini.prototype.initValideQuickSelect=function (){
+    EventsHandler.prototype.initValideQuickSelect=function (){
     	$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
     		
     		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
@@ -328,7 +331,7 @@ define(function(require) {
     	});
     }
 
-    EventsMini.prototype.getSongDragged=function(){
+    EventsHandler.prototype.getSongDragged=function(){
     	var songDragged=null;
     	if($('.piste .song.inDrag').length>0){
     		songDragged=$('.piste .song.inDrag');
@@ -336,7 +339,7 @@ define(function(require) {
     	return songDragged;
     }
 
-    EventsMini.prototype.getPisteOverlayed=function(y){
+    EventsHandler.prototype.getPisteOverlayed=function(y){
     	var pisteOverlayed=null;
 
 		$('.piste').each(function(){
@@ -352,7 +355,7 @@ define(function(require) {
 		return pisteOverlayed;
     }
 
-    EventsMini.prototype.getSongToLoad=function(y){
+    EventsHandler.prototype.getSongToLoad=function(y){
 		var song=null;
 		if($("#buttons-songs > .button.active").length>0){
 			song=$("#buttons-songs > .button.active")[0];
@@ -361,7 +364,7 @@ define(function(require) {
 	
     }
 
-    EventsMini.prototype.isOverSong=function(songDiv,pisteOverlayed){
+    EventsHandler.prototype.isOverSong=function(songDiv,pisteOverlayed){
     	var overSong=false;
 
     	pisteOverlayed.find('.song').not(songDiv).each(function()
@@ -377,20 +380,28 @@ define(function(require) {
 		return overSong;
     }
 
-    // General Menu Events
-	$('#general-menu-button')       .click( openGeneralMenu );
-	$('#general-menu-help')         .click( openGeneralMenuHelp );
-	$('#general-menu-overlay')      .click( closeGeneralMenu );
-	$('#save-menu-validate')        .click( saveComposition )
-	$('#export-menu-validate')      .click( exportComposition );
-	$('#load-menu-validate')        .click( loadSave )
-	$('#new-menu-validate')         .click( newComposition )
-	$('#micro-menu-validate')       .click( launchRecordView )
-	$('#manage-menu-validate')      .click( launchSoundManagementView)
-	$('#general-menu .sub-menu-btn').click( function() { openSubMenu($(this).attr('menu')); });
+    EventsHandler.prototype.handleMenu = function () {
+	    // General Menu Events
+		$('#general-menu-button')       .click( this.menu.openGeneralMenu );
+		$('#general-menu-help')         .click( this.menu.openGeneralMenuHelp );
+		$('#general-menu-overlay')      .click( this.menu.closeGeneralMenu );
+		$('#save-menu-validate')        .click( this.menu.saveComposition )
+		$('#export-menu-validate')      .click( this.menu.exportComposition );
+		$('#load-menu-validate')        .click( this.menu.loadSave )
+		$('#new-menu-validate')         .click( this.menu.newComposition )
+		$('#micro-menu-validate')       .click( this.menu.launchRecordView )
+		$('#manage-menu-validate')      .click( this.menu.launchSoundManagementView)
+		$('#general-menu .sub-menu-btn').click( function() { openSubMenu($(this).attr('menu')); });	    	
+    }
 
+	EventsHandler.prototype.active = function(selector){
 
+		selector.click(function(){
+			$(selector).filter(".active").removeClass('active');
+			$(this).addClass("active");
+		})
+	}
 
-	return EventsMini;
+	return EventsHandler;
 
 });

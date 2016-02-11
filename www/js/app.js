@@ -3,13 +3,15 @@ requirejs.config({
 	paths: {
 		app: '../js/app',
 		lib: '../js/lib',
-		impl:'../js/app/impl',
+		events: '../js/app/events',
+		ui: '../js/app/ui',
+		impl: '../js/app/impl'
 	}
 });
 
 $(document).ready(function() {
 
-    require(['app/Timeline', 'app/Utils', 'app/UiMini', 'app/EventsMini', 'app/ResourcesHandler', 'app/Record', 'app/GeneralMenu'], function(Timeline, Utils, UiMini, EventsMini, ressources, Record) {
+    require(['app/Timeline', 'app/Utils', 'ui/UiMini', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], function(Timeline, Utils, UiMini, EventsMini, ressources, Record) {
 
 		'use strict';
 
@@ -23,13 +25,13 @@ $(document).ready(function() {
 
 				var uiMini       = new UiMini();
 				var record       = new Record();
-				var eventsMini   = new EventsMini(uiMini, record);
 
 				ressources.loadSongs().then(function(data){
 					uiMini.initButtonsSongs();
 					uiMini.initButtonsModal();
 				});
 
+				var eventsMini   = new EventsMini(uiMini, record);
 				uiMini.initUI();
 
 			}

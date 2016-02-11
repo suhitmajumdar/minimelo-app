@@ -1,41 +1,44 @@
-//////////////// GENERAL MENU ///// Thomas
-/*var generalMenuButton = $('#general-menu-button')
-var generalMenu = $('#general-menu');
-var generalMenuOverlay = $('#general-menu-overlay')*/
-//Ouvrir le general menu
-function openGeneralMenu(){
-    $('#general-menu').addClass('active');
-    $('#general-menu-overlay').addClass('active');
-}
-function openGeneralMenuHelp(){
-    if($('#general-menu').hasClass('helpActive')){
-        $('#general-menu').removeClass('helpActive');
-    }
-    else{
-        $('#general-menu').addClass('helpActive');
-    }
-}
-function closeGeneralMenu(){
-    $('#general-menu').removeClass('helpActive').removeClass('active');
-    $('#general-menu-overlay').removeClass('active');
-    $('.sub-menu').removeClass('active');
-}
+define(function(require) {
+    function Menu() {
 
+    }
 
-//SAVE SUB MENU
-    function getSaveName(){
+    Menu.prototype.openGeneralMenu = function(){
+        $('#general-menu').addClass('active');
+        $('#general-menu-overlay').addClass('active');
+    }
+
+    Menu.prototype.openGeneralMenuHelp = function(){
+        if($('#general-menu').hasClass('helpActive')){
+            $('#general-menu').removeClass('helpActive');
+        }
+        else{
+            $('#general-menu').addClass('helpActive');
+        }
+    }
+
+    Menu.prototype.closeGeneralMenu = function(){
+        $('#general-menu').removeClass('helpActive').removeClass('active');
+        $('#general-menu-overlay').removeClass('active');
+        $('.sub-menu').removeClass('active');
+    }
+
+    Menu.prototype.getSaveName = function(){
         alert('penser à aller chercher le nom de la sauvegarde')
         return "saveName";
     }
-    function load_saveMenu(){
+
+    Menu.prototype.load_saveMenu = function(){
         var name = getSaveName();
         $('#save-menu-input').val( name );
     }
-    function isAvailableSaveName(name){
+
+    Menu.prototype.isAvailableSaveName = function(name){
         alert("Penser à vérivier si un nom est déjà pris dans les sauvegardes")
         return true;
     }
-    function checkSaveName(name){
+
+    Menu.prototype.checkSaveName = function(name){
         if(name == null || name ==""){
             alert("Donnez un nom à votre sauvegarde");
         }else{
@@ -48,15 +51,15 @@ function closeGeneralMenu(){
         }
         return false;
     }
-    function saveComposition(){
+
+    Menu.prototype.saveComposition = function(){
         var name = $('#save-menu-input').val();
         if(checkSaveName(name)){
             alert("penser à sauvegarder la composition...")
         }
     }
-//END SAVE SUB MENU
-//EXPORT SUB MENU
-    function getExportName(){
+
+    Menu.prototype.getExportName = function(){
         alert('Penser à aller chercher si il y a un export name')
         var name = "";
         if(name==""){
@@ -64,10 +67,12 @@ function closeGeneralMenu(){
         }
         return name;
     }
-    function load_exportMenu(){
+
+    Menu.prototype.loadExportMenufunction = function(){
         name = getExportName()
         $('#export-menu-input').val(name)
     }
+
     function exportComposition(){
         var name = $('#export-menu-input').val();
         if(name!=null && name!=""){
@@ -78,14 +83,14 @@ function closeGeneralMenu(){
         }
     }
 
-//END EXPORT SUB MENU
-//LOAD SUB MENU
     var selectedSaveToLoad = null;
-    function getSavedCompositionList(){
+
+    Menu.prototype.getSavedCompositionList = function (){
         alert("penser à aller chercher la liste des compositions");
         return ["saveA","saveB","savEnger"];
     }
-    function load_loadMenu(){
+
+    Menu.prototype.loadLoadMenu = function (){
         var fileList = getSavedCompositionList();
         var domList = $('#load-menu-list');
         domList.empty();
@@ -107,57 +112,55 @@ function closeGeneralMenu(){
             }
         });
     }
-    function loadSave(name){
+
+    Menu.prototype.loadSave = function (name){
         if(selectedSaveToLoad!=null){
             alert("Penser à charger une sauvegarde")
         }
     }
-//END LOAD SUB MENU
-//NEW SUB MENU
-    function newComposition(){
+
+    Menu.prototype.newComposition = function (){
         alert('Penser à vider la timeline ET effacer les noms de save et d\'export')
         //On vide la timeline
         //On efface les noms de sauvegarde et d'exportation
     }
-//END NEW SUB MENU
-//MICRO SUB MENU
-    function launchRecordView(){
+
+    Menu.prototype.launchRecordView = function (){
         alert('Penser à aller sur la vue de record')
     }
-//END MICRO SUB MENU
-//MANAGE SUB MENU
-    function launchSoundManagementView(){
+
+    Menu.prototype.launchSoundManagementView = function (){
         alert('Penser à aller sur la vue de management de records')
     }
-//END MANAGE SUB MENU
 
-
-
-function loadSubMenu(name){
-    switch(name){
-        case 'save-menu':
-            load_saveMenu();
-            break;
-        case 'export-menu':
-            load_exportMenu();
-            break;
-        case 'load-menu':
-            load_loadMenu();
-            break;
-        case 'new-menu':
-            break;
-        case 'micro-menu':
-            break;
-        case 'manage-menu':
-            break;
+    Menu.prototype.loadSubMenu = function (name){
+        switch(name){
+            case 'save-menu':
+                load_saveMenu();
+                break;
+            case 'export-menu':
+                load_exportMenu();
+                break;
+            case 'load-menu':
+                load_loadMenu();
+                break;
+            case 'new-menu':
+                break;
+            case 'micro-menu':
+                break;
+            case 'manage-menu':
+                break;
+        }
     }
-}
-//Ouvrir un sub-menu
-function openSubMenu(menuName){
-    $('.sub-menu').removeClass('active');
-    $('#'+menuName).addClass('active');
-    //Charger le sub-menu
-    loadSubMenu( menuName )
-}
 
-//////////////// END GENERAL MENU ///// Thomas
+    Menu.prototype.openSubMenu = function (menuName){
+        $('.sub-menu').removeClass('active');
+        $('#'+menuName).addClass('active');
+        loadSubMenu( menuName );
+    }
+
+    return Menu;
+
+})
+
+
