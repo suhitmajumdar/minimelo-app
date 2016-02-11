@@ -133,7 +133,7 @@ define(function( require ) {
 		var colorClass = divSong.css('background-color');
 
 		divSong.attr('type',song.type);
-		divSong.append("<span class='numberSong'>" + $(songButton).find('span').text() + "</span>")
+		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
 		divSong.attr('originalBgColor', colorClass);
 		divSong.css('left',xOnPiste-widthSong/2);

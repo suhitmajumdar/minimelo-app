@@ -169,8 +169,6 @@ define(function(require) {
 					positionY=heightTimeline - songDragged.height();
 				}
 
-
-
 				songDragged.css('left',positionX);
 				songDragged.css('top',positionY);
 
@@ -312,17 +310,22 @@ define(function(require) {
 
     EventsMini.prototype.initValideQuickSelect=function (){
     	$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
-    		var numBtnSelected=$(this).parent().find('.button.active');
-    		var idSong=numBtnSelected.find("span").text();
-    		var dataIdSong=numBtnSelected.attr('data-song-id');
+    		
+    		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
+    		if(btnSelected.length>0){
 
-    		var buttonToSwitch=$(this).parent().parent();
-    		buttonToSwitch.find('span').text(idSong);
-    		buttonToSwitch.attr('data-song-id',dataIdSong);
-    		buttonToSwitch.removeClass('qsopen');
-    		buttonToSwitch.removeClass('active');
-    		buttonToSwitch.find('.quick-select').removeClass('active');
-    		ResourcesHandler.loadSong(dataIdSong);
+	    		var idSong=btnSelected.find(" > span").text();
+	    		var dataIdSong=btnSelected.attr('data-song-id');
+
+	    		var buttonToSwitch=$(this).parent().parent();
+	    		buttonToSwitch.find('span.numberSong').text(idSong);
+	    		buttonToSwitch.attr('data-song-id',dataIdSong);
+	    		buttonToSwitch.removeClass('qsopen');
+	    		buttonToSwitch.removeClass('disabled');
+	    		buttonToSwitch.removeClass('active');
+	    		buttonToSwitch.find('.quick-select').removeClass('active');
+	    		ResourcesHandler.loadSong(dataIdSong);
+    		}
 	       
     	});
     }
@@ -362,10 +365,11 @@ define(function(require) {
 
     EventsMini.prototype.isOverSong=function(songDiv,pisteOverlayed){
     	var overSong=false;
+
     	pisteOverlayed.find('.song').not(songDiv).each(function()
 		{
-			var leftOtherSong=$(this).position().left;
-			var rigthOtherSong=leftOtherSong+$(this).outerWidth();
+			var leftOtherSong  = $(this).position().left;
+			var rigthOtherSong = leftOtherSong+$(this).outerWidth();
 			
 			if(! (rigthOtherSong<=songDiv.position().left || leftOtherSong>=songDiv.position().left+songDiv.outerWidth() ) ){
 			
