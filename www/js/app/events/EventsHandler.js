@@ -4,19 +4,18 @@ define(function( require ) {
 	var Timeline 		 = require('app/Timeline');
 	var Menu 			 = require('events/Menu');
 
-	function EventsHandler(uiMini, record){
-		this.uiMini = uiMini;
+	function EventsHandler(UiHandler, record){
+		this.UiHandler = UiHandler;
 		this.record = record;
 		this.menu   = new Menu();
 
-		this.handleMenu();
 		this.initPisteClick();
 		this.initDragAndDrop();
 		this.initModalEvents();
 		this.initSongClick();
 		this.initDeckButtons();
 		this.initRecorderEvents();
-		this.initValideQuickSelect();
+		this.initValidQuickSelect();
 	}
 
 	EventsHandler.prototype.initPisteClick = function(){
@@ -30,12 +29,11 @@ define(function( require ) {
 
 				var songToLoad = self.getSongToLoad();
 
-				console.log(songToLoad);
 				if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
 			    {
 					var xOnPiste = event.touches[0].clientX-$(this).offset().left;
 					
-					var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
+					var newSongDiv = self.UiHandler.addSongToPiste(songToLoad, $(this), xOnPiste);
 					$("#buttons-songs .button.active").removeClass('active');
 
 				    self.setDragOnSong(newSongDiv);
@@ -309,7 +307,7 @@ define(function( require ) {
     	});
     }
 
-    EventsHandler.prototype.initValideQuickSelect=function (){
+    EventsHandler.prototype.initValidQuickSelect=function (){
     	$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
     		
     		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
@@ -378,20 +376,6 @@ define(function( require ) {
 			}
 		});
 		return overSong;
-    }
-
-    EventsHandler.prototype.handleMenu = function () {
-	    // General Menu Events
-		$('#general-menu-button')       .click( this.menu.openGeneralMenu );
-		$('#general-menu-help')         .click( this.menu.openGeneralMenuHelp );
-		$('#general-menu-overlay')      .click( this.menu.closeGeneralMenu );
-		$('#save-menu-validate')        .click( this.menu.saveComposition )
-		$('#export-menu-validate')      .click( this.menu.exportComposition );
-		$('#load-menu-validate')        .click( this.menu.loadSave )
-		$('#new-menu-validate')         .click( this.menu.newComposition )
-		$('#micro-menu-validate')       .click( this.menu.launchRecordView )
-		$('#manage-menu-validate')      .click( this.menu.launchSoundManagementView)
-		$('#general-menu .sub-menu-btn').click( function() { openSubMenu($(this).attr('menu')); });	    	
     }
 
 	EventsHandler.prototype.active = function(selector){

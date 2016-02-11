@@ -1,24 +1,14 @@
 define(function( require ) {
 
-	'use strict';
+	var ResourcesHandler  = require('app/ResourcesHandler');
+	var Timeline 		  = require('app/Timeline');
 
-	var ResourcesHandler = require('app/ResourcesHandler');
-	var Timeline         = require('app/Timeline');
-
-	function UiMini(){
+	function SoundElements() {
+		this.initButtonsModal();
+		this.initButtonsSongs();
 	}
 
-	UiMini.prototype.initUI = function () {
-		this.initTimelineHeight();
-		this.initPistes();
-		this.initRecorder();
-	} 
-
-	UiMini.prototype.hideLoader = function() {
-		$( ".loader" ).fadeOut( "slow" );
-	}
-
-	UiMini.prototype.initButtonsSongs = function () {
+	SoundElements.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
 
@@ -52,7 +42,7 @@ define(function( require ) {
 		$('#songsSelector').modal('show');
 	}
 
-	UiMini.prototype.initButtonsModal = function () {
+	SoundElements.prototype.initButtonsModal = function () {
 
 
 		var songsByType = ResourcesHandler.songsDirectories;
@@ -85,42 +75,16 @@ define(function( require ) {
 				var cloneLine=line.clone();
 
 				line.css('width',songs.length*$('#choose-song .button').outerWidth());
-				// console.log(songs.length);
-				// console.log($('#choose-song .button').outerWidth());
 
 				cloneLine.addClass('quick-select');
 				cloneLine.append($('<div class="round_btn validate_btn"></div>'));
-
-				// cloneLine[0].ontouchmove=function(event){
-				// 	// console.log(this);
-				// 	$(this).removeClass('active');
-				// 	console.log(this,"quick-select");
-				// 	event.preventDefault();
-				// }
 
 				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
 			}
 		}
 	}
 
-	UiMini.prototype.initTimelineHeight = function() {
-		var heightHeader = $("h1").outerHeight();
-		var heightFooter = $("#deck-buttons").outerHeight();
-		var heightApp = $(".app").outerHeight();
-
-		$("#timeline").css("height", heightApp - (heightHeader + heightFooter));
-	}
-
-	UiMini.prototype.initPistes = function () {
-		$('.piste').css('width', Timeline.getDurationInPx());
-		// for (var i = 0; i < Timeline.getDurationInPx(); i+=200) {
-		// 	var lineTempo=$('<div class="lineTempo"></div>');
-		// 	lineTempo.css('left',i);
-		// 	$('#timeline').prepend(lineTempo);
-		// };
-	}
-
-	UiMini.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
+	SoundElements.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
 	{
 		var idSong    = $(songButton).attr('data-song-id');
 		var song      = ResourcesHandler.getSong(idSong);
@@ -142,13 +106,6 @@ define(function( require ) {
 		return divSong;
 	}
 
-	UiMini.prototype.initRecorder=function(){
-		
-		$('#canvasRecord').attr('width',$('#recordScreen').width());
-		$('#canvasRecord').attr('height',$('#recordScreen').height());
+	return SoundElements;
 
-	}
-
-	return UiMini;
-
-});
+})

@@ -11,7 +11,8 @@ requirejs.config({
 
 $(document).ready(function() {
 
-    require(['app/Timeline', 'app/Utils', 'ui/UiMini', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], function(Timeline, Utils, UiMini, EventsMini, ressources, Record) {
+	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], 
+		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record) {
 
 		'use strict';
 
@@ -23,16 +24,15 @@ $(document).ready(function() {
 
 			onDeviceReady : function () {
 
-				var uiMini       = new UiMini();
-				var record       = new Record();
+				var uiHandler = new UiHandler();
+				var record    = new Record();
 
-				ressources.loadSongs().then(function(data){
-					uiMini.initButtonsSongs();
-					uiMini.initButtonsModal();
+				ressources.loadSongs().then(function(data) {
+					uiHandler.initSoundElements();
 				});
 
-				var eventsMini   = new EventsMini(uiMini, record);
-				uiMini.initUI();
+				var eventsHandler = new EventsHandler(uiHandler, record);
+				uiHandler.initUI();
 
 			}
 		};
