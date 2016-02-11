@@ -11,7 +11,49 @@ define(function( require ) {
 							 navigator.webkitGetUserMedia ||
 							 navigator.mozGetUserMedia;
 
-	
+	var liblame = new lamejs();
+
+	function encodeMono(channels, sampleRate, samples) {
+        var buffer = [];
+        var mp3enc = new liblame.Mp3Encoder(channels, sampleRate, 128);
+        var remaining = samples.length;
+        var maxSamples = 1152;
+        for (var i = 0; remaining >= maxSamples; i += maxSamples) {
+            var mono = samples.subarray(i, i + maxSamples);
+            var mp3buf = mp3enc.encodeBuffer(mono);
+            if (mp3buf.length > 0) {
+                buffer.push(new Int8Array(mp3buf));
+            }
+            remaining -= maxSamples;
+        }
+        var d = mp3enc.flush();
+        if(d.length > 0){
+            buffer.push(new Int8Array(d));
+        }
+        var blob = new Blob(buffer, {type: 'audio/mp3'});
+        return blob;
+        // console.log('done encoding, size=', buffer.length);
+        // 
+        // var bUrl = window.URL.createObjectURL(blob);
+        // console.log('Blob created, URL:', bUrl);
+        // window.myAudioPlayer = document.createElement('audio');
+        // window.myAudioPlayer.src = bUrl;
+        // window.myAudioPlayer.setAttribute('controls', '');
+        // window.myAudioPlayer.play();
+    }
+    // var wavFile = "testdata/Left44100.wav";
+    // var request = new XMLHttpRequest();
+    // request.open("GET", wavFile, true);
+    // request.responseType = "arraybuffer";
+    // Our asynchronous callback
+    // request.onload = function () {
+    //     audioData = request.response;
+    //     wav = liblame.WavHeader.readHeader(new DataView(audioData));
+    //     console.log('wav:', wav);
+    //     samples = new Int16Array(audioData, wav.dataOffset, wav.dataLen / 2);
+    //     encodeMono(wav.channels, wav.sampleRate, samples);
+    // };
+
 
 	function Record(){
 		this.scriptNode     = null;
@@ -201,7 +243,7 @@ define(function( require ) {
 	}
 
 	Record.prototype.generateFileName=function(){
-		return "mini_"+Date.timestamp()+".wav";
+		return "mini_"+Date.timestamp()+".mp3";
 	};
 
 	Record.prototype.saveRecord=function(){
@@ -226,7 +268,18 @@ define(function( require ) {
 					writer.onwriteend=function(evt){
 						console.log("audio enregistre "+fileName);
 					}
-					writer.write(e.data);
+					var fileReader = new FileReader();
+					fileReader.onload = function() {
+					    var arrayBuffer = this.result;
+						var wav = liblame.WavHeader.readHeader(new DataView(arrayBuffer));
+				        console.log('wav:', wav);
+				        var samples = new Int16Array(arrayBuffer, wav.dataOffset, wav.dataLen / 2);
+				        var blobMp3=encodeMono(wav.channels, wav.sampleRate, samples);
+				        writer.write(blobMp3);
+					};
+					fileReader.readAsArrayBuffer(e.data);
+					
+
 				}, fail);
 
 			}, fail);
