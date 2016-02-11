@@ -6,9 +6,7 @@ define(function(require) {
 	function EventsMini(uiMini,record){
 		this.uiMini=uiMini;
 		this.record=record;
-	}
 
-	EventsMini.prototype.initEventsMini = function (){
 		this.initPisteClick();
 		this.initDragAndDrop();
 		this.initModalEvents();
@@ -378,6 +376,18 @@ define(function(require) {
 		});
 		return overSong;
     }
+
+    // General Menu Events
+	$('#general-menu-button')       .click( openGeneralMenu );
+	$('#general-menu-help')         .click( openGeneralMenuHelp );
+	$('#general-menu-overlay')      .click( closeGeneralMenu );
+	$('#save-menu-validate')        .click( saveComposition )
+	$('#export-menu-validate')      .click( exportComposition );
+	$('#load-menu-validate')        .click( loadSave )
+	$('#new-menu-validate')         .click( newComposition )
+	$('#micro-menu-validate')       .click( launchRecordView )
+	$('#manage-menu-validate')      .click( launchSoundManagementView)
+	$('#general-menu .sub-menu-btn').click( function() { openSubMenu($(this).attr('menu')); });
 
 
 

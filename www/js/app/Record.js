@@ -3,29 +3,29 @@ define(function( require ) {
 	'use strict';
 
 	var audioCtx = new AudioContext();
-	var ctx=canvasRecord.getContext('2d');
+	var ctx = canvasRecord.getContext('2d');
 
-	var ResourcesHandler=require('app/ResourcesHandler');
+	var ResourcesHandler = require('app/ResourcesHandler');
 
 	navigator.getUserMedia = navigator.getUserMedia ||
-                             navigator.webkitGetUserMedia ||
-                             navigator.mozGetUserMedia;
+							 navigator.webkitGetUserMedia ||
+							 navigator.mozGetUserMedia;
 
-    
+	
 
 	function Record(){
-		this.scriptNode=null;
-		this.scriptNodePlay=null;
-		this.streamRecord=null;
-        this.microphone=null;
-        this.recordBuffer=null;
-        this.idPlayInterval=null;
-        this.arrayData=new Float32Array(0);
-        this.startSong=0;
-        this.stopSong=0;
-        this.playStart=0;
-        this.recorToPlay=null;
-        this.playing=false;
+		this.scriptNode     = null;
+		this.scriptNodePlay = null;
+		this.streamRecord   = null;
+		this.microphone     = null;
+		this.recordBuffer   = null;
+		this.idPlayInterval = null;
+		this.arrayData      = new Float32Array(0);
+		this.startSong      = 0;
+		this.stopSong       = 0;
+		this.playStart      = 0;
+		this.recorToPlay    = null;
+		this.playing        = false;
 	}
 
 	Record.prototype.startRecord=function()
@@ -38,7 +38,7 @@ define(function( require ) {
 		navigator.getUserMedia({audio: true},
 			function(stream){
 				self.streamRecord=stream.getAudioTracks()[0];
-		    	self.microphone = audioCtx.createMediaStreamSource(stream);
+				self.microphone = audioCtx.createMediaStreamSource(stream);
 				self.scriptNode = audioCtx.createScriptProcessor(4096, 1, 1);
 				self.microphone.connect(self.scriptNode);
 				self.scriptNode.connect(audioCtx.destination);
@@ -70,9 +70,9 @@ define(function( require ) {
 		this.scriptNode.disconnect();
 
 		this.recordBuffer = audioCtx.createBuffer(1, this.arrayData.length, audioCtx.sampleRate);
-	    var output = this.recordBuffer.getChannelData(0);
+		var output = this.recordBuffer.getChannelData(0);
 		for (var i = 0; i < this.arrayData.length; i++) {
-		    output[i] = this.arrayData[i];
+			output[i] = this.arrayData[i];
 		}
 
 		this.drawRecord(this.recordBuffer);
@@ -80,35 +80,35 @@ define(function( require ) {
 
 	Record.prototype.drawRecord=function(){
 		var binSize = ( this.recordBuffer.duration * this.recordBuffer.sampleRate ) / canvasRecord.width;
-	    ctx.clearRect(0,0,canvasRecord.width,canvasRecord.height);
-	    ctx.beginPath();
-	    
-	    var linePosition=10;
-	    ctx.moveTo(0,canvasRecord.height-linePosition);
+		ctx.clearRect(0,0,canvasRecord.width,canvasRecord.height);
+		ctx.beginPath();
+		
+		var linePosition=10;
+		ctx.moveTo(0,canvasRecord.height-linePosition);
 
-	    var data=this.recordBuffer.getChannelData(0);
-	    var xOnCanvas=0;
+		var data=this.recordBuffer.getChannelData(0);
+		var xOnCanvas=0;
 
-	    for (var i=0,len=data.length; i<len; i+=binSize)
-	    {
-	      //avec la moyenne moins performant mais plus precis
-	      // var tempdata=data.subarray(i,i+binSize);
-	      // ctx.lineTo(xOnCanvas,canvasRecord.height-Math.abs(Math.max.apply(Math, tempdata) * canvasRecord.height/1.3)-linePosition);
-	       
-	       //sans la moyenne
-	      var tempdata=data.subarray(i,i+binSize)[0];
-	      ctx.lineTo(xOnCanvas,canvasRecord.height-Math.abs(tempdata * canvasRecord.height/1.1)-linePosition);
+		for (var i=0,len=data.length; i<len; i+=binSize)
+		{
+		  //avec la moyenne moins performant mais plus precis
+		  // var tempdata=data.subarray(i,i+binSize);
+		  // ctx.lineTo(xOnCanvas,canvasRecord.height-Math.abs(Math.max.apply(Math, tempdata) * canvasRecord.height/1.3)-linePosition);
+		   
+		   //sans la moyenne
+		  var tempdata=data.subarray(i,i+binSize)[0];
+		  ctx.lineTo(xOnCanvas,canvasRecord.height-Math.abs(tempdata * canvasRecord.height/1.1)-linePosition);
 
-	      xOnCanvas++;
-	    }
-	    ctx.lineTo(canvasRecord.width,canvasRecord.height-linePosition);
-	    ctx.closePath();
-	    ctx.fill();
-	    ctx.beginPath();
-	    ctx.moveTo(0,canvasRecord.height-linePosition);
-	    ctx.lineTo(canvasRecord.width,canvasRecord.height-linePosition);
-	    ctx.closePath();
-	    ctx.stroke();
+		  xOnCanvas++;
+		}
+		ctx.lineTo(canvasRecord.width,canvasRecord.height-linePosition);
+		ctx.closePath();
+		ctx.fill();
+		ctx.beginPath();
+		ctx.moveTo(0,canvasRecord.height-linePosition);
+		ctx.lineTo(canvasRecord.width,canvasRecord.height-linePosition);
+		ctx.closePath();
+		ctx.stroke();
 	}
 
 	Record.prototype.playRecord=function(){
@@ -193,8 +193,8 @@ define(function( require ) {
 		  var nowBuffering = myArrayBuffer.getChannelData(channel);
 		  var pos=0;
 		  for (var i = Math.round(frameStart); i < Math.round(frameEnd); i++) {
-		    nowBuffering[pos] = this.recordBuffer.getChannelData(channel)[i];
-		    pos++;
+			nowBuffering[pos] = this.recordBuffer.getChannelData(channel)[i];
+			pos++;
 		  }
 		}
 		this.recordBuffer=myArrayBuffer;	
@@ -207,16 +207,16 @@ define(function( require ) {
 	Record.prototype.saveRecord=function(){
 		var self=this;
 		var worker = new Worker('js/app/RecordWorker.js');
-	    worker.postMessage({
-	      command: 'init',
-	      config: {sampleRate: this.recordBuffer.sampleRate,numChannels:this.recordBuffer.numberOfChannels}
-	    });
+		worker.postMessage({
+		  command: 'init',
+		  config: {sampleRate: this.recordBuffer.sampleRate,numChannels:this.recordBuffer.numberOfChannels}
+		});
 
-	    // callback for `exportWAV`
-	    worker.onmessage = function( e ) {
-		    
+		// callback for `exportWAV`
+		worker.onmessage = function( e ) {
+			
 
-		    var fileName=self.generateFileName();
+			var fileName=self.generateFileName();
 
 			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
 
@@ -235,55 +235,55 @@ define(function( require ) {
 				console.log(error);
 			});
 
-	    };
+		};
 
-	    // send the channel data from our buffer to the worker
-	    worker.postMessage({
-	    command: 'record',
-	    buffer: [
-	      this.recordBuffer.getChannelData(0)
-	    ]
-	    });
+		// send the channel data from our buffer to the worker
+		worker.postMessage({
+		command: 'record',
+		buffer: [
+		  this.recordBuffer.getChannelData(0)
+		]
+		});
 
-	    worker.postMessage({
-	      command: 'exportWAV',
-	      type: 'audio/wav'
-	    });
+		worker.postMessage({
+		  command: 'exportWAV',
+		  type: 'audio/wav'
+		});
 
-	      //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
+		  //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
 
-	      															//GotFS
+																	//GotFS
 
 
 	}
 
 	function gotFS(fileSystem) {
-        fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-    }
+		fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
+	}
 
-    function gotFileEntry(fileEntry) {
-        fileEntry.createWriter(gotFileWriter, fail);
-    }
+	function gotFileEntry(fileEntry) {
+		fileEntry.createWriter(gotFileWriter, fail);
+	}
 
-    function gotFileWriter(writer) {
-        writer.onwriteend = function(evt) {
-            console.log("contents of file now 'some sample text'");
-            writer.truncate(11);
-            writer.onwriteend = function(evt) {
-                console.log("contents of file now 'some sample'");
-                writer.seek(4);
-                writer.write(" different text");
-                writer.onwriteend = function(evt){
-                    console.log("contents of file now 'some different text'");
-                }
-            };
-        };
-        writer.write("some sample text");
-    }
+	function gotFileWriter(writer) {
+		writer.onwriteend = function(evt) {
+			console.log("contents of file now 'some sample text'");
+			writer.truncate(11);
+			writer.onwriteend = function(evt) {
+				console.log("contents of file now 'some sample'");
+				writer.seek(4);
+				writer.write(" different text");
+				writer.onwriteend = function(evt){
+					console.log("contents of file now 'some different text'");
+				}
+			};
+		};
+		writer.write("some sample text");
+	}
 
-    function fail(error) {
-        console.log(error.code);
-    }
+	function fail(error) {
+		console.log(error.code);
+	}
 
 
 	return Record;

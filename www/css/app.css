@@ -360,9 +360,13 @@ header {
 	    position: absolute;
     }*/ }
   #timeline .piste {
-    border-bottom: 1px solid #1E4CF1;
+    border-top: 1px solid #3F496E;
+    height: 25%;
+    position: relative;
     height: 25%;
     position: relative; }
+    #timeline .piste:last-of-type {
+      border-bottom: 1px solid #3F496E; }
     #timeline .piste .song {
       position: absolute;
       height: 100%;
@@ -409,6 +413,15 @@ header {
       #timeline .piste .song[type="type-8"] {
         background-color: rgba(155, 0, 128, 0.8);
         border: 5px solid rgba(155, 0, 128, 0.8); }
+      #timeline .piste .song span {
+        font-size: 32px;
+        font-family: "Orange";
+        position: absolute;
+        top: 4px;
+        text-align: center;
+        width: 100%;
+        padding-left: 5px;
+        overflow: hidden; }
     #timeline .piste .box {
       height: 60px;
       width: 60px;
@@ -526,3 +539,139 @@ header {
 #debug {
   background-color: black;
   color: #33FF33; }
+
+/* GENERAL MENU */
+#general-menu-button {
+  float: right;
+  background-color: grey; }
+
+#general-menu {
+  background-color: #fff;
+  position: absolute;
+  width: 0px;
+  overflow: hidden;
+  right: 0;
+  top: 0px;
+  height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.2) -5px 0 5px;
+  transition-duration: .3s; }
+  #general-menu.active {
+    width: 75px;
+    right: 0px;
+    z-index: 3; }
+    #general-menu.active.helpActive {
+      width: 315px; }
+      #general-menu.active.helpActive p {
+        width: 225px;
+        margin-right: 10px; }
+  #general-menu ul {
+    padding: 20px 10px; }
+  #general-menu li {
+    list-style-type: none;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: right;
+    height: 60px; }
+  #general-menu p {
+    display: inline-block;
+    width: 0px;
+    padding-top: 12px;
+    overflow: hidden;
+    transition-duration: .3s;
+    white-space: nowrap;
+    float: right;
+    margin-right: 0px; }
+  #general-menu .square_btn {
+    vertical-align: middle;
+    float: right; }
+  #general-menu .round_btn {
+    margin-top: 20px; }
+
+#general-menu-overlay {
+  content: "";
+  display: block;
+  width: 0%;
+  height: 100%;
+  background-color: transparent;
+  position: absolute;
+  top: 0px;
+  right: -100%;
+  z-index: 2;
+  transition-duration: .5s; }
+  #general-menu-overlay.active {
+    width: 100%;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.5); }
+
+.sub-menu {
+  position: absolute;
+  left: 50%;
+  margin-left: -250px;
+  top: 10%;
+  width: 500px;
+  padding: 20px 10px 30px;
+  box-shadow: rgba(0, 0, 0, 0.2) -5px 0 5px;
+  background-color: #fff;
+  visibility: hidden;
+  text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transition-duration: .3s; }
+  .sub-menu.active {
+    visibility: visible;
+    opacity: 1; }
+  .sub-menu input {
+    background-color: #eee;
+    border: none;
+    border-radius: 5px;
+    width: 400px;
+    height: 40px;
+    box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 5px inset;
+    text-align: center;
+    margin-bottom: 20px; }
+  .sub-menu .validate_btn {
+    display: block;
+    margin: auto; }
+  .sub-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px; }
+  .sub-menu #load-menu-list {
+    max-height: 150px;
+    overflow-y: scroll; }
+  .sub-menu .load-menu-save {
+    float: left;
+    padding: 10px;
+    border: solid 1px #222;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+    margin: 0 5px 5px;
+    background-color: #fff;
+    transition-duration: .2s; }
+    .sub-menu .load-menu-save:hover {
+      background-color: #eee; }
+    .sub-menu .load-menu-save.active {
+      background-color: #ddd; }
+      .sub-menu .load-menu-save.active:hover {
+        background-color: #ddd; }
+  .sub-menu #load-menu-validate {
+    opacity: .2;
+    transition-property: opacity;
+    transition-duration: .3s; }
+    .sub-menu #load-menu-validate.active {
+      opacity: 1; }
+
+.square_btn {
+  background-image: url("../img/buttons_sprite.png");
+  background-size: cover;
+  width: 55px;
+  height: 55px;
+  display: inline-block; }
+
+.round_btn {
+  display: inline-block;
+  width: 50px;
+  height: 51px;
+  background-image: url("../img/buttons_sprite.png");
+  background-size: cover;
+  background-position: 0 67%; }

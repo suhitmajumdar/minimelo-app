@@ -11,7 +11,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		this.bars        = 20;
 		this.stepByBars  = 4;
 
-		this.audioCtx    = new (window.AudioContext || window.webkitAudioContext)();
+		this.audioCtx    = new AudioContext();
 
 		this.nbSongPlayed=0;
 

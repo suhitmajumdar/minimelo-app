@@ -42,7 +42,9 @@
         </div>
         
         <div class="col-xs-11">
-          <!-- <h1 id="application-name" >Mini Mélo</h1> -->
+          <h1 id="application-name" >Mini Mélo</h1>
+          <!-- GENERAL MENU BUTTON -->
+          <div id="general-menu-button" class="square_btn"></div>
               <div id="timeline">
                 <div id="line"></div>
                 <div id="piste-1" class="piste"></div>
@@ -90,6 +92,72 @@
         </div>
 
       </div>
+
+      <!-- GENERAL MENU -->
+      <div id="general-menu">
+        <ul>
+          <li>
+            <div class="square_btn sub-menu-btn save_btn" menu="save-menu"></div>
+            <p>Sauvegarder</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn export_btn" menu="export-menu"></div>
+            <p>Exporter</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn load_btn" menu="load-menu"></div>
+            <p>Charger une composition</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn new_btn" menu="new-menu"></div>
+            <p>nouvelle composition</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn micro_btn" menu="micro-menu"></div>
+            <p>Enregistrer un son</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn manage_btn" menu="manage-menu"></div>
+            <p>Gérer les sons</p>
+          </li>
+          <li>
+            <div class="round_btn question_btn" id="general-menu-help"></div>
+          </li>
+        </ul>
+      </div>
+      <div id="general-menu-overlay"></div>
+
+      <div id="save-menu" class="sub-menu">
+        <h2>SAUVEGARDER</h2>
+        <p>Choisis un titre!</p>
+        <input type="text" id="save-menu-input"/>
+        <div id="save-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="export-menu" class="sub-menu">
+        <h2>EXPORTER</h2>
+        <p>Choisis un titre!</p>
+        <input type="text" id="export-menu-input"/>
+        <div id="export-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="load-menu" class="sub-menu">
+        <h2>Charger</h2>
+        <p>Choisis une composition à charger</p>
+        <ul id="load-menu-list"></ul>
+        <div id="load-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="new-menu" class="sub-menu">
+        <h2>NOUVEAU</h2>
+        <p>Veux-tu commencer une nouvelle composition?</p>
+        <div id="new-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="micro-menu" class="sub-menu">
+        <p>MICRO</p>
+      </div>
+      <div id="manage-menu" class="sub-menu">
+        <p>MANAGERRRrrrRRrRrrr!</p>
+      </div>
+      <!-- END GENERAL MENU -->
+
 
     </div>
 
