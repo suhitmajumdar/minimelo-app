@@ -37,7 +37,7 @@
 
     <div class="app">
 
-      <div class="row panel" id="panel-compose">
+      <div class="row panel active" id="panel-compose">
         <div class="col-xs-1 buttons_left" id="buttons-songs">
         </div>
         
@@ -77,7 +77,7 @@
 
       </div>
 
-      <div id="panel-record" class="panel active">
+      <div id="panel-record" class="panel">
         <div id="recordScreen">
           <div id='selector'></div>
           <div id="lineRecord"></div>
@@ -87,7 +87,7 @@
           <div class="round_btn" id="recordButton" action="record"></div>
           <div class="round_btn play_btn" id="playRecord"></div>
           <div class="round_btn scissors_btn" id="cutRecord"></div>
-          <div class="round_btn validate_btn button" data-dismiss="modal"></div>
+          <div class="round_btn close_btn button" id="closeRecorder"></div>
           <div class="round_btn validate_btn button" id="saveRecord"></div>
         </div>
 
@@ -150,9 +150,9 @@
         <p>Veux-tu commencer une nouvelle composition?</p>
         <div id="new-menu-validate" class="round_btn validate_btn"></div>
       </div>
-      <div id="micro-menu" class="sub-menu">
+      <!-- <div id="micro-menu" class="sub-menu">
         <p>MICRO</p>
-      </div>
+      </div> -->
       <div id="manage-menu" class="sub-menu">
         <p>MANAGERRRrrrRRrRrrr!</p>
       </div>

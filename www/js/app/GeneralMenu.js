@@ -122,7 +122,9 @@ function closeGeneralMenu(){
 //END NEW SUB MENU
 //MICRO SUB MENU
     function launchRecordView(){
-        alert('Penser à aller sur la vue de record')
+        $('.panel').removeClass('active');
+        $('#panel-record').addClass('active');
+        closeGeneralMenu();
     }
 //END MICRO SUB MENU
 //MANAGE SUB MENU
@@ -147,6 +149,7 @@ function loadSubMenu(name){
         case 'new-menu':
             break;
         case 'micro-menu':
+            launchRecordView();
             break;
         case 'manage-menu':
             break;

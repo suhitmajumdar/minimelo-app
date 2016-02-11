@@ -126,6 +126,11 @@ define(function(require) {
 		saveRecord.onclick=function(){
 			self.record.saveRecord();
 		}
+
+		closeRecorder.onclick=function(event){
+			$('.panel').removeClass('active');
+			$('#panel-compose').addClass('active');
+		}
     }
 
 	EventsMini.prototype.initDragAndDrop = function () {

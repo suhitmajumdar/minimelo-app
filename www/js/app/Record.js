@@ -11,50 +11,6 @@ define(function( require ) {
 							 navigator.webkitGetUserMedia ||
 							 navigator.mozGetUserMedia;
 
-	var liblame = new lamejs();
-
-	function encodeMono(channels, sampleRate, samples) {
-        var buffer = [];
-        var mp3enc = new liblame.Mp3Encoder(channels, sampleRate, 128);
-        var remaining = samples.length;
-        var maxSamples = 1152;
-        for (var i = 0; remaining >= maxSamples; i += maxSamples) {
-            var mono = samples.subarray(i, i + maxSamples);
-            var mp3buf = mp3enc.encodeBuffer(mono);
-            if (mp3buf.length > 0) {
-                buffer.push(new Int8Array(mp3buf));
-            }
-            remaining -= maxSamples;
-        }
-        var d = mp3enc.flush();
-        if(d.length > 0){
-            buffer.push(new Int8Array(d));
-        }
-        var blob = new Blob(buffer, {type: 'audio/mp3'});
-        return blob;
-        // console.log('done encoding, size=', buffer.length);
-        // 
-        // var bUrl = window.URL.createObjectURL(blob);
-        // console.log('Blob created, URL:', bUrl);
-        // window.myAudioPlayer = document.createElement('audio');
-        // window.myAudioPlayer.src = bUrl;
-        // window.myAudioPlayer.setAttribute('controls', '');
-        // window.myAudioPlayer.play();
-    }
-    // var wavFile = "testdata/Left44100.wav";
-    // var request = new XMLHttpRequest();
-    // request.open("GET", wavFile, true);
-    // request.responseType = "arraybuffer";
-    // Our asynchronous callback
-    // request.onload = function () {
-    //     audioData = request.response;
-    //     wav = liblame.WavHeader.readHeader(new DataView(audioData));
-    //     console.log('wav:', wav);
-    //     samples = new Int16Array(audioData, wav.dataOffset, wav.dataLen / 2);
-    //     encodeMono(wav.channels, wav.sampleRate, samples);
-    // };
-
-
 	function Record(){
 		this.scriptNode     = null;
 		this.scriptNodePlay = null;
@@ -248,16 +204,19 @@ define(function( require ) {
 
 	Record.prototype.saveRecord=function(){
 		var self=this;
-		var worker = new Worker('js/app/RecordWorker.js');
+		var worker = new Worker('js/lib/RecordWorker.js');
 		worker.postMessage({
-		  command: 'init',
-		  config: {sampleRate: this.recordBuffer.sampleRate,numChannels:this.recordBuffer.numberOfChannels}
+		  config: {
+		  	sampleRate: this.recordBuffer.sampleRate,
+		  	numChannels:this.recordBuffer.numberOfChannels,
+		  	buffer:this.recordBuffer.getChannelData(0)
+		  }
 		});
 
 		// callback for `exportWAV`
 		worker.onmessage = function( e ) {
 			
-
+			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
 			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
@@ -268,17 +227,7 @@ define(function( require ) {
 					writer.onwriteend=function(evt){
 						console.log("audio enregistre "+fileName);
 					}
-					var fileReader = new FileReader();
-					fileReader.onload = function() {
-					    var arrayBuffer = this.result;
-						var wav = liblame.WavHeader.readHeader(new DataView(arrayBuffer));
-				        console.log('wav:', wav);
-				        var samples = new Int16Array(arrayBuffer, wav.dataOffset, wav.dataLen / 2);
-				        var blobMp3=encodeMono(wav.channels, wav.sampleRate, samples);
-				        writer.write(blobMp3);
-					};
-					fileReader.readAsArrayBuffer(e.data);
-					
+				    writer.write(blobMp3);
 
 				}, fail);
 
@@ -289,49 +238,6 @@ define(function( require ) {
 			});
 
 		};
-
-		// send the channel data from our buffer to the worker
-		worker.postMessage({
-		command: 'record',
-		buffer: [
-		  this.recordBuffer.getChannelData(0)
-		]
-		});
-
-		worker.postMessage({
-		  command: 'exportWAV',
-		  type: 'audio/wav'
-		});
-
-		  //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-
-																	//GotFS
-
-
-	}
-
-	function gotFS(fileSystem) {
-		fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-	}
-
-	function gotFileEntry(fileEntry) {
-		fileEntry.createWriter(gotFileWriter, fail);
-	}
-
-	function gotFileWriter(writer) {
-		writer.onwriteend = function(evt) {
-			console.log("contents of file now 'some sample text'");
-			writer.truncate(11);
-			writer.onwriteend = function(evt) {
-				console.log("contents of file now 'some sample'");
-				writer.seek(4);
-				writer.write(" different text");
-				writer.onwriteend = function(evt){
-					console.log("contents of file now 'some different text'");
-				}
-			};
-		};
-		writer.write("some sample text");
 	}
 
 	function fail(error) {
@@ -342,4 +248,3 @@ define(function( require ) {
 	return Record;
 
 });
-

@@ -5,7 +5,7 @@ define(function( require ){
 
 	var audioCtx   = new AudioContext();
 
-	var unwantedTypes = ['indefini'];
+	var unwantedTypes = [''];
 
 	'use strict';
 
