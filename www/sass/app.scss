@@ -359,17 +359,7 @@ header{
     height: 500px;
     background: #f4f6fe;
 
-    /*.lineTempo{
-	    display: inline-block;
-	    position: absolute;
-	    height: 100%;
-	    background: green;
-	    width: 1px;
-	    position: absolute;
-    }*/
-
-
-	.piste {
+	.track {
 		border-top: 1px solid #3F496E;
 		height: 25%;
 		position: relative;
@@ -439,6 +429,9 @@ header{
 			&[type="type-8"]{
 				background-color: $purple; 
 				border: 5px solid $purple;
+			}
+			&[overOtherSong=true] {
+				background-color: $red;
 			}
 			span{
 				font-size:32px;

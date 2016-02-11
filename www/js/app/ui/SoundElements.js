@@ -84,7 +84,7 @@ define(function( require ) {
 		}
 	}
 
-	SoundElements.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
+	SoundElements.prototype.addSongTotrack = function(songButton, track, xOntrack)
 	{
 		var idSong    = $(songButton).attr('data-song-id');
 		var song      = ResourcesHandler.getSong(idSong);
@@ -96,11 +96,11 @@ define(function( require ) {
 		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
 		divSong.attr('originalBgColor', colorClass);
-		divSong.css('left',xOnPiste-widthSong/2);
+		divSong.css('left',xOntrack-widthSong/2);
 
 		divSong.width(widthSong);
 
-		piste.append(divSong);
+		track.append(divSong);
 
 
 		return divSong;
