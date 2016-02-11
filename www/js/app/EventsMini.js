@@ -395,6 +395,25 @@ define(function(require) {
     	});
     }
 
+    EventsMini.prototype.initSongToDelete=function (){
+    	// $( document ).on( "mousedown", ".song.todelete", function() {
+    	// 	$(this).remove();
+    	// });
+    }
+
+    // General Menu Events
+	$('#general-menu-button')       .click( openGeneralMenu );
+	$('#general-menu-help')         .click( openGeneralMenuHelp );
+	$('#general-menu-overlay')      .click( closeGeneralMenu );
+	$('#save-menu-validate')        .click( saveComposition )
+	$('#export-menu-validate')      .click( exportComposition );
+	$('#load-menu-validate')        .click( loadSave )
+	$('#new-menu-validate')         .click( newComposition )
+	$('#micro-menu-validate')       .click( launchRecordView )
+	$('#manage-menu-validate')      .click( launchSoundManagementView)
+	$('#general-menu .sub-menu-btn').click( function() { openSubMenu($(this).attr('menu')); });
+
+
 	return EventsMini;
 
 });
