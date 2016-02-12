@@ -561,7 +561,10 @@ header{
 	#recordScreen{
 		position: relative;
 		/*width: 100%;*/
-		height: 200px;
+		height: 200px;    
+		width: 90%;
+	    margin: 40px auto 50px;
+	    border: solid 1px black;
 
 		#selector{
 			background: blue;
@@ -588,8 +591,40 @@ header{
 			background: rgba(2,34,3,0.2);
 		}
 	}
-	#controls-record{
+	#record-controls{
 		text-align: center;
+		#playRecord, #cutRecord, #recordButton{
+			transition-property: opacity;
+			transition-duration: .2s;
+			opacity: 1;
+		}
+
+		.player_controls{
+			text-align: center;
+
+			&.recording{
+				#recordButton{
+					background-color: green;
+				}
+				#playRecord, #cutRecord{
+					opacity: .4;
+				}
+			}
+			&.playing{
+				#playRecord{
+					background-color: green;
+				}
+				#recordButton, #cutRecord{
+					opacity: .4;
+				}
+			}
+		}
+		.panel_controls{
+			text-align: center;
+			position: absolute;
+			bottom: 10px;
+			width: 100%;
+		}
 	}
 }
 

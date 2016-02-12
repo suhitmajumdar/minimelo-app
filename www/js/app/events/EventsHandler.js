@@ -85,15 +85,26 @@ define(function( require ) {
     	var self=this;
     	playRecord.onmousedown=function(){
 			self.record.playRecord();
+			var parent = $(this).parent();
+			if(parent.hasClass("playing")){
+				$(this).parent().removeClass("playing");
+			}
+			else{
+				$(this).parent().addClass("playing");
+			}
 		}
 
 		recordButton.onclick=function(event){
 			if($(this).attr("action")=="record"){
 				self.record.startRecord();
 				$(this).attr("action","stop");
+				//Give class "recording" to the buttons container
+				$(this).parent().addClass("recording");
 			}else{
 				self.record.stopRecord();
 				$(this).attr("action","record");
+				//Removes class "recording" to the buttons container
+				$(this).parent().removeClass("recording");
 			}
 		}
 
@@ -126,6 +137,11 @@ define(function( require ) {
 
 		saveRecord.onclick=function(){
 			self.record.saveRecord();
+		}
+
+		closeRecorder.onclick=function(event){
+			$('.panel').removeClass('active');
+			$('#panel-compose').addClass('active');
 		}
     }
 

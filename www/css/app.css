@@ -497,7 +497,10 @@ header {
 #panel-record #recordScreen {
   position: relative;
   /*width: 100%;*/
-  height: 200px; }
+  height: 200px;
+  width: 90%;
+  margin: 40px auto 50px;
+  border: solid 1px black; }
   #panel-record #recordScreen #selector {
     background: blue;
     height: 100%;
@@ -520,8 +523,27 @@ header {
     top: 0px;
     background: rgba(2, 34, 3, 0.2); }
 
-#panel-record #controls-record {
+#panel-record #record-controls {
   text-align: center; }
+  #panel-record #record-controls #playRecord, #panel-record #record-controls #cutRecord, #panel-record #record-controls #recordButton {
+    transition-property: opacity;
+    transition-duration: .2s;
+    opacity: 1; }
+  #panel-record #record-controls .player_controls {
+    text-align: center; }
+    #panel-record #record-controls .player_controls.recording #recordButton {
+      background-color: green; }
+    #panel-record #record-controls .player_controls.recording #playRecord, #panel-record #record-controls .player_controls.recording #cutRecord {
+      opacity: .4; }
+    #panel-record #record-controls .player_controls.playing #playRecord {
+      background-color: green; }
+    #panel-record #record-controls .player_controls.playing #recordButton, #panel-record #record-controls .player_controls.playing #cutRecord {
+      opacity: .4; }
+  #panel-record #record-controls .panel_controls {
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    width: 100%; }
 
 /*---------*/
 #deck-buttons {
