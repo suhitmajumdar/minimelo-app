@@ -71,7 +71,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 				self.nbSongPlayed++;
 				this.songRef.classList.remove('active');
 
-				if(self.nbSongPlayed==self.songsInPlay.length)
+				if(self.nbSongPlayed == self.songsInPlay.length)
 				{
 					$('#play_stop').removeClass('stop_btn');
 					$('#play_stop').addClass('play_btn');
