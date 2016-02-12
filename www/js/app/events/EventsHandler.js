@@ -9,7 +9,7 @@ define(function( require ) {
 		this.record = record;
 		this.menu   = new Menu();
 
-		this.inittrackClick();
+		this.initTrackClick();
 		this.initDragAndDrop();
 		this.initModalEvents();
 		this.initSongClick();
@@ -18,7 +18,7 @@ define(function( require ) {
 		this.initValidQuickSelect();
 	}
 
-	EventsHandler.prototype.inittrackClick = function(){
+	EventsHandler.prototype.initTrackClick = function(){
 
 		var self=this;
 
@@ -27,15 +27,15 @@ define(function( require ) {
 			this.ontouchstart = function(event) {
 
 				var songToLoad = self.getSongToLoad();
-				var xOntrack = event.touches[0].clientX-$(this).offset().left;
+				var xOnTrack = event.touches[0].clientX-$(this).offset().left;
 				
-				if ( songToLoad != null && self.isValidPosition(xOntrack, songToLoad, $(this)) == true )
+				if ( songToLoad != null && self.isValidPosition(xOnTrack, songToLoad, $(this)) == true )
 				{				
 
 					if(self.getSongDragged() == null && !$('#trash').hasClass("active") && songToLoad!=null)
 					{
 						
-						var newSongDiv = self.uiHandler.addSongTotrack(songToLoad, $(this), xOntrack);
+						var newSongDiv = self.uiHandler.addSongTotrack(songToLoad, $(this), xOnTrack);
 						$("#buttons-songs .button.active").removeClass('active');
 
 						self.setDragOnSong(newSongDiv);
@@ -177,11 +177,9 @@ define(function( require ) {
 
 
 				trackOverlayed = self.getTrackOverlayed(centerY);
-				console.log(centerY + " " + trackOverlayed);
 
 				if(trackOverlayed != null)
 				{
-
 					var overSong = self.isMovedOverSong(songDragged,trackOverlayed);
 					songDragged.css('background-color',songDragged.attr('originalBgColor'));
 					songDragged.attr('overOtherSong',overSong);
@@ -332,8 +330,6 @@ define(function( require ) {
 		});
 	}
 
-
-
 	EventsHandler.prototype.getTrackOverlayed = function(y) {
 		var trackOverlayed=null;
 
@@ -361,8 +357,6 @@ define(function( require ) {
 
 	EventsHandler.prototype.isMovedOverSong = function(songDiv, trackOverlayed) {
 		var overSong = false;
-
-		console.log("hello");
 
 		trackOverlayed.find('.song').not(songDiv).each(function()
 		{

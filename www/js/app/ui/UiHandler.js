@@ -11,7 +11,7 @@ define(function( require ) {
 
 	UiHandler.prototype.initUI = function () {
 		this.initTimelineHeight();
-		this.inittracks();
+		this.initTracks();
 		this.initRecorder();
 	} 
 
@@ -31,7 +31,7 @@ define(function( require ) {
 		$("#timeline").css("height", heightApp - (heightHeader + heightFooter));
 	}
 
-	UiHandler.prototype.inittracks = function () {
+	UiHandler.prototype.initTracks = function () {
 		$('.track').css('width', Timeline.getDurationInPx());
 	}
 
