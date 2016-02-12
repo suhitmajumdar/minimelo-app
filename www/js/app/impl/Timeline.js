@@ -11,11 +11,11 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		this.bars        = 20;
 		this.stepByBars  = 4;
 
-		this.audioCtx    = new (window.AudioContext || window.webkitAudioContext)();
+		this.audioCtx    = new AudioContext();
 
 		this.nbSongPlayed=0;
 
-		this.ratioSecondPixel=200;
+		this.ratioSecondPixel=20;
 
 		this.debutSong=0;
 		this.lineTimeOut=0;
@@ -104,25 +104,49 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 	}
 
 	Timeline.prototype.zoom=function(){
+		var self=this;
+
 		var lastRatio=this.ratioSecondPixel;
+
+		
+
 		if(this.ratioSecondPixel<=300)
 		{
+
 			this.ratioSecondPixel+=10;
+
+			$(".piste").each(function(){
+				var widthPiste = $(this).width();
+				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+				$(this).css('width',newWidth);
+			});
+
 			this.redrawSongs(lastRatio);
 		}
 	}
 
 	Timeline.prototype.unzoom=function(){
+		var self=this;
+
 		var lastRatio=this.ratioSecondPixel;
-		if(this.ratioSecondPixel>=150)
+
+		if(this.ratioSecondPixel>=15)
 		{
 			this.ratioSecondPixel-=10;
+
+			$(".piste").each(function(){
+				var widthPiste = $(this).width();
+				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+				$(this).css('width',newWidth);
+			});
+
 			this.redrawSongs(lastRatio);
 		}	
 	}
 
 	Timeline.prototype.redrawSongs=function(lastRatio){
 		var self=this;
+
 		$('.piste .song').each(function()
 		{	
 			var idSong=$(this).attr('data-song-id');

@@ -3,7 +3,7 @@ define(function( require ){
 	var Song       = require('app/Song');
 	var Utils      = require('app/Utils');
 
-	var audioCtx   = new (window.AudioContext || window.webkitAudioContext)();
+	var audioCtx   = new AudioContext();
 
 	var unwantedTypes = ['indefini'];
 

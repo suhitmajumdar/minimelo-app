@@ -11,21 +11,21 @@ html{
 	height: 100%;
 }
 body {
-    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
-    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
-    font-size:14px;
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
-    background-color:#FFF;
+	-webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+	-webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+	-webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+	font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	font-size:14px;
+	height:100%;
+	margin:0px;
+	padding:0px;
+	width:100%;
+	background-color:#FFF;
 }
 
 @font-face {
-    font-family: "Orange";
-    src: url(../fonts/orange_juice.ttf);
+	font-family: "Orange";
+	src: url(../fonts/orange_juice.ttf);
 }
 /*General style elements*/
 aside{width:20%;}
@@ -46,61 +46,61 @@ ul{
 }
 
 @-webkit-keyframes load_one {
-    10%   {opacity:0;}
-    15%	  {opacity:0.5;}
-    20%  {opacity:1;}
+	10%   {opacity:0;}
+	15%	  {opacity:0.5;}
+	20%  {opacity:1;}
    
 }
 
 @-webkit-keyframes load_two {
-    20%   {opacity:0;}
-    25%	  {opacity:0.5;}
-    30%  {opacity:1;}
+	20%   {opacity:0;}
+	25%	  {opacity:0.5;}
+	30%  {opacity:1;}
    
 }
 
 @-webkit-keyframes load_three {
-    30%   {opacity:0;}
-    35%	  {opacity:0.5;}
-    40%  {opacity:1;}
+	30%   {opacity:0;}
+	35%	  {opacity:0.5;}
+	40%  {opacity:1;}
    
 }
 
 @-webkit-keyframes load_four {
-    40%   {opacity:0;}
-    45%	  {opacity:0.5;}
-    50%  {opacity:1;}
+	40%   {opacity:0;}
+	45%	  {opacity:0.5;}
+	50%  {opacity:1;}
    
 }
 
 @-webkit-keyframes load_five {
-    50%   {opacity:0;}
-    55%	  {opacity:0.5;}
-    60%  {opacity:1;}
+	50%   {opacity:0;}
+	55%	  {opacity:0.5;}
+	60%  {opacity:1;}
    
 }
 
 
 @-webkit-keyframes load_six {
-    60%   {opacity:0;}
-    65%	  {opacity:0.5;}
-    70%  {opacity:1;}
+	60%   {opacity:0;}
+	65%	  {opacity:0.5;}
+	70%  {opacity:1;}
    
 }
 
 
 @-webkit-keyframes load_seven {
-    70%   {opacity:0;}
-    75%	  {opacity:0.5;}
-    80%  {opacity:1;}
+	70%   {opacity:0;}
+	75%	  {opacity:0.5;}
+	80%  {opacity:1;}
    
 }
 
 
 @-webkit-keyframes load_eight {
-    80%   {opacity:0;}
-    85%	  {opacity:0.5;}
-    90%  {opacity:1;}
+	80%   {opacity:0;}
+	85%	  {opacity:0.5;}
+	90%  {opacity:1;}
    
 }
 
@@ -129,7 +129,7 @@ ul{
 			background-image:url("../img/buttons_sprite.png");
 			background-size: cover;
 
-			&:hover{
+			&.active{
 				background-position:0 33%;
 			}
 
@@ -156,7 +156,7 @@ ul{
 
 			&[type="type-8"]{ -webkit-animation: load_eight 3s infinite;
 			background-color: $purple;}
-    }
+	}
 }
 
 
@@ -202,7 +202,7 @@ ul{
 	&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 
 
-		&:hover{
+		&.active{
 		background-position:0 33%;
 	}
 
@@ -226,24 +226,24 @@ ul{
 }
 */
  .round_btn{
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-   	background-image: url("../img/buttons_sprite.png");
-    background-size: cover;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	background-image: url("../img/buttons_sprite.png");
+	background-size: cover;
 	background-position: 0 67%;
-    
-    &.active{
+	
+	&.active{
 		background-position: 0 100%;
 		&:after{
 			top:3px;
 			left:-3px;
 		}
-    }
+	}
 
-    &:after{
+	&:after{
 		content:"";
-	    background-image: url("../img/circle_icon_sprite.png");
+		background-image: url("../img/circle_icon_sprite.png");
 		background-position:0 67%;
 		position: relative;
 		display: inline-block;
@@ -254,7 +254,7 @@ ul{
 		background-color: transparent;	
 	}
 
-    &.trash_btn:after{    background-position-y: 0; }
+	&.trash_btn:after{    background-position-y: 0; }
 	&.validate_btn:after{ background-position-y: -50px; }
 	&.scissors_btn:after{ background-position-y: -100px; }
 	&.unzoom_btn:after{   background-position-y: -150px; }
@@ -275,16 +275,17 @@ ul{
 	width:100%;
     height: 100%;
    	position: relative;
-    .row{
-    	margin:0;
-    }
+   	overflow: hidden;
+	.row{
+		margin:0;
+	}
 	h1{
-	    font-size:48px;
-	    display:inline-block;
-	    overflow:visible;
-	    font-family:"Orange";
-	    margin: 0px;
-	    padding: 10px;
+		font-size:48px;
+		display:inline-block;
+		overflow:visible;
+		font-family:"Orange";
+		margin: 0px;
+		padding: 10px;
 	}
 
 	.panel {
@@ -314,6 +315,33 @@ header{
 
 #buttons-songs{
 	.button{margin-top:10px;}
+	
+	.button{
+		
+		.quick-select{
+			position: fixed;
+			width: 100%;
+			z-index: 3;
+			padding-left: 78px;
+			transition: transform 500ms;
+			transform: translateX(-100%);
+
+			&>div{
+				vertical-align: top;
+				margin-left:10px;
+				margin-right:10px;
+			}
+
+			&.active{
+				transform: translateX(0);
+			}
+
+			.button{
+				display: inline-block;
+				margin-top: 0px;
+			}
+		}
+	}
 }
 
 #buttons-songs-modal{
@@ -330,7 +358,6 @@ header{
 }
 
 #timeline{
-	
 	width: 100%;
     overflow-x: auto;
     position: relative;
@@ -338,23 +365,60 @@ header{
     height: 500px;
     background: #f4f6fe;
 
-    .piste {
-    	border-bottom:1px solid white;
-    	height: 25%;
-    	position: relative;
+    &::-webkit-scrollbar {
+	    width: 10px;
+	    height:10px;
+	    margin:10px;
+	}
 
-    	.song{
-    		position: absolute;
-    		height:100%;
-    		display: inline-block;
-    		z-index: 1;
-    		box-sizing:border-box;
+	&::-webkit-scrollbar-thumb { 
+		border-radius: 10px; 
+		background: rgb(169,169,169);
+		margin:10px; 
+	}
+
+	&::-webkit-scrollbar-track {
+		border-radius: 10px;
+	}
+
+    /*.lineTempo{
+	    display: inline-block;
+	    position: absolute;
+	    height: 100%;
+	    background: green;
+	    width: 1px;
+	    position: absolute;
+    }*/
+
+
+	.piste {
+		border-top: 1px solid #3F496E;
+		/*background-image:url("../img/quadrillage.jpg");
+		background-repeat: repeat-y;
+    	background-repeat-x: initial;
+    	background-size: 200px 100%;*/
+		width:400px;
+		height: 25%;
+		position: relative;
+		height: 25%;
+		position: relative;
+
+		&:last-of-type{
+			border-bottom: 1px solid #3F496E;
+		}
+
+		.song{
+			position: absolute;
+			height:100%;
+			display: inline-block;
+			z-index: 1;
+			box-sizing:border-box;
 			background-image: url("../img/texture_crayon-1.png");
 			background-repeat-x: repeat;
 			border-radius:3px;
 
-    		&.active{
-    			opacity: 0.6;
+			&.active{
+				opacity: 0.6;
 			}
 			&.inDrag{
 				opacity: 0.7;
@@ -403,11 +467,21 @@ header{
 				background-color: $purple; 
 				border: 5px solid $purple;
 			}
-    	}
+			span{
+				font-size:32px;
+				font-family:"Orange";
+				position:absolute;
+				top:4px;
+				text-align:center;
+				width:100%;
+				padding-left:5px;
+				overflow: hidden;
+			}
+		}
 		.box{
 			height:60px;
-		    width: 60px;
-		    vertical-align: top;
+			width: 60px;
+			vertical-align: top;
 			box-sizing:border-box;
 			border:1px solid;
 			text-align: center;
@@ -432,37 +506,36 @@ header{
 	#line{
 		top: 0px;
 		width: 0px;
-		background: rgba(72,197,72,0.51);
+		background: rgba(72,197,72,0.70);
 		height: 100%;
 		position: absolute;
 		left: 0px;
 		display: inline-block;
-		border-right: 1px solid rgba(97,102,127,0.2);;
-	    background: rgb(238, 240, 250);
+		border-right: 1px solid rgba(97,102,127,0.70);;
+		background: rgb(238, 240, 250);
 	}
 }
 
 /*CSS MODAL*/
-#myModal{
+#songsSelector{
 	
 	.modal-dialog {
-	    width: 100%;
-	    height: 100%;
-	    margin: 0;
-	    .modal-content{
-	    	height: 100%;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		.modal-content{
+			height: 100%;
 
-	    	.modal-body{
-	    		text-align: center;
-	    	}
-	    }
+			.modal-body{
+				text-align: center;
+			}
+		}
 	}
 
 	#choose-song{
 	    display: inline-block;
 	    text-align: left;
-
-		div{margin-right:10px;}
+	    width: 100%;
 
 		div .button span{font-size:32px;
 					font-family:"Orange";
@@ -470,21 +543,32 @@ header{
 					top:4px;
 					text-align:center;
 					width:100%;
-					padding-left:5px;
+					left: 0px;
 					}
+		.container-line{
+			overflow-x: auto;
+			width: 100%;
+			
+			&>div[type]{
+				display: inline-block;
+				.button{
+					padding: 10px;
+				}
+			}
+		}
 
 		.button{
 			width: 55px;
 			height: 55px;
-	    	background-image:url("../img/buttons_sprite.png");
+			background-image:url("../img/buttons_sprite.png");
 			background-size: cover;
 			display: inline-block;
 			position:relative;
-			opacity:0.2;
+			opacity:0.3;
 
 			&.active{
 				background-position:0 33%;
-			    opacity:1;
+				opacity:1;
 			}
 
 		}
@@ -526,7 +610,7 @@ header{
 			position: relative;
 			left: 0px;
 			top: 0px;
-		    background: rgba(2,34,3,0.2);
+			background: rgba(2,34,3,0.2);
 		}
 	}
 	#controls-record{
@@ -557,9 +641,9 @@ header{
 	
 	img{
 		margin-left:10px;
-        width:40px;
-        height:40px;
-    }
+		width:40px;
+		height:40px;
+	}
 }
 
 #debug {
@@ -568,3 +652,164 @@ header{
 }
 
 
+/* GENERAL MENU */
+#general-menu-button{
+  float:right;
+  background-color: grey;
+}
+#general-menu{
+    background-color: #fff;
+    position: absolute;
+    width: 0px;
+    overflow:hidden;
+    right: 0;
+    top: 0px;
+    height: 100%;
+    box-shadow: rgba(0,0,0,0.2) -5px 0 5px;
+    transition-duration: .3s;
+    &.active{
+      width: 75px;
+      right: 0px;
+      z-index: 3;
+      &.helpActive{
+        width: 315px;
+        p{
+          width: 225px;
+          margin-right: 10px;
+        }
+      }
+    }
+    ul{
+      padding: 20px 10px;
+    }
+    li{
+    list-style-type: none;
+    font-size: 20px;
+    margin-bottom: 10px;
+    text-align: right;
+    height: 60px;
+    }
+    p{
+      display: inline-block;
+      width:0px;
+      padding-top: 12px;
+      overflow: hidden;
+      transition-duration: .3s;
+      white-space:nowrap;
+      float:right;
+    margin-right: 0px;
+    }
+    .square_btn{
+      vertical-align: middle;
+      float:right;
+  }
+  .round_btn{
+    margin-top: 20px;
+  }
+}
+#general-menu-overlay{
+  content: "";
+  display: block;
+  width: 0%;
+  height: 100%;
+  background-color: rgba(0,0,0,.0);
+  position: absolute;
+  top: 0px;
+  right: -100%;
+  z-index: 2;
+  transition-duration: .5s;
+  &.active{
+    width: 100%;
+    right: 0px;
+    background-color: rgba(0,0,0,.5);
+  }
+}
+.sub-menu{
+  position: absolute;
+    left: 50%;
+    margin-left: -250px;
+    top: 10%;
+    width: 500px;
+    padding: 20px 10px 30px;
+  box-shadow: rgba(0,0,0,0.2) -5px 0 5px;
+  background-color: #fff;
+  visibility: hidden;
+    text-align: center;
+  z-index: 2;
+  opacity: 0;
+  transition-duration: .3s;
+  &.active{
+    visibility: visible;
+    opacity: 1;
+  }
+
+  input{
+      background-color: #eee;
+      border: none;
+      border-radius: 5px;
+      width: 400px;
+      height: 40px;
+      box-shadow: rgba(0,0,0,.2) 3px 3px 5px inset;
+      text-align:center;
+      margin-bottom: 20px;
+  }
+  .validate_btn{
+    display: block;
+    margin:auto;
+  }
+  ul{
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+  #load-menu-list{
+      max-height: 150px;
+      overflow-y: scroll;
+  }
+  .load-menu-save{
+    float:left;
+      padding: 10px;
+      border: solid 1px #222;
+      border-radius: 3px;
+      box-shadow: rgba(0,0,0,.3) 2px 2px 2px;
+      margin: 0 5px 5px;
+      background-color: #fff;
+      transition-duration: .2s;
+      &:hover{
+        background-color: #eee;
+      }
+      &.active{
+        background-color: #ddd;
+        &:hover{
+          background-color: #ddd;
+        }
+      }
+  }
+  #load-menu-validate{
+    opacity: .2;
+    transition-property: opacity;
+    transition-duration: .3s;
+    &.active{
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+.square_btn{
+  background-image: url("../img/buttons_sprite.png");
+  background-size: cover;
+  width: 55px;
+  height: 55px;
+  display: inline-block;
+}
+.round_btn{
+    display: inline-block;
+    width: 50px;
+    height: 51px;
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    background-position: 0 67%;
+}
