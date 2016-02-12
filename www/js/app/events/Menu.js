@@ -137,7 +137,10 @@ define(function(require) {
 	}
 
 	Menu.prototype.launchRecordView = function (){
-		alert('Penser à aller sur la vue de record')
+		//alert('Penser à aller sur la vue de record')
+        $('.panel').removeClass('active');
+        $('#panel-record').addClass('active');
+        this.closeGeneralMenu();
 	}
 
 	Menu.prototype.launchSoundManagementView = function (){
@@ -164,6 +167,7 @@ define(function(require) {
 			case 'new-menu':
 				break;
 			case 'micro-menu':
+            	this.launchRecordView();
 				break;
 			case 'manage-menu':
 				break;

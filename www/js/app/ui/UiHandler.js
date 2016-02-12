@@ -11,7 +11,7 @@ define(function( require ) {
 
 	UiHandler.prototype.initUI = function () {
 		this.initTimelineHeight();
-		this.initPistes();
+		this.initTracks();
 		this.initRecorder();
 		this.hideLoader();
 	} 
@@ -32,13 +32,13 @@ define(function( require ) {
 		$("#timeline").css("height", heightApp - (heightHeader + heightFooter));
 	}
 
-	UiHandler.prototype.initPistes = function () {
-		$('.piste').css('width', Timeline.getDurationInPx());
+	UiHandler.prototype.initTracks = function () {
+		$('.track').css('width', Timeline.getDurationInPx());
 	}
 
-	UiHandler.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
+	UiHandler.prototype.addSongTotrack = function(songButton, track, xOntrack)
 	{
-		return this.soundElements.addSongToPiste(songButton, piste, xOnPiste);
+		return this.soundElements.addSongTotrack(songButton, track, xOntrack);
 	}
 
 	UiHandler.prototype.initRecorder=function(){

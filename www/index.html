@@ -47,10 +47,10 @@
           <div id="general-menu-button" class="square_btn"></div>
               <div id="timeline">
                 <div id="line"></div>
-                <div id="piste-1" class="piste"></div>
-                <div id="piste-2" class="piste"></div>
-                <div id="piste-3" class="piste"></div>
-                <div id="piste-4" class="piste"></div>
+                <div id="track-1" class="track"></div>
+                <div id="track-2" class="track"></div>
+                <div id="track-3" class="track"></div>
+                <div id="track-4" class="track"></div>
               </div>
         
 
@@ -83,12 +83,16 @@
           <div id="lineRecord"></div>
           <canvas id="canvasRecord"></canvas>
         </div>
-        <div id="controls-record">
-          <div class="round_btn" id="recordButton" action="record"></div>
-          <div class="round_btn play_btn" id="playRecord"></div>
-          <div class="round_btn scissors_btn" id="cutRecord"></div>
-          <div class="round_btn validate_btn button" data-dismiss="modal"></div>
-          <div class="round_btn validate_btn button" id="saveRecord"></div>
+        <div id="record-controls">
+          <div class="player_controls">
+            <div class="round_btn" id="recordButton" action="record"></div>
+            <div class="round_btn play_btn" id="playRecord"></div>
+            <div class="round_btn scissors_btn" id="cutRecord"></div>
+          </div>
+          <div class="panel_controls">
+            <div class="round_btn close_btn button" id="closeRecorder"></div>
+            <div class="round_btn validate_btn button" id="saveRecord"></div>
+          </div>
         </div>
 
       </div>
@@ -150,11 +154,37 @@
         <p>Veux-tu commencer une nouvelle composition?</p>
         <div id="new-menu-validate" class="round_btn validate_btn"></div>
       </div>
-      <div id="micro-menu" class="sub-menu">
+      <!-- <div id="micro-menu" class="sub-menu">
         <p>MICRO</p>
-      </div>
+      </div> -->
       <div id="manage-menu" class="sub-menu">
-        <p>MANAGERRRrrrRRrRrrr!</p>
+
+        <div id="sound_to_sort">
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+          <div class="square_btn toSort"></div>
+        </div>
+
+        <div id="sorting_colors">
+          <div type="type-1" class="pool"></div>
+          <div type="type-2" class="pool"></div>
+          <div type="type-3" class="pool"></div>
+          <div type="type-4" class="pool"></div>
+          <div type="type-5" class="pool"></div>
+          <div type="type-6" class="pool"></div>
+          <div type="type-7" class="pool"></div>
+          <div type="type-8" class="pool"></div>
+        </div>
+
+        <div id="sorted_sounds">
+          <div class="square_btn toSort" type="type-1"></div>
+          <div class="square_btn toSort" type="type-5"></div>
+          <div class="square_btn toSort" type="type-8"></div>
+        </div>
       </div>
       <!-- END GENERAL MENU -->
 
@@ -175,7 +205,7 @@
         </div> 
 
     <script type="text/javascript" src="cordova.js"></script>
-
+    <script type="text/javascript" src="js/lib/lame.min.js"></script>
     <script type="text/javascript" src="js/lib/requirejs.js"></script>
     <script type="text/javascript" src="js/lib/jquery.js"></script>
     <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>

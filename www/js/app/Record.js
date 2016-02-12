@@ -11,8 +11,6 @@ define(function( require ) {
 							 navigator.webkitGetUserMedia ||
 							 navigator.mozGetUserMedia;
 
-	
-
 	function Record(){
 		this.scriptNode     = null;
 		this.scriptNodePlay = null;
@@ -201,21 +199,24 @@ define(function( require ) {
 	}
 
 	Record.prototype.generateFileName=function(){
-		return "mini_"+Date.timestamp()+".wav";
+		return "mini_"+Date.timestamp()+".mp3";
 	};
 
 	Record.prototype.saveRecord=function(){
 		var self=this;
-		var worker = new Worker('js/app/RecordWorker.js');
+		var worker = new Worker('js/lib/RecordWorker.js');
 		worker.postMessage({
-		  command: 'init',
-		  config: {sampleRate: this.recordBuffer.sampleRate,numChannels:this.recordBuffer.numberOfChannels}
+		  config: {
+		  	sampleRate: this.recordBuffer.sampleRate,
+		  	numChannels:this.recordBuffer.numberOfChannels,
+		  	buffer:this.recordBuffer.getChannelData(0)
+		  }
 		});
 
 		// callback for `exportWAV`
 		worker.onmessage = function( e ) {
 			
-
+			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
 			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
@@ -226,7 +227,8 @@ define(function( require ) {
 					writer.onwriteend=function(evt){
 						console.log("audio enregistre "+fileName);
 					}
-					writer.write(e.data);
+				    writer.write(blobMp3);
+
 				}, fail);
 
 			}, fail);
@@ -236,49 +238,6 @@ define(function( require ) {
 			});
 
 		};
-
-		// send the channel data from our buffer to the worker
-		worker.postMessage({
-		command: 'record',
-		buffer: [
-		  this.recordBuffer.getChannelData(0)
-		]
-		});
-
-		worker.postMessage({
-		  command: 'exportWAV',
-		  type: 'audio/wav'
-		});
-
-		  //window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-
-																	//GotFS
-
-
-	}
-
-	function gotFS(fileSystem) {
-		fileSystem.root.getFile("readme.txt", {create: true, exclusive: false}, gotFileEntry, fail);
-	}
-
-	function gotFileEntry(fileEntry) {
-		fileEntry.createWriter(gotFileWriter, fail);
-	}
-
-	function gotFileWriter(writer) {
-		writer.onwriteend = function(evt) {
-			console.log("contents of file now 'some sample text'");
-			writer.truncate(11);
-			writer.onwriteend = function(evt) {
-				console.log("contents of file now 'some sample'");
-				writer.seek(4);
-				writer.write(" different text");
-				writer.onwriteend = function(evt){
-					console.log("contents of file now 'some different text'");
-				}
-			};
-		};
-		writer.write("some sample text");
 	}
 
 	function fail(error) {
@@ -289,4 +248,3 @@ define(function( require ) {
 	return Record;
 
 });
-

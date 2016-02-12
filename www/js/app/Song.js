@@ -15,7 +15,7 @@ define(function( require ) {
 		this.stopTime  = 0;
 	}
 
-	Song.prototype.loadByFile = function () {
+	Song.prototype.load = function () {
 		var self = this;
 
 		return new Promise(function (resolve, reject) {
@@ -61,7 +61,7 @@ define(function( require ) {
 	Song.prototype.playForPreview = function ( ) {
 		var self = this;
 
-		return self.loadByFile().then(function(){
+		return self.load().then(function(){
 			var source=self.play();
 			self.buffer=null;
 			return Promise.resolve(source);
