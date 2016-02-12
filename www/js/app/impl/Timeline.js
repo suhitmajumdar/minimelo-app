@@ -37,7 +37,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			$("#line").css('width',self.secondsToPxInTimeline(playingTime));
 		},100)
 
-		$('.piste .song').each(function(){
+		$('.track .song').each(function(){
 			
 			var xSong=$(this).position().left;
 			var beginSong=self.pxToSecondsInTimeline(xSong);
@@ -71,7 +71,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 				self.nbSongPlayed++;
 				this.songRef.classList.remove('active');
 
-				if(self.nbSongPlayed==self.songsInPlay.length)
+				if(self.nbSongPlayed == self.songsInPlay.length)
 				{
 					$('#play_stop').removeClass('stop_btn');
 					$('#play_stop').addClass('play_btn');
@@ -123,7 +123,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	Timeline.prototype.redrawSongs=function(lastRatio){
 		var self=this;
-		$('.piste .song').each(function()
+		$('.track .song').each(function()
 		{	
 			var idSong=$(this).attr('data-song-id');
 			var song=self.songs[idSong];

@@ -4,8 +4,8 @@ define(function( require ) {
 	var Timeline 		  = require('app/Timeline');
 
 	function SoundElements() {
-		this.initButtonsModal();
 		this.initButtonsSongs();
+		this.initButtonsModal();
 	}
 
 	SoundElements.prototype.initButtonsSongs = function () {
@@ -19,10 +19,10 @@ define(function( require ) {
 
 			$('#buttons-songs').append(buttonSong);
 
-			buttonSong[0].ontouchstart=function(event){
+			buttonSong[0].ontouchstart = function(event) {
 				$(this).attr('xswip',event.touches[0].clientX);
 			}
-			buttonSong[0].ontouchmove=function(event){
+			buttonSong[0].ontouchmove = function(event) {
 				
 				var xswip=$(this).attr('xswip');
 				if(xswip<event.touches[0].clientX)
@@ -30,8 +30,7 @@ define(function( require ) {
 					$(".quick-select").removeClass('active');
 					$(this).find(".quick-select").addClass('active');
 					$(this).addClass('qsopen');
-				}
-				else{
+				} else {
 					$(this).find(".quick-select").removeClass('active');
 					$(this).removeClass('qsopen');
 				}
@@ -44,12 +43,11 @@ define(function( require ) {
 
 	SoundElements.prototype.initButtonsModal = function () {
 
-
 		var songsByType = ResourcesHandler.songsDirectories;
 
 		for ( var type in songsByType )
 		{
-			if(type != "indefini"){
+			if(type != "indefini") {
 				
 				var containerLine=$('<div class="container-line">');
 
@@ -72,7 +70,7 @@ define(function( require ) {
 					line.append(buttonSong);
 				}
 
-				var cloneLine=line.clone();
+				var cloneLine = line.clone();
 
 				line.css('width',songs.length*$('#choose-song .button').outerWidth());
 
@@ -80,11 +78,14 @@ define(function( require ) {
 				cloneLine.append($('<div class="round_btn validate_btn"></div>'));
 
 				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
+
+				console.log($('#buttons-songs .button[type="'+type+'"]'));;
+
 			}
 		}
 	}
 
-	SoundElements.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
+	SoundElements.prototype.addSongTotrack = function(songButton, track, xOntrack)
 	{
 		var idSong    = $(songButton).attr('data-song-id');
 		var song      = ResourcesHandler.getSong(idSong);
@@ -96,11 +97,11 @@ define(function( require ) {
 		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
 		divSong.attr('originalBgColor', colorClass);
-		divSong.css('left',xOnPiste-widthSong/2);
+		divSong.css('left',xOntrack-widthSong/2);
 
 		divSong.width(widthSong);
 
-		piste.append(divSong);
+		track.append(divSong);
 
 
 		return divSong;
