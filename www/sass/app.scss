@@ -7,6 +7,8 @@ $dark_blue : rgba(0, 133, 255, 0.8);
 $clear_blue : rgba(132, 214, 255, 0.8);
 $purple : rgba(155, 0, 128, 0.8);
 
+$white : #ffffff;
+
 html{
 	height: 100%;
 }
@@ -20,7 +22,7 @@ body {
 	margin:0px;
 	padding:0px;
 	width:100%;
-	background-color:#FFF;
+	background-color:$white;
 }
 
 @font-face {
@@ -631,7 +633,7 @@ header{
   background-color: grey;
 }
 #general-menu{
-    background-color: #fff;
+    background-color: $white;
     position: absolute;
     width: 0px;
     overflow:hidden;
@@ -705,7 +707,7 @@ header{
     width: 500px;
     padding: 20px 10px 30px;
   box-shadow: rgba(0,0,0,0.2) -5px 0 5px;
-  background-color: #fff;
+  background-color: $white;
   visibility: hidden;
     text-align: center;
   z-index: 2;
@@ -746,7 +748,7 @@ header{
       border-radius: 3px;
       box-shadow: rgba(0,0,0,.3) 2px 2px 2px;
       margin: 0 5px 5px;
-      background-color: #fff;
+      background-color: $white;
       transition-duration: .2s;
       &:hover{
         background-color: #eee;
@@ -767,6 +769,74 @@ header{
     }
   }
 }
+
+/* MANAGE_MENU */
+#manage-menu{
+    width: 80%;
+    left: 5%;
+    margin: 0;
+    height: 90%;
+    top: 5%;
+}
+#sound_to_sort{
+	text-align: left;
+	display: inline-block;
+    float: left;
+	width: 33%;
+	height: 100%;
+	margin: 0;
+	padding: 10px;
+	box-sizing: border-box;
+	&.selected{
+		background-color: #ccc;
+	}
+}
+#sorting_colors{
+	display: inline-block;
+    float: left;
+	width: 33%;
+	height: 100%;
+	box-sizing: border-box;
+	.pool{
+		display: inline-block;
+		width: 50%;
+		height: 25%;
+		margin: 0;
+		padding: 0;
+		float: left;
+	    border: solid 3px $white;
+	    border-radius: 16px;
+	    transition-property: background-color;
+	    transition-duration: .3s;
+		&[type="type-1"]{ background-color: $red; }/* RED */
+		&[type="type-2"]{ background-color: $orange; }/* ORANGE */
+		&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
+		&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
+		&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
+		&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
+		&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
+		&[type="type-8"]{ background-color: $purple; }/* PURPLE */
+	}
+}
+#sorted_sounds{
+	text-align: right;
+	display: inline-block;
+    float: left;
+	width: 33%;
+	height: 100%;
+	box-sizing: border-box;
+	.square_btn{
+		&[type="type-1"]{ background-color: $red; }/* RED */
+		&[type="type-2"]{ background-color: $orange; }/* ORANGE */
+		&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
+		&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
+		&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
+		&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
+		&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
+		&[type="type-8"]{ background-color: $purple; }/* PURPLE */
+	}
+}
+/* END MANAGE_MENU*/
 
 
 

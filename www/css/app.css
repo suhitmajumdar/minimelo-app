@@ -14,7 +14,7 @@ body {
   margin: 0px;
   padding: 0px;
   width: 100%;
-  background-color: #FFF; }
+  background-color: #ffffff; }
 
 @font-face {
   font-family: "Orange";
@@ -546,7 +546,7 @@ header {
   background-color: grey; }
 
 #general-menu {
-  background-color: #fff;
+  background-color: #ffffff;
   position: absolute;
   width: 0px;
   overflow: hidden;
@@ -611,7 +611,7 @@ header {
   width: 500px;
   padding: 20px 10px 30px;
   box-shadow: rgba(0, 0, 0, 0.2) -5px 0 5px;
-  background-color: #fff;
+  background-color: #ffffff;
   visibility: hidden;
   text-align: center;
   z-index: 2;
@@ -646,7 +646,7 @@ header {
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
     margin: 0 5px 5px;
-    background-color: #fff;
+    background-color: #ffffff;
     transition-duration: .2s; }
     .sub-menu .load-menu-save:hover {
       background-color: #eee; }
@@ -661,6 +661,102 @@ header {
     .sub-menu #load-menu-validate.active {
       opacity: 1; }
 
+/* MANAGE_MENU */
+#manage-menu {
+  width: 80%;
+  left: 5%;
+  margin: 0;
+  height: 90%;
+  top: 5%; }
+
+#sound_to_sort {
+  text-align: left;
+  display: inline-block;
+  float: left;
+  width: 33%;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+  box-sizing: border-box; }
+  #sound_to_sort.selected {
+    background-color: #ccc; }
+
+#sorting_colors {
+  display: inline-block;
+  float: left;
+  width: 33%;
+  height: 100%;
+  box-sizing: border-box; }
+  #sorting_colors .pool {
+    display: inline-block;
+    width: 50%;
+    height: 25%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    border: solid 3px #ffffff;
+    border-radius: 16px;
+    transition-property: background-color;
+    transition-duration: .3s;
+    /* RED */
+    /* ORANGE */
+    /* YELLOW */
+    /* CLEAR GREEN */
+    /* DARK  GREEN */
+    /* DARK  BLUE */
+    /* CLEAR BLUE */
+    /* PURPLE */ }
+    #sorting_colors .pool[type="type-1"] {
+      background-color: rgba(235, 56, 22, 0.8); }
+    #sorting_colors .pool[type="type-2"] {
+      background-color: rgba(255, 120, 0, 0.8); }
+    #sorting_colors .pool[type="type-3"] {
+      background-color: rgba(255, 228, 0, 0.8); }
+    #sorting_colors .pool[type="type-4"] {
+      background-color: rgba(170, 244, 0, 0.8); }
+    #sorting_colors .pool[type="type-5"] {
+      background-color: rgba(0, 161, 52, 0.8); }
+    #sorting_colors .pool[type="type-6"] {
+      background-color: rgba(0, 133, 255, 0.8); }
+    #sorting_colors .pool[type="type-7"] {
+      background-color: rgba(132, 214, 255, 0.8); }
+    #sorting_colors .pool[type="type-8"] {
+      background-color: rgba(155, 0, 128, 0.8); }
+
+#sorted_sounds {
+  text-align: right;
+  display: inline-block;
+  float: left;
+  width: 33%;
+  height: 100%;
+  box-sizing: border-box; }
+  #sorted_sounds .square_btn {
+    /* RED */
+    /* ORANGE */
+    /* YELLOW */
+    /* CLEAR GREEN */
+    /* DARK  GREEN */
+    /* DARK  BLUE */
+    /* CLEAR BLUE */
+    /* PURPLE */ }
+    #sorted_sounds .square_btn[type="type-1"] {
+      background-color: rgba(235, 56, 22, 0.8); }
+    #sorted_sounds .square_btn[type="type-2"] {
+      background-color: rgba(255, 120, 0, 0.8); }
+    #sorted_sounds .square_btn[type="type-3"] {
+      background-color: rgba(255, 228, 0, 0.8); }
+    #sorted_sounds .square_btn[type="type-4"] {
+      background-color: rgba(170, 244, 0, 0.8); }
+    #sorted_sounds .square_btn[type="type-5"] {
+      background-color: rgba(0, 161, 52, 0.8); }
+    #sorted_sounds .square_btn[type="type-6"] {
+      background-color: rgba(0, 133, 255, 0.8); }
+    #sorted_sounds .square_btn[type="type-7"] {
+      background-color: rgba(132, 214, 255, 0.8); }
+    #sorted_sounds .square_btn[type="type-8"] {
+      background-color: rgba(155, 0, 128, 0.8); }
+
+/* END MANAGE_MENU*/
 .square_btn {
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;
