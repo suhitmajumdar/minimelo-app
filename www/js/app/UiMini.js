@@ -21,31 +21,74 @@ define(function( require ) {
 	UiMini.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
-
+		var self=this;
 		for ( var type in types ) {
-			var buttonSong = $('<div class="button disabled"></div>');
+			var buttonSong = $('<div class="button disabled soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
 			buttonSong.append("<span class='numberSong'></span>")
 
 			$('#buttons-songs').append(buttonSong);
 
-			buttonSong[0].ontouchstart=function(event){
-				$(this).attr('xswip',event.touches[0].clientX);
-			}
-			buttonSong[0].ontouchmove=function(event){
-				
-				var xswip=$(this).attr('xswip');
-				if(xswip<event.touches[0].clientX)
-				{
-					$(".quick-select").removeClass('active');
-					$(this).find(".quick-select").addClass('active');
-					$(this).addClass('qsopen');
-				}
-				else{
-					$(this).find(".quick-select").removeClass('active');
-					$(this).removeClass('qsopen');
-				}
-			}
+			// buttonSong[0].ontouchstart=function(event){
+			// 	$(this).attr('touchstartTime',Date.now());
+			// 	$(this).attr('move','false');
+
+			// 	var divSong=self.createDivSong($(this));
+			// 	$("#timeline").prepend(divSong);
+			// 	divSong.addClass('songToPlace');
+			// 	divSong.css('height',$('#piste-1').height());
+			// 	divSong.css('top',$('#timeline').position().top+$('#timeline').outerHeight()/2-divSong.height()/2);
+			// 	divSong.css('left',$('#timeline').position().left+$('#timeline').width()/2-divSong.width()/2);
+			// 	//self.setDragOnSong(divSong);
+			// 	// console.log(divSong);
+			// 	this.miniSong=divSong[0];
+			// 	$('#panel-compose').prepend(this.miniSong);
+
+			// }
+			// buttonSong[0].ontouchend=function(event){
+
+			// 	if(Date.now()-$(this).attr('touchstartTime')>500 && $(this).attr('move')=="false" ){
+			// 		$(".qsopen").removeClass('qsopen');
+			// 		$(".quick-select").removeClass('active');
+			// 		$(this).find(".quick-select").addClass('active');
+			// 		$(this).addClass('qsopen');
+			// 	}
+			// 	else{
+			// 		if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen')){ 
+			// 			var idSong=$(this).attr('data-song-id');
+			// 			ResourcesHandler.playPreview(idSong);
+			// 		}
+			// 	}
+
+			// 	console.log(this.miniSong);
+			// 	// console.log(event);
+
+			// 	var centerMiniSongY=this.miniSong.getBoundingClientRect().top+$(this.miniSong).height()/2;
+			// 	var pisteOverlayed=self.getPisteOverlayed(centerMiniSongY);
+			// 	console.log(centerMiniSongY);
+			// 	console.log(pisteOverlayed);
+			// 	if(pisteOverlayed!=null){
+			// 		var xOnPiste = event.changedTouches[0].clientX-$(pisteOverlayed).offset().left;
+			// 		pisteOverlayed.append(this.miniSong);
+			// 		$(this.miniSong).css('left',xOnPiste);
+			// 		$(this.miniSong).css('top',0);
+			// 		$(this.miniSong).removeClass('songToPlace');
+			// 	}else
+			// 	{
+			// 		$(this.miniSong).remove();
+			// 	}
+
+
+
+
+			// }
+			// buttonSong[0].ontouchmove=function(event){
+			// 	$(this).attr('move','true');
+			// 	// console.log(this.miniSong);
+			// 	$(this.miniSong).css('left',event.touches[0].clientX);
+			// 	$(this.miniSong).css('top',event.touches[0].clientY);
+
+			// }
 
 		}
 
@@ -120,19 +163,40 @@ define(function( require ) {
 		// };
 	}
 
-	UiMini.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
-	{
-		var idSong    = $(songButton).attr('data-song-id');
-		var song      = ResourcesHandler.getSong(idSong);
-		var widthSong = Timeline.secondsToPxInTimeline(song.getDuration());
-		var divSong   = $("<div class='song'></div>");
+	UiMini.prototype.createDivSong= function(soundButton){
+
+		var divSong    = $("<div class='song'></div>");
+
+		var idSong     = $(soundButton).attr('data-song-id');
+		var song       = ResourcesHandler.getSong(idSong);
+		var widthSong  = Timeline.secondsToPxInTimeline(song.getDuration());
 		var colorClass = divSong.css('background-color');
 
+
 		divSong.attr('type',song.type);
-		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
+		divSong.append("<span class='numberSong'>" + $(soundButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
 		divSong.attr('originalBgColor', colorClass);
-		divSong.css('left',xOnPiste-widthSong/2);
+		divSong.width(widthSong);
+
+		return divSong;
+
+	}
+
+	UiMini.prototype.addSongToPiste = function(soundButton, piste, xOnPiste)
+	{
+		var divSong = this.createDivSong(soundButton);
+		divSong.css( 'left' , xOnPiste - divSong.width()/2 );
+		divSong.attr( 'piste' , piste.attr('id') );
+		
+		piste.append(divSong);
+
+		return divSong;
+	}
+
+	UiMini.prototype.addSongToPlace = function(soundButton, piste, xOnPiste)
+	{
+		var divSong = this.createDivSong(soundButton)
 
 		divSong.width(widthSong);
 
@@ -148,6 +212,22 @@ define(function( require ) {
 		$('#canvasRecord').attr('height',$('#recordScreen').height());
 
 	}
+
+	// UiMini.prototype.getPisteOverlayed=function(y){
+ //    	var pisteOverlayed=null;
+
+	// 	$('.piste').each(function(){
+
+	// 		var topPiste = this.getBoundingClientRect().top;
+ //  			var bottomPiste = this.getBoundingClientRect().bottom;
+			
+	// 		if( y >= topPiste && y <= bottomPiste){
+	// 	    	pisteOverlayed=$(this);
+	// 	  	}
+
+	// 	});
+	// 	return pisteOverlayed;
+ //    }
 
 	return UiMini;
 

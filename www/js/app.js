@@ -28,6 +28,7 @@ $(document).ready(function() {
 				ressources.loadSongs().then(function(data){
 					uiMini.initButtonsSongs();
 					uiMini.initButtonsModal();
+                    eventsMini.initButtonSongs();
 				});
 
 				uiMini.initUI();

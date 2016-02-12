@@ -23,19 +23,19 @@ define(function(require) {
 		
 		$('.piste').each(function(){
 
-			this.ontouchstart=function(event){
+			var piste=this;
+			piste.ontouchstart=function(event){
 
 				var songToLoad = self.getSongToLoad();
 
-				console.log(songToLoad);
 				if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
 			    {
-					var xOnPiste = event.touches[0].clientX-$(this).offset().left;
+					// var xOnPiste = event.touches[0].clientX-$(this).offset().left;
 					
-					var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
-					$("#buttons-songs .button.active").removeClass('active');
+					// var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
+					// $("#buttons-songs .button.active").removeClass('active');
 
-				    self.setDragOnSong(newSongDiv);
+				 //    self.setDragOnSong(newSongDiv);
 				}
 			}
 
@@ -57,24 +57,43 @@ define(function(require) {
   			}
   			else
   			{
+  				var topTimelineTouch=clientY-$('#timeline').offset().top;
+  				var topSong = this.getBoundingClientRect().top;
+  				var leftSong = this.getBoundingClientRect().left;
+  				var topSongTouch = clientY-topSong;
+  				var leftSongTouch = clientX-leftSong;
+  				
 
+  				console.log(topSongTouch,'topSong');
+  				console.log(topTimelineTouch,'topTimelineTouch');
+  				console.log(clientY,'clientY');
+  				
+
+
+  				// var topTouchOnSong=clientY-$(this).parent().offset().top;
+  				// if($(this).parent().attr('id')=='timeline'){
+
+  				// }
+
+  				// console.log(topTouchOnSong);
 				$(this).addClass('inDrag');
+				$(this).removeClass('songToPlace');
 
 				$(this).attr('posSongX',$(this).position().left);
-				$(this).attr('piste',$(this).parent().attr('id'));
+				// $(this).attr('piste',$(this).parent().attr('id'));
+
+				$('#timeline').prepend($(this));
+				$(this).css('top',topTimelineTouch-topSongTouch);
+
+				
 
 
-
-				var top=$(this).parent().position().top;
-				$(this).css('top',top);
-
-				$('.piste:first').append($(this));
-
-
-				var posSourisOnSongX=clientX-$('.piste .song.inDrag').offset().left;
-				var posSourisOnSongY=clientY-$('.piste .song.inDrag').offset().top;
-				$(this).attr('posSourisX',posSourisOnSongX);
-				$(this).attr('posSourisY',posSourisOnSongY);
+				// var posSourisOnSongX=clientX-$('#timeline').offset().left;
+				//var posSourisOnSongY=topTimelineTouch-topInitialSong;
+				// var posSourisOnSongY=clientY;
+				
+				$(this).attr('posSourisX',leftSongTouch);
+				$(this).attr('posSourisY',topSongTouch);
 
 			}
 		}
@@ -148,7 +167,7 @@ define(function(require) {
   			{
   				event.preventDefault();
   				var scrollLeft=$( "#timeline" ).scrollLeft();
-  				
+
   				var positionX=clientX-$('#timeline').offset().left+scrollLeft;
 		     	var positionY=clientY-$('#timeline').offset().top;
 
@@ -175,9 +194,9 @@ define(function(require) {
 				songDragged.css('left',positionX);
 				songDragged.css('top',positionY);
 
-				var centerY = songDragged.position().top + songDragged.height() / 2;
+				//var centerY = positionY + songDragged.height() / 2;
 
-				pisteOverlayed=self.getPisteOverlayed(centerY);
+				pisteOverlayed=self.getPisteOverlayed(songDragged[0]);
 
 				if(pisteOverlayed!=null)
 				{
@@ -300,7 +319,8 @@ define(function(require) {
 
 
     EventsMini.prototype.initSongClick=function (){
-    	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen)", function() {
+    	var self=this;
+    	$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
 
 	        var idSong=$(this).attr('data-song-id');
 	        ResourcesHandler.playPreview(idSong);
@@ -309,6 +329,29 @@ define(function(require) {
 	        
 	        $(this).addClass("active");
     	});
+
+   //  	$( document ).on( "mousedown", "#buttons-songs > .button[data-song-id]:not(.disabled):not(.qsopen)", function() {
+
+   //  		var songToLoad = $(this);
+
+			// if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
+		 //    {
+			// 	// var xOnPiste = event.touches[0].clientX-$(this).offset().left;
+			// 	var divSong=self.uiMini.createDivSong(songToLoad);
+			// 	$("#timeline").prepend(divSong);
+			// 	divSong.addClass('songToPlace');
+			// 	divSong.css('height',$('#piste-1').height());
+			// 	divSong.css('top',$('#timeline').position().top+$('#timeline').outerHeight()/2-divSong.height()/2);
+			// 	divSong.css('left',$('#timeline').position().left+$('#timeline').width()/2-divSong.width()/2);
+			// 	self.setDragOnSong(divSong);
+				
+			// 	// //var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), );
+			// 	// $("#buttons-songs .button.active").removeClass('active');
+
+			//  //    self.setDragOnSong(newSongDiv);
+			// }
+	        
+   //  	});
     }
 
     EventsMini.prototype.initValideQuickSelect=function (){
@@ -326,36 +369,56 @@ define(function(require) {
 	    		buttonToSwitch.removeClass('qsopen');
 	    		buttonToSwitch.removeClass('disabled');
 	    		buttonToSwitch.removeClass('active');
-	    		buttonToSwitch.find('.quick-select').removeClass('active');
 	    		ResourcesHandler.loadSong(dataIdSong);
     		}
+    		$('.quick-select').removeClass('active');
+    		$('.qsopen').removeClass('qsopen');
 	       
     	});
     }
 
     EventsMini.prototype.getSongDragged=function(){
     	var songDragged=null;
-    	if($('.piste .song.inDrag').length>0){
-    		songDragged=$('.piste .song.inDrag');
+    	if($('.song.inDrag').length>0){
+    		songDragged=$('.song.inDrag');
     	}
     	return songDragged;
     }
 
-    EventsMini.prototype.getPisteOverlayed=function(y){
+    EventsMini.prototype.getPisteOverlayed=function(div){
     	var pisteOverlayed=null;
-
+    	var divRect=div.getBoundingClientRect();
+    	var centerYDiv=divRect.top+divRect.height/2;
+		
 		$('.piste').each(function(){
 
-			var topPist=$(this).position().top;
-			var bottomPiste=$(this).position().top+$(this).height();
-				
-			if( y >= topPist && y <= bottomPiste){
+			var pisteRect = this.getBoundingClientRect();
+			var topPiste = pisteRect.top;
+  			var bottomPiste = pisteRect.bottom;
+			
+			if( centerYDiv >= topPiste && centerYDiv <= bottomPiste){
 		    	pisteOverlayed=$(this);
 		  	}
 
 		});
 		return pisteOverlayed;
     }
+
+  //   EventsMini.prototype.getPisteOverlayedFixed=function(y){
+  //   	var pisteOverlayed=null;
+
+		// $('.piste').each(function(){
+
+		// 	var topPiste = this.getBoundingClientRect().top;
+  // 			var bottomPiste = this.getBoundingClientRect().bottom;
+			
+		// 	if( y >= topPiste && y <= bottomPiste){
+		//     	pisteOverlayed=$(this);
+		//   	}
+
+		// });
+		// return pisteOverlayed;
+  //   }
 
     EventsMini.prototype.getSongToLoad=function(y){
 		var song=null;
@@ -369,18 +432,101 @@ define(function(require) {
     EventsMini.prototype.isOverSong=function(songDiv,pisteOverlayed){
     	var overSong=false;
 
+    	var divRectSong=songDiv[0].getBoundingClientRect();
+    	var leftSong=divRectSong.left;
+    	var rightSong=divRectSong.right;
+		
+
     	pisteOverlayed.find('.song').not(songDiv).each(function()
 		{
-			var leftOtherSong  = $(this).position().left;
-			var rigthOtherSong = leftOtherSong+$(this).outerWidth();
+			var songToCompareRect = this.getBoundingClientRect();
+			var rightSongToCompare = songToCompareRect.right;
+			var leftSongToCompare = songToCompareRect.left;
 			
-			if(! (rigthOtherSong<=songDiv.position().left || leftOtherSong>=songDiv.position().left+songDiv.outerWidth() ) ){
+			if(! (rightSongToCompare<=leftSong || leftSongToCompare>=rightSong ) ){
 			
 				overSong=true;
 			}
 		});
 		return overSong;
     }
+
+
+    EventsMini.prototype.initButtonSongs=function(){
+
+    	var self=this;
+    	$('.button.soundChoose').each(function(){
+
+    		var buttonSong=this;
+    		buttonSong.ontouchstart=function(event){
+				$(this).attr('touchstartTime',Date.now());
+				$(this).attr('move','false');
+
+				var divSong=self.uiMini.createDivSong($(this));
+				$("#timeline").prepend(divSong);
+				divSong.addClass('songToPlace');
+				divSong.css('height',$('#piste-1').height());
+				divSong.css('top','-300px');
+				divSong.css('left','0px');
+
+				this.miniSong=divSong[0];
+				$('#panel-compose').prepend(this.miniSong);
+
+			}
+			buttonSong.ontouchend=function(event){
+
+				if(Date.now()-$(this).attr('touchstartTime')>500 && $(this).attr('move')=="false" ){
+					$(".qsopen").removeClass('qsopen');
+					$(".quick-select").removeClass('active');
+					$(this).find(".quick-select").addClass('active');
+					$(this).addClass('qsopen');
+				}
+				else{
+					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && $(this).attr('move')=="false"){ 
+						var idSong=$(this).attr('data-song-id');
+						ResourcesHandler.playPreview(idSong);
+					}
+				}
+
+				var pisteOverlayed=self.getPisteOverlayed(this.miniSong);
+
+
+				if(pisteOverlayed!=null && $(this.miniSong).attr('overOtherSong') == "false" ){
+
+					var xOnPiste = event.changedTouches[0].clientX-$(pisteOverlayed).offset().left;
+					pisteOverlayed.append(this.miniSong);
+					$(this.miniSong).css('left',xOnPiste);
+					$(this.miniSong).css('top',0);
+					$(this.miniSong).removeClass('songToPlace');
+					self.setDragOnSong($(this.miniSong));
+					$(this.miniSong).attr( 'piste' , pisteOverlayed.attr('id') );
+				
+				}
+				else{
+
+					$(this.miniSong).remove();
+				}
+			}
+			buttonSong.ontouchmove=function(event){
+				$(this).attr('move','true');
+				$(this.miniSong).css('left',event.touches[0].clientX);
+				$(this.miniSong).css('top',event.touches[0].clientY);
+
+				var pisteOverlayed=self.getPisteOverlayed(this.miniSong);
+				var overSong=self.isOverSong($(this.miniSong),pisteOverlayed);
+
+				$(this.miniSong).css('background-color',$(this.miniSong).attr('originalBgColor'));
+
+				if(overSong){
+					$(this.miniSong).css('background-color',"red");
+				}
+				$(this.miniSong).attr('overOtherSong',overSong);
+			}
+
+    	});
+    	
+    }
+
 
     // General Menu Events
 	$('#general-menu-button')       .click( openGeneralMenu );

@@ -52,6 +52,12 @@ ul{
    
 }
 
+@-webkit-keyframes songToDropAnimation {
+	0%   {transform:scale(1);}
+	50%   {transform:scale(1.1);}
+	100% {transform:scale(1);}
+}
+
 @-webkit-keyframes load_two {
 	20%   {opacity:0;}
 	25%	  {opacity:0.5;}
@@ -294,6 +300,83 @@ ul{
 		}
 	}
 
+	.song{
+		position: absolute;
+		height:100%;
+		display: inline-block;
+		z-index: 1;
+		box-sizing:border-box;
+		background-image: url("../img/texture_crayon-1.png");
+		background-repeat-x: repeat;
+		border-radius:3px;
+
+		&.active{
+			opacity: 0.6;
+		}
+		&.inDrag{
+			opacity: 0.7;
+			z-index: 3;
+		}
+		&.songToPlace{
+			/*-webkit-animation: songToDropAnimation 1s infinite;*/
+			position: fixed;
+			z-index: 4;
+		}
+
+		/* RED */
+		&[type="type-1"]{
+			background-color: $red;
+			border: 5px solid $red;
+		}
+
+		/* ORANGE */
+		&[type="type-2"]{
+		 background-color: $orange;
+		 border: 5px solid $orange; 
+		 }
+
+		/* YELLOW */
+		&[type="type-3"]{ 
+			background-color: $yellow; 
+			border: 5px solid $yellow;
+		}
+		/* CLEAR GREEN */
+		&[type="type-4"]{ 
+			background-color: $clear_green;
+			border: 5px solid $clear_green;
+		}
+		 /* DARK  GREEN */
+		&[type="type-5"]{
+			background-color: $dark_green; 
+			border: 5px solid $dark_green;
+		}
+		/* DARK  BLUE */
+		&[type="type-6"]{
+			background-color: $dark_blue;
+			border: 5px solid $dark_blue;
+		}
+		/* CLEAR BLUE */
+		&[type="type-7"]{ 
+			background-color: $clear_blue; 
+			border: 5px solid $clear_blue;
+		}
+		/* PURPLE */
+		&[type="type-8"]{
+			background-color: $purple; 
+			border: 5px solid $purple;
+		}
+		span{
+			font-size:32px;
+			font-family:"Orange";
+			position:absolute;
+			top:4px;
+			text-align:center;
+			width:100%;
+			padding-left:5px;
+			overflow: hidden;
+		}
+	}
+
 }
 
 header{
@@ -313,11 +396,14 @@ header{
 		
 		.quick-select{
 			position: fixed;
-			width: 100%;
 			z-index: 3;
+			max-width: 90%;
 			padding-left: 78px;
+			border-radius: 0px 20px 20px 0px;
 			transition: transform 500ms;
-			transform: translateX(-100%);
+			transform: translateX(-106%);
+			background-color: white;
+			box-shadow: 2px 2Px 2px rgba(0, 0, 0, 0.3);
 
 			&>div{
 				vertical-align: top;
@@ -369,6 +455,7 @@ header{
     }*/
 
 
+
 	.piste {
 		border-top: 1px solid #3F496E;
 		height: 25%;
@@ -378,78 +465,6 @@ header{
 
 		&:last-of-type{
 			border-bottom: 1px solid #3F496E;
-		}
-
-		.song{
-			position: absolute;
-			height:100%;
-			display: inline-block;
-			z-index: 1;
-			box-sizing:border-box;
-			background-image: url("../img/texture_crayon-1.png");
-			background-repeat-x: repeat;
-			border-radius:3px;
-
-			&.active{
-				opacity: 0.6;
-			}
-			&.inDrag{
-				opacity: 0.7;
-				z-index: 3;
-			}
-
-			/* RED */
-			&[type="type-1"]{
-				background-color: $red;
-				border: 5px solid $red;
-			}
-
-			/* ORANGE */
-			&[type="type-2"]{
-			 background-color: $orange;
-			 border: 5px solid $orange; 
-			 }
-
-			/* YELLOW */
-			&[type="type-3"]{ 
-				background-color: $yellow; 
-				border: 5px solid $yellow;
-			}
-			/* CLEAR GREEN */
-			&[type="type-4"]{ 
-				background-color: $clear_green;
-				border: 5px solid $clear_green;
-			}
-			 /* DARK  GREEN */
-			&[type="type-5"]{
-				background-color: $dark_green; 
-				border: 5px solid $dark_green;
-			}
-			/* DARK  BLUE */
-			&[type="type-6"]{
-				background-color: $dark_blue;
-				border: 5px solid $dark_blue;
-			}
-			/* CLEAR BLUE */
-			&[type="type-7"]{ 
-				background-color: $clear_blue; 
-				border: 5px solid $clear_blue;
-			}
-			/* PURPLE */
-			&[type="type-8"]{
-				background-color: $purple; 
-				border: 5px solid $purple;
-			}
-			span{
-				font-size:32px;
-				font-family:"Orange";
-				position:absolute;
-				top:4px;
-				text-align:center;
-				width:100%;
-				padding-left:5px;
-				overflow: hidden;
-			}
 		}
 		.box{
 			height:60px;

@@ -45,6 +45,14 @@ ul {
   20% {
     opacity: 1; } }
 
+@-webkit-keyframes songToDropAnimation {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.1); }
+  100% {
+    transform: scale(1); } }
+
 @-webkit-keyframes load_two {
   20% {
     opacity: 0; }
@@ -305,6 +313,65 @@ ul {
     .app .panel.active {
       opacity: 1;
       z-index: 1; }
+  .app .song {
+    position: absolute;
+    height: 100%;
+    display: inline-block;
+    z-index: 1;
+    box-sizing: border-box;
+    background-image: url("../img/texture_crayon-1.png");
+    background-repeat-x: repeat;
+    border-radius: 3px;
+    /* RED */
+    /* ORANGE */
+    /* YELLOW */
+    /* CLEAR GREEN */
+    /* DARK  GREEN */
+    /* DARK  BLUE */
+    /* CLEAR BLUE */
+    /* PURPLE */ }
+    .app .song.active {
+      opacity: 0.6; }
+    .app .song.inDrag {
+      opacity: 0.7;
+      z-index: 3; }
+    .app .song.songToPlace {
+      /*-webkit-animation: songToDropAnimation 1s infinite;*/
+      position: fixed;
+      z-index: 4; }
+    .app .song[type="type-1"] {
+      background-color: rgba(235, 56, 22, 0.8);
+      border: 5px solid rgba(235, 56, 22, 0.8); }
+    .app .song[type="type-2"] {
+      background-color: rgba(255, 120, 0, 0.8);
+      border: 5px solid rgba(255, 120, 0, 0.8); }
+    .app .song[type="type-3"] {
+      background-color: rgba(255, 228, 0, 0.8);
+      border: 5px solid rgba(255, 228, 0, 0.8); }
+    .app .song[type="type-4"] {
+      background-color: rgba(170, 244, 0, 0.8);
+      border: 5px solid rgba(170, 244, 0, 0.8); }
+    .app .song[type="type-5"] {
+      background-color: rgba(0, 161, 52, 0.8);
+      border: 5px solid rgba(0, 161, 52, 0.8); }
+    .app .song[type="type-6"] {
+      background-color: rgba(0, 133, 255, 0.8);
+      border: 5px solid rgba(0, 133, 255, 0.8); }
+    .app .song[type="type-7"] {
+      background-color: rgba(132, 214, 255, 0.8);
+      border: 5px solid rgba(132, 214, 255, 0.8); }
+    .app .song[type="type-8"] {
+      background-color: rgba(155, 0, 128, 0.8);
+      border: 5px solid rgba(155, 0, 128, 0.8); }
+    .app .song span {
+      font-size: 32px;
+      font-family: "Orange";
+      position: absolute;
+      top: 4px;
+      text-align: center;
+      width: 100%;
+      padding-left: 5px;
+      overflow: hidden; }
 
 header {
   width: 100%;
@@ -317,11 +384,14 @@ header {
 
 #buttons-songs .button .quick-select {
   position: fixed;
-  width: 100%;
   z-index: 3;
+  max-width: 90%;
   padding-left: 78px;
+  border-radius: 0px 20px 20px 0px;
   transition: transform 500ms;
-  transform: translateX(-100%); }
+  transform: translateX(-106%);
+  background-color: white;
+  box-shadow: 2px 2Px 2px rgba(0, 0, 0, 0.3); }
   #buttons-songs .button .quick-select > div {
     vertical-align: top;
     margin-left: 10px;
@@ -367,61 +437,6 @@ header {
     position: relative; }
     #timeline .piste:last-of-type {
       border-bottom: 1px solid #3F496E; }
-    #timeline .piste .song {
-      position: absolute;
-      height: 100%;
-      display: inline-block;
-      z-index: 1;
-      box-sizing: border-box;
-      background-image: url("../img/texture_crayon-1.png");
-      background-repeat-x: repeat;
-      border-radius: 3px;
-      /* RED */
-      /* ORANGE */
-      /* YELLOW */
-      /* CLEAR GREEN */
-      /* DARK  GREEN */
-      /* DARK  BLUE */
-      /* CLEAR BLUE */
-      /* PURPLE */ }
-      #timeline .piste .song.active {
-        opacity: 0.6; }
-      #timeline .piste .song.inDrag {
-        opacity: 0.7;
-        z-index: 3; }
-      #timeline .piste .song[type="type-1"] {
-        background-color: rgba(235, 56, 22, 0.8);
-        border: 5px solid rgba(235, 56, 22, 0.8); }
-      #timeline .piste .song[type="type-2"] {
-        background-color: rgba(255, 120, 0, 0.8);
-        border: 5px solid rgba(255, 120, 0, 0.8); }
-      #timeline .piste .song[type="type-3"] {
-        background-color: rgba(255, 228, 0, 0.8);
-        border: 5px solid rgba(255, 228, 0, 0.8); }
-      #timeline .piste .song[type="type-4"] {
-        background-color: rgba(170, 244, 0, 0.8);
-        border: 5px solid rgba(170, 244, 0, 0.8); }
-      #timeline .piste .song[type="type-5"] {
-        background-color: rgba(0, 161, 52, 0.8);
-        border: 5px solid rgba(0, 161, 52, 0.8); }
-      #timeline .piste .song[type="type-6"] {
-        background-color: rgba(0, 133, 255, 0.8);
-        border: 5px solid rgba(0, 133, 255, 0.8); }
-      #timeline .piste .song[type="type-7"] {
-        background-color: rgba(132, 214, 255, 0.8);
-        border: 5px solid rgba(132, 214, 255, 0.8); }
-      #timeline .piste .song[type="type-8"] {
-        background-color: rgba(155, 0, 128, 0.8);
-        border: 5px solid rgba(155, 0, 128, 0.8); }
-      #timeline .piste .song span {
-        font-size: 32px;
-        font-family: "Orange";
-        position: absolute;
-        top: 4px;
-        text-align: center;
-        width: 100%;
-        padding-left: 5px;
-        overflow: hidden; }
     #timeline .piste .box {
       height: 60px;
       width: 60px;
