@@ -1,5 +1,9 @@
 define(function(require) {
-	function Menu() {
+
+	function Menu( uiHandler ) {
+		this.selectedSaveToLoad = null;
+		this.ui = uiHandler;
+
 		var self = this;
 
 		$('#general-menu-button')       .click( self.openGeneralMenu );
@@ -10,7 +14,7 @@ define(function(require) {
 		$('#load-menu-validate')        .click( self.loadSaveMenu );
 		$('#new-menu-validate')         .click( self.newComposition );
 		$('#micro-menu-validate')       .click( self.launchRecordView );
-		$('#manage-menu-validate')      .click( self.launchSoundManagementView);
+		$('#manage-menu-validate')      .click( self.launchSoundManagementView );
 		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
 	}
 
@@ -94,8 +98,6 @@ define(function(require) {
 		}
 	}
 
-	var selectedSaveToLoad = null;
-
 	Menu.prototype.getSavedCompositionList = function (){
 		alert("penser à aller chercher la liste des compositions");
 		return ["saveA","saveB","savEnger"];
@@ -113,19 +115,19 @@ define(function(require) {
 			if( $(this).hasClass('active') ){
 				$('.load-menu-save').removeClass('active');
 				$('#load-menu-validate').removeClass('active');
-				selectedSaveToLoad = null;
+				this.selectedSaveToLoad = null;
 			}
 			else{
 				$('.load-menu-save').removeClass('active');
 				$(this).addClass('active');
 				$('#load-menu-validate').addClass('active');
-				selectedSaveToLoad = $(this).text();
+				this.selectedSaveToLoad = $(this).text();
 			}
 		});
 	}
 
 	Menu.prototype.loadstart = function (name){
-		if(selectedSaveToLoad!=null){
+		if(this.selectedSaveToLoad!=null){
 			alert("Penser à charger une sauvegarde")
 		}
 	}
@@ -153,6 +155,10 @@ define(function(require) {
 		this.loadSubMenu( menuName );
 	}
 
+	Menu.prototype.displayCollectionManager = function () {
+		this.ui.initCollectionManager();
+	}
+
 	Menu.prototype.loadSubMenu = function (name){
 		switch(name){
 			case 'save-menu':
@@ -170,6 +176,7 @@ define(function(require) {
             	this.launchRecordView();
 				break;
 			case 'manage-menu':
+				this.displayCollectionManager();
 				break;
 		}
 	}

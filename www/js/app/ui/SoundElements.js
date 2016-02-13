@@ -79,8 +79,6 @@ define(function( require ) {
 
 				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
 
-				console.log($('#buttons-songs .button[type="'+type+'"]'));;
-
 			}
 		}
 	}

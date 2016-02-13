@@ -2,11 +2,13 @@ define(function( require ) {
 
 	'use strict';
 
+	var Timeline      = require('app/Timeline');
 	var SoundElements = require('ui/SoundElements');
-	var Timeline 	  = require('app/Timeline');
+	var CollectionUi  = require('ui/CollectionUi');
 
 	function UiHandler() {
 		this.soundElements = null;
+		this.collectionUi  = null;
 	}
 
 	UiHandler.prototype.initUI = function () {
@@ -14,6 +16,10 @@ define(function( require ) {
 		this.initTracks();
 		this.initRecorder();
 	} 
+
+	UiHandler.prototype.initCollectionManager = function () {
+		this.collectionUi = new CollectionUi();
+	}
 
 	UiHandler.prototype.initSoundElements = function() {
 		this.soundElements = new SoundElements();

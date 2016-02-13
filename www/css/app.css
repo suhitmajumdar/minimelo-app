@@ -218,19 +218,6 @@ ul {
   .buttons_left .button.disabled, #choose-song .button.disabled {
     background-color: grey; }
 
-/*.button::after {
-  content:" ";
-  display: inline-block;
-  width: 90%;
-  height: 90%;
-  background-color:red;
-  position:absolute;
-  z-index:-1;
-
-  left: 5px;
-  top: 4px;
-}
-*/
 .round_btn {
   display: inline-block;
   width: 50px;
@@ -677,7 +664,6 @@ header {
     .sub-menu #load-menu-validate.active {
       opacity: 1; }
 
-/* MANAGE_MENU */
 #manage-menu {
   width: 80%;
   left: 5%;
@@ -746,33 +732,39 @@ header {
   width: 33%;
   height: 100%;
   box-sizing: border-box; }
-  #sorted_sounds .square_btn {
-    /* RED */
-    /* ORANGE */
-    /* YELLOW */
-    /* CLEAR GREEN */
-    /* DARK  GREEN */
-    /* DARK  BLUE */
-    /* CLEAR BLUE */
-    /* PURPLE */ }
-    #sorted_sounds .square_btn[type="type-1"] {
-      background-color: rgba(235, 56, 22, 0.8); }
-    #sorted_sounds .square_btn[type="type-2"] {
-      background-color: rgba(255, 120, 0, 0.8); }
-    #sorted_sounds .square_btn[type="type-3"] {
-      background-color: rgba(255, 228, 0, 0.8); }
-    #sorted_sounds .square_btn[type="type-4"] {
-      background-color: rgba(170, 244, 0, 0.8); }
-    #sorted_sounds .square_btn[type="type-5"] {
-      background-color: rgba(0, 161, 52, 0.8); }
-    #sorted_sounds .square_btn[type="type-6"] {
-      background-color: rgba(0, 133, 255, 0.8); }
-    #sorted_sounds .square_btn[type="type-7"] {
-      background-color: rgba(132, 214, 255, 0.8); }
-    #sorted_sounds .square_btn[type="type-8"] {
-      background-color: rgba(155, 0, 128, 0.8); }
 
-/* END MANAGE_MENU*/
+#sorted_sounds .button, #sound_to_sort .button {
+  width: 55px;
+  height: 55px;
+  background-image: url("../img/buttons_sprite.png");
+  background-size: cover;
+  display: inline-block;
+  position: relative;
+  /* RED */
+  /* ORANGE */
+  /* YELLOW */
+  /* CLEAR GREEN */
+  /* DARK  GREEN */
+  /* DARK  BLUE */
+  /* CLEAR BLUE */
+  /* PURPLE */ }
+  #sorted_sounds .button[type="type-1"], #sound_to_sort .button[type="type-1"] {
+    background-color: rgba(235, 56, 22, 0.8); }
+  #sorted_sounds .button[type="type-2"], #sound_to_sort .button[type="type-2"] {
+    background-color: rgba(255, 120, 0, 0.8); }
+  #sorted_sounds .button[type="type-3"], #sound_to_sort .button[type="type-3"] {
+    background-color: rgba(255, 228, 0, 0.8); }
+  #sorted_sounds .button[type="type-4"], #sound_to_sort .button[type="type-4"] {
+    background-color: rgba(170, 244, 0, 0.8); }
+  #sorted_sounds .button[type="type-5"], #sound_to_sort .button[type="type-5"] {
+    background-color: rgba(0, 161, 52, 0.8); }
+  #sorted_sounds .button[type="type-6"], #sound_to_sort .button[type="type-6"] {
+    background-color: rgba(0, 133, 255, 0.8); }
+  #sorted_sounds .button[type="type-7"], #sound_to_sort .button[type="type-7"] {
+    background-color: rgba(132, 214, 255, 0.8); }
+  #sorted_sounds .button[type="type-8"], #sound_to_sort .button[type="type-8"] {
+    background-color: rgba(155, 0, 128, 0.8); }
+
 .square_btn {
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;

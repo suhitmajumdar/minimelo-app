@@ -9,7 +9,7 @@ define(function( require ) {
 	function Song( type, url ) {
 		this.id        = lastId++;
 		this.url       = url;
-		this.type      = type;
+		this.type      = type || 'none';
 		this.buffer    = null;
 		this.startTime = 0;
 		this.stopTime  = 0;

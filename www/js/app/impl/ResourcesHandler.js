@@ -1,13 +1,16 @@
 define(function( require ){
 
+	'use strict';
+
 	var Song       = require('app/Song');
 	var Utils      = require('app/Utils');
 
 	var audioCtx   = new AudioContext();
 
+	// distinction entre les types non répertoriés ( tout ceux non classés + enregistrements ) et ceux non classés
 	var unwantedTypes = ['indefini'];
+	var unclassifiedTypes = ['indefini'];
 
-	'use strict';
 
 	function ResourcesHandler() {
 		this.songs      = [];
@@ -17,7 +20,7 @@ define(function( require ){
 		this.sourceInPreview   = null;
 	}
 
-	ResourcesHandler.prototype.playPreview=function(idSong){
+	ResourcesHandler.prototype.playPreview = function(idSong) {
 
 		if(this.songs[idSong].buffer != null){
 			if(this.sourceInPreview != null){
@@ -121,46 +124,6 @@ define(function( require ){
 		return this.songs;
 	}
 
-	ResourcesHandler.prototype.getIdFirstSongType = function(type) {
-		var found = false;
-		var id 	  = 0;
-
-		while ( found == false && id < this.songs.length)
-		{
-			if ( this.songs[id].type == type)
-			{
-				found = true;
-			}
-			id++;
-		}
-		if(found)
-			return id-1;
-		else
-			return -1;
-	}
-
-	ResourcesHandler.prototype.getIdFirstSongUrl = function(url) {
-		var found = false;
-		var id 	  = 0;
-
-		while ( found == false && id < this.songs.length)
-		{
-			if ( this.songs[id].url == url)
-			{
-				found = true;
-			}
-			id++;
-		}
-		if(found)
-			return id-1;
-		else
-			return -1;
-	}
-
-	ResourcesHandler.prototype.getInstance = function() {
-		return this;
-	}
-
 	ResourcesHandler.prototype.getTypes = function() {
 		return Object.keys(this.songsDirectories);
 	}
@@ -172,6 +135,36 @@ define(function( require ){
 		});
 
 		return actives;
+	}
+
+	// todo : need to fix this to avoid unnecessary redundant calculus
+	ResourcesHandler.prototype.getActivesCollections = function() {
+
+		var actives = {};
+
+		for ( var type in this.songsDirectories ) {
+			if( unwantedTypes.indexOf( type ) < 0 )
+				actives[type] = this.songsDirectories[type];
+		}
+
+		return actives;
+	}
+
+	// todo : need to fix this to avoid unnecessary redundant calculus
+	ResourcesHandler.prototype.getNotClassifiedCollections = function() {
+
+		var notClassified = {};
+
+		for ( var type in this.songsDirectories ) {
+			if( !(unclassifiedTypes.indexOf( type ) < 0) )
+				notClassified[type] = this.songsDirectories[type];
+		}
+
+		return notClassified;
+	}
+
+	ResourcesHandler.prototype.getInstance = function() {
+		return this;
 	}
 
 	return ResourcesHandler;

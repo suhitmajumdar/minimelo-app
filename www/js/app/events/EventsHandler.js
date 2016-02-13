@@ -8,7 +8,7 @@ define(function( require ) {
 	function EventsHandler(uiHandler, record){
 		this.uiHandler = uiHandler;
 		this.record = record;
-		this.menu   = new Menu();
+		this.menu   = new Menu(uiHandler);
 
 		this.initTrackClick();
 		this.initModalEvents();
