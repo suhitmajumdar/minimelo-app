@@ -3,13 +3,16 @@ requirejs.config({
 	paths: {
 		app: '../js/app',
 		lib: '../js/lib',
-		impl:'../js/app/impl',
+		events: '../js/app/events',
+		ui: '../js/app/ui',
+		impl: '../js/app/impl'
 	}
 });
 
 $(document).ready(function() {
 
-    require(['app/Timeline', 'app/Utils', 'app/UiMini', 'app/EventsMini', 'app/ResourcesHandler', 'app/Record', 'app/GeneralMenu'], function(Timeline, Utils, UiMini, EventsMini, ressources, Record) {
+	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], 
+		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record) {
 
 		'use strict';
 
@@ -21,17 +24,17 @@ $(document).ready(function() {
 
 			onDeviceReady : function () {
 
-				var uiMini       = new UiMini();
-				var record       = new Record();
-				var eventsMini   = new EventsMini(uiMini, record);
+				var uiHandler = new UiHandler();
+				var record    = new Record();
+				var eventsHandler = new EventsHandler(uiHandler, record);
 
-				ressources.loadSongs().then(function(data){
-					uiMini.initButtonsSongs();
-					uiMini.initButtonsModal();
-                    eventsMini.initButtonSongs();
+				ressources.loadSongs().then(function() {
+					uiHandler.initSoundElements();
+					eventsHandler.soundEvents.initEventsButtonsSong();
 				});
 
-				uiMini.initUI();
+				
+				uiHandler.initUI();
 
 			}
 		};

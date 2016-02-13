@@ -16,32 +16,6 @@ define(function(require) {
 		this.initValideQuickSelect();
 	}
 
-	EventsMini.prototype.initPisteClick = function(){
-
-		var self=this;
-
-		
-		$('.piste').each(function(){
-
-			var piste=this;
-			piste.ontouchstart=function(event){
-
-				var songToLoad = self.getSongToLoad();
-
-				if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
-			    {
-					// var xOnPiste = event.touches[0].clientX-$(this).offset().left;
-					
-					// var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), xOnPiste);
-					// $("#buttons-songs .button.active").removeClass('active');
-
-				 //    self.setDragOnSong(newSongDiv);
-				}
-			}
-
-		});
-	}
-
 	EventsMini.prototype.setDragOnSong = function(divSong){
 
 		divSong[0].ontouchstart=function(event){
@@ -329,29 +303,6 @@ define(function(require) {
 	        
 	        $(this).addClass("active");
     	});
-
-   //  	$( document ).on( "mousedown", "#buttons-songs > .button[data-song-id]:not(.disabled):not(.qsopen)", function() {
-
-   //  		var songToLoad = $(this);
-
-			// if(self.getSongDragged()==null && !$('#trash').hasClass("active") && songToLoad!=null)
-		 //    {
-			// 	// var xOnPiste = event.touches[0].clientX-$(this).offset().left;
-			// 	var divSong=self.uiMini.createDivSong(songToLoad);
-			// 	$("#timeline").prepend(divSong);
-			// 	divSong.addClass('songToPlace');
-			// 	divSong.css('height',$('#piste-1').height());
-			// 	divSong.css('top',$('#timeline').position().top+$('#timeline').outerHeight()/2-divSong.height()/2);
-			// 	divSong.css('left',$('#timeline').position().left+$('#timeline').width()/2-divSong.width()/2);
-			// 	self.setDragOnSong(divSong);
-				
-			// 	// //var newSongDiv = self.uiMini.addSongToPiste(songToLoad, $(this), );
-			// 	// $("#buttons-songs .button.active").removeClass('active');
-
-			//  //    self.setDragOnSong(newSongDiv);
-			// }
-	        
-   //  	});
     }
 
     EventsMini.prototype.initValideQuickSelect=function (){

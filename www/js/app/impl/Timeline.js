@@ -15,7 +15,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 		this.nbSongPlayed=0;
 
-		this.ratioSecondPixel=200;
+		this.ratioSecondPixel=20;
 
 		this.debutSong=0;
 		this.lineTimeOut=0;
@@ -37,7 +37,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			$("#line").css('width',self.secondsToPxInTimeline(playingTime));
 		},100)
 
-		$('.piste .song').each(function(){
+		$('.track .song').each(function(){
 			
 			var xSong=$(this).position().left;
 			var beginSong=self.pxToSecondsInTimeline(xSong);
@@ -71,7 +71,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 				self.nbSongPlayed++;
 				this.songRef.classList.remove('active');
 
-				if(self.nbSongPlayed==self.songsInPlay.length)
+				if(self.nbSongPlayed == self.songsInPlay.length)
 				{
 					$('#play_stop').removeClass('stop_btn');
 					$('#play_stop').addClass('play_btn');
@@ -104,26 +104,50 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 	}
 
 	Timeline.prototype.zoom=function(){
+		var self=this;
+
 		var lastRatio=this.ratioSecondPixel;
+
+		
+
 		if(this.ratioSecondPixel<=300)
 		{
+
 			this.ratioSecondPixel+=10;
+
+			$(".piste").each(function(){
+				var widthPiste = $(this).width();
+				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+				$(this).css('width',newWidth);
+			});
+
 			this.redrawSongs(lastRatio);
 		}
 	}
 
 	Timeline.prototype.unzoom=function(){
+		var self=this;
+
 		var lastRatio=this.ratioSecondPixel;
-		if(this.ratioSecondPixel>=150)
+
+		if(this.ratioSecondPixel>=15)
 		{
 			this.ratioSecondPixel-=10;
+
+			$(".track").each(function(){
+				var widthPiste = $(this).width();
+				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+				$(this).css('width',newWidth);
+			});
+
 			this.redrawSongs(lastRatio);
 		}	
 	}
 
 	Timeline.prototype.redrawSongs=function(lastRatio){
 		var self=this;
-		$('.piste .song').each(function()
+
+		$('.track .song').each(function()
 		{	
 			var idSong=$(this).attr('data-song-id');
 			var song=self.songs[idSong];

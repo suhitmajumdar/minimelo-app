@@ -122,6 +122,7 @@ function closeGeneralMenu(){
 //END NEW SUB MENU
 //MICRO SUB MENU
     function launchRecordView(){
+        alert("aer")
         $('.panel').removeClass('active');
         $('#panel-record').addClass('active');
         closeGeneralMenu();
