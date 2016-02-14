@@ -43,43 +43,40 @@ define(function( require ) {
 
 	SoundElements.prototype.initButtonsModal = function () {
 
-		var songsByType = ResourcesHandler.songsDirectories;
+		var songsByType = ResourcesHandler.getActivesCollections();
 
 		for ( var type in songsByType )
 		{
-			if(type != "indefini") {
-				
-				var containerLine=$('<div class="container-line">');
+			var containerLine=$('<div class="container-line">');
 
-				var line=$("<div type="+type+"></div>");
+			var line=$("<div type="+type+"></div>");
 
-				containerLine.append(line);
+			containerLine.append(line);
 
-				$("#choose-song").append(containerLine);
-				
-				var songs = songsByType[type];
+			$("#choose-song").append(containerLine);
 
-				for ( var song in songs)
-				{
-					var buttonSong=$('<div class="button"></div>');
-					buttonSong.attr('type',type);
-					buttonSong.attr('data-song-id', songs[song].id);
+			var songs = songsByType[type];
 
-					buttonSong.append("<span>" + ++song  + "</span>");
+			for ( var song in songs )
+			{
+				var buttonSong=$('<div class="button"></div>');
+				buttonSong.attr('type',type);
+				buttonSong.attr('data-song-id', songs[song].id);
 
-					line.append(buttonSong);
-				}
+				buttonSong.append("<span>" + ++song  + "</span>");
 
-				var cloneLine = line.clone();
-
-				line.css('width',songs.length*$('#choose-song .button').outerWidth());
-
-				cloneLine.addClass('quick-select');
-				cloneLine.append($('<div class="round_btn validate_btn"></div>'));
-
-				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
-
+				line.append(buttonSong);
 			}
+
+			var cloneLine = line.clone();
+
+			line.css('width',songs.length*$('#choose-song .button').outerWidth());
+
+			cloneLine.addClass('quick-select');
+			cloneLine.append($('<div class="round_btn validate_btn"></div>'));
+
+			$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
+
 		}
 	}
 

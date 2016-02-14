@@ -12,7 +12,7 @@ requirejs.config({
 $(document).ready(function() {
 
 	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], 
-		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record) {
+		function(Timeline, Utils, UiHandler, EventsHandler, Resources, Record) {
 
 		'use strict';
 
@@ -27,7 +27,8 @@ $(document).ready(function() {
 				var uiHandler = new UiHandler();
 				var record    = new Record();
 
-				ressources.loadSongs().then(function(data) {
+				Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
+					Resources.postProcessing();
 					uiHandler.initSoundElements();
 				});
 

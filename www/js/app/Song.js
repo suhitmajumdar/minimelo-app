@@ -62,8 +62,8 @@ define(function( require ) {
 		var self = this;
 
 		return self.load().then(function(){
-			var source=self.play();
-			self.buffer=null;
+			var source = self.play();
+			self.buffer = null;
 			return Promise.resolve(source);
 		});
 	}
