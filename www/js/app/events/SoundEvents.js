@@ -44,7 +44,7 @@ define(function(require) {
 		     	var heightSong  	= $(songDragged).height();
 		     	var widthSong  		= $(songDragged).width();
 		     	var widthTrack  	= $('.track').width();
-		     	var heightTimeline  = $('#timeline').height();
+		     	var heightTimeline  = $('.track').height()*$('.track').length;
 
 
 		     	positionX -= $(songDragged).attr('posSourisX');
@@ -61,8 +61,6 @@ define(function(require) {
 					positionY=0;
 				}
 
-				//var heightTimeline=$('.track').outerHeight()*$('.track').length;
-
 				if(positionY + heightSong > heightTimeline ){
 					positionY = heightTimeline - heightSong;
 				}
@@ -71,11 +69,10 @@ define(function(require) {
 				songDragged.style.top  = positionY+"px";
 
 
-				trackOverlayed=self.getTrackOverlayed(songDragged);
+				trackOverlayed = self.getTrackOverlayed(songDragged);
 
 				if(trackOverlayed!=null)
 				{
-
 					var overSong=self.isMovedOverSong(songDragged,trackOverlayed);
 					$(songDragged).attr('overOtherSong',overSong);
 	      		}
@@ -86,11 +83,12 @@ define(function(require) {
 
   		timeline.ontouchend=function(event){
 
-  			var songDragged=self.getSoundDragged();
+  			var songDragged = self.getSoundDragged();
 
-			if(songDragged!=null)
+			if(songDragged != null)
 			{
-				if($(songDragged).attr('overOtherSong')=='false')
+
+				if($(songDragged).attr('overOtherSong') == 'false')
 				{
 					var trackOverlayed=self.getTrackOverlayed(songDragged);
 					$(trackOverlayed).append(songDragged);
@@ -98,8 +96,8 @@ define(function(require) {
 					$(songDragged).attr('track',trackOverlayed.id);
 				}
 				else{
-					var leftOriginal=$(songDragged).attr('posSongX');
-					var pisteOriginal=$(songDragged).attr('track');
+					var leftOriginal  = $(songDragged).attr('posSongX');
+					var pisteOriginal = $(songDragged).attr('track');
 					
 					$("#"+pisteOriginal).append(songDragged);
 					$(songDragged).css('left',leftOriginal+"px");
@@ -108,7 +106,6 @@ define(function(require) {
 					$(songDragged).attr('overOtherSong',false);
 				}
 				$(songDragged).css('top',0);
-				$(songDragged).css('background-color',$(songDragged).attr('originalBgColor'));
 			}
 		}
 	}
@@ -124,22 +121,20 @@ define(function(require) {
 			}
 			else
 			{
-				// event.preventDefault();
 				var	clientX=event.touches[0].clientX;
 				var clientY=event.touches[0].clientY;
 
-				var topTimelineTouch=clientY-$('#timeline').offset().top;
-  				var topSong = this.getBoundingClientRect().top;
-  				var leftSong = this.getBoundingClientRect().left;
-  				var topSongTouch = clientY-topSong;
-  				var leftSongTouch = clientX-leftSong;
+				var topTimelineTouch = clientY-$('#timeline').offset().top;
+  				var topSong          = this.getBoundingClientRect().top;
+  				var leftSong         = this.getBoundingClientRect().left;
+  				var topSongTouch     = clientY-topSong;
+  				var leftSongTouch    = clientX-leftSong;
   				
 
 				$(this).addClass('inDrag');
 				$(this).removeClass('songToPlace');
 
 				$(this).attr('posSongX',$(this).position().left);
-				// $(this).attr('piste',$(this).parent().attr('id'));
 
 				$('#timeline').prepend($(this));
 				$(this).css('top',topTimelineTouch-topSongTouch);
@@ -152,20 +147,18 @@ define(function(require) {
 	}
 
 	SoundEvents.prototype.getTrackOverlayed = function(div) {
-		var trackOverlayed=null;
-    	var divRect=div.getBoundingClientRect();
-    	var centerYDiv=divRect.top+divRect.height/2;
+		var trackOverlayed = null;
+    	var divRect        = div.getBoundingClientRect();
+    	var centerYDiv     = divRect.top+divRect.height/2;
 		
-		var tracks=timeline.querySelectorAll('.track');
+		var tracks = timeline.querySelectorAll('.track');
 
 		var i=0;
 		while(i<tracks.length && trackOverlayed==null){
 
-			var trackRect=tracks[i].getBoundingClientRect();
-			var topTrack = trackRect.top;
-  			var bottomTrack = trackRect.bottom;
+			var trackRect   = tracks[i].getBoundingClientRect();
 			
-			if( centerYDiv >= topTrack && centerYDiv <= bottomTrack){
+			if( centerYDiv >= trackRect.top && centerYDiv <= trackRect.bottom){
 		    	trackOverlayed=tracks[i];
 		  	}
 		  	i++;
@@ -175,23 +168,21 @@ define(function(require) {
 	}
 
 	SoundEvents.prototype.isMovedOverSong = function(songDiv, trackOverlayed) {
-		var overSong=false;
+		var overSong = false;
 
-    	var divRectSong=songDiv.getBoundingClientRect();
-    	var leftSong=divRectSong.left;
-    	var rightSong=divRectSong.right;
+    	var divRectSong = songDiv.getBoundingClientRect();
+    	var leftSong    = divRectSong.left;
+    	var rightSong   = divRectSong.right;
 		
-    	var songsInTrack=trackOverlayed.querySelectorAll('.song:not(.inDrag)');
+    	var songsInTrack = trackOverlayed.querySelectorAll('.song:not(.inDrag)');
 
     	var i=0;
     	while(i<songsInTrack.length && !overSong){
 
 
-    		var songToCompareRect = songsInTrack[i].getBoundingClientRect();
-			var rightSongToCompare = songToCompareRect.right;
-			var leftSongToCompare = songToCompareRect.left;
+    		var songToCompareRect  = songsInTrack[i].getBoundingClientRect();
 			
-			if(! (rightSongToCompare<=leftSong || leftSongToCompare>=rightSong ) ){
+			if(! (songToCompareRect.right <= leftSong || songToCompareRect.left >= rightSong ) ){
 			
 				overSong=true;
 			}
@@ -223,8 +214,8 @@ define(function(require) {
 			}
 			buttonSong.ontouchend=function(event){
 
-				var longTouch     = Date.now()-$(this).attr('touchstartTime')>500;
-				var hasMoved      = $(this).attr('move')=="true";
+				var longTouch     = Date.now() - $(this).attr('touchstartTime') > 500;
+				var hasMoved      = $(this).attr('move') == "true";
 				var overOtherSong = $(this.songToPlace).attr('overOtherSong') == "true";
 
 				if(longTouch && !hasMoved)
@@ -234,7 +225,7 @@ define(function(require) {
 				else
 				{
 					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && !hasMoved){ 
-						var idSong=$(this).attr('data-song-id');
+						var idSong = $(this).attr('data-song-id');
 						ResourcesHandler.playPreview(idSong);
 					}
 				}
@@ -246,8 +237,8 @@ define(function(require) {
 					var xOnPiste = event.changedTouches[0].clientX-$(trackOverlayed).offset().left;
 					$(trackOverlayed).append(this.songToPlace);
 
-					this.songToPlace.style.left = xOnPiste+"px";
-					this.songToPlace.style.top  = 0+"px";
+					this.songToPlace.style.left = xOnPiste + "px";
+					this.songToPlace.style.top  = 0 + "px";
 					
 					this.songToPlace.classList.remove('songToPlace');
 					
@@ -263,8 +254,8 @@ define(function(require) {
 			buttonSong.ontouchmove=function(event){
 				this.setAttribute('move',true);
 
-				var positionX = event.touches[0].clientX-$('#timeline').offset().left+$( "#timeline" ).scrollLeft();
-		     	var positionY = event.touches[0].clientY-$('#timeline').offset().top;
+				var positionX = event.touches[0].clientX - $('#timeline').offset().left + $( "#timeline" ).scrollLeft();
+		     	var positionY = event.touches[0].clientY - $('#timeline').offset().top;
 				
 				this.songToPlace.style.left=positionX+"px";
 				this.songToPlace.style.top=positionY+"px";
@@ -275,8 +266,6 @@ define(function(require) {
 					var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
 					this.songToPlace.setAttribute('overOtherSong',overSong);
 				}
-				
-
 			}
 
     	});
@@ -290,13 +279,10 @@ define(function(require) {
 		var idSong     = $(soundButton).attr('data-song-id');
 		var song       = ResourcesHandler.getSong(idSong);
 		var widthSong  = Timeline.secondsToPxInTimeline(song.getDuration());
-		var colorClass = divSong.css('background-color');
-
 
 		divSong.attr('type',song.type);
 		divSong.append("<span class='numberSong'>" + $(soundButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
-		divSong.attr('originalBgColor', colorClass);
 		divSong.width(widthSong);
 
 		return divSong;
