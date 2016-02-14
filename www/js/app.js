@@ -31,6 +31,7 @@ $(document).ready(function() {
 				ressources.loadSongs().then(function() {
 					uiHandler.initSoundElements();
 					eventsHandler.soundEvents.initEventsButtonsSong();
+					uiHandler.hideLoader();
 				});
 
 				

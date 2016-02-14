@@ -67,26 +67,6 @@ define(function( require ) {
 		}
 	}
 
-	// SoundElements.prototype.createDivSong= function(soundButton){
-
-	// 	var divSong    = $("<div class='song'></div>");
-
-	// 	var idSong     = $(soundButton).attr('data-song-id');
-	// 	var song       = ResourcesHandler.getSong(idSong);
-	// 	var widthSong  = Timeline.secondsToPxInTimeline(song.getDuration());
-	// 	var colorClass = divSong.css('background-color');
-
-
-	// 	divSong.attr('type',song.type);
-	// 	divSong.append("<span class='numberSong'>" + $(soundButton).find('span.numberSong').text() + "</span>")
-	// 	divSong.attr('data-song-id',idSong);
-	// 	divSong.attr('originalBgColor', colorClass);
-	// 	divSong.width(widthSong);
-
-	// 	return divSong;
-
-	// }
-
 	return SoundElements;
 
 })

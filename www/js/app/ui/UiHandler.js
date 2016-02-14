@@ -13,7 +13,6 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initTracks();
 		this.initRecorder();
-		this.hideLoader();
 	} 
 
 	UiHandler.prototype.initSoundElements = function() {
@@ -35,7 +34,7 @@ define(function( require ) {
 	UiHandler.prototype.initTracks = function () {
 		$('.track').css('width', Timeline.getDurationInPx());
 	}
-	
+
 	UiHandler.prototype.initRecorder=function(){
 		
 		$('#canvasRecord').attr('width',$('#recordScreen').width());

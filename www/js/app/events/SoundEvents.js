@@ -12,7 +12,7 @@ define(function(require) {
 	SoundEvents.prototype.initSoundClick = function (){
 		$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
 
-			var idSong=$(this).attr('data-song-id');
+			var idSong = $(this).attr('data-song-id');
 			ResourcesHandler.playPreview(idSong);
 
 			$(this).parent().find('.button').removeClass("active");
@@ -36,43 +36,48 @@ define(function(require) {
   			if(songDragged!=null)
   			{
   				event.preventDefault();
-  				var scrollLeft=$( "#timeline" ).scrollLeft();
+  				
+  				var scrollLeft = $( "#timeline" ).scrollLeft();
 
-  				var positionX=clientX-$('#timeline').offset().left+scrollLeft;
-		     	var positionY=clientY-$('#timeline').offset().top;
+  				var positionX  		= clientX-$('#timeline').offset().left+scrollLeft;
+		     	var positionY  		= clientY-$('#timeline').offset().top;
+		     	var heightSong  	= $(songDragged).height();
+		     	var widthSong  		= $(songDragged).width();
+		     	var widthTrack  	= $('.track').width();
+		     	var heightTimeline  = $('#timeline').height();
 
-		     	positionX-=songDragged.attr('posSourisX');
-		      	positionY-=songDragged.attr('posSourisY');
 
-				if(positionX<0){
-					positionX=0;
+		     	positionX -= $(songDragged).attr('posSourisX');
+		      	positionY -= $(songDragged).attr('posSourisY');
+
+				if(positionX < 0){
+					positionX = 0;
 				}
-				if(positionX>$('.track').width()-songDragged.width()){
-					positionX=$('.track').width()-songDragged.width();
+				if(positionX > widthTrack - widthSong){
+					positionX = widthTrack - widthSong;
 				}
 
 				if(positionY<0){
 					positionY=0;
 				}
 
-				var heightTimeline=$('.track').outerHeight()*$('.track').length;
+				//var heightTimeline=$('.track').outerHeight()*$('.track').length;
 
-				if(positionY + songDragged.height() > heightTimeline ){
-					positionY=heightTimeline - songDragged.height();
+				if(positionY + heightSong > heightTimeline ){
+					positionY = heightTimeline - heightSong;
 				}
 
-				songDragged.css('left',positionX);
-				songDragged.css('top',positionY);
+				songDragged.style.left = positionX+"px";
+				songDragged.style.top  = positionY+"px";
 
-				//var centerY = positionY + songDragged.height() / 2;
 
-				trackOverlayed=self.getTrackOverlayed(songDragged[0]);
+				trackOverlayed=self.getTrackOverlayed(songDragged);
 
 				if(trackOverlayed!=null)
 				{
 
 					var overSong=self.isMovedOverSong(songDragged,trackOverlayed);
-					songDragged.attr('overOtherSong',overSong);
+					$(songDragged).attr('overOtherSong',overSong);
 	      		}
 
   			}
@@ -85,25 +90,25 @@ define(function(require) {
 
 			if(songDragged!=null)
 			{
-				if(songDragged.attr('overOtherSong')=='false')
+				if($(songDragged).attr('overOtherSong')=='false')
 				{
-
-					var trackOverlayed=self.getTrackOverlayed(songDragged[0]);
-					trackOverlayed.append(songDragged);
-					songDragged.removeClass('inDrag');
+					var trackOverlayed=self.getTrackOverlayed(songDragged);
+					$(trackOverlayed).append(songDragged);
+					$(songDragged).removeClass('inDrag');
+					$(songDragged).attr('track',trackOverlayed.id);
 				}
 				else{
-					var leftOriginal=songDragged.attr('posSongX');
-					var pisteOriginal=songDragged.attr('piste');
+					var leftOriginal=$(songDragged).attr('posSongX');
+					var pisteOriginal=$(songDragged).attr('track');
 					
 					$("#"+pisteOriginal).append(songDragged);
-					songDragged.css('left',leftOriginal+"px");
+					$(songDragged).css('left',leftOriginal+"px");
 					
-					songDragged.removeClass('inDrag');
-					songDragged.attr('overOtherSong',false);
+					$(songDragged).removeClass('inDrag');
+					$(songDragged).attr('overOtherSong',false);
 				}
-				songDragged.css('top',0);
-				songDragged.css('background-color',songDragged.attr('originalBgColor'));
+				$(songDragged).css('top',0);
+				$(songDragged).css('background-color',$(songDragged).attr('originalBgColor'));
 			}
 		}
 	}
@@ -113,34 +118,34 @@ define(function(require) {
 
 		divSong[0].ontouchstart=function(event){
 
-			event.preventDefault();
-			var	clientX=event.touches[0].clientX;
-			var clientY=event.touches[0].clientY;
-
-
 			if($(this).hasClass('todelete'))
 			{
 				$(this).remove();
 			}
 			else
 			{
+				// event.preventDefault();
+				var	clientX=event.touches[0].clientX;
+				var clientY=event.touches[0].clientY;
+
+				var topTimelineTouch=clientY-$('#timeline').offset().top;
+  				var topSong = this.getBoundingClientRect().top;
+  				var leftSong = this.getBoundingClientRect().left;
+  				var topSongTouch = clientY-topSong;
+  				var leftSongTouch = clientX-leftSong;
+  				
 
 				$(this).addClass('inDrag');
+				$(this).removeClass('songToPlace');
 
 				$(this).attr('posSongX',$(this).position().left);
-				$(this).attr('track',$(this).parent().attr('id'));
+				// $(this).attr('piste',$(this).parent().attr('id'));
 
-
-				var top=$(this).parent().position().top;
-				$(this).css('top',top);
-
-				$('.track:first').append($(this));
-
-
-				var posSourisOnSongX=clientX-$('.track .song.inDrag').offset().left;
-				var posSourisOnSongY=clientY-$('.track .song.inDrag').offset().top;
-				$(this).attr('posSourisX',posSourisOnSongX);
-				$(this).attr('posSourisY',posSourisOnSongY);
+				$('#timeline').prepend($(this));
+				$(this).css('top',topTimelineTouch-topSongTouch);
+				
+				$(this).attr('posSourisX',leftSongTouch);
+				$(this).attr('posSourisY',topSongTouch);
 
 			}
 		}
@@ -151,31 +156,38 @@ define(function(require) {
     	var divRect=div.getBoundingClientRect();
     	var centerYDiv=divRect.top+divRect.height/2;
 		
-		$('.track').each(function(){
+		var tracks=timeline.querySelectorAll('.track');
 
-			var pisteRect = this.getBoundingClientRect();
-			var topPiste = pisteRect.top;
-  			var bottomPiste = pisteRect.bottom;
+		var i=0;
+		while(i<tracks.length && trackOverlayed==null){
+
+			var trackRect=tracks[i].getBoundingClientRect();
+			var topTrack = trackRect.top;
+  			var bottomTrack = trackRect.bottom;
 			
-			if( centerYDiv >= topPiste && centerYDiv <= bottomPiste){
-		    	trackOverlayed=$(this);
+			if( centerYDiv >= topTrack && centerYDiv <= bottomTrack){
+		    	trackOverlayed=tracks[i];
 		  	}
+		  	i++;
+		}
 
-		});
 		return trackOverlayed;
 	}
 
 	SoundEvents.prototype.isMovedOverSong = function(songDiv, trackOverlayed) {
 		var overSong=false;
 
-    	var divRectSong=songDiv[0].getBoundingClientRect();
+    	var divRectSong=songDiv.getBoundingClientRect();
     	var leftSong=divRectSong.left;
     	var rightSong=divRectSong.right;
 		
+    	var songsInTrack=trackOverlayed.querySelectorAll('.song:not(.inDrag)');
 
-    	trackOverlayed.find('.song').not(songDiv).each(function()
-		{
-			var songToCompareRect = this.getBoundingClientRect();
+    	var i=0;
+    	while(i<songsInTrack.length && !overSong){
+
+
+    		var songToCompareRect = songsInTrack[i].getBoundingClientRect();
 			var rightSongToCompare = songToCompareRect.right;
 			var leftSongToCompare = songToCompareRect.left;
 			
@@ -183,7 +195,9 @@ define(function(require) {
 			
 				overSong=true;
 			}
-		});
+    		i++;
+    	}
+    	
 		return overSong;
 	}
 
@@ -203,59 +217,66 @@ define(function(require) {
 				divSong.css('top','-300px');
 				divSong.css('left','0px');
 
-				this.miniSong=divSong[0];
-				$('#panel-compose').prepend(this.miniSong);
+				this.songToPlace=divSong[0];
+				$(timeline).prepend(this.songToPlace);
 
 			}
 			buttonSong.ontouchend=function(event){
 
-				if(Date.now()-$(this).attr('touchstartTime')>500 && $(this).attr('move')=="false" ){
-					$(".qsopen").removeClass('qsopen');
-					$(".quick-select").removeClass('active');
-					$(this).find(".quick-select").addClass('active');
-					$(this).addClass('qsopen');
+				var longTouch     = Date.now()-$(this).attr('touchstartTime')>500;
+				var hasMoved      = $(this).attr('move')=="true";
+				var overOtherSong = $(this.songToPlace).attr('overOtherSong') == "true";
+
+				if(longTouch && !hasMoved)
+				{
+					$(this).openQuickSelect();
 				}
-				else{
-					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && $(this).attr('move')=="false"){ 
+				else
+				{
+					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && !hasMoved){ 
 						var idSong=$(this).attr('data-song-id');
 						ResourcesHandler.playPreview(idSong);
 					}
 				}
 
-				var trackOverlayed=self.getTrackOverlayed(this.miniSong);
+				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
 
-
-				if(trackOverlayed!=null && $(this.miniSong).attr('overOtherSong') == "false" ){
+				if(trackOverlayed != null && !overOtherSong ){
 
 					var xOnPiste = event.changedTouches[0].clientX-$(trackOverlayed).offset().left;
-					trackOverlayed.append(this.miniSong);
-					$(this.miniSong).css('left',xOnPiste);
-					$(this.miniSong).css('top',0);
-					$(this.miniSong).removeClass('songToPlace');
-					self.setDragOnSong($(this.miniSong));
-					$(this.miniSong).attr( 'piste' , trackOverlayed.attr('id') );
+					$(trackOverlayed).append(this.songToPlace);
+
+					this.songToPlace.style.left = xOnPiste+"px";
+					this.songToPlace.style.top  = 0+"px";
+					
+					this.songToPlace.classList.remove('songToPlace');
+					
+					self.setDragOnSong($(this.songToPlace));
+					this.songToPlace.setAttribute('track' , trackOverlayed.id);
 				
 				}
 				else{
 
-					$(this.miniSong).remove();
+					$(this.songToPlace).remove();
 				}
 			}
 			buttonSong.ontouchmove=function(event){
-				event.preventDefault();
-				$(this).attr('move','true');
-				$(this.miniSong).css('left',event.touches[0].clientX);
-				$(this.miniSong).css('top',event.touches[0].clientY);
+				this.setAttribute('move',true);
 
-				var trackOverlayed=self.getTrackOverlayed(this.miniSong);
-				var overSong=self.isMovedOverSong($(this.miniSong),trackOverlayed);
-				$(this.miniSong).attr('overOtherSong',overSong);
-				// $(this.miniSong).css('background-color',$(this.miniSong).attr('originalBgColor'));
+				var positionX = event.touches[0].clientX-$('#timeline').offset().left+$( "#timeline" ).scrollLeft();
+		     	var positionY = event.touches[0].clientY-$('#timeline').offset().top;
+				
+				this.songToPlace.style.left=positionX+"px";
+				this.songToPlace.style.top=positionY+"px";
 
-				// if(overSong){
-				// 	$(this.miniSong).css('background-color',"red");
-				// }
-				// $(this.miniSong).attr('overOtherSong',overSong);
+				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
+				
+				if(trackOverlayed != null){
+					var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
+					this.songToPlace.setAttribute('overOtherSong',overSong);
+				}
+				
+
 			}
 
     	});
@@ -282,25 +303,9 @@ define(function(require) {
 
 	}
 
-
-
-	SoundEvents.prototype.getSoundToLoad = function() {
-		return (this.getFirstElementOrNull($("#buttons-songs > .button.active")));
-	}
-
 	SoundEvents.prototype.getSoundDragged = function() {
-		return (this.getFirstElementOrNull($('.track .song.inDrag')));
+		return timeline.querySelector('.song.inDrag');
 	}
-
-	SoundEvents.prototype.getFirstElementOrNull = function(element) {
-		if(element.length > 0){
-			return element;
-		}
-
-		return null;
-	}
-
-
 
 	return SoundEvents;
 

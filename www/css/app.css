@@ -344,7 +344,7 @@ ul {
       z-index: 3; }
     .app .song.songToPlace {
       /*-webkit-animation: songToDropAnimation 1s infinite;*/
-      position: fixed;
+      /*position: fixed;*/
       z-index: 4; }
     .app .song[type="type-1"] {
       background-color: rgba(235, 56, 22, 0.8);
@@ -427,6 +427,7 @@ header {
 #timeline {
   width: 100%;
   overflow-x: auto;
+  overflow-y: hidden;
   position: relative;
   max-height: 100%;
   height: 500px;
