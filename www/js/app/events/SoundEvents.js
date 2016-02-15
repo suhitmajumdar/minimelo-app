@@ -24,23 +24,23 @@ define(function(require) {
 	SoundEvents.prototype.initDragAndDrop = function () {
 
 		var self=this;
-  		timeline.ontouchmove=function (event){
-  			
+		timeline.ontouchmove=function (event){
+			
 			var clientX=event.touches[0].clientX;
 			var clientY=event.touches[0].clientY;
-  			
-  			var songDragged=self.getSoundDragged();
+			
+			var songDragged=self.getSoundDragged();
 
-  			if(songDragged!=null)
-  			{
-  				event.preventDefault();
-  				
-  				var scrollLeft = $( "#timeline" ).scrollLeft();
+			if(songDragged!=null)
+			{
+				event.preventDefault();
+				
+				var scrollLeft = $( "#timeline" ).scrollLeft();
 
-  				var position = self.getPostionOnTimeline(event.touches[0].clientX,event.touches[0].clientY);
+				var position = self.getPostionOnTimeline(event.touches[0].clientX,event.touches[0].clientY);
 
-		     	position.x -= $(songDragged).attr('posSourisX');
-		      	position.y -= $(songDragged).attr('posSourisY');
+				position.x -= $(songDragged).attr('posSourisX');
+				position.y -= $(songDragged).attr('posSourisY');
 
 				var finalPosition = self.correctPosition(songDragged,position);
 
@@ -53,14 +53,14 @@ define(function(require) {
 				{
 					var overSong=self.isMovedOverSong(songDragged,trackOverlayed);
 					$(songDragged).attr('overOtherSong',overSong);
-	      		}
+				}
 
-  			}
-      	}
+			}
+		}
 
-  		timeline.ontouchend=function(event){
+		timeline.ontouchend=function(event){
 
-  			var songDragged = self.getSoundDragged();
+			var songDragged = self.getSoundDragged();
 
 			if(songDragged != null)
 			{
@@ -102,11 +102,11 @@ define(function(require) {
 				var clientY=event.touches[0].clientY;
 
 				var topTimelineTouch = clientY-$('#timeline').offset().top;
-  				var topSong          = this.getBoundingClientRect().top;
-  				var leftSong         = this.getBoundingClientRect().left;
-  				var topSongTouch     = clientY - topSong;
-  				var leftSongTouch    = clientX - leftSong;
-  				
+				var topSong          = this.getBoundingClientRect().top;
+				var leftSong         = this.getBoundingClientRect().left;
+				var topSongTouch     = clientY - topSong;
+				var leftSongTouch    = clientX - leftSong;
+				
 
 				$(this).addClass('inDrag');
 				$(this).removeClass('songToPlace');
@@ -125,8 +125,8 @@ define(function(require) {
 
 	SoundEvents.prototype.getTrackOverlayed = function(div) {
 		var trackOverlayed = null;
-    	var divRect        = div.getBoundingClientRect();
-    	var centerYDiv     = divRect.top+divRect.height/2;
+		var divRect        = div.getBoundingClientRect();
+		var centerYDiv     = divRect.top+divRect.height/2;
 		
 		var tracks = timeline.querySelectorAll('.track');
 
@@ -136,9 +136,9 @@ define(function(require) {
 			var trackRect   = tracks[i].getBoundingClientRect();
 			
 			if( centerYDiv >= trackRect.top && centerYDiv <= trackRect.bottom){
-		    	trackOverlayed=tracks[i];
-		  	}
-		  	i++;
+				trackOverlayed=tracks[i];
+			}
+			i++;
 		}
 
 		return trackOverlayed;
@@ -147,45 +147,45 @@ define(function(require) {
 	SoundEvents.prototype.isMovedOverSong = function(songDiv, trackOverlayed) {
 		var overSong = false;
 
-    	var divRectSong = songDiv.getBoundingClientRect();
-    	var leftSong    = divRectSong.left;
-    	var rightSong   = divRectSong.right;
+		var divRectSong = songDiv.getBoundingClientRect();
+		var leftSong    = divRectSong.left;
+		var rightSong   = divRectSong.right;
 		
-    	var songsInTrack = trackOverlayed.querySelectorAll('.song:not(.inDrag)');
+		var songsInTrack = trackOverlayed.querySelectorAll('.song:not(.inDrag)');
 
-    	var i=0;
-    	while(i<songsInTrack.length && !overSong){
+		var i=0;
+		while(i<songsInTrack.length && !overSong){
 
 
-    		var songToCompareRect  = songsInTrack[i].getBoundingClientRect();
+			var songToCompareRect  = songsInTrack[i].getBoundingClientRect();
 			
 			if(! (songToCompareRect.right <= leftSong || songToCompareRect.left >= rightSong ) ){
 			
 				overSong=true;
 			}
-    		i++;
-    	}
-    	
+			i++;
+		}
+		
 		return overSong;
 	}
 
-	SoundEvents.prototype.initEventsButtonsSong=function(){
+	SoundEvents.prototype.initEventsButtonsSong = function() {
+
 		var self=this;
-    	$('.button.soundChoose').each(function(){
 
-    		var buttonSong=this;
-    		buttonSong.ontouchstart=function(event){
+		$('.button.soundChoose').each(function(){
 
-    			if(!$(this).hasClass('disabled'))
-    			{
-    				var divSong=self.createDivSong($(this));
+			var buttonSong=this;
+			buttonSong.ontouchstart=function(event){
+
+				if(!$(this).hasClass('disabled'))
+				{
+					var divSong=self.createDivSong($(this));
 					this.songToPlace=divSong[0];
 					$('#timeline').prepend(this.songToPlace);
-    			}
+				}
 				$(this).attr('touchstartTime',Date.now());
 				$(this).attr('move','false');
-
-				
 
 			}
 			buttonSong.ontouchend=function(event){
@@ -259,11 +259,11 @@ define(function(require) {
 				}
 			}
 
-    	});
-    	
-    }
+		});
+		
+	}
 
-    SoundEvents.prototype.correctPosition=function(divDragged,position){
+	SoundEvents.prototype.correctPosition=function(divDragged,position){
 
 		var heightSong  	= divDragged.offsetHeight;
 		var widthSong  		= divDragged.offsetWidth;
@@ -286,17 +286,17 @@ define(function(require) {
 			position.y = heightTimeline - heightSong;
 		}
 		return position;
-    }
+	}
 
-    SoundEvents.prototype.getPostionOnTimeline=function(clientX,clientY){
-    	var rectTimeline=timeline.getBoundingClientRect();
+	SoundEvents.prototype.getPostionOnTimeline=function(clientX,clientY){
+		var rectTimeline=timeline.getBoundingClientRect();
 		var x = clientX - rectTimeline.left + timeline.scrollLeft;
-     	var y = clientY - rectTimeline.top;
+		var y = clientY - rectTimeline.top;
 
-     	return {x:x,y:y};
-    }
+		return {x:x,y:y};
+	}
 
-    SoundEvents.prototype.createDivSong= function(soundButton){
+	SoundEvents.prototype.createDivSong= function(soundButton){
 
 		var divSong    = $("<div class='song'></div>");
 

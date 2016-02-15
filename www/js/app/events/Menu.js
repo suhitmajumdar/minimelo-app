@@ -1,4 +1,6 @@
-define(function(require) {
+define(function( require ) {
+
+	var CollectionEvents = require('events/CollectionEvents');
 
 	function Menu( uiHandler ) {
 		this.selectedSaveToLoad = null;
@@ -157,6 +159,7 @@ define(function(require) {
 
 	Menu.prototype.displayCollectionManager = function () {
 		this.ui.initCollectionManager();
+		new CollectionEvents();
 	}
 
 	Menu.prototype.loadSubMenu = function (name){
