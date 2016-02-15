@@ -127,8 +127,8 @@ define(function(require) {
 				var topTimelineTouch = clientY-$('#timeline').offset().top;
   				var topSong          = this.getBoundingClientRect().top;
   				var leftSong         = this.getBoundingClientRect().left;
-  				var topSongTouch     = clientY-topSong;
-  				var leftSongTouch    = clientX-leftSong;
+  				var topSongTouch     = clientY - topSong;
+  				var leftSongTouch    = clientX - leftSong;
   				
 
 				$(this).addClass('inDrag');
@@ -136,7 +136,7 @@ define(function(require) {
 
 				$(this).attr('posSongX',$(this).position().left);
 
-				$('#timeline').prepend($(this));
+				$('#timeline').prepend(this);
 				$(this).css('top',topTimelineTouch-topSongTouch);
 				
 				$(this).attr('posSourisX',leftSongTouch);
@@ -198,29 +198,57 @@ define(function(require) {
 
     		var buttonSong=this;
     		buttonSong.ontouchstart=function(event){
+
+    			if(!$(this).hasClass('disabled'))
+    			{
+    				var divSong=self.createDivSong($(this));
+					this.songToPlace=divSong[0];
+					$('#timeline').prepend(this.songToPlace);
+    			}
 				$(this).attr('touchstartTime',Date.now());
 				$(this).attr('move','false');
 
-				var divSong=self.createDivSong($(this));
-				$("#timeline").prepend(divSong);
-				divSong.addClass('songToPlace');
-				divSong.css('height',$('#track-1').height());
-				divSong.css('top','-300px');
-				divSong.css('left','0px');
-
-				this.songToPlace=divSong[0];
-				$(timeline).prepend(this.songToPlace);
+				
 
 			}
 			buttonSong.ontouchend=function(event){
 
-				var longTouch     = Date.now() - $(this).attr('touchstartTime') > 500;
-				var hasMoved      = $(this).attr('move') == "true";
-				var overOtherSong = $(this.songToPlace).attr('overOtherSong') == "true";
+				var longTouch      = Date.now() - $(this).attr('touchstartTime') > 500;
+				var hasMoved       = $(this).attr('move') == "true";
+				var overOtherSong  = $(this.songToPlace).attr('overOtherSong') == "true";
+				var widthSong  	   = $(this.songToPlace).width();
+				var widthTrack     = $('.track').width();
+				var trackOverlayed = null;
+				var isDropped      = false;
+
+				if(this.songToPlace!=null){
+					trackOverlayed=self.getTrackOverlayed(this.songToPlace)
+				}
 
 				if(longTouch && !hasMoved)
 				{
 					$(this).openQuickSelect();
+				}
+				else if(trackOverlayed != null && !overOtherSong ){
+
+					var xOnPiste = event.changedTouches[0].clientX-$(trackOverlayed).offset().left;
+					$(trackOverlayed).append(this.songToPlace);
+
+					if(xOnPiste < 0){
+						xOnPiste = 0;
+					}
+					if(xOnPiste > widthTrack - widthSong){
+						xOnPiste = widthTrack - widthSong;
+					}
+
+					this.songToPlace.style.left = xOnPiste + "px";
+					this.songToPlace.style.top  = 0 + "px";
+					
+					this.songToPlace.classList.remove('songToPlace');
+					
+					self.setDragOnSong($(this.songToPlace));
+					this.songToPlace.setAttribute('track' , trackOverlayed.id);
+					isDropped = true;
 				}
 				else
 				{
@@ -230,26 +258,10 @@ define(function(require) {
 					}
 				}
 
-				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
-
-				if(trackOverlayed != null && !overOtherSong ){
-
-					var xOnPiste = event.changedTouches[0].clientX-$(trackOverlayed).offset().left;
-					$(trackOverlayed).append(this.songToPlace);
-
-					this.songToPlace.style.left = xOnPiste + "px";
-					this.songToPlace.style.top  = 0 + "px";
-					
-					this.songToPlace.classList.remove('songToPlace');
-					
-					self.setDragOnSong($(this.songToPlace));
-					this.songToPlace.setAttribute('track' , trackOverlayed.id);
-				
-				}
-				else{
-
+				if(!isDropped){
 					$(this.songToPlace).remove();
 				}
+
 			}
 			buttonSong.ontouchmove=function(event){
 				this.setAttribute('move',true);
@@ -257,6 +269,27 @@ define(function(require) {
 				var positionX = event.touches[0].clientX - $('#timeline').offset().left + $( "#timeline" ).scrollLeft();
 		     	var positionY = event.touches[0].clientY - $('#timeline').offset().top;
 				
+				var heightSong  	= $(this.songToPlace).height();
+		     	var widthSong  		= $(this.songToPlace).width();
+		     	var widthTrack  	= $('.track').width();
+		     	var heightTimeline  = $('.track').height()*$('.track').length;
+
+
+				if(positionX < 0){
+					positionX = 0;
+				}
+				if(positionX > widthTrack - widthSong){
+					positionX = widthTrack - widthSong;
+				}
+
+				if(positionY<0){
+					positionY=0;
+				}
+
+				if(positionY + heightSong > heightTimeline ){
+					positionY = heightTimeline - heightSong;
+				}
+
 				this.songToPlace.style.left=positionX+"px";
 				this.songToPlace.style.top=positionY+"px";
 
@@ -279,11 +312,17 @@ define(function(require) {
 		var idSong     = $(soundButton).attr('data-song-id');
 		var song       = ResourcesHandler.getSong(idSong);
 		var widthSong  = Timeline.secondsToPxInTimeline(song.getDuration());
+		var heightSong = $('#track-1').height();
+		
 
 		divSong.attr('type',song.type);
 		divSong.append("<span class='numberSong'>" + $(soundButton).find('span.numberSong').text() + "</span>")
 		divSong.attr('data-song-id',idSong);
-		divSong.width(widthSong);
+		divSong.css('top',-300);
+		divSong.css('width',widthSong);
+		divSong.css('height',heightSong);
+		divSong.addClass('songToPlace');
+				
 
 		return divSong;
 
