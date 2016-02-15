@@ -64,7 +64,6 @@ define(function(require) {
 
 			if(songDragged != null)
 			{
-
 				if($(songDragged).attr('overOtherSong') == 'false')
 				{
 					var trackOverlayed=self.getTrackOverlayed(songDragged);
@@ -184,8 +183,6 @@ define(function(require) {
     			}
 				$(this).attr('touchstartTime',Date.now());
 				$(this).attr('move','false');
-
-				
 
 			}
 			buttonSong.ontouchend=function(event){

@@ -91,7 +91,9 @@ define(function(require) {
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
 		if(name!=null && name!=""){
-			alert("penser à exporter la composition...")
+			var Export = require('app/Export');
+			var exportTimeline = new Export();
+            exportTimeline.exportMp3(name+".mp3");
 		}
 		else{
 			alert("Donnez un nom à votre musique")

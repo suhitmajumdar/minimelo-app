@@ -45,8 +45,7 @@ $(document).ready(function() {
 			}
 		};
 
-
-		application.onDeviceReady();
+		application.init();
 	});
 
 
