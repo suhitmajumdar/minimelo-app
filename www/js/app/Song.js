@@ -52,7 +52,6 @@ define(function( require ) {
 			function(){
 				console.log("Impossible de lire "+self.url);
 				$('.button[data-song-id="'+self.id+'"]').addClass('disabled');
-				
 			}
 		);
 

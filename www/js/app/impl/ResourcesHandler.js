@@ -51,8 +51,10 @@ define(function( require ){
 		}
 	}
 
-	ResourcesHandler.prototype.loadSong = function(idNewSong) {
-		this.songs[idNewSong].load();
+	ResourcesHandler.prototype.loadSong = function(id) {
+		console.log(id);
+		console.log(this.songs[id]);
+		this.songs[id].load();
 	}
 
 	ResourcesHandler.prototype.getSong = function( id ) {

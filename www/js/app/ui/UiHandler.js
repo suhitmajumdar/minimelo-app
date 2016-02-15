@@ -41,11 +41,6 @@ define(function( require ) {
 		$('.track').css('width', Timeline.getDurationInPx());
 	}
 
-	UiHandler.prototype.addSongTotrack = function(songButton, track, xOntrack)
-	{
-		return this.soundElements.addSongTotrack(songButton, track, xOntrack);
-	}
-
 	UiHandler.prototype.initRecorder=function(){
 		
 		$('#canvasRecord').attr('width',$('#recordScreen').width());

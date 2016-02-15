@@ -26,17 +26,20 @@ $(document).ready(function() {
 
 				var uiHandler = new UiHandler();
 				var record    = new Record();
+				var eventsHandler = new EventsHandler(uiHandler, record); // todo :init this after load songs to avoid spending more time 
 
 				Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
 					Resources.postProcessing();
 					uiHandler.initSoundElements();
+					eventsHandler.soundEvents.initEventsButtonsSong();
+					uiHandler.hideLoader();
 
 					$("*[data-dismiss=modal]").trigger( "click" );
 					$("#general-menu-button").trigger( "click");
 					$("[menu=manage-menu]").trigger( "click");
 				});
 
-				var eventsHandler = new EventsHandler(uiHandler, record);
+				
 				uiHandler.initUI();
 
 			}

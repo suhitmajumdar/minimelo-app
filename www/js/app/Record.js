@@ -138,6 +138,7 @@ define(function( require ) {
 				lineRecord.style.left="0px";
 				self.scriptNodePlay.disconnect();
 				self.scriptNodePlay=null;
+				$('#record-controls .player_controls').removeClass('playing');
 			}
 			this.recorToPlay.connect(audioCtx.destination);
 		}

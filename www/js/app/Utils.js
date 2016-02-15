@@ -56,3 +56,11 @@ function compare(a, b) {
 	else 
 		return 0;
 }
+jQuery.fn.extend({
+    openQuickSelect: function () {
+        $(".qsopen").removeClass('qsopen');
+		$(".quick-select").removeClass('active');
+		$(this).find(".quick-select").addClass('active');
+		$(this).addClass('qsopen');
+    }
+});

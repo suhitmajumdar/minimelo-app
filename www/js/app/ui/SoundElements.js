@@ -11,30 +11,13 @@ define(function( require ) {
 	SoundElements.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
-
+		var self=this;
 		for ( var type in types ) {
-			var buttonSong = $('<div class="button disabled"></div>');
+			var buttonSong = $('<div class="button disabled soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
 			buttonSong.append("<span class='numberSong'></span>")
 
 			$('#buttons-songs').append(buttonSong);
-
-			buttonSong[0].ontouchstart = function(event) {
-				$(this).attr('xswip',event.touches[0].clientX);
-			}
-			buttonSong[0].ontouchmove = function(event) {
-				
-				var xswip=$(this).attr('xswip');
-				if(xswip<event.touches[0].clientX)
-				{
-					$(".quick-select").removeClass('active');
-					$(this).find(".quick-select").addClass('active');
-					$(this).addClass('qsopen');
-				} else {
-					$(this).find(".quick-select").removeClass('active');
-					$(this).removeClass('qsopen');
-				}
-			}
 
 		}
 
@@ -76,30 +59,7 @@ define(function( require ) {
 			cloneLine.append($('<div class="round_btn validate_btn"></div>'));
 
 			$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
-
 		}
-	}
-
-	SoundElements.prototype.addSongTotrack = function(songButton, track, xOntrack)
-	{
-		var idSong    = $(songButton).attr('data-song-id');
-		var song      = ResourcesHandler.getSong(idSong);
-		var widthSong = Timeline.secondsToPxInTimeline(song.getDuration());
-		var divSong   = $("<div class='song'></div>");
-		var colorClass = divSong.css('background-color');
-
-		divSong.attr('type',song.type);
-		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
-		divSong.attr('data-song-id',idSong);
-		divSong.attr('originalBgColor', colorClass);
-		divSong.css('left',xOntrack-widthSong/2);
-
-		divSong.width(widthSong);
-
-		track.append(divSong);
-
-
-		return divSong;
 	}
 
 	return SoundElements;

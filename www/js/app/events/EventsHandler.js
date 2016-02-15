@@ -10,42 +10,12 @@ define(function( require ) {
 		this.record = record;
 		this.menu   = new Menu(uiHandler);
 
-		this.initTrackClick();
 		this.initModalEvents();
-
 		this.soundEvents = new SoundEvents();
 
 		this.initDeckButtons();
 		this.initRecorderEvents();
 		this.initValidQuickSelect();
-	}
-
-	EventsHandler.prototype.initTrackClick = function(){
-
-		var self=this;
-
-		$('.track').each(function(){
-
-			this.ontouchstart = function(event) {
-
-				var songToLoad = self.soundEvents.getSoundToLoad();
-				var xOnTrack = event.touches[0].clientX-$(this).offset().left;
-				
-				if ( songToLoad != null && self.soundEvents.isValidPosition(xOnTrack, songToLoad, $(this)) == true )
-				{				
-
-					if(self.soundEvents.getSoundDragged() == null && !$('#trash').hasClass("active") && songToLoad!=null)
-					{
-						
-						var newSongDiv = self.uiHandler.addSongTotrack(songToLoad, $(this), xOnTrack);
-						$("#buttons-songs .button.active").removeClass('active');
-
-						self.soundEvents.setDragOnSong(newSongDiv);
-					}
-				}
-			}
-
-		});
 	}
 
 	EventsHandler.prototype.initRecorderEvents = function(){
@@ -182,24 +152,25 @@ define(function( require ) {
 
 	EventsHandler.prototype.initValidQuickSelect=function (){
 		$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
-			
-			var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
-			if(btnSelected.length>0){
+    		
+    		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
+    		if(btnSelected.length>0){
 
-				var idSong=btnSelected.find(" > span").text();
-				var dataIdSong=btnSelected.attr('data-song-id');
+	    		var idSong=btnSelected.find(" > span").text();
+	    		var dataIdSong=btnSelected.attr('data-song-id');
 
-				var buttonToSwitch=$(this).parent().parent();
-				buttonToSwitch.find('span.numberSong').text(idSong);
-				buttonToSwitch.attr('data-song-id',dataIdSong);
-				buttonToSwitch.removeClass('qsopen');
-				buttonToSwitch.removeClass('disabled');
-				buttonToSwitch.removeClass('active');
-				buttonToSwitch.find('.quick-select').removeClass('active');
-				ResourcesHandler.loadSong(dataIdSong);
-			}
-		   
-		});
+	    		var buttonToSwitch=$(this).parent().parent();
+	    		buttonToSwitch.find('span.numberSong').text(idSong);
+	    		buttonToSwitch.attr('data-song-id',dataIdSong);
+	    		buttonToSwitch.removeClass('qsopen');
+	    		buttonToSwitch.removeClass('disabled');
+	    		buttonToSwitch.removeClass('active');
+	    		ResourcesHandler.loadSong(dataIdSong);
+    		}
+    		$('.quick-select').removeClass('active');
+    		$('.qsopen').removeClass('qsopen');
+	       
+    	});
 	}
 
 
