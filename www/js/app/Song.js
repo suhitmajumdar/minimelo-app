@@ -78,16 +78,15 @@ define(function( require ) {
 		source.start(audioCtx.currentTime + time);
 
 		return source;
-	};
+	}
 
-	Song.prototype.play = function ()
-	{
+	Song.prototype.play = function () {
 		return this.playWithTime(0);
-	};
+	}
 
-	Song.prototype.getDuration = function (){
+	Song.prototype.getDuration = function () {
 		return this.buffer.duration;
-	};
+	}
 
 	Song.prototype.loaded = function() {
 		return ( this.buffer != null )

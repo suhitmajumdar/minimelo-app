@@ -127,7 +127,7 @@ define(function( require ) {
 
 	EventsHandler.prototype.initModalEvents = function(){
 
-		$(".validate_btn.button").on('click', function(){
+		$("#songsSelector .validate_btn.button").click(function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
@@ -156,8 +156,8 @@ define(function( require ) {
     		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
     		if(btnSelected.length>0){
 
-	    		var idSong=btnSelected.find(" > span").text();
-	    		var dataIdSong=btnSelected.attr('data-song-id');
+	    		var idSong = btnSelected.find(" > span").text();
+	    		var dataIdSong = btnSelected.attr('data-song-id');
 
 	    		var buttonToSwitch=$(this).parent().parent();
 	    		buttonToSwitch.find('span.numberSong').text(idSong);

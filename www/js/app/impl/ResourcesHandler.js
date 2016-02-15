@@ -40,33 +40,19 @@ define(function( require ){
 			this.sourceInPreview.stop();
 		}
 
-		if(this.songs[idSong].buffer != null) {
-			this.sourceInPreview = this.songs[idSong].play();
+		if(this.getSong(idSong).buffer != null) {
+			this.sourceInPreview = this.getSong(idSong).play();
 		} else {
 			var self = this;
 
-			this.songs[idSong].playForPreview().then( function(source) {
+			this.getSong(idSong).playForPreview().then( function(source) {
 				self.sourceInPreview = source;
 			});
 		}
 	}
 
-	ResourcesHandler.prototype.loadSong = function(id) {
-		console.log(id);
-		console.log(this.songs[id]);
-		this.songs[id].load();
-	}
-
-	ResourcesHandler.prototype.getSong = function( id ) {
-
-		for ( var song in this.songs )
-		{
-			if (this.songs[song].id == id) {
-				return this.songs[song];
-			}
-		}
-
-		return null;
+	ResourcesHandler.prototype.loadSong = function( id ) {
+		this.getSong(id).load();
 	}
 
 	ResourcesHandler.prototype.getSongs = function() {
@@ -114,6 +100,15 @@ define(function( require ){
 
 	ResourcesHandler.prototype.getInstance = function() {
 		return this;
+	}
+
+	ResourcesHandler.prototype.getSong = function ( id ) {
+		var length = this.songs.length;
+		for (var i = length - 1; i >= 0; i--) {
+			if( this.songs[i].id == id )
+				return this.songs[i];
+		}
+		return null;
 	}
 
 	return ResourcesHandler;

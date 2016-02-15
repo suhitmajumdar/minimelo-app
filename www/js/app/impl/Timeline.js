@@ -4,7 +4,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 
 	function Timeline() {
-		this.songs       = ResourcesHandler.getSongs();
 		this.songsInPlay = [];
 
 		this.tempo       = 90;
@@ -47,7 +46,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			var idSong=song.getAttribute('data-song-id');
 			var step=song.getAttribute('step');
 
-			var sourcePlaying = self.songs[idSong].playWithTime(beginSong);
+			var sourcePlaying = ResourcesHandler.getSong(idSong).playWithTime(beginSong);
 			sourcePlaying.songRef=song;
 
 			var idTimeOutInactive;
@@ -150,7 +149,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		$('.track .song').each(function()
 		{	
 			var idSong=$(this).attr('data-song-id');
-			var song=self.songs[idSong];
+			var song=ResourcesHandler.getSong(idSong);
 			$(this).css('width',self.ratioSecondPixel*song.getDuration());
 			$(this).css('left',self.ratioSecondPixel*$(this).position().left/lastRatio);
 		});
