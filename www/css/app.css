@@ -564,20 +564,20 @@ header {
     margin-top: 20px; }
 
 #general-menu-overlay {
-  content: "";
-  display: block;
-  width: 0%;
+  /* display: block; */
   height: 100%;
   background-color: transparent;
   position: absolute;
   top: 0px;
-  right: -100%;
+  right: 0px;
+  transition: transform;
   z-index: 2;
-  transition-duration: .5s; }
+  transform: translateX(100%);
+  transition-duration: 0.3s;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
   #general-menu-overlay.active {
-    width: 100%;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0.5); }
+    transform: translateX(0); }
 
 .sub-menu {
   position: absolute;
