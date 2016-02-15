@@ -26,11 +26,9 @@ define(function(require) {
 		var self=this;
   		timeline.ontouchmove=function (event){
   			
-  			
 			var clientX=event.touches[0].clientX;
 			var clientY=event.touches[0].clientY;
   			
-
   			var songDragged=self.getSoundDragged();
 
   			if(songDragged!=null)
@@ -41,33 +39,14 @@ define(function(require) {
 
   				var positionX  		= clientX-$('#timeline').offset().left+scrollLeft;
 		     	var positionY  		= clientY-$('#timeline').offset().top;
-		     	var heightSong  	= $(songDragged).height();
-		     	var widthSong  		= $(songDragged).width();
-		     	var widthTrack  	= $('.track').width();
-		     	var heightTimeline  = $('.track').height()*$('.track').length;
-
 
 		     	positionX -= $(songDragged).attr('posSourisX');
 		      	positionY -= $(songDragged).attr('posSourisY');
 
-				if(positionX < 0){
-					positionX = 0;
-				}
-				if(positionX > widthTrack - widthSong){
-					positionX = widthTrack - widthSong;
-				}
+				var finalPosition = self.correctPosition(songDragged,positionX,positionY);
 
-				if(positionY<0){
-					positionY=0;
-				}
-
-				if(positionY + heightSong > heightTimeline ){
-					positionY = heightTimeline - heightSong;
-				}
-
-				songDragged.style.left = positionX+"px";
-				songDragged.style.top  = positionY+"px";
-
+				songDragged.style.left = finalPosition.positionX+"px";
+				songDragged.style.top  = finalPosition.positionY+"px";
 
 				trackOverlayed = self.getTrackOverlayed(songDragged);
 
@@ -78,7 +57,6 @@ define(function(require) {
 	      		}
 
   			}
-
       	}
 
   		timeline.ontouchend=function(event){
@@ -113,7 +91,7 @@ define(function(require) {
 
 	SoundEvents.prototype.setDragOnSong = function(divSong){
 
-		divSong[0].ontouchstart=function(event){
+		divSong.ontouchstart=function(event){
 
 			if($(this).hasClass('todelete'))
 			{
@@ -216,7 +194,7 @@ define(function(require) {
 				var longTouch      = Date.now() - $(this).attr('touchstartTime') > 500;
 				var hasMoved       = $(this).attr('move') == "true";
 				var overOtherSong  = $(this.songToPlace).attr('overOtherSong') == "true";
-				var widthSong  	   = $(this.songToPlace).width();
+				var widthSong  	   = this.songToPlace.offsetWidth;
 				var widthTrack     = $('.track').width();
 				var trackOverlayed = null;
 				var isDropped      = false;
@@ -246,7 +224,7 @@ define(function(require) {
 					
 					this.songToPlace.classList.remove('songToPlace');
 					
-					self.setDragOnSong($(this.songToPlace));
+					self.setDragOnSong(this.songToPlace);
 					this.songToPlace.setAttribute('track' , trackOverlayed.id);
 					isDropped = true;
 				}
@@ -268,30 +246,11 @@ define(function(require) {
 
 				var positionX = event.touches[0].clientX - $('#timeline').offset().left + $( "#timeline" ).scrollLeft();
 		     	var positionY = event.touches[0].clientY - $('#timeline').offset().top;
-				
-				var heightSong  	= $(this.songToPlace).height();
-		     	var widthSong  		= $(this.songToPlace).width();
-		     	var widthTrack  	= $('.track').width();
-		     	var heightTimeline  = $('.track').height()*$('.track').length;
 
+				var position = self.correctPosition(this.songToPlace,positionX,positionY);
 
-				if(positionX < 0){
-					positionX = 0;
-				}
-				if(positionX > widthTrack - widthSong){
-					positionX = widthTrack - widthSong;
-				}
-
-				if(positionY<0){
-					positionY=0;
-				}
-
-				if(positionY + heightSong > heightTimeline ){
-					positionY = heightTimeline - heightSong;
-				}
-
-				this.songToPlace.style.left=positionX+"px";
-				this.songToPlace.style.top=positionY+"px";
+				this.songToPlace.style.left = position.positionX+"px";
+				this.songToPlace.style.top  = position.positionY+"px";
 
 				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
 				
@@ -303,6 +262,31 @@ define(function(require) {
 
     	});
     	
+    }
+
+    SoundEvents.prototype.correctPosition=function(divDragged,positionX,positionY){
+
+		var heightSong  	= divDragged.offsetHeight;
+		var widthSong  		= divDragged.offsetWidth;
+
+		var widthTrack  	= $('.track').width();
+		var heightTimeline  = $('.track').height()*$('.track').length;
+
+		if(positionX < 0){
+			positionX = 0;
+		}
+		if(positionX > widthTrack - widthSong){
+			positionX = widthTrack - widthSong;
+		}
+
+		if(positionY<0){
+			positionY=0;
+		}
+
+		if(positionY + heightSong > heightTimeline ){
+			positionY = heightTimeline - heightSong;
+		}
+		return { positionX : positionX, positionY : positionY };
     }
 
     SoundEvents.prototype.createDivSong= function(soundButton){
