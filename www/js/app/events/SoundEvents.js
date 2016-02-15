@@ -64,7 +64,6 @@ define(function(require) {
 
 			if(songDragged != null)
 			{
-
 				if($(songDragged).attr('overOtherSong') == 'false')
 				{
 					var trackOverlayed=self.getTrackOverlayed(songDragged);

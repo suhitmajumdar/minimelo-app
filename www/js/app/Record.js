@@ -26,7 +26,7 @@ define(function( require ) {
 		this.playing        = false;
 	}
 
-	Record.prototype.startRecord=function()
+	Record.prototype.startRecord = function()
 	{	
 		var self=this;
 
@@ -62,7 +62,7 @@ define(function( require ) {
 		);
 		
 	}
-	Record.prototype.stopRecord=function(){
+	Record.prototype.stopRecord = function(){
 		this.streamRecord.stop();
 		this.microphone.disconnect();
 		this.scriptNode.disconnect();
@@ -76,7 +76,7 @@ define(function( require ) {
 		this.drawRecord(this.recordBuffer);
 	}
 
-	Record.prototype.drawRecord=function(){
+	Record.prototype.drawRecord = function(){
 		var binSize = ( this.recordBuffer.duration * this.recordBuffer.sampleRate ) / canvasRecord.width;
 		ctx.clearRect(0,0,canvasRecord.width,canvasRecord.height);
 		ctx.beginPath();
@@ -109,7 +109,7 @@ define(function( require ) {
 		ctx.stroke();
 	}
 
-	Record.prototype.playRecord=function(){
+	Record.prototype.playRecord = function(){
 		var self=this;
 		if(this.playing==true){
 			this.recorToPlay.stop();
@@ -127,13 +127,13 @@ define(function( require ) {
 			self.scriptNodePlay.connect(audioCtx.destination);
 			
 
-			this.scriptNodePlay.onaudioprocess=function(e){
+			this.scriptNodePlay.onaudioprocess = function(e){
 				var timeInPx = self.getXOnSong(audioCtx.currentTime-self.playStart);
 				lineRecord.style.left=timeInPx+"px";
 
 			}
 
-			this.recorToPlay.onended=function () {
+			this.recorToPlay.onended = function () {
 				self.playing=false;
 				lineRecord.style.left="0px";
 				self.scriptNodePlay.disconnect();
