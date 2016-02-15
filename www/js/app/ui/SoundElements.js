@@ -4,38 +4,20 @@ define(function( require ) {
 	var Timeline 		  = require('app/Timeline');
 
 	function SoundElements() {
-		this.initButtonsModal();
 		this.initButtonsSongs();
+		this.initButtonsModal();
 	}
 
 	SoundElements.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
-
+		var self=this;
 		for ( var type in types ) {
-			var buttonSong = $('<div class="button disabled"></div>');
+			var buttonSong = $('<div class="button disabled soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
 			buttonSong.append("<span class='numberSong'></span>")
 
 			$('#buttons-songs').append(buttonSong);
-
-			buttonSong[0].ontouchstart=function(event){
-				$(this).attr('xswip',event.touches[0].clientX);
-			}
-			buttonSong[0].ontouchmove=function(event){
-				
-				var xswip=$(this).attr('xswip');
-				if(xswip<event.touches[0].clientX)
-				{
-					$(".quick-select").removeClass('active');
-					$(this).find(".quick-select").addClass('active');
-					$(this).addClass('qsopen');
-				}
-				else{
-					$(this).find(".quick-select").removeClass('active');
-					$(this).removeClass('qsopen');
-				}
-			}
 
 		}
 
@@ -44,12 +26,11 @@ define(function( require ) {
 
 	SoundElements.prototype.initButtonsModal = function () {
 
-
 		var songsByType = ResourcesHandler.songsDirectories;
 
 		for ( var type in songsByType )
 		{
-			if(type != "indefini"){
+			if(type != "indefini") {
 				
 				var containerLine=$('<div class="container-line">');
 
@@ -72,7 +53,7 @@ define(function( require ) {
 					line.append(buttonSong);
 				}
 
-				var cloneLine=line.clone();
+				var cloneLine = line.clone();
 
 				line.css('width',songs.length*$('#choose-song .button').outerWidth());
 
@@ -80,30 +61,10 @@ define(function( require ) {
 				cloneLine.append($('<div class="round_btn validate_btn"></div>'));
 
 				$('#buttons-songs .button[type="'+type+'"]').append(cloneLine);
+
+
 			}
 		}
-	}
-
-	SoundElements.prototype.addSongToPiste = function(songButton, piste, xOnPiste)
-	{
-		var idSong    = $(songButton).attr('data-song-id');
-		var song      = ResourcesHandler.getSong(idSong);
-		var widthSong = Timeline.secondsToPxInTimeline(song.getDuration());
-		var divSong   = $("<div class='song'></div>");
-		var colorClass = divSong.css('background-color');
-
-		divSong.attr('type',song.type);
-		divSong.append("<span class='numberSong'>" + $(songButton).find('span.numberSong').text() + "</span>")
-		divSong.attr('data-song-id',idSong);
-		divSong.attr('originalBgColor', colorClass);
-		divSong.css('left',xOnPiste-widthSong/2);
-
-		divSong.width(widthSong);
-
-		piste.append(divSong);
-
-
-		return divSong;
 	}
 
 	return SoundElements;

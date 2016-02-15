@@ -26,12 +26,15 @@ $(document).ready(function() {
 
 				var uiHandler = new UiHandler();
 				var record    = new Record();
+				var eventsHandler = new EventsHandler(uiHandler, record);
 
-				ressources.loadSongs().then(function(data) {
+				ressources.loadSongs().then(function() {
 					uiHandler.initSoundElements();
+					eventsHandler.soundEvents.initEventsButtonsSong();
+					uiHandler.hideLoader();
 				});
 
-				var eventsHandler = new EventsHandler(uiHandler, record);
+				
 				uiHandler.initUI();
 
 			}
