@@ -231,56 +231,6 @@ ul {
   top: 4px;
 }
 */
-.round_btn {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background-image: url("../img/buttons_sprite.png");
-  background-size: cover;
-  background-position: 0 67%; }
-  .round_btn.active {
-    background-position: 0 100%; }
-    .round_btn.active:after {
-      top: 3px;
-      left: -3px; }
-  .round_btn:after {
-    content: "";
-    background-image: url("../img/circle_icon_sprite.png");
-    background-position: 0 67%;
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-color: transparent; }
-  .round_btn.trash_btn:after {
-    background-position-y: 0; }
-  .round_btn.validate_btn:after {
-    background-position-y: -50px; }
-  .round_btn.scissors_btn:after {
-    background-position-y: -100px; }
-  .round_btn.unzoom_btn:after {
-    background-position-y: -150px; }
-  .round_btn.zoom_btn:after {
-    background-position-y: -200px; }
-  .round_btn.play_btn:after {
-    background-position-y: -250px; }
-  .round_btn.pause_btn:after {
-    background-position-y: -300px; }
-  .round_btn.stop_btn:after {
-    background-position-y: -350px; }
-  .round_btn.begin_btn:after {
-    background-position-y: -400px; }
-  .round_btn.end_btn:after {
-    background-position-y: -450px; }
-  .round_btn.sound_btn:after {
-    background-position-y: -500px; }
-  .round_btn.close_btn:after {
-    background-position-y: -550px; }
-  .round_btn.plus_btn:after {
-    background-position-y: -600px; }
-
 .app {
   width: 100%;
   height: 100%;
@@ -491,9 +441,6 @@ header {
       background-position: 0 33%;
       opacity: 1; }
 
-#panel-record .round_btn[action="stop"] {
-  background-color: red; }
-
 #panel-record #recordScreen {
   position: relative;
   /*width: 100%;*/
@@ -531,12 +478,10 @@ header {
     opacity: 1; }
   #panel-record #record-controls .player_controls {
     text-align: center; }
-    #panel-record #record-controls .player_controls.recording #recordButton {
-      background-color: green; }
+    #panel-record #record-controls .player_controls.recording #recordButton:after {
+      background-position-y: -700px; }
     #panel-record #record-controls .player_controls.recording #playRecord, #panel-record #record-controls .player_controls.recording #cutRecord {
       opacity: .4; }
-    #panel-record #record-controls .player_controls.playing #playRecord {
-      background-color: green; }
     #panel-record #record-controls .player_controls.playing #recordButton, #panel-record #record-controls .player_controls.playing #cutRecord {
       opacity: .4; }
   #panel-record #record-controls .panel_controls {
@@ -564,8 +509,7 @@ header {
 
 /* GENERAL MENU */
 #general-menu-button {
-  float: right;
-  background-color: grey; }
+  float: right; }
 
 #general-menu {
   background-color: #ffffff;
@@ -784,8 +728,50 @@ header {
   background-size: cover;
   width: 55px;
   height: 55px;
-  display: inline-block; }
+  display: inline-block;
+  /*&.menu_btn{ background-position:0px 50px; }*/ }
+  .square_btn:after {
+    content: "";
+    background-image: url("../img/square_icon_sprite.png");
+    background-position: 0 50px;
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: transparent; }
+  .square_btn.validate_btn:after {
+    background-position-y: 0; }
+  .square_btn.close_btn:after {
+    background-position-y: -50px; }
+  .square_btn.menu_btn:after {
+    background-position-y: -100px; }
+  .square_btn.export_btn:after {
+    background-position-y: -150px; }
+  .square_btn.manage_btn:after {
+    background-position-y: -200px; }
+  .square_btn.save_btn:after {
+    background-position-y: -250px; }
+  .square_btn.question_btn:after {
+    background-position-y: -300px; }
+  .square_btn.load_btn:after {
+    background-position-y: -350px; }
+  .square_btn.new_btn:after {
+    background-position-y: -400px; }
+  .square_btn.micro_btn:after {
+    background-position-y: -450px; }
 
+/*
+.round_btn{
+    display: inline-block;
+    width: 50px;
+    height: 51px;
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    background-position: 0 67%;
+}*/
 .round_btn {
   display: inline-block;
   width: 50px;
@@ -793,3 +779,51 @@ header {
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;
   background-position: 0 67%; }
+  .round_btn.active {
+    background-position: 0 100%; }
+    .round_btn.active:after {
+      top: 3px;
+      left: -3px; }
+  .round_btn:after {
+    content: "";
+    background-image: url("../img/circle_icon_sprite.png");
+    background-position: 0 67%;
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: transparent; }
+  .round_btn.trash_btn:after {
+    background-position-y: 0; }
+  .round_btn.validate_btn:after {
+    background-position-y: -50px; }
+  .round_btn.scissors_btn:after {
+    background-position-y: -100px; }
+  .round_btn.unzoom_btn:after {
+    background-position-y: -150px; }
+  .round_btn.zoom_btn:after {
+    background-position-y: -200px; }
+  .round_btn.play_btn:after {
+    background-position-y: -250px; }
+  .round_btn.pause_btn:after {
+    background-position-y: -300px; }
+  .round_btn.stop_btn:after {
+    background-position-y: -350px; }
+  .round_btn.begin_btn:after {
+    background-position-y: -400px; }
+  .round_btn.end_btn:after {
+    background-position-y: -450px; }
+  .round_btn.sound_btn:after {
+    background-position-y: -500px; }
+  .round_btn.close_btn:after {
+    background-position-y: -550px; }
+  .round_btn.plus_btn:after {
+    background-position-y: -600px; }
+  .round_btn.red_rec_btn:after {
+    background-position-y: -650px; }
+  .round_btn.red_stop_btn:after {
+    background-position-y: -700px; }
+  .round_btn.question_btn:after {
+    background-position-y: -750px; }
