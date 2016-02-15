@@ -30,7 +30,7 @@ define(function( require ) {
 
 		for ( var type in songsByType )
 		{
-			if(type != "indefini") {
+			if(type != "") {
 				
 				var containerLine=$('<div class="container-line">');
 

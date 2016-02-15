@@ -11,8 +11,8 @@ requirejs.config({
 
 $(document).ready(function() {
 
-	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record'], 
-		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record) {
+	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record','app/Export'], 
+		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record, Export) {
 
 		'use strict';
 
@@ -40,8 +40,7 @@ $(document).ready(function() {
 			}
 		};
 
-
-		application.onDeviceReady();
+		application.init();
 	});
 
 
