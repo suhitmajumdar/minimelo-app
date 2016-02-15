@@ -115,7 +115,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 			this.ratioSecondPixel+=10;
 
-			$(".piste").each(function(){
+			$(".track").each(function(){
 				var widthPiste = $(this).width();
 				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
 				$(this).css('width',newWidth);
