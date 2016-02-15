@@ -670,36 +670,32 @@ header {
   margin: 0;
   height: 90%;
   top: 5%; }
-
-#sound_to_sort {
-  text-align: left;
-  display: inline-block;
-  float: left;
-  width: 33%;
-  height: 100%;
-  margin: 0;
-  padding: 10px;
-  box-sizing: border-box; }
-  #sound_to_sort.selected {
-    background-color: #ccc; }
-
-#sorting_colors {
-  display: inline-block;
-  float: left;
-  width: 33%;
-  height: 100%;
-  box-sizing: border-box; }
-  #sorting_colors .pool {
+  #manage-menu #sorted_sounds {
+    overflow-y: scroll;
+    text-align: right;
     display: inline-block;
-    width: 50%;
-    height: 25%;
-    margin: 0;
-    padding: 0;
     float: left;
-    border: solid 3px #ffffff;
-    border-radius: 16px;
-    transition-property: background-color;
-    transition-duration: .3s;
+    width: 33%;
+    height: 100%;
+    box-sizing: border-box; }
+  #manage-menu #sound_to_sort {
+    text-align: left;
+    display: inline-block;
+    float: left;
+    width: 33%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    box-sizing: border-box; }
+    #manage-menu #sound_to_sort.selected {
+      background-color: #ccc; }
+  #manage-menu .button {
+    width: 55px;
+    height: 55px;
+    background-image: url("../img/buttons_sprite.png");
+    background-size: cover;
+    display: inline-block;
+    position: relative;
     /* RED */
     /* ORANGE */
     /* YELLOW */
@@ -708,62 +704,63 @@ header {
     /* DARK  BLUE */
     /* CLEAR BLUE */
     /* PURPLE */ }
-    #sorting_colors .pool[type="type-1"] {
+    #manage-menu .button[type="type-1"] {
       background-color: rgba(235, 56, 22, 0.8); }
-    #sorting_colors .pool[type="type-2"] {
+    #manage-menu .button[type="type-2"] {
       background-color: rgba(255, 120, 0, 0.8); }
-    #sorting_colors .pool[type="type-3"] {
+    #manage-menu .button[type="type-3"] {
       background-color: rgba(255, 228, 0, 0.8); }
-    #sorting_colors .pool[type="type-4"] {
+    #manage-menu .button[type="type-4"] {
       background-color: rgba(170, 244, 0, 0.8); }
-    #sorting_colors .pool[type="type-5"] {
+    #manage-menu .button[type="type-5"] {
       background-color: rgba(0, 161, 52, 0.8); }
-    #sorting_colors .pool[type="type-6"] {
+    #manage-menu .button[type="type-6"] {
       background-color: rgba(0, 133, 255, 0.8); }
-    #sorting_colors .pool[type="type-7"] {
+    #manage-menu .button[type="type-7"] {
       background-color: rgba(132, 214, 255, 0.8); }
-    #sorting_colors .pool[type="type-8"] {
+    #manage-menu .button[type="type-8"] {
       background-color: rgba(155, 0, 128, 0.8); }
-
-#sorted_sounds {
-  text-align: right;
-  display: inline-block;
-  float: left;
-  width: 33%;
-  height: 100%;
-  box-sizing: border-box; }
-
-#sorted_sounds .button, #sound_to_sort .button {
-  width: 55px;
-  height: 55px;
-  background-image: url("../img/buttons_sprite.png");
-  background-size: cover;
-  display: inline-block;
-  position: relative;
-  /* RED */
-  /* ORANGE */
-  /* YELLOW */
-  /* CLEAR GREEN */
-  /* DARK  GREEN */
-  /* DARK  BLUE */
-  /* CLEAR BLUE */
-  /* PURPLE */ }
-  #sorted_sounds .button[type="type-1"], #sound_to_sort .button[type="type-1"] {
-    background-color: rgba(235, 56, 22, 0.8); }
-  #sorted_sounds .button[type="type-2"], #sound_to_sort .button[type="type-2"] {
-    background-color: rgba(255, 120, 0, 0.8); }
-  #sorted_sounds .button[type="type-3"], #sound_to_sort .button[type="type-3"] {
-    background-color: rgba(255, 228, 0, 0.8); }
-  #sorted_sounds .button[type="type-4"], #sound_to_sort .button[type="type-4"] {
-    background-color: rgba(170, 244, 0, 0.8); }
-  #sorted_sounds .button[type="type-5"], #sound_to_sort .button[type="type-5"] {
-    background-color: rgba(0, 161, 52, 0.8); }
-  #sorted_sounds .button[type="type-6"], #sound_to_sort .button[type="type-6"] {
-    background-color: rgba(0, 133, 255, 0.8); }
-  #sorted_sounds .button[type="type-7"], #sound_to_sort .button[type="type-7"] {
-    background-color: rgba(132, 214, 255, 0.8); }
-  #sorted_sounds .button[type="type-8"], #sound_to_sort .button[type="type-8"] {
-    background-color: rgba(155, 0, 128, 0.8); }
+  #manage-menu #sorting_colors {
+    display: inline-block;
+    float: left;
+    width: 33%;
+    height: 100%;
+    box-sizing: border-box; }
+    #manage-menu #sorting_colors .pool {
+      display: inline-block;
+      width: 50%;
+      height: 25%;
+      margin: 0;
+      padding: 0;
+      float: left;
+      border: solid 3px #ffffff;
+      border-radius: 16px;
+      transition-property: background-color;
+      transition-duration: .3s;
+      /* RED */
+      /* ORANGE */
+      /* YELLOW */
+      /* CLEAR GREEN */
+      /* DARK  GREEN */
+      /* DARK  BLUE */
+      /* CLEAR BLUE */
+      /* PURPLE */ }
+      #manage-menu #sorting_colors .pool[type="type-1"] {
+        background-color: rgba(235, 56, 22, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-2"] {
+        background-color: rgba(255, 120, 0, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-3"] {
+        background-color: rgba(255, 228, 0, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-4"] {
+        background-color: rgba(170, 244, 0, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-5"] {
+        background-color: rgba(0, 161, 52, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-6"] {
+        background-color: rgba(0, 133, 255, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-7"] {
+        background-color: rgba(132, 214, 255, 0.8); }
+      #manage-menu #sorting_colors .pool[type="type-8"] {
+        background-color: rgba(155, 0, 128, 0.8); }
 
 .square_btn {
   background-image: url("../img/buttons_sprite.png");

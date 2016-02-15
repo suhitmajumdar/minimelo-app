@@ -40,7 +40,7 @@ define(function( require ) {
 			});
 
 		}).then(function(e){
-			var arrayBuffer=e.target.result;
+			var arrayBuffer = e.target.result;
 			return new Promise(function(resolve,reject){
 				audioCtx.decodeAudioData(arrayBuffer,resolve,reject);  
 			});

@@ -22,13 +22,17 @@ define(function( require ){
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
+
+		this.songs.sort(compare);
+
 		for (var index in this.songs) {
 			var song = this.songs[index];
 			if(this.songsByType[song.type] == undefined)
 				this.songsByType[song.type] = [];
 			this.songsByType[song.type].push(song);
 		}
-	} 
+
+	}
 
 	ResourcesHandler.prototype.playPreview = function(idSong) {
 

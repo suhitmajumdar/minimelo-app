@@ -62,16 +62,14 @@ define(function( require ) {
 			}
 		}
 
-		recordButton.onclick=function(event){
+		recordButton.onclick = function(event){
 			if($(this).attr("action")=="record"){
 				self.record.startRecord();
 				$(this).attr("action","stop");
-				//Give class "recording" to the buttons container
 				$(this).parent().addClass("recording");
 			}else{
 				self.record.stopRecord();
 				$(this).attr("action","record");
-				//Removes class "recording" to the buttons container
 				$(this).parent().removeClass("recording");
 			}
 		}
@@ -159,7 +157,7 @@ define(function( require ) {
 
 	EventsHandler.prototype.initModalEvents = function(){
 
-		$(".validate_btn.button").click(function(){
+		$(".validate_btn.button").on('click', function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
@@ -176,7 +174,7 @@ define(function( require ) {
 				buttonToReplace.removeClass('disabled');
 
 				ResourcesHandler.loadSong(dataIdSong);
-			
+
 			});
 
 		});

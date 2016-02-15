@@ -30,6 +30,10 @@ $(document).ready(function() {
 				Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
 					Resources.postProcessing();
 					uiHandler.initSoundElements();
+
+					$("*[data-dismiss=modal]").trigger( "click" );
+					$("#general-menu-button").trigger( "click");
+					$("[menu=manage-menu]").trigger( "click");
 				});
 
 				var eventsHandler = new EventsHandler(uiHandler, record);
