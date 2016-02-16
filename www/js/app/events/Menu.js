@@ -1,13 +1,19 @@
 define(function( require ) {
 
 	var CollectionEvents = require('events/CollectionEvents');
+	var ResourcesHandler = require('app/ResourcesHandler');
 
-	function Menu( uiHandler ) {
+
+	var ui = null
+	var events = null
+	var modifiedCollection = false;
+	function Menu( eventsHandler ) {
+
 		this.selectedSaveToLoad = null;
-		this.ui = uiHandler;
+		events = eventsHandler;
+		ui = eventsHandler.uiHandler;
 
 		var self = this;
-
 		$('#general-menu-button')       .click( self.openGeneralMenu );
 		$('#general-menu-help')         .click( self.openGeneralMenuHelp );
 		$('#general-menu-overlay')      .click( self.closeGeneralMenu );
@@ -15,8 +21,6 @@ define(function( require ) {
 		$('#export-menu-validate')      .click( self.exportComposition );
 		$('#load-menu-validate')        .click( self.loadSaveMenu );
 		$('#new-menu-validate')         .click( self.newComposition );
-		$('#micro-menu-validate')       .click( self.launchRecordView );
-		$('#manage-menu-validate')      .click( self.launchSoundManagementView );
 		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
 	}
 
@@ -26,18 +30,18 @@ define(function( require ) {
 	}
 
 	Menu.prototype.openGeneralMenuHelp = function(){
-		if($('#general-menu').hasClass('helpActive')){
-			$('#general-menu').removeClass('helpActive');
-		}
-		else{
-			$('#general-menu').addClass('helpActive');
-		}
+		$('#general-menu').toggleClass('helpActive');
 	}
 
-	Menu.prototype.closeGeneralMenu = function(){
+	Menu.prototype.closeGeneralMenu = function() {
 		$('#general-menu').removeClass('helpActive').removeClass('active');
 		$('#general-menu-overlay').removeClass('active');
 		$('.sub-menu').removeClass('active');
+
+		if ( modifiedCollection == true ) {
+			reloadSoundElements();
+			modifiedCollection = false;
+		}
 	}
 
 	Menu.prototype.getSaveName = function(){
@@ -46,12 +50,11 @@ define(function( require ) {
 	}
 
 	Menu.prototype.loadSaveMenu = function(){
-		var name = this.getSaveName();
-		$('#save-menu-input').val( name );
+		$('#save-menu-input').val( this.getSaveName() );
 	}
 
 	Menu.prototype.isAvailableSaveName = function(name){
-		alert("Penser à vérivier si un nom est déjà pris dans les sauvegardes")
+		alert("Penser à vérizier si un nom est déjà pris dans les sauvegardes")
 		return true;
 	}
 
@@ -109,22 +112,20 @@ define(function( require ) {
 
 	Menu.prototype.loadLoadMenu = function (){
 		var fileList = this.getSavedCompositionList();
-		var domList = $('#load-menu-list');
-		domList.empty();
+		var domList = $('#load-menu-list').empty();
+
 		for(var i=0; i<fileList.length; i++){
 			var s = $('<li class="load-menu-save">'+fileList[i]+'</li>');
 			s.appendTo(domList);
 		}
+
 		$('.load-menu-save').click(function(){
+			$('.load-menu-save, #load-menu-validate').removeClass('active');
 			if( $(this).hasClass('active') ){
-				$('.load-menu-save').removeClass('active');
-				$('#load-menu-validate').removeClass('active');
 				this.selectedSaveToLoad = null;
 			}
 			else{
-				$('.load-menu-save').removeClass('active');
 				$(this).addClass('active');
-				$('#load-menu-validate').addClass('active');
 				this.selectedSaveToLoad = $(this).text();
 			}
 		});
@@ -155,12 +156,14 @@ define(function( require ) {
 
 	Menu.prototype.openSubMenu = function (menuName){
 		$('.sub-menu').removeClass('active');
+		$('#general-menu *[menu]').addClass('active');
+		$('#general-menu *[menu=' + menuName + ']').addClass('active');
 		$('#'+menuName).addClass('active');
 		this.loadSubMenu( menuName );
 	}
 
 	Menu.prototype.displayCollectionManager = function () {
-		this.ui.initCollectionManager();
+		ui.initCollectionManager();
 		new CollectionEvents();
 	}
 
@@ -182,8 +185,16 @@ define(function( require ) {
 				break;
 			case 'manage-menu':
 				this.displayCollectionManager();
+				modifiedCollection = true;
 				break;
 		}
+	}
+
+	function reloadSoundElements () {
+		ResourcesHandler.postProcessing();
+		ui.reloadSoundElements();
+		events.initSoundEvents();
+
 	}
 
 	return Menu;

@@ -48,7 +48,7 @@ Date.timestamp = function() {
 }
 
 // Compare one song to another to sort them by type
-function compare(a, b) {
+function byType(a, b) {
 	if (a.type < b.type)
 		return -1;
 	else if (a.type > b.type)
@@ -56,6 +56,16 @@ function compare(a, b) {
 	else 
 		return 0;
 }
+
+function byUrl(a, b) {
+	if (a.url < b.url)
+		return -1;
+	else if (a.url > b.url)
+		return 1;
+	else 
+		return 0;
+}
+
 jQuery.fn.extend({
     openQuickSelect: function () {
         $(".qsopen").removeClass('qsopen');

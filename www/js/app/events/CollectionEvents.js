@@ -29,6 +29,9 @@ define( function (require) {
 			this.ontouchstart = function(event) {
 				$(this).addClass('inDrag');
 				$('#manage-menu > div').append($(this));
+				this.style.left = this.getBoundingClientRect().left;	
+				this.style.top = this.getBoundingClientRect().top;	
+
 			}
 			
 			this.ontouchend = function(event) {
