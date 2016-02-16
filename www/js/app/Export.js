@@ -118,6 +118,8 @@ define(function( require ) {
           fileEntry.createWriter(function(writer){
             writer.onwriteend=function(evt){
               console.log("audio enregistre "+nameComposition);
+              $("#success-export").addClass("active");
+              $("#traitement-popup").removeClass("active");
             }
               writer.write(blobMp3);
 

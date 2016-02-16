@@ -22,7 +22,7 @@ define( function ( require ) {
 
 		for( var type in collection ) {
 			for ( var sound in collection[type] ) {
-				this.addSoundButtonToElement(collection[type][sound] , $('#sorted_sounds'));
+				addSoundButtonToElement(collection[type][sound] , $('#sorted_sounds'));
 			}	
 		}
 	}
@@ -34,13 +34,13 @@ define( function ( require ) {
 
 		for ( var type in collection ) {
 			for ( var sound in collection[type] ) {
-				this.addSoundButtonToElement(collection[type][sound] , $('#sound_to_sort'));
+				addSoundButtonToElement(collection[type][sound] , $('#sound_to_sort'));
 			}	
 		}
 	}
 
 
-	CollectionUi.prototype.addSoundButtonToElement = function ( sound, element ) {
+	function addSoundButtonToElement ( sound, element ) {
 		var newButton = $('<div class="button" type="' + sound.type + '" data-song-id="' + sound.id + '"></div>');
 
 		element.append(newButton);

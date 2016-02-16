@@ -50,10 +50,12 @@
               <div id="timeline">
                 <div id="line"></div>
                 <div id="timeInfo"></div>
-                <div id="track-1" class="track"></div>
-                <div id="track-2" class="track"></div>
-                <div id="track-3" class="track"></div>
-                <div id="track-4" class="track"></div>
+                <div id="tracks">
+                  <div id="track-1" class="track"></div>
+                  <div id="track-2" class="track"></div>
+                  <div id="track-3" class="track"></div>
+                  <div id="track-4" class="track"></div>
+                </div>
               </div>
         
 
@@ -157,12 +159,20 @@
         <p>Veux-tu commencer une nouvelle composition?</p>
         <div id="new-menu-validate" class="round_btn validate_btn"></div>
       </div>
+      <div id="success-export" class="sub-menu">
+        <h2>Success</h2>
+        <div id="success-export-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="traitement-popup" class="sub-menu">
+        <h2>Traitement en cours ...</h2>
+        <div id="success-traitement-validate" class="loader1"></div>
+      </div>
       <!-- <div id="micro-menu" class="sub-menu">
         <p>MICRO</p>
       </div> -->
       <div id="manage-menu" class="sub-menu">
         <div>
-          <div id="sound_to_sort">
+          <div id="sound_to_sort" class="sorter">
             <div class="square_btn toSort"></div>
             <div class="square_btn toSort"></div>
             <div class="square_btn toSort"></div>
@@ -172,7 +182,7 @@
             <div class="square_btn toSort"></div>
           </div>
 
-          <div id="sorting_colors">
+          <div id="sorting_colors" class="sorter">
             <div type="type-1" class="pool"></div>
             <div type="type-2" class="pool"></div>
             <div type="type-3" class="pool"></div>
@@ -183,7 +193,7 @@
             <div type="type-8" class="pool"></div>
           </div>
 
-          <div id="sorted_sounds">
+          <div id="sorted_sounds" class="sorter">
             <div class="square_btn toSort" type="type-1"></div>
             <div class="square_btn toSort" type="type-5"></div>
             <div class="square_btn toSort" type="type-8"></div>

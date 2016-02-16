@@ -36,7 +36,7 @@ $(document).ready(function() {
 						eventsHandler.soundEvents.initEventsButtonsSong();
 						uiHandler.hideLoader();
 					});
-
+					
 				});
 				
 				uiHandler.initUI();

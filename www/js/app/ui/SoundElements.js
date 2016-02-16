@@ -8,6 +8,14 @@ define(function( require ) {
 		this.initButtonsModal();
 	}
 
+	SoundElements.prototype.reload = function () {
+		$("#buttons-songs").empty();
+		$("#choose-song").empty();
+
+		this.initButtonsSongs();
+		this.initButtonsModal();
+	}
+
 	SoundElements.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
@@ -42,7 +50,7 @@ define(function( require ) {
 
 			for ( var song in songs )
 			{
-				var buttonSong=$('<div class="button"></div>');
+				var buttonSong = $('<div class="button"></div>');
 				buttonSong.attr('type',type);
 				buttonSong.attr('data-song-id', songs[song].id);
 
@@ -55,6 +63,7 @@ define(function( require ) {
 
 			line.css('width',songs.length*$('#choose-song .button').outerWidth());
 
+			//todo : get this out
 			cloneLine.addClass('quick-select');
 			cloneLine.append($('<div class="round_btn validate_btn"></div>'));
 
