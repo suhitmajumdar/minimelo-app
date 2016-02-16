@@ -10,14 +10,20 @@ define(function( require ) {
 
 		$('#general-menu-button')       .click( self.openGeneralMenu );
 		$('#general-menu-help')         .click( self.openGeneralMenuHelp );
-		$('#general-menu-overlay')      .click( self.closeGeneralMenu );
+
+		$('#general-menu-overlay').click(function(){
+			if(!$("#traitement-popup").hasClass("active"))
+				self.closeGeneralMenu();
+		});
+
 		$('#save-menu-validate')        .click( self.saveComposition )
 		$('#export-menu-validate')      .click( self.exportComposition );
 		$('#load-menu-validate')        .click( self.loadSaveMenu );
-		$('#new-menu-validate')         .click( self.newComposition );
+		$('#new-menu-validate')         .click( function(){ self.newComposition() });
 		$('#micro-menu-validate')       .click( self.launchRecordView );
 		$('#manage-menu-validate')      .click( self.launchSoundManagementView );
 		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
+		$("#success-export-validate").click(self.closeGeneralMenu);
 	}
 
 	Menu.prototype.openGeneralMenu = function(){
@@ -93,6 +99,8 @@ define(function( require ) {
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
 		if(name!=null && name!=""){
+			$("#traitement-popup").addClass("active");
+			$("#export-menu").removeClass("active");
 			var Export = require('app/Export');
 			var exportTimeline = new Export();
             exportTimeline.exportMp3(name+".mp3");
@@ -137,8 +145,11 @@ define(function( require ) {
 	}
 
 	Menu.prototype.newComposition = function (){
-		alert('Penser à vider la timeline ET effacer les noms de save et d\'export')
 		//On vide la timeline
+		$(".track").empty();
+		$("#export-menu-input").val("");
+		this.closeGeneralMenu();
+
 		//On efface les noms de sauvegarde et d'exportation
 	}
 

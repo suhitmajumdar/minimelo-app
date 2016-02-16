@@ -72,6 +72,7 @@ define(function( require ) {
 		}
 
 		saveRecord.onclick=function(){
+			$("#traitement-popup").addClass("active");
 			self.record.saveRecord();
 		}
 
