@@ -153,6 +153,20 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			$(this).css('width',self.ratioSecondPixel*song.getDuration());
 			$(this).css('left',self.ratioSecondPixel*$(this).position().left/lastRatio);
 		});
+		this.setTimelapse();
+	}
+
+	Timeline.prototype.setTimelapse=function(){
+		$('#timeInfo').css('width', this.getDurationInPx());
+		$('#timeInfo').empty();
+		var everyTwentySecond=this.secondsToPxInTimeline(20);
+		var second=0;
+		for (var i = 0; i < this.getDurationInPx(); i+=everyTwentySecond) {
+			var lapseLine=$('<div class="lapseLine"><span>'+second+'</span></div>');
+			lapseLine.css('left',i);
+			$('#timeInfo').append(lapseLine);
+			second+=20;
+		};
 	}
 
 	Timeline.prototype.getDurationInPx=function(){

@@ -15,6 +15,7 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initTracks();
 		this.initRecorder();
+		Timeline.setTimelapse();
 	} 
 
 	UiHandler.prototype.initCollectionManager = function () {
@@ -40,6 +41,10 @@ define(function( require ) {
 	UiHandler.prototype.initTracks = function () {
 		$('.track').css('width', Timeline.getDurationInPx());
 	}
+
+	// UiHandler.prototype.setTimelapse = function () {
+	// 	Timeline.setTimelapse();
+	// }
 
 	UiHandler.prototype.initRecorder=function(){
 		

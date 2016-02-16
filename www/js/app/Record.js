@@ -220,7 +220,7 @@ define(function( require ) {
 			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
-			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/indefini", function (fileSystem) {
 
 				fileSystem.getFile(fileName, {create: true, exclusive: false}, function(fileEntry){
 								

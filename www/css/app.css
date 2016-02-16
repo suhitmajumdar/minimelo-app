@@ -135,31 +135,23 @@ ul {
     .loader .button.active {
       background-position: 0 33%; }
     .loader .button[type="type-1"] {
-      -webkit-animation: load_one 3s infinite;
-      background-color: rgba(235, 56, 22, 0.8); }
+      -webkit-animation: load_one 3s infinite; }
     .loader .button[type="type-2"] {
-      -webkit-animation: load_two 3s infinite;
-      background-color: rgba(255, 120, 0, 0.8); }
+      -webkit-animation: load_two 3s infinite; }
     .loader .button[type="type-3"] {
-      -webkit-animation: load_three 3s infinite;
-      background-color: rgba(255, 228, 0, 0.8); }
+      -webkit-animation: load_three 3s infinite; }
     .loader .button[type="type-4"] {
-      -webkit-animation: load_four 3s infinite;
-      background-color: rgba(170, 244, 0, 0.8); }
+      -webkit-animation: load_four 3s infinite; }
     .loader .button[type="type-5"] {
-      -webkit-animation: load_five 3s infinite;
-      background-color: rgba(0, 161, 52, 0.8); }
+      -webkit-animation: load_five 3s infinite; }
     .loader .button[type="type-6"] {
-      -webkit-animation: load_six 3s infinite;
-      background-color: rgba(0, 133, 255, 0.8); }
+      -webkit-animation: load_six 3s infinite; }
     .loader .button[type="type-7"] {
-      -webkit-animation: load_seven 3s infinite;
-      background-color: rgba(132, 214, 255, 0.8); }
+      -webkit-animation: load_seven 3s infinite; }
     .loader .button[type="type-8"] {
-      -webkit-animation: load_eight 3s infinite;
-      background-color: rgba(155, 0, 128, 0.8); }
+      -webkit-animation: load_eight 3s infinite; }
 
-.song, .button {
+.button, .song, .pool {
   /* RED */
   /* ORANGE */
   /* YELLOW */
@@ -168,24 +160,28 @@ ul {
   /* DARK  BLUE */
   /* CLEAR BLUE */
   /* PURPLE */ }
-  .song.todelete, .button.todelete {
-    opacity: 0.5; }
-  .song[type="type-1"], .button[type="type-1"] {
+  .button[type="type-1"], .song[type="type-1"], .pool[type="type-1"] {
     background-color: rgba(235, 56, 22, 0.8); }
-  .song[type="type-2"], .button[type="type-2"] {
+  .button[type="type-2"], .song[type="type-2"], .pool[type="type-2"] {
     background-color: rgba(255, 120, 0, 0.8); }
-  .song[type="type-3"], .button[type="type-3"] {
+  .button[type="type-3"], .song[type="type-3"], .pool[type="type-3"] {
     background-color: rgba(255, 228, 0, 0.8); }
-  .song[type="type-4"], .button[type="type-4"] {
+  .button[type="type-4"], .song[type="type-4"], .pool[type="type-4"] {
     background-color: rgba(170, 244, 0, 0.8); }
-  .song[type="type-5"], .button[type="type-5"] {
+  .button[type="type-5"], .song[type="type-5"], .pool[type="type-5"] {
     background-color: rgba(0, 161, 52, 0.8); }
-  .song[type="type-6"], .button[type="type-6"] {
+  .button[type="type-6"], .song[type="type-6"], .pool[type="type-6"] {
     background-color: rgba(0, 133, 255, 0.8); }
-  .song[type="type-7"], .button[type="type-7"] {
+  .button[type="type-7"], .song[type="type-7"], .pool[type="type-7"] {
     background-color: rgba(132, 214, 255, 0.8); }
-  .song[type="type-8"], .button[type="type-8"] {
+  .button[type="type-8"], .song[type="type-8"], .pool[type="type-8"] {
     background-color: rgba(155, 0, 128, 0.8); }
+
+.button.disabled {
+  background-color: grey; }
+
+.button.active {
+  background-position: 0 33%; }
 
 .buttons_left .button, #choose-song .button {
   background-image: url("../img/buttons_sprite.png");
@@ -193,17 +189,8 @@ ul {
   width: 57px;
   height: 57px;
   background-repeat: no-repeat;
-  background-position-y: -1px;
   position: relative;
-  font-size: 0px;
-  /* RED */
-  /* ORANGE */
-  /* YELLOW */
-  /* CLEAR GREEN */
-  /* DARK  GREEN */
-  /* DARK  BLUE */
-  /* CLEAR BLUE */
-  /* PURPLE */ }
+  font-size: 0px; }
   .buttons_left .button span, #choose-song .button span {
     font-size: 32px;
     font-family: "Orange";
@@ -212,26 +199,6 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
-  .buttons_left .button[type="type-1"], #choose-song .button[type="type-1"] {
-    background-color: rgba(235, 56, 22, 0.8); }
-  .buttons_left .button[type="type-2"], #choose-song .button[type="type-2"] {
-    background-color: rgba(255, 120, 0, 0.8); }
-  .buttons_left .button[type="type-3"], #choose-song .button[type="type-3"] {
-    background-color: rgba(255, 228, 0, 0.8); }
-  .buttons_left .button[type="type-4"], #choose-song .button[type="type-4"] {
-    background-color: rgba(170, 244, 0, 0.8); }
-  .buttons_left .button[type="type-5"], #choose-song .button[type="type-5"] {
-    background-color: rgba(0, 161, 52, 0.8); }
-  .buttons_left .button[type="type-6"], #choose-song .button[type="type-6"] {
-    background-color: rgba(0, 133, 255, 0.8); }
-  .buttons_left .button[type="type-7"], #choose-song .button[type="type-7"] {
-    background-color: rgba(132, 214, 255, 0.8); }
-  .buttons_left .button[type="type-8"], #choose-song .button[type="type-8"] {
-    background-color: rgba(155, 0, 128, 0.8); }
-  .buttons_left .button.active, #choose-song .button.active {
-    background-position: 0 33%; }
-  .buttons_left .button.disabled, #choose-song .button.disabled {
-    background-color: grey; }
 
 .app {
   width: 100%;
@@ -246,7 +213,8 @@ ul {
     overflow: visible;
     font-family: "Orange";
     margin: 0px;
-    padding: 10px; }
+    padding-top: 10px;
+    padding-bottom: 0px; }
   .app .panel {
     height: 100%;
     width: 100%;
@@ -279,33 +247,27 @@ ul {
     .app .song.inDrag {
       opacity: 0.7;
       z-index: 3; }
+    .app .song.todelete {
+      opacity: 0.5; }
     .app .song.songToPlace {
       /*-webkit-animation: songToDropAnimation 1s infinite;*/
       /*position: fixed;*/
       z-index: 4; }
     .app .song[type="type-1"] {
-      background-color: rgba(235, 56, 22, 0.8);
       border: 5px solid rgba(235, 56, 22, 0.8); }
     .app .song[type="type-2"] {
-      background-color: rgba(255, 120, 0, 0.8);
       border: 5px solid rgba(255, 120, 0, 0.8); }
     .app .song[type="type-3"] {
-      background-color: rgba(255, 228, 0, 0.8);
       border: 5px solid rgba(255, 228, 0, 0.8); }
     .app .song[type="type-4"] {
-      background-color: rgba(170, 244, 0, 0.8);
       border: 5px solid rgba(170, 244, 0, 0.8); }
     .app .song[type="type-5"] {
-      background-color: rgba(0, 161, 52, 0.8);
       border: 5px solid rgba(0, 161, 52, 0.8); }
     .app .song[type="type-6"] {
-      background-color: rgba(0, 133, 255, 0.8);
       border: 5px solid rgba(0, 133, 255, 0.8); }
     .app .song[type="type-7"] {
-      background-color: rgba(132, 214, 255, 0.8);
       border: 5px solid rgba(132, 214, 255, 0.8); }
     .app .song[type="type-8"] {
-      background-color: rgba(155, 0, 128, 0.8);
       border: 5px solid rgba(155, 0, 128, 0.8); }
     .app .song span {
       font-size: 32px;
@@ -361,6 +323,12 @@ header {
 #buttons-songs-modal .button {
   position: relative; }
 
+.main #timelapse-container {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+  height: 25px; }
+
 #timeline {
   width: 100%;
   overflow-x: auto;
@@ -369,6 +337,22 @@ header {
   max-height: 100%;
   height: 500px;
   background: #f4f6fe; }
+  #timeline #timeInfo {
+    background-color: white;
+    width: 400px;
+    height: 6%;
+    position: relative; }
+    #timeline #timeInfo .lapseLine {
+      height: 100%;
+      width: 1px;
+      background-color: black;
+      position: absolute; }
+      #timeline #timeInfo .lapseLine span {
+        margin-left: -7px;
+        position: absolute;
+        background-color: white; }
+      #timeline #timeInfo .lapseLine:first-of-type span {
+        margin-left: -1px; }
   #timeline::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -382,9 +366,7 @@ header {
   #timeline .track {
     border-top: 1px solid #3F496E;
     width: 400px;
-    height: 25%;
-    position: relative;
-    height: 25%;
+    height: 23.5%;
     position: relative; }
     #timeline .track:last-of-type {
       border-bottom: 1px solid #3F496E; }
@@ -491,8 +473,7 @@ header {
 
 /*---------*/
 #deck-buttons {
-  padding-top: 20px;
-  padding-bottom: 20px; }
+  padding-top: 10px; }
   #deck-buttons div:nth-of-type(3) {
     text-align: right; }
   #deck-buttons div:nth-of-type(1) p {
@@ -553,20 +534,20 @@ header {
     margin-top: 20px; }
 
 #general-menu-overlay {
-  content: "";
-  display: block;
-  width: 0%;
+  /* display: block; */
   height: 100%;
   background-color: transparent;
   position: absolute;
   top: 0px;
-  right: -100%;
+  right: 0px;
+  transition: transform;
   z-index: 2;
-  transition-duration: .5s; }
+  transform: translateX(100%);
+  transition-duration: 0.3s;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
   #general-menu-overlay.active {
-    width: 100%;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0.5); }
+    transform: translateX(0); }
 
 .sub-menu {
   position: absolute;
@@ -664,31 +645,7 @@ header {
     background-image: url("../img/buttons_sprite.png");
     background-size: cover;
     display: inline-block;
-    position: relative;
-    /* RED */
-    /* ORANGE */
-    /* YELLOW */
-    /* CLEAR GREEN */
-    /* DARK  GREEN */
-    /* DARK  BLUE */
-    /* CLEAR BLUE */
-    /* PURPLE */ }
-    #manage-menu .button[type="type-1"] {
-      background-color: rgba(235, 56, 22, 0.8); }
-    #manage-menu .button[type="type-2"] {
-      background-color: rgba(255, 120, 0, 0.8); }
-    #manage-menu .button[type="type-3"] {
-      background-color: rgba(255, 228, 0, 0.8); }
-    #manage-menu .button[type="type-4"] {
-      background-color: rgba(170, 244, 0, 0.8); }
-    #manage-menu .button[type="type-5"] {
-      background-color: rgba(0, 161, 52, 0.8); }
-    #manage-menu .button[type="type-6"] {
-      background-color: rgba(0, 133, 255, 0.8); }
-    #manage-menu .button[type="type-7"] {
-      background-color: rgba(132, 214, 255, 0.8); }
-    #manage-menu .button[type="type-8"] {
-      background-color: rgba(155, 0, 128, 0.8); }
+    position: relative; }
   #manage-menu #sorting_colors {
     display: inline-block;
     float: left;
@@ -705,31 +662,7 @@ header {
       border: solid 3px #ffffff;
       border-radius: 16px;
       transition-property: background-color;
-      transition-duration: .3s;
-      /* RED */
-      /* ORANGE */
-      /* YELLOW */
-      /* CLEAR GREEN */
-      /* DARK  GREEN */
-      /* DARK  BLUE */
-      /* CLEAR BLUE */
-      /* PURPLE */ }
-      #manage-menu #sorting_colors .pool[type="type-1"] {
-        background-color: rgba(235, 56, 22, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-2"] {
-        background-color: rgba(255, 120, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-3"] {
-        background-color: rgba(255, 228, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-4"] {
-        background-color: rgba(170, 244, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-5"] {
-        background-color: rgba(0, 161, 52, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-6"] {
-        background-color: rgba(0, 133, 255, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-7"] {
-        background-color: rgba(132, 214, 255, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-8"] {
-        background-color: rgba(155, 0, 128, 0.8); }
+      transition-duration: .3s; }
 
 .square_btn {
   background-image: url("../img/buttons_sprite.png");

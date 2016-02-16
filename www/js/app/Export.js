@@ -111,7 +111,7 @@ define(function( require ) {
       worker.onmessage = function( event ) {
         var blobMp3=event.data;
 
-        window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
+        window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/indefini", function (fileSystem) {
 
           fileSystem.getFile(nameComposition, {create: true, exclusive: false}, function(fileEntry){
                   
@@ -149,7 +149,7 @@ define(function( require ) {
       for (var k = 0; k < songsDiv.length; k++) {
         var songDiv   = songsDiv[k];
         var idSong    = $(songDiv).attr('data-song-id');
-        var song      = ResourcesHandler.songs[idSong];
+        var song      = ResourcesHandler.getSong(idSong);
         var xSong     = $(songDiv).position().left;
         var beginSong = Timeline.pxToSecondsInTimeline(xSong);
         

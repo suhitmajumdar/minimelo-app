@@ -19,6 +19,7 @@ define(function( require ){
 
 		this.sourceInPreview = null;
 		this.filesHandler    = new FilesHandler();
+		this.songInPreview   = null;
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
@@ -39,14 +40,18 @@ define(function( require ){
 		if(this.sourceInPreview != null) {
 			this.sourceInPreview.stop();
 		}
+		this.songInPreview=this.getSong(idSong);
 
-		if(this.getSong(idSong).buffer != null) {
+		if(this.songInPreview.buffer != null) {
 			this.sourceInPreview = this.getSong(idSong).play();
 		} else {
 			var self = this;
 
-			this.getSong(idSong).playForPreview().then( function(source) {
-				self.sourceInPreview = source;
+			this.songInPreview.loadForPreview().then( function(song) {
+				if(song==self.songInPreview){
+					self.sourceInPreview = song.play();
+				}
+				self.buffer=null;
 			});
 		}
 	}
