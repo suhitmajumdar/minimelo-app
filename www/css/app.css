@@ -135,57 +135,24 @@ ul {
     .loader .button.active {
       background-position: 0 33%; }
     .loader .button[type="type-1"] {
-      -webkit-animation: load_one 3s infinite;
-      background-color: rgba(235, 56, 22, 0.8); }
+      -webkit-animation: load_one 3s infinite; }
     .loader .button[type="type-2"] {
-      -webkit-animation: load_two 3s infinite;
-      background-color: rgba(255, 120, 0, 0.8); }
+      -webkit-animation: load_two 3s infinite; }
     .loader .button[type="type-3"] {
-      -webkit-animation: load_three 3s infinite;
-      background-color: rgba(255, 228, 0, 0.8); }
+      -webkit-animation: load_three 3s infinite; }
     .loader .button[type="type-4"] {
-      -webkit-animation: load_four 3s infinite;
-      background-color: rgba(170, 244, 0, 0.8); }
+      -webkit-animation: load_four 3s infinite; }
     .loader .button[type="type-5"] {
-      -webkit-animation: load_five 3s infinite;
-      background-color: rgba(0, 161, 52, 0.8); }
+      -webkit-animation: load_five 3s infinite; }
     .loader .button[type="type-6"] {
-      -webkit-animation: load_six 3s infinite;
-      background-color: rgba(0, 133, 255, 0.8); }
+      -webkit-animation: load_six 3s infinite; }
     .loader .button[type="type-7"] {
-      -webkit-animation: load_seven 3s infinite;
-      background-color: rgba(132, 214, 255, 0.8); }
+      -webkit-animation: load_seven 3s infinite; }
     .loader .button[type="type-8"] {
-      -webkit-animation: load_eight 3s infinite;
-      background-color: rgba(155, 0, 128, 0.8); }
+      -webkit-animation: load_eight 3s infinite; }
 
-.song, .button {
-  /* RED */
-  /* ORANGE */
-  /* YELLOW */
-  /* CLEAR GREEN */
-  /* DARK  GREEN */
-  /* DARK  BLUE */
-  /* CLEAR BLUE */
-  /* PURPLE */ }
-  .song.todelete, .button.todelete {
-    opacity: 0.5; }
-  .song[type="type-1"], .button[type="type-1"] {
-    background-color: rgba(235, 56, 22, 0.8); }
-  .song[type="type-2"], .button[type="type-2"] {
-    background-color: rgba(255, 120, 0, 0.8); }
-  .song[type="type-3"], .button[type="type-3"] {
-    background-color: rgba(255, 228, 0, 0.8); }
-  .song[type="type-4"], .button[type="type-4"] {
-    background-color: rgba(170, 244, 0, 0.8); }
-  .song[type="type-5"], .button[type="type-5"] {
-    background-color: rgba(0, 161, 52, 0.8); }
-  .song[type="type-6"], .button[type="type-6"] {
-    background-color: rgba(0, 133, 255, 0.8); }
-  .song[type="type-7"], .button[type="type-7"] {
-    background-color: rgba(132, 214, 255, 0.8); }
-  .song[type="type-8"], .button[type="type-8"] {
-    background-color: rgba(155, 0, 128, 0.8); }
+.song.todelete, .button.todelete {
+  opacity: 0.5; }
 
 .buttons_left .button, #choose-song .button {
   background-image: url("../img/buttons_sprite.png");
@@ -195,15 +162,7 @@ ul {
   background-repeat: no-repeat;
   background-position-y: -1px;
   position: relative;
-  font-size: 0px;
-  /* RED */
-  /* ORANGE */
-  /* YELLOW */
-  /* CLEAR GREEN */
-  /* DARK  GREEN */
-  /* DARK  BLUE */
-  /* CLEAR BLUE */
-  /* PURPLE */ }
+  font-size: 0px; }
   .buttons_left .button span, #choose-song .button span {
     font-size: 32px;
     font-family: "Orange";
@@ -212,22 +171,6 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
-  .buttons_left .button[type="type-1"], #choose-song .button[type="type-1"] {
-    background-color: rgba(235, 56, 22, 0.8); }
-  .buttons_left .button[type="type-2"], #choose-song .button[type="type-2"] {
-    background-color: rgba(255, 120, 0, 0.8); }
-  .buttons_left .button[type="type-3"], #choose-song .button[type="type-3"] {
-    background-color: rgba(255, 228, 0, 0.8); }
-  .buttons_left .button[type="type-4"], #choose-song .button[type="type-4"] {
-    background-color: rgba(170, 244, 0, 0.8); }
-  .buttons_left .button[type="type-5"], #choose-song .button[type="type-5"] {
-    background-color: rgba(0, 161, 52, 0.8); }
-  .buttons_left .button[type="type-6"], #choose-song .button[type="type-6"] {
-    background-color: rgba(0, 133, 255, 0.8); }
-  .buttons_left .button[type="type-7"], #choose-song .button[type="type-7"] {
-    background-color: rgba(132, 214, 255, 0.8); }
-  .buttons_left .button[type="type-8"], #choose-song .button[type="type-8"] {
-    background-color: rgba(155, 0, 128, 0.8); }
   .buttons_left .button.active, #choose-song .button.active {
     background-position: 0 33%; }
   .buttons_left .button.disabled, #choose-song .button.disabled {
@@ -265,15 +208,7 @@ ul {
     box-sizing: border-box;
     background-image: url("../img/texture_crayon-1.png");
     background-repeat-x: repeat;
-    border-radius: 3px;
-    /* RED */
-    /* ORANGE */
-    /* YELLOW */
-    /* CLEAR GREEN */
-    /* DARK  GREEN */
-    /* DARK  BLUE */
-    /* CLEAR BLUE */
-    /* PURPLE */ }
+    border-radius: 3px; }
     .app .song.active {
       opacity: 0.6; }
     .app .song.inDrag {
@@ -284,28 +219,20 @@ ul {
       /*position: fixed;*/
       z-index: 4; }
     .app .song[type="type-1"] {
-      background-color: rgba(235, 56, 22, 0.8);
       border: 5px solid rgba(235, 56, 22, 0.8); }
     .app .song[type="type-2"] {
-      background-color: rgba(255, 120, 0, 0.8);
       border: 5px solid rgba(255, 120, 0, 0.8); }
     .app .song[type="type-3"] {
-      background-color: rgba(255, 228, 0, 0.8);
       border: 5px solid rgba(255, 228, 0, 0.8); }
     .app .song[type="type-4"] {
-      background-color: rgba(170, 244, 0, 0.8);
       border: 5px solid rgba(170, 244, 0, 0.8); }
     .app .song[type="type-5"] {
-      background-color: rgba(0, 161, 52, 0.8);
       border: 5px solid rgba(0, 161, 52, 0.8); }
     .app .song[type="type-6"] {
-      background-color: rgba(0, 133, 255, 0.8);
       border: 5px solid rgba(0, 133, 255, 0.8); }
     .app .song[type="type-7"] {
-      background-color: rgba(132, 214, 255, 0.8);
       border: 5px solid rgba(132, 214, 255, 0.8); }
     .app .song[type="type-8"] {
-      background-color: rgba(155, 0, 128, 0.8);
       border: 5px solid rgba(155, 0, 128, 0.8); }
     .app .song span {
       font-size: 32px;
@@ -425,6 +352,7 @@ header {
     overflow-x: auto;
     width: 100%; }
     #songsSelector #choose-song .container-line > div[type] {
+      background-color: transparent;
       display: inline-block; }
       #songsSelector #choose-song .container-line > div[type] .button {
         padding: 10px; }
@@ -664,31 +592,7 @@ header {
     background-image: url("../img/buttons_sprite.png");
     background-size: cover;
     display: inline-block;
-    position: relative;
-    /* RED */
-    /* ORANGE */
-    /* YELLOW */
-    /* CLEAR GREEN */
-    /* DARK  GREEN */
-    /* DARK  BLUE */
-    /* CLEAR BLUE */
-    /* PURPLE */ }
-    #manage-menu .button[type="type-1"] {
-      background-color: rgba(235, 56, 22, 0.8); }
-    #manage-menu .button[type="type-2"] {
-      background-color: rgba(255, 120, 0, 0.8); }
-    #manage-menu .button[type="type-3"] {
-      background-color: rgba(255, 228, 0, 0.8); }
-    #manage-menu .button[type="type-4"] {
-      background-color: rgba(170, 244, 0, 0.8); }
-    #manage-menu .button[type="type-5"] {
-      background-color: rgba(0, 161, 52, 0.8); }
-    #manage-menu .button[type="type-6"] {
-      background-color: rgba(0, 133, 255, 0.8); }
-    #manage-menu .button[type="type-7"] {
-      background-color: rgba(132, 214, 255, 0.8); }
-    #manage-menu .button[type="type-8"] {
-      background-color: rgba(155, 0, 128, 0.8); }
+    position: relative; }
   #manage-menu #sorting_colors {
     display: inline-block;
     float: left;
@@ -705,31 +609,31 @@ header {
       border: solid 3px #ffffff;
       border-radius: 16px;
       transition-property: background-color;
-      transition-duration: .3s;
-      /* RED */
-      /* ORANGE */
-      /* YELLOW */
-      /* CLEAR GREEN */
-      /* DARK  GREEN */
-      /* DARK  BLUE */
-      /* CLEAR BLUE */
-      /* PURPLE */ }
-      #manage-menu #sorting_colors .pool[type="type-1"] {
-        background-color: rgba(235, 56, 22, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-2"] {
-        background-color: rgba(255, 120, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-3"] {
-        background-color: rgba(255, 228, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-4"] {
-        background-color: rgba(170, 244, 0, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-5"] {
-        background-color: rgba(0, 161, 52, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-6"] {
-        background-color: rgba(0, 133, 255, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-7"] {
-        background-color: rgba(132, 214, 255, 0.8); }
-      #manage-menu #sorting_colors .pool[type="type-8"] {
-        background-color: rgba(155, 0, 128, 0.8); }
+      transition-duration: .3s; }
+
+[type="type-1"] {
+  background-color: rgba(235, 56, 22, 0.8); }
+
+[type="type-2"] {
+  background-color: rgba(255, 120, 0, 0.8); }
+
+[type="type-3"] {
+  background-color: rgba(255, 228, 0, 0.8); }
+
+[type="type-4"] {
+  background-color: rgba(170, 244, 0, 0.8); }
+
+[type="type-5"] {
+  background-color: rgba(0, 161, 52, 0.8); }
+
+[type="type-6"] {
+  background-color: rgba(0, 133, 255, 0.8); }
+
+[type="type-7"] {
+  background-color: rgba(132, 214, 255, 0.8); }
+
+[type="type-8"] {
+  background-color: rgba(155, 0, 128, 0.8); }
 
 .square_btn {
   background-image: url("../img/buttons_sprite.png");
