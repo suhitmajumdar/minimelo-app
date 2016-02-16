@@ -23,6 +23,10 @@ define(function( require ) {
 		this.soundEvents.initEventsButtonsSong();
 	}
 
+	EventsHandler.prototype.initPanelsShowerEvent = function () {
+		
+	}
+
 	EventsHandler.prototype.initRecorderEvents = function(){
 		var self=this;
 
@@ -102,7 +106,7 @@ define(function( require ) {
 		}
 
 		showSongsSelector.ontouchstart=function(event){
-			$('#songsSelector').modal('show');
+			openPanel('#songsSelector');
 		}
 
 		$('#play_stop').click(function() {
@@ -134,7 +138,7 @@ define(function( require ) {
 
 	EventsHandler.prototype.initModalEvents = function(){
 
-		$("#songsSelector .validate_btn.button").click(function(){
+		$("#validSongSelection").click(function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
@@ -153,7 +157,7 @@ define(function( require ) {
 				ResourcesHandler.loadSong(dataIdSong);
 
 			});
-
+			openPanel('#panel-compose');
 		});
 	}
 

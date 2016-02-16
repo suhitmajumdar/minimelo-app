@@ -31,7 +31,7 @@ define(function( require ) {
 	}
 
 	UiHandler.prototype.hideLoader = function() {
-		$( ".loader" ).fadeOut( "slow" );
+		$( ".loader" ).fadeOut( "medium" );
 	}
 
 	UiHandler.prototype.initTimelineHeight = function() {

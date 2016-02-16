@@ -118,7 +118,8 @@ define(function(require) {
 
 				$(this).attr('posSongX',$(this).position().left);
 
-				$('#tracks').prepend(this);
+				// $('#tracks').prepend(this);
+				tracksDiv.insertBefore(this,tracksDiv.childNodes[0]);
 				$(this).css('top',topTracksTouch - topSongTouch);
 				
 				$(this).attr('posSourisX',leftSongTouch);
@@ -186,7 +187,8 @@ define(function(require) {
 				{
 					var divSong=self.createDivSong(this);
 					this.songToPlace=divSong;
-					$('#tracks').prepend(this.songToPlace);
+					// $('#tracks').prepend(this.songToPlace);
+					tracksDiv.insertBefore(this.songToPlace,tracksDiv.childNodes[0]);
 				}
 				$(this).attr('touchstartTime',Date.now());
 				$(this).attr('move','false');
@@ -229,7 +231,9 @@ define(function(require) {
 					self.setDragOnSong(this.songToPlace);
 					this.songToPlace.setAttribute('track' , trackOverlayed.id);
 
-					$(trackOverlayed).prepend(this.songToPlace);
+					//$(trackOverlayed).prepend(this.songToPlace);
+					// trackOverlayed.insertBefore(this.songToPlace, trackOverlayed.childNodes[0]); 
+					trackOverlayed.appendChild(this.songToPlace); 
 					isDropped = true;
 				}
 				else
@@ -312,7 +316,7 @@ define(function(require) {
 		
 
 		divSong.setAttribute('type',song.type);
-		divSong.innerHTML= "<span class='numberSong'>" + numberSong + "</span>";
+		divSong.innerHTML    = "<span class='numberSong'>" + numberSong + "</span>";
 		divSong.setAttribute('data-song-id',idSong);
 		divSong.style.top    = -300 + "px";
 		divSong.style.width  = widthSong  + "px";

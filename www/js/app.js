@@ -26,7 +26,8 @@ $(document).ready(function() {
 
 				var uiHandler = new UiHandler();
 				var record    = new Record();
-				var eventsHandler = new EventsHandler(uiHandler, record); // todo :init this after load songs to avoid spending more time 
+				var eventsHandler = new EventsHandler(uiHandler, record); // todo :init this after load songs to avoid spending more time
+
 
 				Resources.filesHandler.initDefaultsSongs().then(function(){
 					
@@ -36,7 +37,7 @@ $(document).ready(function() {
 						eventsHandler.soundEvents.initEventsButtonsSong();
 						uiHandler.hideLoader();
 					});
-					
+
 				});
 				
 				uiHandler.initUI();

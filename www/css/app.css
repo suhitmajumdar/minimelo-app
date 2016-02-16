@@ -44,61 +44,17 @@ ul {
   100% {
     background-position: 0 33%; } }
 
-@-webkit-keyframes load_one {
-  00% {
-    opacity: 0; }
-  20% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_two {
-  10% {
-    opacity: 0; }
-  30% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_three {
-  20% {
-    opacity: 0; }
-  40% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_four {
-  30% {
-    opacity: 0; }
-  50% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_five {
-  40% {
-    opacity: 0; }
-  60% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_six {
-  50% {
-    opacity: 0; }
-  70% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_seven {
-  60% {
-    opacity: 0; }
-  80% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_eight {
-  70% {
-    opacity: 0; }
-  90% {
-    opacity: 1; } }
-
-@-webkit-keyframes songToDropAnimation {
-  0% {
-    transform: scale(1); }
-  50% {
-    transform: scale(1.1); }
-  100% {
-    transform: scale(1); } }
+/*@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
+@-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
+@-webkit-keyframes load_three { 20%{opacity:0;}40%{opacity:1;}}
+@-webkit-keyframes load_four  { 30%{opacity:0;}50%{opacity:1;}}
+@-webkit-keyframes load_five  { 40%{opacity:0;}60%{opacity:1;}}
+@-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
+@-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
+@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}*/
+@-webkit-keyframes loadButton {
+  to {
+    background-position: 0 33%; } }
 
 .loader {
   position: absolute;
@@ -115,22 +71,25 @@ ul {
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px; }
-  .loader .button[type="type-1"] {
-    -webkit-animation: load_one 3s infinite; }
-  .loader .button[type="type-2"] {
-    -webkit-animation: load_two 3s infinite; }
-  .loader .button[type="type-3"] {
-    -webkit-animation: load_three 3s infinite; }
-  .loader .button[type="type-4"] {
-    -webkit-animation: load_four 3s infinite; }
-  .loader .button[type="type-5"] {
-    -webkit-animation: load_five 3s infinite; }
-  .loader .button[type="type-6"] {
-    -webkit-animation: load_six 3s infinite; }
-  .loader .button[type="type-7"] {
-    -webkit-animation: load_seven 3s infinite; }
-  .loader .button[type="type-8"] {
-    -webkit-animation: load_eight 3s infinite; }
+  .loader .button {
+    -webkit-animation: loadButton 1s infinite steps(1, start);
+    background-color: inherit; }
+    .loader .button[type="type-1"] {
+      -webkit-animation-delay: 0s; }
+    .loader .button[type="type-2"] {
+      -webkit-animation-delay: 1s; }
+    .loader .button[type="type-3"] {
+      -webkit-animation-delay: 2s; }
+    .loader .button[type="type-4"] {
+      -webkit-animation-delay: 3s; }
+    .loader .button[type="type-5"] {
+      -webkit-animation-delay: 4s; }
+    .loader .button[type="type-6"] {
+      -webkit-animation-delay: 5s; }
+    .loader .button[type="type-7"] {
+      -webkit-animation-delay: 6s; }
+    .loader .button[type="type-8"] {
+      -webkit-animation-delay: 7s; }
 
 .button, .song, .pool {
   /* RED */
@@ -378,46 +337,43 @@ header {
     background: #eef0fa; }
 
 /*CSS MODAL*/
-#songsSelector .modal-dialog {
+#songsSelector {
   width: 100%;
   height: 100%;
-  margin: 0; }
-  #songsSelector .modal-dialog .modal-content {
-    height: 100%; }
-    #songsSelector .modal-dialog .modal-content .modal-body {
-      text-align: center; }
-
-#songsSelector #choose-song {
-  display: inline-block;
-  text-align: left;
-  width: 100%; }
-  #songsSelector #choose-song div .button span {
-    font-size: 32px;
-    font-family: "Orange";
-    position: absolute;
-    top: 4px;
-    text-align: center;
-    width: 100%;
-    left: 0px; }
-  #songsSelector #choose-song .container-line {
-    overflow-x: auto;
-    width: 100%; }
-    #songsSelector #choose-song .container-line > div[type] {
-      background-color: transparent;
-      display: inline-block; }
-      #songsSelector #choose-song .container-line > div[type] .button {
-        padding: 10px; }
-  #songsSelector #choose-song .button {
-    width: 55px;
-    height: 55px;
-    background-image: url("../img/buttons_sprite.png");
-    background-size: cover;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  text-align: center; }
+  #songsSelector #choose-song {
     display: inline-block;
-    position: relative;
-    opacity: 0.3; }
-    #songsSelector #choose-song .button.active {
-      background-position: 0 33%;
-      opacity: 1; }
+    width: 100%; }
+    #songsSelector #choose-song div .button span {
+      font-size: 32px;
+      font-family: "Orange";
+      position: absolute;
+      top: 4px;
+      text-align: center;
+      width: 100%;
+      left: 0px; }
+    #songsSelector #choose-song .container-line {
+      overflow-x: auto;
+      width: 100%; }
+      #songsSelector #choose-song .container-line > div[type] {
+        background-color: transparent;
+        display: inline-block; }
+        #songsSelector #choose-song .container-line > div[type] .button {
+          padding: 10px; }
+    #songsSelector #choose-song .button {
+      width: 55px;
+      height: 55px;
+      background-image: url("../img/buttons_sprite.png");
+      background-size: cover;
+      display: inline-block;
+      position: relative;
+      opacity: 0.3; }
+      #songsSelector #choose-song .button.active {
+        background-position: 0 33%;
+        opacity: 1; }
 
 #panel-record #recordScreen {
   position: relative;
