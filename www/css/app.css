@@ -31,6 +31,13 @@ ul {
     -webkit-user-select: none;
     cursor: pointer; }
 
+/* -------------- Loader1 -------------- */
+@-webkit-keyframes loader1 {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
 @-webkit-keyframes load-song-modal {
   0% {
     background-position: 0 0; }
@@ -360,7 +367,7 @@ header {
   margin: 40px auto 50px;
   border: solid 1px black; }
   #panel-record #recordScreen #selector {
-    background: blue;
+    background: rgba(223, 223, 223, 0.9);
     height: 100%;
     width: 1px;
     display: inline-block;
@@ -379,7 +386,7 @@ header {
     position: relative;
     left: 0px;
     top: 0px;
-    background: rgba(2, 34, 3, 0.2); }
+    background: rgba(223, 223, 223, 0.2); }
 
 #panel-record #record-controls {
   text-align: center; }
@@ -537,6 +544,33 @@ header {
     transition-duration: .3s; }
     .sub-menu #load-menu-validate.active {
       opacity: 1; }
+  .sub-menu h2 {
+    font-family: "Orange"; }
+  .sub-menu .loader1 {
+    position: relative;
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    border: 3px solid rgba(0, 0, 0, 0.7);
+    top: 28%;
+    top: -webkit-calc(50% - 43px);
+    top: calc(50% - 43px);
+    left: 35%;
+    left: -webkit-calc(50% - 43px);
+    left: calc(50% - 43px);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: loader1 3s linear infinite;
+    animation: loader1 3s linear infinite; }
+  .sub-menu .loader1:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    width: 11px;
+    height: 11px;
+    border-radius: 10px;
+    background-color: #000; }
 
 #manage-menu {
   width: 80%;

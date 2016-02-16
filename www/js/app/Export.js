@@ -118,6 +118,8 @@ define(function( require ) {
           fileEntry.createWriter(function(writer){
             writer.onwriteend=function(evt){
               console.log("audio enregistre "+nameComposition);
+              $("#success-export").addClass("active");
+              $("#traitement-popup").removeClass("active");
             }
               writer.write(blobMp3);
 
@@ -149,7 +151,7 @@ define(function( require ) {
       for (var k = 0; k < songsDiv.length; k++) {
         var songDiv   = songsDiv[k];
         var idSong    = $(songDiv).attr('data-song-id');
-        var song      = ResourcesHandler.songs[idSong];
+        var song      = ResourcesHandler.getSong(idSong);
         var xSong     = $(songDiv).position().left;
         var beginSong = Timeline.pxToSecondsInTimeline(xSong);
         
