@@ -27,16 +27,22 @@ define( function (require) {
 			var defaultLocation = $(this).parent();
 
 			this.ontouchstart = function(event) {
-				$(this).addClass('inDrag');
-				$('#manage-menu > div').append($(this));
-				this.style.left = this.getBoundingClientRect().left;	
-				this.style.top = this.getBoundingClientRect().top;	
+				//We add a fake button at his place to show it was here
+				var landMark = $(this).clone();
+				$(this).addClass("cloned");
 
+				$(landMark).addClass('inDrag');
+				$('#manage-menu').prepend(landMark);
+				this.cloneButton = landMark[0];
+				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
+
+				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
+				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
 			}
 			
 			this.ontouchend = function(event) {
 
-				var type = isOverType(this);
+				var type = isOverType(this.cloneButton);
 
 				if( type != null) {
 					// todo :change the location of the file
@@ -48,22 +54,21 @@ define( function (require) {
 					$(this).attr('type', newType);
 					$(this).appendTo(sorted_sounds);
 
-				} else {
-					$(this).appendTo(defaultLocation);
-				}
+				} 
 
+				this.cloneButton.remove();
+
+				$(this).removeClass('cloned');
 				$(this).removeClass('inDrag');		
-				this.style.top = "";
-				this.style.left = "";	
 
 			}
 
 			this.ontouchmove = function(event) {
 
-				var rectTimeline = document.querySelectorAll( "#manage-menu > div")[0].getBoundingClientRect();
+				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
 
-				this.style.top = (event.touches[0].clientY - rectTimeline.top) + "px";
-				this.style.left = (event.touches[0].clientX - rectTimeline.left + timeline.scrollLeft) + "px";
+				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
+				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
 
 			}
 
