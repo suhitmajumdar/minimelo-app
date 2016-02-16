@@ -8,8 +8,8 @@ define(function( require ){
 
 
 	// distinction between not indexed and not classified ( ie usable sounds that are not in a collection )
-	var unwantedTypes     = ['indefini'];
-	var unclassifiedTypes = ['indefini'];
+	var unwantedTypes     = ['indefini', 'save', 'record'];
+	var unclassifiedTypes = ['indefini', 'record'];
 	
 	var audioCtx    = new AudioContext();
 

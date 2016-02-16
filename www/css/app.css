@@ -200,56 +200,6 @@ ul {
     width: 100%;
     padding-left: 8px; }
 
-.round_btn {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  background-image: url("../img/buttons_sprite.png");
-  background-size: cover;
-  background-position: 0 67%; }
-  .round_btn.active {
-    background-position: 0 100%; }
-    .round_btn.active:after {
-      top: 3px;
-      left: -3px; }
-  .round_btn:after {
-    content: "";
-    background-image: url("../img/circle_icon_sprite.png");
-    background-position: 0 67%;
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    background-color: transparent; }
-  .round_btn.trash_btn:after {
-    background-position-y: 0; }
-  .round_btn.validate_btn:after {
-    background-position-y: -50px; }
-  .round_btn.scissors_btn:after {
-    background-position-y: -100px; }
-  .round_btn.unzoom_btn:after {
-    background-position-y: -150px; }
-  .round_btn.zoom_btn:after {
-    background-position-y: -200px; }
-  .round_btn.play_btn:after {
-    background-position-y: -250px; }
-  .round_btn.pause_btn:after {
-    background-position-y: -300px; }
-  .round_btn.stop_btn:after {
-    background-position-y: -350px; }
-  .round_btn.begin_btn:after {
-    background-position-y: -400px; }
-  .round_btn.end_btn:after {
-    background-position-y: -450px; }
-  .round_btn.sound_btn:after {
-    background-position-y: -500px; }
-  .round_btn.close_btn:after {
-    background-position-y: -550px; }
-  .round_btn.plus_btn:after {
-    background-position-y: -600px; }
-
 .app {
   width: 100%;
   height: 100%;
@@ -643,6 +593,12 @@ header {
   margin: 0;
   height: 90%;
   top: 5%; }
+  #manage-menu > div {
+    position: relative;
+    height: 100%;
+    z-index: 5; }
+  #manage-menu .button.inDrag {
+    position: absolute; }
   #manage-menu #sorted_sounds {
     overflow-y: scroll;
     text-align: right;
@@ -650,7 +606,8 @@ header {
     float: left;
     width: 33%;
     height: 100%;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    position: relative; }
   #manage-menu #sound_to_sort {
     text-align: left;
     display: inline-block;
@@ -693,11 +650,43 @@ header {
   width: 55px;
   height: 55px;
   display: inline-block; }
+  .square_btn:after {
+    content: "";
+    background-image: url("../img/square_icon_sprite.png");
+    background-position: 0 50px;
+    position: relative;
+    top: 4px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-color: transparent; }
+  .square_btn.validate_btn:after {
+    background-position-y: 0; }
+  .square_btn.close_btn:after {
+    background-position-y: -50px; }
+  .square_btn.menu_btn:after {
+    background-position-y: -100px; }
+  .square_btn.export_btn:after {
+    background-position-y: -150px; }
+  .square_btn.manage_btn:after {
+    background-position-y: -200px; }
+  .square_btn.save_btn:after {
+    background-position-y: -250px; }
+  .square_btn.question_btn:after {
+    background-position-y: -300px; }
+  .square_btn.load_btn:after {
+    background-position-y: -350px; }
+  .square_btn.new_btn:after {
+    background-position-y: -400px; }
+  .square_btn.micro_btn:after {
+    background-position-y: -450px; }
 
 .round_btn {
   display: inline-block;
   width: 50px;
-  height: 51px;
+  height: 50px;
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;
   background-position: 0 67%; }

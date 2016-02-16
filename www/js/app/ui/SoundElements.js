@@ -11,7 +11,7 @@ define(function( require ) {
 	SoundElements.prototype.initButtonsSongs = function () {
 
 		var types = ResourcesHandler.getActivesTypes();
-		var self=this;
+
 		for ( var type in types ) {
 			var buttonSong = $('<div class="button disabled soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
@@ -30,9 +30,9 @@ define(function( require ) {
 
 		for ( var type in songsByType )
 		{
-			var containerLine=$('<div class="container-line">');
+			var containerLine = $('<div class="container-line">');
 
-			var line=$("<div type="+type+"></div>");
+			var line = $("<div type="+type+"></div>");
 
 			containerLine.append(line);
 

@@ -215,51 +215,6 @@ ul{
 	padding-left:8px;}
 }
 
-.round_btn{
-	display: inline-block;
-	width: 50px;
-	height: 50px;
-	background-image: url("../img/buttons_sprite.png");
-	background-size: cover;
-	background-position: 0 67%;
-	
-	&.active{
-		background-position: 0 100%;
-		&:after{
-			top:3px;
-			left:-3px;
-		}
-	}
-
-	&:after{
-		content:"";
-		background-image: url("../img/circle_icon_sprite.png");
-		background-position:0 67%;
-		position: relative;
-		display: inline-block;
-		width:50px;
-		height: 50px;
-		background-repeat: no-repeat;
-		background-size: 100%;
-		background-color: transparent;	
-	}
-
-	&.trash_btn:after{    background-position-y: 0; }
-	&.validate_btn:after{ background-position-y: -50px; }
-	&.scissors_btn:after{ background-position-y: -100px; }
-	&.unzoom_btn:after{   background-position-y: -150px; }
-	&.zoom_btn:after{     background-position-y: -200px; }
-	&.play_btn:after{     background-position-y: -250px; }
-	&.pause_btn:after{    background-position-y: -300px; }
-	&.stop_btn:after{     background-position-y: -350px; }
-	&.begin_btn:after{    background-position-y: -400px; }
-	&.end_btn:after{      background-position-y: -450px; }
-	&.sound_btn:after{    background-position-y: -500px; }
-	&.close_btn:after{    background-position-y: -550px; }
-	&.plus_btn:after{     background-position-y: -600px; }
-
-}
-
 .app{
 
 	width:100%;
@@ -794,6 +749,16 @@ header{
 	margin: 0;
 	height: 90%;
 	top: 5%;
+	
+	&>div {
+		position: relative;
+		height: 100%;
+		z-index: 5;
+	}
+
+	.button.inDrag {
+		position: absolute;
+	}
 
 	#sorted_sounds {
 		overflow-y: scroll;
@@ -803,7 +768,9 @@ header{
 		width: 33%;
 		height: 100%;
 		box-sizing: border-box;
+		position: relative;
 	}
+
 	#sound_to_sort{
 		text-align: left;
 		display: inline-block;
@@ -817,6 +784,7 @@ header{
 			background-color: #ccc;
 		}
 	}
+
 	.button {
 		width: 55px;
 		height: 55px;
@@ -851,17 +819,40 @@ header{
 
 
 .square_btn{
-  background-image: url("../img/buttons_sprite.png");
-  background-size: cover;
-  width: 55px;
-  height: 55px;
-  display: inline-block;
+	background-image: url("../img/buttons_sprite.png");
+	background-size: cover;
+	width: 55px;
+	height: 55px;
+	display: inline-block;
+	&:after{
+		content:"";
+		background-image: url("../img/square_icon_sprite.png");
+		background-position:0 50px;
+		position: relative;
+		top: 4px;
+		display: inline-block;
+		width:50px;
+		height: 50px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-color: transparent;    
+	}
+	&.validate_btn:after{background-position-y:0; }
+	&.close_btn:after{   background-position-y:-50px; }
+	&.menu_btn:after{    background-position-y:-100px; }
+	&.export_btn:after{  background-position-y:-150px; }
+	&.manage_btn:after{  background-position-y:-200px; }
+	&.save_btn:after{    background-position-y:-250px; }
+	&.question_btn:after{background-position-y:-300px; }
+	&.load_btn:after{    background-position-y:-350px; }
+	&.new_btn:after{     background-position-y:-400px; }
+	&.micro_btn:after{   background-position-y:-450px; }
 }
 
 .round_btn{
 	display: inline-block;
 	width: 50px;
-	height: 51px;
+	height: 50px;
 	background-image: url("../img/buttons_sprite.png");
 	background-size: cover;
 	background-position: 0 67%;

@@ -81,7 +81,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 		})
 
-	};
+	}
 
 	Timeline.prototype.stop = function () {
 
@@ -92,7 +92,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		};
 		this.songsInPlay=[];
 		$("#line").css('width',0);
-  	};
+  	}
 
 	Timeline.prototype.secondsToPxInTimeline =function (second){
 		return second*this.ratioSecondPixel;
