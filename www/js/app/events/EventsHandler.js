@@ -108,6 +108,7 @@ define(function( require ) {
 					$(this).removeClass('play_btn');
 					$(this).addClass('stop_btn');
 					Timeline.play();
+
 				} else {
 					$(this).removeClass('stop_btn');
 					$(this).addClass('play_btn');

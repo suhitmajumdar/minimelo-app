@@ -31,10 +31,18 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		self.songsInPlay=[];
 
 		self.debutSong=self.audioCtx.currentTime;
+		$("#timeline").scrollLeft(0);
 
 		self.lineTimeOut = setInterval(function(){
 			var playingTime = self.audioCtx.currentTime-self.debutSong;
-			$("#line").css('width',self.secondsToPxInTimeline(playingTime));
+			var timeInTimeline = self.secondsToPxInTimeline(playingTime);
+			$("#line").css('width',timeInTimeline);
+
+			var middleTimeline = timeline.getBoundingClientRect().right/2;
+			var positionLine = line.getBoundingClientRect().right;
+
+			if (positionLine >= middleTimeline)
+				$("#timeline").animate({scrollLeft : '+=200'}, 'slow');
 		},100)
 
 		$('.track .song').each(function(){
@@ -77,6 +85,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 					$('#play_stop').addClass('play_btn');
 					clearInterval(self.lineTimeOut);
 					$("#line").css('width',0);
+					$("#timeline").scrollLeft(0);
 				}
 			}
 
