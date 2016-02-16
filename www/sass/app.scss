@@ -56,69 +56,19 @@ ul{
 	100% {background-position:0 33%;}
 }
 
-@-webkit-keyframes load_one {
-	10%   {opacity:0;}
-	15%	  {opacity:0.5;}
-	20%  {opacity:1;}
-   
-}
+@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
+@-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
+@-webkit-keyframes load_three { 20%{opacity:0;}40%{opacity:1;}}
+@-webkit-keyframes load_four  { 30%{opacity:0;}50%{opacity:1;}}
+@-webkit-keyframes load_five  { 40%{opacity:0;}60%{opacity:1;}}
+@-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
+@-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
+@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}
 
 @-webkit-keyframes songToDropAnimation {
 	0%   {transform:scale(1);}
 	50%   {transform:scale(1.1);}
 	100% {transform:scale(1);}
-}
-
-@-webkit-keyframes load_two {
-	20%   {opacity:0;}
-	25%	  {opacity:0.5;}
-	30%  {opacity:1;}
-   
-}
-
-@-webkit-keyframes load_three {
-	30%   {opacity:0;}
-	35%	  {opacity:0.5;}
-	40%  {opacity:1;}
-   
-}
-
-@-webkit-keyframes load_four {
-	40%   {opacity:0;}
-	45%	  {opacity:0.5;}
-	50%  {opacity:1;}
-   
-}
-
-@-webkit-keyframes load_five {
-	50%   {opacity:0;}
-	55%	  {opacity:0.5;}
-	60%  {opacity:1;}
-   
-}
-
-
-@-webkit-keyframes load_six {
-	60%   {opacity:0;}
-	65%	  {opacity:0.5;}
-	70%  {opacity:1;}
-   
-}
-
-
-@-webkit-keyframes load_seven {
-	70%   {opacity:0;}
-	75%	  {opacity:0.5;}
-	80%  {opacity:1;}
-   
-}
-
-
-@-webkit-keyframes load_eight {
-	80%   {opacity:0;}
-	85%	  {opacity:0.5;}
-	90%  {opacity:1;}
-   
 }
 
 .loader{
@@ -150,29 +100,14 @@ ul{
 				background-position:0 33%;
 			}
 
-	    	&[type="type-1"]{ -webkit-animation: load_one 3s infinite;
-	    	background-color: $red; }
-
-			&[type="type-2"]{ -webkit-animation: load_two 3s infinite;
-			background-color: $orange;}
-
-			&[type="type-3"]{ -webkit-animation: load_three 3s infinite;
-			background-color: $yellow;}
-
-			&[type="type-4"]{ -webkit-animation: load_four 3s infinite;
-			background-color: $clear_green;}
-
-			&[type="type-5"]{ -webkit-animation: load_five 3s infinite;
-			background-color: $dark_green;}
-
-			&[type="type-6"]{ -webkit-animation: load_six 3s infinite;
-			background-color: $dark_blue; }
-
-			&[type="type-7"]{ -webkit-animation: load_seven 3s infinite;
-			background-color: $clear_blue; }
-
-			&[type="type-8"]{ -webkit-animation: load_eight 3s infinite;
-			background-color: $purple;}
+	    	&[type="type-1"]{ -webkit-animation: load_one 3s infinite;}
+			&[type="type-2"]{ -webkit-animation: load_two 3s infinite;}
+			&[type="type-3"]{ -webkit-animation: load_three 3s infinite;}
+			&[type="type-4"]{ -webkit-animation: load_four 3s infinite;}
+			&[type="type-5"]{ -webkit-animation: load_five 3s infinite;}
+			&[type="type-6"]{ -webkit-animation: load_six 3s infinite;}
+			&[type="type-7"]{ -webkit-animation: load_seven 3s infinite;}
+			&[type="type-8"]{ -webkit-animation: load_eight 3s infinite;}
 	}
 }
 
@@ -180,14 +115,6 @@ ul{
 
 .song,.button{
 	&.todelete{opacity:0.5;}
-	&[type="type-1"]{ background-color: $red; }/* RED */
-	&[type="type-2"]{ background-color: $orange; }/* ORANGE */
-	&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
-	&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
-	&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
-	&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
-	&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-	&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 }
 
 
@@ -208,15 +135,6 @@ ul{
 	text-align:center;
 	width:100%;
 	padding-left:8px;}
-
-	&[type="type-1"]{ background-color: $red; }/* RED */
-	&[type="type-2"]{ background-color: $orange; }/* ORANGE */
-	&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
-	&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
-	&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
-	&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
-	&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-	&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 
 
 		&.active{
@@ -283,48 +201,14 @@ ul{
 			z-index: 4;
 		}
 
-		/* RED */
-		&[type="type-1"]{
-			background-color: $red;
-			border: 5px solid $red;
-		}
-
-		/* ORANGE */
-		&[type="type-2"]{
-		 background-color: $orange;
-		 border: 5px solid $orange; 
-		 }
-
-		/* YELLOW */
-		&[type="type-3"]{ 
-			background-color: $yellow; 
-			border: 5px solid $yellow;
-		}
-		/* CLEAR GREEN */
-		&[type="type-4"]{ 
-			background-color: $clear_green;
-			border: 5px solid $clear_green;
-		}
-		 /* DARK  GREEN */
-		&[type="type-5"]{
-			background-color: $dark_green; 
-			border: 5px solid $dark_green;
-		}
-		/* DARK  BLUE */
-		&[type="type-6"]{
-			background-color: $dark_blue;
-			border: 5px solid $dark_blue;
-		}
-		/* CLEAR BLUE */
-		&[type="type-7"]{ 
-			background-color: $clear_blue; 
-			border: 5px solid $clear_blue;
-		}
-		/* PURPLE */
-		&[type="type-8"]{
-			background-color: $purple; 
-			border: 5px solid $purple;
-		}
+&[type="type-1"]{ border: 5px solid $red;}
+&[type="type-2"]{ border: 5px solid $orange; }
+&[type="type-3"]{ border: 5px solid $yellow;}
+&[type="type-4"]{ border: 5px solid $clear_green;}
+&[type="type-5"]{ border: 5px solid $dark_green;}
+&[type="type-6"]{ border: 5px solid $dark_blue;}
+&[type="type-7"]{ border: 5px solid $clear_blue;}
+&[type="type-8"]{ border: 5px solid $purple;}
 		span{
 			font-size:32px;
 			font-family:"Orange";
@@ -485,6 +369,7 @@ header{
 			width: 100%;
 			
 			&>div[type]{
+				background-color:transparent;
 				display: inline-block;
 				.button{
 					padding: 10px;
@@ -813,6 +698,10 @@ header{
 	.button.inDrag {
 		position: absolute;
 	}
+	.button.cloned:after {
+		content:"";
+		background-color: #ddd;
+	}
 
 	#sorted_sounds {
 		overflow-y: scroll;
@@ -846,15 +735,19 @@ header{
 		background-size: cover;
 		display: inline-block;
 		position:relative;
+		&.cloned{
+			&:after{
+				content: "";
+				background-color: #aaa;
+				position: relative;
+				top: 4px;
+				display: inline-block;
+				width:50px;
+				height: 50px;
+				z-index: -1;
+			}
+		}
 
-		&[type="type-1"]{ background-color: $red; }/* RED */
-		&[type="type-2"]{ background-color: $orange; }/* ORANGE */
-		&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
-		&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
-		&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
-		&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
-		&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-		&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 	}
 
 	#sorting_colors{
@@ -875,19 +768,19 @@ header{
 			border-radius: 16px;
 			transition-property: background-color;
 			transition-duration: .3s;
-			&[type="type-1"]{ background-color: $red; }/* RED */
-			&[type="type-2"]{ background-color: $orange; }/* ORANGE */
-			&[type="type-3"]{ background-color: $yellow; }/* YELLOW */
-			&[type="type-4"]{ background-color: $clear_green; }/* CLEAR GREEN */
-			&[type="type-5"]{ background-color: $dark_green; }/* DARK  GREEN */
-			&[type="type-6"]{ background-color: $dark_blue; }/* DARK  BLUE */
-			&[type="type-7"]{ background-color: $clear_blue; }/* CLEAR BLUE */
-			&[type="type-8"]{ background-color: $purple; }/* PURPLE */
 		}
 	}
 
 }
 
+[type="type-1"]{ background-color: $red; }
+[type="type-2"]{ background-color: $orange; }
+[type="type-3"]{ background-color: $yellow; }
+[type="type-4"]{ background-color: $clear_green; }
+[type="type-5"]{ background-color: $dark_green; }
+[type="type-6"]{ background-color: $dark_blue; }
+[type="type-7"]{ background-color: $clear_blue; }
+[type="type-8"]{ background-color: $purple; }
 
 .square_btn{
 	background-image: url("../img/buttons_sprite.png");
