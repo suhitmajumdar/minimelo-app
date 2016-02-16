@@ -9,7 +9,7 @@ define(function( require ) {
 	function Song( type, url ) {
 		this.id        = lastId++;
 		this.url       = url;
-		this.type      = type;
+		this.type      = type || 'none';
 		this.buffer    = null;
 		this.startTime = 0;
 		this.stopTime  = 0;
@@ -40,7 +40,7 @@ define(function( require ) {
 			});
 
 		}).then(function(e){
-			var arrayBuffer=e.target.result;
+			var arrayBuffer = e.target.result;
 			return new Promise(function(resolve,reject){
 				audioCtx.decodeAudioData(arrayBuffer,resolve,reject);  
 			});
@@ -61,8 +61,8 @@ define(function( require ) {
 		var self = this;
 
 		return self.load().then(function(){
-			var source=self.play();
-			self.buffer=null;
+			var source = self.play();
+			self.buffer = null;
 			return Promise.resolve(source);
 		});
 	}
@@ -78,16 +78,15 @@ define(function( require ) {
 		source.start(audioCtx.currentTime + time);
 
 		return source;
-	};
+	}
 
-	Song.prototype.play = function ()
-	{
+	Song.prototype.play = function () {
 		return this.playWithTime(0);
-	};
+	}
 
-	Song.prototype.getDuration = function (){
+	Song.prototype.getDuration = function () {
 		return this.buffer.duration;
-	};
+	}
 
 	Song.prototype.loaded = function() {
 		return ( this.buffer != null )

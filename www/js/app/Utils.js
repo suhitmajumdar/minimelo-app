@@ -8,19 +8,19 @@ $(document).ready(function() {
 		
 
 		if (typeof console  != "undefined") 
-		    if (typeof console.log != 'undefined')
-		        console.olog = console.log;
-		    else
-		        console.olog = function() {};
+			if (typeof console.log != 'undefined')
+				console.olog = console.log;
+			else
+				console.olog = function() {};
 
-		console.log = function(message) {
-		    console.olog(message);
-		    $('#debug').prepend('<p>' + message + '</p>');
-		};
-		console.error = console.debug = console.info =  console.log
+			console.log = function(message) {
+				console.olog(message);
+				$('#debug').prepend('<p>' + message + '</p>');
+			};
+			console.error = console.debug = console.info =  console.log
 
-	}
-})
+		}
+	})
 
 var debug = function(txt) {
 	var debug = $('#debug');
@@ -39,14 +39,23 @@ Date.prototype.today = function () {
 
 // For the time now
 Date.prototype.timeNow = function () {
-     return ((this.getHours() < 10)?"0":"") + this.getHours() + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+	return ((this.getHours() < 10)?"0":"") + this.getHours() + ((this.getMinutes() < 10)?"0":"") + this.getMinutes() + ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
 
-Date.timestamp=function(){
-	var date=new Date();
+Date.timestamp = function() {
+	var date = new Date();
 	return date.timeNow()+date.today();
 }
 
+// Compare one song to another to sort them by type
+function compare(a, b) {
+	if (a.type < b.type)
+		return -1;
+	else if (a.type > b.type)
+		return 1;
+	else 
+		return 0;
+}
 jQuery.fn.extend({
     openQuickSelect: function () {
         $(".qsopen").removeClass('qsopen');

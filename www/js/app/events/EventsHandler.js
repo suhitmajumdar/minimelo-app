@@ -8,7 +8,7 @@ define(function( require ) {
 	function EventsHandler(uiHandler, record){
 		this.uiHandler = uiHandler;
 		this.record = record;
-		this.menu   = new Menu();
+		this.menu   = new Menu(uiHandler);
 
 		this.initModalEvents();
 		this.soundEvents = new SoundEvents();
@@ -32,16 +32,14 @@ define(function( require ) {
 			}
 		}
 
-		recordButton.onclick=function(event){
+		recordButton.onclick = function(event){
 			if($(this).attr("action")=="record"){
 				self.record.startRecord();
 				$(this).attr("action","stop");
-				//Give class "recording" to the buttons container
 				$(this).parent().addClass("recording");
 			}else{
 				self.record.stopRecord();
 				$(this).attr("action","record");
-				//Removes class "recording" to the buttons container
 				$(this).parent().removeClass("recording");
 			}
 		}
@@ -130,7 +128,7 @@ define(function( require ) {
 
 	EventsHandler.prototype.initModalEvents = function(){
 
-		$(".validate_btn.button").click(function(){
+		$("#songsSelector .validate_btn.button").click(function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
@@ -147,7 +145,7 @@ define(function( require ) {
 				buttonToReplace.removeClass('disabled');
 
 				ResourcesHandler.loadSong(dataIdSong);
-			
+
 			});
 
 		});
@@ -159,8 +157,8 @@ define(function( require ) {
     		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
     		if(btnSelected.length>0){
 
-	    		var idSong=btnSelected.find(" > span").text();
-	    		var dataIdSong=btnSelected.attr('data-song-id');
+	    		var idSong = btnSelected.find(" > span").text();
+	    		var dataIdSong = btnSelected.attr('data-song-id');
 
 	    		var buttonToSwitch=$(this).parent().parent();
 	    		buttonToSwitch.find('span.numberSong').text(idSong);

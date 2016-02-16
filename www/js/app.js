@@ -12,7 +12,7 @@ requirejs.config({
 $(document).ready(function() {
 
 	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record','app/Export'], 
-		function(Timeline, Utils, UiHandler, EventsHandler, ressources, Record, Export) {
+		function(Timeline, Utils, UiHandler, EventsHandler, Resources, Record, Export) {
 
 		'use strict';
 
@@ -26,9 +26,10 @@ $(document).ready(function() {
 
 				var uiHandler = new UiHandler();
 				var record    = new Record();
-				var eventsHandler = new EventsHandler(uiHandler, record);
+				var eventsHandler = new EventsHandler(uiHandler, record); // todo :init this after load songs to avoid spending more time 
 
-				ressources.loadSongs().then(function() {
+				Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
+					Resources.postProcessing();
 					uiHandler.initSoundElements();
 					eventsHandler.soundEvents.initEventsButtonsSong();
 					uiHandler.hideLoader();

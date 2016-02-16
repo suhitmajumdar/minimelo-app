@@ -1,166 +1,66 @@
 define(function( require ){
 
-	var Song       = require('app/Song');
-	var Utils      = require('app/Utils');
-
-	var audioCtx   = new AudioContext();
-
-	var unwantedTypes = ['indefini'];
-
 	'use strict';
 
-	function ResourcesHandler() {
-		this.songs      = [];
+	var Song         = require('app/Song');
+	var Utils        = require('app/Utils');
+	var FilesHandler = require('app/FilesHandler');
 
-		this.filesDirectories  = {};
-		this.songsDirectories  = {};
-		this.sourceInPreview   = null;
+
+	// distinction between not indexed and not classified ( ie usable sounds that are not in a collection )
+	var unwantedTypes     = ['indefini', 'save', 'record'];
+	var unclassifiedTypes = ['indefini', 'record'];
+	
+	var audioCtx    = new AudioContext();
+
+	function ResourcesHandler() {
+		this.songs           = [];
+		this.songsByType     = {};
+
+		this.sourceInPreview = null;
+		this.filesHandler     = new FilesHandler();
 	}
 
-	ResourcesHandler.prototype.playPreview=function(idSong){
+	ResourcesHandler.prototype.postProcessing = function () {
 
-		if(this.songs[idSong].buffer != null){
-			if(this.sourceInPreview != null){
-				this.sourceInPreview.stop();
-			}
-			this.sourceInPreview = this.songs[idSong].play();
+		this.songs.sort(compare);
+
+		for (var index in this.songs) {
+			var song = this.songs[index];
+			if(this.songsByType[song.type] == undefined)
+				this.songsByType[song.type] = [];
+			this.songsByType[song.type].push(song);
+		}
+
+	}
+
+	ResourcesHandler.prototype.playPreview = function(idSong) {
+
+		if(this.sourceInPreview != null) {
+			this.sourceInPreview.stop();
+		}
+
+		if(this.getSong(idSong).buffer != null) {
+			this.sourceInPreview = this.getSong(idSong).play();
 		} else {
 			var self = this;
 
-			this.songs[idSong].playForPreview().then(function(source) {
-				
-				if(self.sourceInPreview != null){
-					self.sourceInPreview.stop();
-				}
-				self.sourceInPreview=source;
-				
+			this.getSong(idSong).playForPreview().then( function(source) {
+				self.sourceInPreview = source;
 			});
 		}
 	}
 
-	ResourcesHandler.prototype.loadSongs = function() {
-
-		var self=this;
-
-		return new Promise(function (resolve, reject) {
-			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo", resolve, reject);
-			
-		}).then(function(fileSystem){
-			var directoryReader = fileSystem.createReader();
-			return new Promise(function(resolve,reject){
-				directoryReader.readEntries(resolve,reject);
-			});
-
-		}).then(function(directories){
-			var promises = [];
-			for (var i = 0; i < directories.length; i++) {
-				var directory   = directories[i];
-				var reader      = directory.createReader();
-				directory.files = [];
-				self.songsDirectories[directory.name] = [];
-
-				var promise = new Promise(function(resolve,reject){
-					reader.readEntries(resolve.bind(directory),reject);
-				});
-				promise.then(function(files){
-					for (var j = 0; j < files.length; j++) {
-						var file=files[j];
-						this.files.push(file);
-
-						var song = new Song(this.name,file.nativeURL);
-						song.fileEntry = file;
-						self.songs.push(song);
-						self.songsDirectories[this.name].push(song);
-					};
-					self.filesDirectories[this.name] = this;
-				}.bind(directory));
-
-				promises.push(promise);
-
-			};
-
-			return Promise.all(promises);
-
-		});
-
-	}
-
-	ResourcesHandler.prototype.loadSong = function(idNewSong) {
-		this.songs[idNewSong].load();
-	}
-
-	ResourcesHandler.prototype.loadTestSongs = function() {
-
-		var self = this;
-		for ( var type in ressources )
-		{
-			var songsOfType = ressources[type];
-			for ( var i in songsOfType )
-			{
-				var urlSong = songsOfType[i];
-				self.songs.push(new Song(type, urlSong));
-			}
-		}
-	}
-
-	ResourcesHandler.prototype.getSong = function( id ) {
-
-		for ( var song in this.songs )
-		{
-			if (this.songs[song].id == id) {
-				return this.songs[song];
-			}
-		}
-
-		return null;
+	ResourcesHandler.prototype.loadSong = function( id ) {
+		this.getSong(id).load();
 	}
 
 	ResourcesHandler.prototype.getSongs = function() {
 		return this.songs;
 	}
 
-	ResourcesHandler.prototype.getIdFirstSongType = function(type) {
-		var found = false;
-		var id 	  = 0;
-
-		while ( found == false && id < this.songs.length)
-		{
-			if ( this.songs[id].type == type)
-			{
-				found = true;
-			}
-			id++;
-		}
-		if(found)
-			return id-1;
-		else
-			return -1;
-	}
-
-	ResourcesHandler.prototype.getIdFirstSongUrl = function(url) {
-		var found = false;
-		var id 	  = 0;
-
-		while ( found == false && id < this.songs.length)
-		{
-			if ( this.songs[id].url == url)
-			{
-				found = true;
-			}
-			id++;
-		}
-		if(found)
-			return id-1;
-		else
-			return -1;
-	}
-
-	ResourcesHandler.prototype.getInstance = function() {
-		return this;
-	}
-
 	ResourcesHandler.prototype.getTypes = function() {
-		return Object.keys(this.songsDirectories);
+		return Object.keys(this.songsByType);
 	}
 
 	ResourcesHandler.prototype.getActivesTypes = function() {
@@ -170,6 +70,45 @@ define(function( require ){
 		});
 
 		return actives;
+	}
+
+	// todo : need to fix this to avoid unnecessary redundant calculus
+	ResourcesHandler.prototype.getActivesCollections = function() {
+
+		var actives = {};
+
+		for ( var type in this.songsByType ) {
+			if( unwantedTypes.indexOf( type ) < 0 )
+				actives[type] = this.songsByType[type];
+		}
+
+		return actives;
+	}
+
+	// todo : need to fix this to avoid unnecessary redundant calculus
+	ResourcesHandler.prototype.getNotClassifiedCollections = function() {
+
+		var notClassified = {};
+
+		for ( var type in this.songsByType ) {
+			if( !(unclassifiedTypes.indexOf( type ) < 0) )
+				notClassified[type] = this.songsByType[type];
+		}
+
+		return notClassified;
+	}
+
+	ResourcesHandler.prototype.getInstance = function() {
+		return this;
+	}
+
+	ResourcesHandler.prototype.getSong = function ( id ) {
+		var length = this.songs.length;
+		for (var i = length - 1; i >= 0; i--) {
+			if( this.songs[i].id == id )
+				return this.songs[i];
+		}
+		return null;
 	}
 
 	return ResourcesHandler;
