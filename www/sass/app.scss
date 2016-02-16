@@ -846,11 +846,34 @@ header{
 
 
 .square_btn{
-  background-image: url("../img/buttons_sprite.png");
-  background-size: cover;
-  width: 55px;
-  height: 55px;
-  display: inline-block;
+	background-image: url("../img/buttons_sprite.png");
+	background-size: cover;
+	width: 55px;
+	height: 55px;
+	display: inline-block;
+	&:after{
+		content:"";
+		background-image: url("../img/square_icon_sprite.png");
+		background-position:0 50px;
+		position: relative;
+		top: 4px;
+		display: inline-block;
+		width:50px;
+		height: 50px;
+		background-repeat: no-repeat;
+		background-size: 100%;
+		background-color: transparent;    
+	}
+	&.validate_btn:after{background-position-y:0; }
+	&.close_btn:after{   background-position-y:-50px; }
+	&.menu_btn:after{    background-position-y:-100px; }
+	&.export_btn:after{  background-position-y:-150px; }
+	&.manage_btn:after{  background-position-y:-200px; }
+	&.save_btn:after{    background-position-y:-250px; }
+	&.question_btn:after{background-position-y:-300px; }
+	&.load_btn:after{    background-position-y:-350px; }
+	&.new_btn:after{     background-position-y:-400px; }
+	&.micro_btn:after{   background-position-y:-450px; }
 }
 
 .round_btn{
