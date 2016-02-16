@@ -68,6 +68,22 @@ define( function ( require ) {
 		}
 	}
 
+	FilesHandler.prototype.moveSound = function ( path, sound ) {
+
+	}
+
+	FilesHandler.prototype.saveRecord = function () {
+
+	}
+
+	FilesHandler.prototype.saveComposition = function () {
+
+	}
+
+	function saveFile ( file, path ) {
+
+	}
+
 	return FilesHandler;
 
 })

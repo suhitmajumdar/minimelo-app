@@ -27,6 +27,10 @@ define( function (require) {
 			var defaultLocation = $(this).parent();
 
 			this.ontouchstart = function(event) {
+				defaultLocation = $(this).parent();
+				this.style.top  = this.getBoundingClientRect().top;
+				this.style.left = this.getBoundingClientRect().left;
+				console.log(this.style.top + " + " + this.style.left);
 				$(this).addClass('inDrag');
 				$('#manage-menu > div').append($(this));
 			}

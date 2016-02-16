@@ -18,7 +18,7 @@ define(function( require ){
 		this.songsByType     = {};
 
 		this.sourceInPreview = null;
-		this.filesHandler     = new FilesHandler();
+		this.filesHandler    = new FilesHandler();
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
