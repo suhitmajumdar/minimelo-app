@@ -12,6 +12,8 @@ www/node_modules
 www/*.log
 www/audio/*
 
+
 *~
 **~
 .directory
+**.nfs*
