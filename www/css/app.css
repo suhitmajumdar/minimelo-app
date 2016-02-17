@@ -43,63 +43,21 @@ ul {
   0% {
     background-position: 0 0; }
   100% {
-    background-position: 0 33%; } }
+    background-position: 0 66%; } }
 
-@-webkit-keyframes load_one {
-  00% {
-    opacity: 0; }
-  20% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_two {
-  10% {
-    opacity: 0; }
-  30% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_three {
-  20% {
-    opacity: 0; }
-  40% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_four {
-  30% {
-    opacity: 0; }
-  50% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_five {
-  40% {
-    opacity: 0; }
-  60% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_six {
-  50% {
-    opacity: 0; }
-  70% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_seven {
-  60% {
-    opacity: 0; }
-  80% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_eight {
-  70% {
-    opacity: 0; }
-  90% {
-    opacity: 1; } }
-
-@-webkit-keyframes songToDropAnimation {
+/*@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
+@-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
+@-webkit-keyframes load_three { 20%{opacity:0;}40%{opacity:1;}}
+@-webkit-keyframes load_four  { 30%{opacity:0;}50%{opacity:1;}}
+@-webkit-keyframes load_five  { 40%{opacity:0;}60%{opacity:1;}}
+@-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
+@-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
+@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}*/
+@-webkit-keyframes loadButton {
   0% {
-    transform: scale(1); }
-  50% {
-    transform: scale(1.1); }
+    background-position: 0 0; }
   100% {
-    transform: scale(1); } }
+    background-position: 0 66%; } }
 
 <<<<<<< Updated upstream
 div#overlay-traitement.active {
@@ -175,45 +133,35 @@ div#overlay-traitement {
     margin-right: auto;
     text-align: center; }
   .loader .button {
-    display: inline-block;
-    text-align: center;
-    opacity: 0;
-    width: 80px;
-    height: 80px;
-    background-image: url("../img/buttons_sprite.png");
-    background-size: cover; }
-    .loader .button.active {
-      background-position: 0 33%; }
+    -webkit-animation: loadButton 0s infinite steps(2, end);
+    background-color: inherit; }
     .loader .button[type="type-1"] {
-      -webkit-animation: load_one 3s infinite; }
+      -webkit-animation-duration: 1s; }
     .loader .button[type="type-2"] {
-      -webkit-animation: load_two 3s infinite; }
+      -webkit-animation-duration: 2s; }
     .loader .button[type="type-3"] {
-      -webkit-animation: load_three 3s infinite; }
+      -webkit-animation-duration: 3s; }
     .loader .button[type="type-4"] {
-      -webkit-animation: load_four 3s infinite; }
+      -webkit-animation-duration: 4s; }
     .loader .button[type="type-5"] {
-      -webkit-animation: load_five 3s infinite; }
+      -webkit-animation-duration: 5s; }
     .loader .button[type="type-6"] {
-      -webkit-animation: load_six 3s infinite; }
+      -webkit-animation-duration: 6s; }
     .loader .button[type="type-7"] {
-      -webkit-animation: load_seven 3s infinite; }
+      -webkit-animation-duration: 7s; }
     .loader .button[type="type-8"] {
-      -webkit-animation: load_eight 3s infinite; }
+      -webkit-animation-duration: 8s; }
 
-.song.todelete, .button.todelete {
-  opacity: 0.5; }
-
-.buttons_left .button, #choose-song .button {
+.button {
   background-image: url("../img/buttons_sprite.png");
   background-size: 100%;
   width: 57px;
   height: 57px;
   background-repeat: no-repeat;
-  background-position-y: -1px;
   position: relative;
-  font-size: 0px; }
-  .buttons_left .button span, #choose-song .button span {
+  font-size: 0px;
+  display: inline-block; }
+  .button span {
     font-size: 32px;
     font-family: "Orange";
     position: absolute;
@@ -221,10 +169,10 @@ div#overlay-traitement {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
-  .buttons_left .button.active, #choose-song .button.active {
-    background-position: 0 33%; }
-  .buttons_left .button.disabled, #choose-song .button.disabled {
+  .button.disabled {
     background-color: grey; }
+  .button.active {
+    background-position: 0 33%; }
 
 .app {
   width: 100%;
@@ -266,6 +214,8 @@ div#overlay-traitement {
     .app .song.inDrag {
       opacity: 0.7;
       z-index: 3; }
+    .app .song.todelete {
+      opacity: 0.5; }
     .app .song.songToPlace {
       /*-webkit-animation: songToDropAnimation 1s infinite;*/
       /*position: fixed;*/
@@ -340,6 +290,12 @@ header {
 #buttons-songs-modal .button {
   position: relative; }
 
+.main #timelapse-container {
+  width: 100%;
+  overflow-x: auto;
+  position: relative;
+  height: 25px; }
+
 #timeline {
   width: 100%;
   overflow-x: auto;
@@ -348,6 +304,22 @@ header {
   max-height: 100%;
   height: 500px;
   background: #f4f6fe; }
+  #timeline #timeInfo {
+    background-color: white;
+    width: 400px;
+    height: 6%;
+    position: relative; }
+    #timeline #timeInfo .lapseLine {
+      height: 100%;
+      width: 1px;
+      background-color: black;
+      position: absolute; }
+      #timeline #timeInfo .lapseLine span {
+        margin-left: -7px;
+        position: absolute;
+        background-color: white; }
+      #timeline #timeInfo .lapseLine:first-of-type span {
+        margin-left: -1px; }
   #timeline::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -358,15 +330,16 @@ header {
     margin: 10px; }
   #timeline::-webkit-scrollbar-track {
     border-radius: 10px; }
-  #timeline .track {
-    border-top: 1px solid #3F496E;
-    width: 400px;
-    height: 25%;
-    position: relative;
-    height: 25%;
+  #timeline #tracks {
+    height: 94%;
     position: relative; }
-    #timeline .track:last-of-type {
-      border-bottom: 1px solid #3F496E; }
+    #timeline #tracks .track {
+      border-top: 1px solid #3F496E;
+      width: 400px;
+      height: 25%;
+      position: relative; }
+      #timeline #tracks .track:last-of-type {
+        border-bottom: 1px solid #3F496E; }
   #timeline #line {
     top: 0px;
     width: 0px;
@@ -379,46 +352,43 @@ header {
     background: #eef0fa; }
 
 /*CSS MODAL*/
-#songsSelector .modal-dialog {
+#songsSelector {
   width: 100%;
   height: 100%;
-  margin: 0; }
-  #songsSelector .modal-dialog .modal-content {
-    height: 100%; }
-    #songsSelector .modal-dialog .modal-content .modal-body {
-      text-align: center; }
-
-#songsSelector #choose-song {
-  display: inline-block;
-  text-align: left;
-  width: 100%; }
-  #songsSelector #choose-song div .button span {
-    font-size: 32px;
-    font-family: "Orange";
-    position: absolute;
-    top: 4px;
-    text-align: center;
-    width: 100%;
-    left: 0px; }
-  #songsSelector #choose-song .container-line {
-    overflow-x: auto;
-    width: 100%; }
-    #songsSelector #choose-song .container-line > div[type] {
-      background-color: transparent;
-      display: inline-block; }
-      #songsSelector #choose-song .container-line > div[type] .button {
-        padding: 10px; }
-  #songsSelector #choose-song .button {
-    width: 55px;
-    height: 55px;
-    background-image: url("../img/buttons_sprite.png");
-    background-size: cover;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  text-align: center; }
+  #songsSelector #choose-song {
     display: inline-block;
-    position: relative;
-    opacity: 0.3; }
-    #songsSelector #choose-song .button.active {
-      background-position: 0 33%;
-      opacity: 1; }
+    width: 100%; }
+    #songsSelector #choose-song div .button span {
+      font-size: 32px;
+      font-family: "Orange";
+      position: absolute;
+      top: 4px;
+      text-align: center;
+      width: 100%;
+      left: 0px; }
+    #songsSelector #choose-song .container-line {
+      overflow-x: auto;
+      width: 100%; }
+      #songsSelector #choose-song .container-line > div[type] {
+        background-color: transparent;
+        display: inline-block; }
+        #songsSelector #choose-song .container-line > div[type] .button {
+          padding: 10px; }
+    #songsSelector #choose-song .button {
+      width: 55px;
+      height: 55px;
+      background-image: url("../img/buttons_sprite.png");
+      background-size: cover;
+      display: inline-block;
+      position: relative;
+      opacity: 0.3; }
+      #songsSelector #choose-song .button.active {
+        background-position: 0 33%;
+        opacity: 1; }
 
 #panel-record #recordScreen {
   position: relative;
@@ -471,8 +441,7 @@ header {
 
 /*---------*/
 #deck-buttons {
-  padding-top: 20px;
-  padding-bottom: 20px; }
+  padding-top: 10px; }
   #deck-buttons div:nth-of-type(3) {
     text-align: right; }
   #deck-buttons div:nth-of-type(2) {
@@ -533,20 +502,20 @@ header {
     margin-top: 20px; }
 
 #general-menu-overlay {
-  content: "";
-  display: block;
-  width: 0%;
+  /* display: block; */
   height: 100%;
   background-color: transparent;
   position: absolute;
   top: 0px;
-  right: -100%;
+  right: 0px;
+  transition: transform;
   z-index: 2;
-  transition-duration: .5s; }
+  transform: translateX(100%);
+  transition-duration: 0.3s;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); }
   #general-menu-overlay.active {
-    width: 100%;
-    right: 0px;
-    background-color: rgba(0, 0, 0, 0.5); }
+    transform: translateX(0); }
 
 .sub-menu {
   position: absolute;
@@ -581,35 +550,12 @@ header {
     list-style-type: none;
     padding: 0;
     margin-bottom: 15px; }
-  .sub-menu #load-menu-list {
-    max-height: 150px;
-    overflow-y: scroll; }
-  .sub-menu .load-menu-save {
-    float: left;
-    padding: 10px;
-    border: solid 1px #222;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
-    margin: 0 5px 5px;
-    background-color: #ffffff;
-    transition-duration: .2s; }
-    .sub-menu .load-menu-save:hover {
-      background-color: #eee; }
-    .sub-menu .load-menu-save.active {
-      background-color: #ddd; }
-      .sub-menu .load-menu-save.active:hover {
-        background-color: #ddd; }
-  .sub-menu #load-menu-validate {
-    opacity: .2;
-    transition-property: opacity;
-    transition-duration: .3s; }
-    .sub-menu #load-menu-validate.active {
-      opacity: 1; }
   .sub-menu h2 {
     font-family: "Orange";
     font-weight: 100;
     font-size: 36px; }
   .sub-menu .loader1 {
+    display: none;
     position: relative;
     height: 80px;
     width: 80px;
@@ -646,28 +592,23 @@ header {
     height: 100%;
     z-index: 5; }
   #manage-menu .button.inDrag {
-    position: absolute; }
-  #manage-menu .button.cloned:after {
-    content: "";
-    background-color: #ddd; }
-  #manage-menu #sorted_sounds {
+    position: absolute;
+    z-index: 6;
+    background-color: #fff; }
+  #manage-menu .sorter {
     overflow-y: scroll;
-    text-align: right;
-    display: inline-block;
-    float: left;
     width: 33%;
     height: 100%;
-    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
     position: relative; }
   #manage-menu #sound_to_sort {
-    text-align: left;
-    display: inline-block;
     float: left;
     width: 33%;
     height: 100%;
     margin: 0;
-    padding: 10px;
-    box-sizing: border-box; }
+    padding: 10px; }
     #manage-menu #sound_to_sort.selected {
       background-color: #ccc; }
   #manage-menu .button {
@@ -679,30 +620,25 @@ header {
     position: relative; }
     #manage-menu .button.cloned:after {
       content: "";
-      background-color: #aaa;
+      background-color: #aaa !important;
       position: relative;
       top: 4px;
       display: inline-block;
       width: 50px;
       height: 50px;
-      z-index: -1; }
-  #manage-menu #sorting_colors {
+      z-index: -1;
+      background-color: #aaa; }
+  #manage-menu #sorting_colors .pool {
     display: inline-block;
+    width: 50%;
+    height: 25%;
+    margin: 0;
+    padding: 0;
     float: left;
-    width: 33%;
-    height: 100%;
-    box-sizing: border-box; }
-    #manage-menu #sorting_colors .pool {
-      display: inline-block;
-      width: 50%;
-      height: 25%;
-      margin: 0;
-      padding: 0;
-      float: left;
-      border: solid 3px #ffffff;
-      border-radius: 16px;
-      transition-property: background-color;
-      transition-duration: .3s; }
+    border: solid 3px #ffffff;
+    border-radius: 16px;
+    transition-property: background-color;
+    transition-duration: .3s; }
 
 [type="type-1"] {
   background-color: rgba(235, 56, 22, 0.8); }

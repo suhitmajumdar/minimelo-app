@@ -204,6 +204,7 @@ define(function( require ) {
 	};
 
 	Record.prototype.saveRecord=function(){
+
 		var self=this;
 		var worker = new Worker('js/lib/RecordWorker.js');
 		worker.postMessage({
@@ -216,7 +217,6 @@ define(function( require ) {
 
 		// callback for `exportWAV`
 		worker.onmessage = function( e ) {
-			
 			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
@@ -241,7 +241,7 @@ define(function( require ) {
 			}, function(error){
 				console.log(error);
 			});
-
+			ResourcesHandler.filesHandler.saveRecord(blobMp3,fileName);
 		};
 	}
 

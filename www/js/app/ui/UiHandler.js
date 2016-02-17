@@ -15,6 +15,7 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initTracks();
 		this.initRecorder();
+		Timeline.setTimelapse();
 	} 
 
 	UiHandler.prototype.initCollectionManager = function () {
@@ -30,7 +31,7 @@ define(function( require ) {
 	}
 
 	UiHandler.prototype.hideLoader = function() {
-		$( ".loader" ).fadeOut( "slow" );
+		$( ".loader" ).fadeOut( "medium" );
 	}
 
 	UiHandler.prototype.initTimelineHeight = function() {
@@ -46,10 +47,8 @@ define(function( require ) {
 	}
 
 	UiHandler.prototype.initRecorder = function(){
-		
 		$('#canvasRecord').attr('width',$('#recordScreen').width());
 		$('#canvasRecord').attr('height',$('#recordScreen').height());
-
 	}
 
 	return UiHandler;

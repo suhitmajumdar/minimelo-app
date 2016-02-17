@@ -54,22 +54,20 @@ ul{
 
 @-webkit-keyframes load-song-modal{
 	0% {background-position:0 0;}
-	100% {background-position:0 33%;}
+	100% {background-position:0 66%;}
 }
 
-@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
+/*@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
 @-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
 @-webkit-keyframes load_three { 20%{opacity:0;}40%{opacity:1;}}
 @-webkit-keyframes load_four  { 30%{opacity:0;}50%{opacity:1;}}
 @-webkit-keyframes load_five  { 40%{opacity:0;}60%{opacity:1;}}
 @-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
 @-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
-@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}
-
-@-webkit-keyframes songToDropAnimation {
-	0%   {transform:scale(1);}
-	50%   {transform:scale(1.1);}
-	100% {transform:scale(1);}
+@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}*/
+@-webkit-keyframes loadButton {	
+	0% {background-position:0 0;}
+	100% {background-position:0 66%;}
 }
 
 
@@ -141,46 +139,35 @@ ul{
 		margin-right:auto;
 		text-align:center;
 	}
-
-	.button{display:inline-block;
-			text-align:center;
-			opacity:0;
-			width:80px;
-			height:80px;
-			background-image:url("../img/buttons_sprite.png");
-			background-size: cover;
-
-			&.active{
-				background-position:0 33%;
-			}
-
-	    	&[type="type-1"]{ -webkit-animation: load_one 3s infinite;}
-			&[type="type-2"]{ -webkit-animation: load_two 3s infinite;}
-			&[type="type-3"]{ -webkit-animation: load_three 3s infinite;}
-			&[type="type-4"]{ -webkit-animation: load_four 3s infinite;}
-			&[type="type-5"]{ -webkit-animation: load_five 3s infinite;}
-			&[type="type-6"]{ -webkit-animation: load_six 3s infinite;}
-			&[type="type-7"]{ -webkit-animation: load_seven 3s infinite;}
-			&[type="type-8"]{ -webkit-animation: load_eight 3s infinite;}
+	.button{
+			-webkit-animation: loadButton 0s infinite steps(2,end);
+			background-color: inherit;
+	    	&[type="type-1"]{ -webkit-animation-duration:  1s ;}
+			&[type="type-2"]{ -webkit-animation-duration:  2s ;}
+			&[type="type-3"]{ -webkit-animation-duration:  3s ;}
+			&[type="type-4"]{ -webkit-animation-duration:  4s ;}
+			&[type="type-5"]{ -webkit-animation-duration:  5s ;}
+			&[type="type-6"]{ -webkit-animation-duration:  6s ;}
+			&[type="type-7"]{ -webkit-animation-duration:  7s ;}
+			&[type="type-8"]{ -webkit-animation-duration:  8s ;}
 	}
 }
 
 
-
-.song,.button{
-	&.todelete{opacity:0.5;}
+.button{
+	
 }
 
 
-.buttons_left .button, #choose-song .button {
+.button {
 	background-image: url("../img/buttons_sprite.png");
 	background-size: 100%;
 	width: 57px;
 	height: 57px; 
 	background-repeat: no-repeat;
-	background-position-y: -1px;
 	position:relative;
 	font-size:0px;
+	display: inline-block;
 
 	span{font-size:32px;
 	font-family:"Orange";
@@ -190,15 +177,12 @@ ul{
 	width:100%;
 	padding-left:8px;}
 
-
-		&.active{
-		background-position:0 33%;
-	}
-
 	&.disabled{
 		background-color: grey;
 	}
-
+	&.active{
+		background-position:0 33%;
+	}
 }
 
 .app{
@@ -251,20 +235,23 @@ ul{
 			opacity: 0.7;
 			z-index: 3;
 		}
+		&.todelete{
+			opacity:0.5;
+		}
 		&.songToPlace{
 			/*-webkit-animation: songToDropAnimation 1s infinite;*/
 			/*position: fixed;*/
 			z-index: 4;
 		}
 
-&[type="type-1"]{ border: 5px solid $red;}
-&[type="type-2"]{ border: 5px solid $orange; }
-&[type="type-3"]{ border: 5px solid $yellow;}
-&[type="type-4"]{ border: 5px solid $clear_green;}
-&[type="type-5"]{ border: 5px solid $dark_green;}
-&[type="type-6"]{ border: 5px solid $dark_blue;}
-&[type="type-7"]{ border: 5px solid $clear_blue;}
-&[type="type-8"]{ border: 5px solid $purple;}
+		&[type="type-1"]{ border: 5px solid $red;}
+		&[type="type-2"]{ border: 5px solid $orange; }
+		&[type="type-3"]{ border: 5px solid $yellow;}
+		&[type="type-4"]{ border: 5px solid $clear_green;}
+		&[type="type-5"]{ border: 5px solid $dark_green;}
+		&[type="type-6"]{ border: 5px solid $dark_blue;}
+		&[type="type-7"]{ border: 5px solid $clear_blue;}
+		&[type="type-8"]{ border: 5px solid $purple;}
 		span{
 			font-size:32px;
 			font-family:"Orange";
@@ -340,6 +327,17 @@ header{
 	.button{position:relative;}
 }
 
+.main{
+	#timelapse-container{
+		width: 100%;
+    	overflow-x: auto;
+		position: relative;
+		height: 25px;
+		
+	}
+	
+}
+
 #timeline{
 	width: 100%;
     overflow-x: auto;
@@ -348,6 +346,29 @@ header{
     max-height: 100%;
     height: 500px;
     background: #f4f6fe;
+
+    #timeInfo {
+		background-color: white;
+		width: 400px;
+		height: 6%;
+		position: relative;
+		.lapseLine{
+			height: 100%;
+			width: 1px;
+			background-color:black; 
+			position:absolute;
+			span{
+				margin-left: -7px;
+				position: absolute;
+				background-color: white;
+			}
+			&:first-of-type{
+				span{
+					margin-left: -1px;
+				}
+			};
+		}
+	}
 
     &::-webkit-scrollbar {
 	    width: 10px;
@@ -364,19 +385,21 @@ header{
 	&::-webkit-scrollbar-track {
 		border-radius: 10px;
 	}
-
-	.track {
-		border-top: 1px solid #3F496E;
-		width:400px;
-		height: 25%;
+	#tracks{
+		height: 94%;
 		position: relative;
-		height: 25%;
-		position: relative;
+		.track {
+			border-top: 1px solid #3F496E;
+			width:400px;
+			height: 25%;
+			position: relative;
 
-		&:last-of-type{
-			border-bottom: 1px solid #3F496E;
+			&:last-of-type{
+				border-bottom: 1px solid #3F496E;
+			}
 		}
 	}
+	
 
 	#line{
 		top: 0px;
@@ -393,23 +416,16 @@ header{
 
 /*CSS MODAL*/
 #songsSelector{
-	
-	.modal-dialog {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		.modal-content{
-			height: 100%;
-
-			.modal-body{
-				text-align: center;
-			}
-		}
-	}
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	text-align: center;
 
 	#choose-song{
 		display: inline-block;
-		text-align: left;
+		
 		width: 100%;
 
 		div .button span{font-size:32px;
@@ -535,8 +551,7 @@ header{
 /*---------*/
 
 #deck-buttons{
-	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-top: 10px;
 	div:nth-of-type(3) {
 		text-align:right;
 	}
@@ -614,21 +629,21 @@ header{
   }
 }
 #general-menu-overlay{
-  content: "";
-  display: block;
-  width: 0%;
-  height: 100%;
-  background-color: rgba(0,0,0,.0);
-  position: absolute;
-  top: 0px;
-  right: -100%;
-  z-index: 2;
-  transition-duration: .5s;
-  &.active{
-	width: 100%;
+  /* display: block; */
+	height: 100%;
+	background-color: transparent;
+	position: absolute;
+	top: 0px;
 	right: 0px;
+	transition: transform;
+	z-index: 2;
+	transform: translateX(100%);
+	transition-duration: 0.3s;
+	width: 100%;
 	background-color: rgba(0,0,0,.5);
-  }
+	&.active{
+		transform: translateX(0);
+	}
 }
 .sub-menu{
   position: absolute;
@@ -668,37 +683,6 @@ header{
 	padding: 0;
 	margin-bottom: 15px;
   }
-  #load-menu-list{
-	  max-height: 150px;
-	  overflow-y: scroll;
-  }
-  .load-menu-save{
-	float:left;
-	  padding: 10px;
-	  border: solid 1px #222;
-	  border-radius: 3px;
-	  box-shadow: rgba(0,0,0,.3) 2px 2px 2px;
-	  margin: 0 5px 5px;
-	  background-color: $white;
-	  transition-duration: .2s;
-	  &:hover{
-		background-color: #eee;
-	  }
-	  &.active{
-		background-color: #ddd;
-		&:hover{
-		  background-color: #ddd;
-		}
-	  }
-  }
-  #load-menu-validate{
-	opacity: .2;
-	transition-property: opacity;
-	transition-duration: .3s;
-	&.active{
-	  opacity: 1;
-	}
-  }
 
   h2{
   	font-family:"Orange";
@@ -707,6 +691,7 @@ header{
   }
 
   .loader1{
+  	display: none;
 	position: relative;
 	height: 80px;
 	width: 80px;
@@ -755,32 +740,27 @@ header{
 
 	.button.inDrag {
 		position: absolute;
-	}
-	.button.cloned:after {
-		content:"";
-		background-color: #ddd;
+		z-index: 6;
+		background-color: #fff;
+
 	}
 
-	#sorted_sounds {
+	.sorter{
 		overflow-y: scroll;
-		text-align: right;
-		display: inline-block;
-		float: left;
 		width: 33%;
 		height: 100%;
-		box-sizing: border-box;
+		margin: 0px;
+		padding: 0px;
+		display: inline-block;
 		position: relative;
 	}
 
 	#sound_to_sort{
-		text-align: left;
-		display: inline-block;
 		float: left;
 		width: 33%;
 		height: 100%;
 		margin: 0;
 		padding: 10px;
-		box-sizing: border-box;
 		&.selected{
 			background-color: #ccc;
 		}
@@ -793,27 +773,23 @@ header{
 		background-size: cover;
 		display: inline-block;
 		position:relative;
+
 		&.cloned{
 			&:after{
 				content: "";
-				background-color: #aaa;
+				background-color: #aaa!important;
 				position: relative;
 				top: 4px;
 				display: inline-block;
 				width:50px;
 				height: 50px;
 				z-index: -1;
+				background-color: #aaa;
 			}
 		}
-
 	}
 
 	#sorting_colors{
-	display: inline-block;
-	float: left;
-	width: 33%;
-	height: 100%;
-	box-sizing: border-box;
 
 		.pool{
 			display: inline-block;

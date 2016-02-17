@@ -3,6 +3,22 @@ define( function ( require ) {
 
 	var Song = require('app/Song');
 
+	var directoriesUrl = {
+		"indefini": cordova.file.externalDataDirectory+"indefini",
+		"save": cordova.file.externalDataDirectory+"save",
+		"record": cordova.file.externalDataDirectory+"record",
+		"type-1": cordova.file.externalDataDirectory+"type-1",
+		"type-2": cordova.file.externalDataDirectory+"type-2",
+		"type-3": cordova.file.externalDataDirectory+"type-3",
+		"type-4": cordova.file.externalDataDirectory+"type-4",
+		"type-5": cordova.file.externalDataDirectory+"type-5",
+		"type-6": cordova.file.externalDataDirectory+"type-6",
+		"type-7": cordova.file.externalDataDirectory+"type-7",
+		"type-8": cordova.file.externalDataDirectory+"type-8",
+		"originalApplication": cordova.file.applicationDirectory+"www/audio",
+		"application" : cordova.file.externalDataDirectory
+	}
+
 	function FilesHandler() {
 		this.filesDirectories  = {};
 		
@@ -14,7 +30,7 @@ define( function ( require ) {
 
 		return new Promise(function (resolve, reject) {
 
-			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, resolve, reject);
+			window.resolveLocalFileSystemURL(directoriesUrl.application, resolve, reject);
 			
 		}).then(function(fileSystem){
 			var directoryReader = fileSystem.createReader();
@@ -54,18 +70,95 @@ define( function ( require ) {
 
 	}
 
-	FilesHandler.prototype.loadTestSongs = function() {
+	FilesHandler.prototype.initDefaultsSongs = function( soundsArray ) {
+		
+		return new Promise(function(resolve,reject){
+			
+			window.resolveLocalFileSystemURL(directoriesUrl.application,resolve,reject);
+		
+		}).then(function(entryToCopy){
 
-		var self = this;
-		for ( var type in ressources )
-		{
-			var songsOfType = ressources[type];
-			for ( var i in songsOfType )
-			{
-				var urlSong = songsOfType[i];
-				self.songs.push(new Song(type, urlSong));
-			}
-		}
+			console.log(entryToCopy);
+				
+			return new Promise(function (resolve, reject) {
+
+			window.resolveLocalFileSystemURL(directoriesUrl.originalApplication, resolve, reject);
+			
+			}).then(function(fileSystem){
+				console.log(fileSystem);
+				var directoryReader = fileSystem.createReader();
+
+				return new Promise(function(resolve,reject){
+					directoryReader.readEntries(resolve,reject);
+				});
+
+			}).then(function(directories){
+				var promises = [];
+				for (var i = 0; i < directories.length; i++) {
+					var directory   = directories[i];
+
+					var promise = new Promise(function(resolve,reject){
+						directory.copyTo(entryToCopy,directory.name,resolve,reject);
+					}).then(function(data){
+						console.log(data);
+					},function(error){
+						console.log(error);
+					});
+
+					promises.push(promise);
+				}
+
+				return Promise.all(promises);
+
+			});
+		});
+	}
+
+	FilesHandler.prototype.moveSound = function (sound,destination) {
+    	return new Promise(
+    		function(resolve,reject){
+				sound.fileEntry.moveTo(destination, sound.fileEntry.name, success, fail); 
+    		}
+    	);
+	}
+
+	FilesHandler.prototype.saveRecord = function (blobData,fileName) {
+		return this.saveFile(blobData,fileName,directoriesUrl.record);
+	}
+
+	FilesHandler.prototype.saveComposition = function (blobData,fileName) {
+		return this.saveFile(blobData,fileName,directoriesUrl.save);
+	}
+
+	FilesHandler.prototype.saveFile = function(blobData,fileName,directory) {
+		
+
+		return new Promise(function(resolve,reject){
+			console.log(blobData,fileName,directory);
+			window.resolveLocalFileSystemURL(directory,resolve,reject);
+		}).then(function(fileSystem){
+			console.log(fileSystem);
+			return new Promise(function(resolve,reject){
+				fileSystem.getFile(fileName,{create: true, exclusive: false},resolve,reject);
+			})
+		}).then(function(fileEntry){
+			console.log(fileEntry);
+			return new Promise(function(resolve,reject){
+				fileEntry.createWriter(resolve,reject);
+			});
+		}).then(function(writer){
+			console.log(writer);
+			return new Promise(function(resolve,reject){
+				writer.onwriteend=resolve;
+				writer.write(blobData);
+			});
+		}).then(function(){
+			console.log("audio enregistre "+fileName);
+			$("#success-export").addClass("active");
+			$("#traitement-popup").removeClass("active");
+			$('.panel').removeClass('active');
+			$('#panel-compose').addClass('active');
+		});
 	}
 
 	return FilesHandler;

@@ -4,10 +4,11 @@ define(function( require ) {
 	var Timeline 		 = require('app/Timeline');
 	var Menu 			 = require('events/Menu');
 	var SoundEvents		 = require('events/SoundEvents');
+	var Record		     = require('app/Record');
 
-	function EventsHandler(uiHandler, record){
+	function EventsHandler(uiHandler){
 		this.uiHandler = uiHandler;
-		this.record = record;
+		this.record = new Record();
 		this.menu   = new Menu( this );
 
 		this.initSoundEvents();
@@ -21,6 +22,10 @@ define(function( require ) {
 		this.initModalEvents();
 		this.soundEvents = new SoundEvents();
 		this.soundEvents.initEventsButtonsSong();
+	}
+
+	EventsHandler.prototype.initPanelsShowerEvent = function () {
+		
 	}
 
 	EventsHandler.prototype.initRecorderEvents = function(){
@@ -102,7 +107,7 @@ define(function( require ) {
 		}
 
 		showSongsSelector.ontouchstart=function(event){
-			$('#songsSelector').modal('show');
+			openPanel('#songsSelector');
 		}
 
 		$('#play_stop').click(function() {
@@ -134,7 +139,7 @@ define(function( require ) {
 
 	EventsHandler.prototype.initModalEvents = function(){
 
-		$("#songsSelector .validate_btn.button").click(function(){
+		$("#validSongSelection").click(function(){
 
 			$("#choose-song div .button.active:not(.disabled)").each( function(){
 
@@ -153,7 +158,7 @@ define(function( require ) {
 				ResourcesHandler.loadSong(dataIdSong);
 
 			});
-
+			openPanel('#panel-compose');
 		});
 	}
 

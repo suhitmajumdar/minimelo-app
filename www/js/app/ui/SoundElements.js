@@ -28,8 +28,6 @@ define(function( require ) {
 			$('#buttons-songs').append(buttonSong);
 
 		}
-
-		$('#songsSelector').modal('show');
 	}
 
 	SoundElements.prototype.initButtonsModal = function () {

@@ -25,16 +25,18 @@ $(document).ready(function() {
 			onDeviceReady : function () {
 
 				var uiHandler = new UiHandler();
-				var record    = new Record();
-				var eventsHandler = new EventsHandler(uiHandler, record); // todo :init this after load songs to avoid spending more time 
+				var eventsHandler = new EventsHandler(uiHandler); // todo :init this after load songs to avoid spending more time
 
-				Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
-					Resources.postProcessing();
-					uiHandler.initSoundElements();
-					eventsHandler.initSoundEvents();
-					uiHandler.hideLoader();
+				Resources.filesHandler.initDefaultsSongs().then(function(){
+					
+					Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
+						Resources.postProcessing();
+						uiHandler.initSoundElements();
+						eventsHandler.initSoundEvents();
+						uiHandler.hideLoader();
+					});
+
 				});
-
 				
 				uiHandler.initUI();
 
