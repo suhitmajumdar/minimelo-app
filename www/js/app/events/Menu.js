@@ -18,7 +18,7 @@ define(function( require ) {
 		$('#general-menu-help')         .click( self.openGeneralMenuHelp );
 
 		$('#general-menu-overlay').click(function(){
-			if(!$("#traitement-popup").hasClass("active"))
+			if(!$("#overlay-traitement").hasClass("active"))
 				self.closeGeneralMenu();
 		});
 
@@ -102,7 +102,7 @@ define(function( require ) {
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
 		if(name!=null && name!=""){
-			$("#traitement-popup").addClass("active");
+			$("#overlay-traitement").addClass("active");
 			$("#export-menu").removeClass("active");
 			var Export = require('app/Export');
 			var exportTimeline = new Export();

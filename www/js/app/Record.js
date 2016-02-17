@@ -228,7 +228,7 @@ define(function( require ) {
 					writer.onwriteend=function(evt){
 						console.log("audio enregistre "+fileName);
 						$("#success-export").addClass("active");
-						$("#traitement-popup").removeClass("active");
+						$("#overlay-traitement").removeClass("active");
 						$('.panel').removeClass('active');
 						$('#panel-compose').addClass('active');
 					}

@@ -119,7 +119,7 @@ define(function( require ) {
             writer.onwriteend=function(evt){
               console.log("audio enregistre "+nameComposition);
               $("#success-export").addClass("active");
-              $("#traitement-popup").removeClass("active");
+              $("#overlay-traitement").removeClass("active");
             }
               writer.write(blobMp3);
 
