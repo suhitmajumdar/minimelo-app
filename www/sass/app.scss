@@ -22,6 +22,7 @@ body {
 	margin:0px;
 	padding:0px;
 	width:100%;
+	font-weight:100;
 	background-color:$white;
 }
 
@@ -80,13 +81,16 @@ ul{
 
 
 	h2{text-align:center;
-			font-size:100px;
-			font-family:"Orange";}
+	font-size:100px;
+	font-family:"Orange";
+	font-weight: 100;}
 
-	.load-line{width:80%;
-				margin-left:auto;
-				margin-right:auto;
-				margin-top:50px;}
+	.load-line{
+		width:80%;
+		margin-left:auto;
+		margin-right:auto;
+		text-align:center;
+	}
 
 	.button{display:inline-block;
 			text-align:center;
@@ -162,7 +166,9 @@ ul{
 		overflow:visible;
 		font-family:"Orange";
 		margin: 0px;
-		padding: 10px;
+		padding-top: 10px;
+		padding-bottom: 0px;
+		font-weight:100;
 	}
 
 	.panel {
@@ -485,11 +491,9 @@ header{
 		text-align:right;
 	}
 
-	
-	div:nth-of-type(1){
-		p{
-			font-family:"Orange";
-		}
+
+	div:nth-of-type(2){
+		text-align:center;
 	}
 	
 	img{
@@ -646,7 +650,11 @@ header{
 	}
   }
 
-  h2{font-family:"Orange";}
+  h2{
+  	font-family:"Orange";
+  	font-weight: 100;
+	font-size: 36px;
+  }
 
   .loader1{
 	position: relative;
@@ -820,6 +828,7 @@ header{
 	background-image: url("../img/buttons_sprite.png");
 	background-size: cover;
 	background-position: 0 67%;
+	margin-top: 2px;
 	
 	&.active{
 		background-position: 0 100%;
