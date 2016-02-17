@@ -4,6 +4,7 @@ define(function( require ) {
 
 	var lastId   = 0;
 	var audioCtx = new AudioContext();
+	var timeLastPlay = null;
 
 
 	function Song( type, url ) {
@@ -33,15 +34,16 @@ define(function( require ) {
 			return new Promise(function(resolve,reject){
 				var reader = new FileReader();
 
-                reader.onloadend = resolve;
+				reader.onloadend = resolve;
 
-                reader.readAsArrayBuffer(file);
+				reader.readAsArrayBuffer(file);
 				
 			});
 
 		}).then(function(e){
 			var arrayBuffer = e.target.result;
-			return new Promise(function(resolve,reject){
+			return new Promise(function(resolve,reject) {
+				timeLastPlay = new Date().getTime();
 				audioCtx.decodeAudioData(arrayBuffer, resolve, reject);
 			});
 		}).then(
@@ -61,8 +63,6 @@ define(function( require ) {
 		var self = this;
 
 		return self.load().then(function(){
-			// var source = self.play();
-			// self.buffer = null;
 			return Promise.resolve(self);
 		});
 	}
@@ -73,6 +73,12 @@ define(function( require ) {
 			throw "PlayWithTime error : buffer is not set, the sound has not been loaded.";
 		}
 
+		if(new Date().getTime()-timeLastPlay>30000){   // Time passed since last playing is greater than 30 secs
+			audioCtx.close();
+			audioCtx = new AudioContext();
+		}
+
+		timeLastPlay = new Date().getTime();
 		var source    = audioCtx.createBufferSource();
 		source.buffer = this.buffer;
 		source.connect(audioCtx.destination);
