@@ -16,16 +16,13 @@ define(function( require ) {
 		this.initDeckButtons();
 		this.initRecorderEvents();
 		this.initValidQuickSelect();
+		this.initCollectionManagerEvents();
 	}
 
 	EventsHandler.prototype.initSoundEvents = function () {
 		this.initModalEvents();
 		this.soundEvents = new SoundEvents();
 		this.soundEvents.initEventsButtonsSong();
-	}
-
-	EventsHandler.prototype.initPanelsShowerEvent = function () {
-		
 	}
 
 	EventsHandler.prototype.initRecorderEvents = function(){
@@ -162,6 +159,19 @@ define(function( require ) {
 		});
 	}
 
+	EventsHandler.prototype.initCollectionManagerEvents = function() {
+		var self = this;
+
+		$('#closeCollections').click(function () { 
+			openPanel('#panel-compose');
+		});
+
+		$('#saveCollections').click(function() { 
+			self.reloadSoundElements( self );
+			openPanel('#panel-compose');
+		 });
+	}
+
 	EventsHandler.prototype.initValidQuickSelect=function (){
 		$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
     		
@@ -183,6 +193,12 @@ define(function( require ) {
     		$('.qsopen').removeClass('qsopen');
 	       
     	});
+	}
+
+	EventsHandler.prototype.reloadSoundElements = function ( events ) {
+		ResourcesHandler.postProcessing();
+		events.uiHandler.reloadSoundElements();
+		events.initSoundEvents();
 	}
 
 

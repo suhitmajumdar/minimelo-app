@@ -607,20 +607,13 @@ header {
     background-color: #000; }
 
 #manage-menu {
-  width: 80%;
-  left: 5%;
-  margin: 0;
-  height: 90%;
-  top: 5%; }
-  #manage-menu > div {
-    position: relative;
-    height: 100%;
-    z-index: 5; }
+  margin: 0.5rem;
+  height: 85%; }
   #manage-menu .button.inDrag {
     position: absolute;
     z-index: 6;
     background-color: #fff; }
-  #manage-menu .sorter {
+  #manage-menu > div[id] {
     overflow-y: scroll;
     width: 33%;
     height: 100%;
@@ -633,8 +626,7 @@ header {
     float: left;
     width: 33%;
     height: 100%;
-    margin: 0;
-    padding: 10px; }
+    margin: 0; }
     #manage-menu #sound_to_sort.selected {
       background-color: #ccc; }
   #manage-menu .button {
@@ -661,6 +653,9 @@ header {
     border-radius: 16px;
     transition-property: background-color;
     transition-duration: .3s; }
+  #manage-menu .panel_controls {
+    text-align: right;
+    margin-right: 3rem; }
 
 [type="type-1"] {
   background-color: rgba(235, 56, 22, 0.8); }

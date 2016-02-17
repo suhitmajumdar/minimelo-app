@@ -750,19 +750,9 @@ header{
 
 }
 
-
 #manage-menu{
-	width: 80%;
-	left: 5%;
-	margin: 0;
-	height: 90%;
-	top: 5%;
-	
-	&>div {
-		position: relative;
-		height: 100%;
-		z-index: 5;
-	}
+	margin: 0.5rem;
+	height: 85%;
 
 	.button.inDrag {
 		position: absolute;
@@ -771,7 +761,7 @@ header{
 
 	}
 
-	.sorter{
+	&>div[id] {
 		overflow-y: scroll;
 		width: 33%;
 		height: 100%;
@@ -787,7 +777,6 @@ header{
 		width: 33%;
 		height: 100%;
 		margin: 0;
-		padding: 10px;
 		&.selected{
 			background-color: #ccc;
 		}
@@ -827,6 +816,12 @@ header{
 			transition-duration: .3s;
 		}
 	}
+
+	.panel_controls {
+		text-align: right;
+		margin-right: 3rem;
+	}
+
 
 }
 

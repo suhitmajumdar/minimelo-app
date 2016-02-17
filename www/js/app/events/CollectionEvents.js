@@ -23,9 +23,7 @@ define( function (require) {
 
 	CollectionEvents.prototype.dragAndDrop = function () {
 
-		$('#manage-menu .button').each(function() {
-			var defaultLocation = $(this).parent();
-
+		$('#manage-menu > div[id] .button').each(function() {
 			this.ontouchstart = function(event) {
 
 				//We add a fake button at his place to show it was here

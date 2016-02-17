@@ -3,10 +3,8 @@ define(function( require ) {
 	var CollectionEvents = require('events/CollectionEvents');
 	var ResourcesHandler = require('app/ResourcesHandler');
 
-
 	var ui = null
 	var events = null
-	var modifiedCollection = false;
 	
 	function Menu( eventsHandler ) {
 
@@ -42,12 +40,8 @@ define(function( require ) {
 		$('#general-menu').removeClass('helpActive').removeClass('active');
 		$('#general-menu-overlay').removeClass('active');
 		$('.sub-menu').removeClass('active');
-
-		if ( modifiedCollection == true ) {
-			reloadSoundElements();
-			modifiedCollection = false;
-		}
 	}
+
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
 		if(name!=null && name!=""){
@@ -72,8 +66,8 @@ define(function( require ) {
 
 	Menu.prototype.launchRecordView = function (){
 		//alert('Penser à aller sur la vue de record')
-        $('.panel').removeClass('active');
-        $('#panel-record').addClass('active');
+
+		openPanel('#panel-record');
         this.closeGeneralMenu();
 	}
 
@@ -92,6 +86,8 @@ define(function( require ) {
 	Menu.prototype.displayCollectionManager = function () {
 		ui.initCollectionManager();
 		new CollectionEvents();
+		openPanel('#manage-menu');
+        this.closeGeneralMenu();		
 	}
 
 	Menu.prototype.loadSubMenu = function (name){
@@ -103,16 +99,8 @@ define(function( require ) {
 				break;
 			case 'manage-menu':
 				this.displayCollectionManager();
-				modifiedCollection = true;
 				break;
 		}
-	}
-
-	function reloadSoundElements () {
-		ResourcesHandler.postProcessing();
-		ui.reloadSoundElements();
-		events.initSoundEvents();
-
 	}
 
 	return Menu;
