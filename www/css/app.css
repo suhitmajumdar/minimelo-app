@@ -639,11 +639,7 @@ header {
       background-color: #ccc; }
   #manage-menu .button {
     width: 55px;
-    height: 55px;
-    background-image: url("../img/buttons_sprite.png");
-    background-size: cover;
-    display: inline-block;
-    position: relative; }
+    height: 55px; }
     #manage-menu .button.cloned:after {
       content: "";
       background-color: #aaa !important;

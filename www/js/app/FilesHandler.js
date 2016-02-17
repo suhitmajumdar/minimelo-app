@@ -159,6 +159,7 @@ define( function ( require ) {
 			return Promise.resolve(fileEntryForSong);
 
 		});
+
 	}
 
 	return FilesHandler;

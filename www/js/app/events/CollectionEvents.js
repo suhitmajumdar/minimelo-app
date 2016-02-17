@@ -27,6 +27,7 @@ define( function (require) {
 			var defaultLocation = $(this).parent();
 
 			this.ontouchstart = function(event) {
+
 				//We add a fake button at his place to show it was here
 				var landMark = $(this).clone();
 				$(this).addClass("cloned");

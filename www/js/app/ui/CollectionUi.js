@@ -1,9 +1,5 @@
 define( function ( require ) {
 
-	// sorted_sounds
-	// sorting_colors
-	// sound_to_sort
-
 	var ResourcesHandler = require('app/ResourcesHandler');
 
 	function CollectionUi() {

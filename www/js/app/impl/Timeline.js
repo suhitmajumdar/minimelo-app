@@ -2,6 +2,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	'use strict';
 
+  	var audioCtx = new AudioContext();
 
 	function Timeline() {
 		this.songsInPlay = [];
@@ -10,8 +11,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		this.tempo       = 90;
 		this.bars        = 20;
 		this.stepByBars  = 4;
-
-		this.audioCtx    = new AudioContext();
 
 		this.songPlayedCount = 0;
 
@@ -34,11 +33,13 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		self.songPlayedCount = 0;
 		self.songsInPlay = [];
 
-		self.debutSong = self.audioCtx.currentTime;
+		self.debutSong = audioCtx.currentTime;
 		$("#timeline").scrollLeft(0);
 
-			self.lineTimeOut = setInterval(function(){
-			var playingTime = self.audioCtx.currentTime-self.debutSong;
+
+		self.lineTimeOut = setInterval(function(){
+			var playingTime = audioCtx.currentTime-self.debutSong;
+
 			var timeInTimeline = self.secondsToPxInTimeline(playingTime);
 			$("#line").css('width',timeInTimeline);
 

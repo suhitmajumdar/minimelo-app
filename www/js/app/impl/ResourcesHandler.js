@@ -11,8 +11,6 @@ define(function( require ){
 	var unwantedTypes     = ['undefined', 'save', 'record'];
 	var unclassifiedTypes = ['undefined', 'record'];
 	
-	var audioCtx    = new AudioContext();
-
 	function ResourcesHandler() {
 		this.songs           = [];
 		this.songsByType     = {};
