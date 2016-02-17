@@ -31,7 +31,7 @@ define(function( require ) {
 	}
 
 	UiHandler.prototype.hideLoader = function() {
-		$( ".loader" ).fadeOut( "slow" );
+		$( ".loader" ).fadeOut( "medium" );
 	}
 
 	UiHandler.prototype.initTimelineHeight = function() {
@@ -47,10 +47,8 @@ define(function( require ) {
 	}
 
 	UiHandler.prototype.initRecorder = function(){
-		
 		$('#canvasRecord').attr('width',$('#recordScreen').width());
 		$('#canvasRecord').attr('height',$('#recordScreen').height());
-
 	}
 
 	return UiHandler;

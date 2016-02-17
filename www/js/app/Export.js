@@ -111,24 +111,7 @@ define(function( require ) {
       worker.onmessage = function( event ) {
         var blobMp3=event.data;
 
-        window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/indefini", function (fileSystem) {
-
-          fileSystem.getFile(nameComposition, {create: true, exclusive: false}, function(fileEntry){
-                  
-          fileEntry.createWriter(function(writer){
-            writer.onwriteend=function(evt){
-              console.log("audio enregistre "+nameComposition);
-              $("#success-export").addClass("active");
-              $("#traitement-popup").removeClass("active");
-            }
-              writer.write(blobMp3);
-
-          }, fail);
-
-        }, fail);
-
-        },fail);
-        
+        ResourcesHandler.filesHandler.saveComposition(blobMp3,nameComposition);
 
       };
 

@@ -27,22 +27,17 @@ define( function (require) {
 			var defaultLocation = $(this).parent();
 
 			this.ontouchstart = function(event) {
-				//We add a fake button at his place to show it was here
-				var landMark = $(this).clone();
-				$(this).addClass("cloned");
-
-				$(landMark).addClass('inDrag');
-				$('#manage-menu').prepend(landMark);
-				this.cloneButton = landMark[0];
-				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
-
-				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
-				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+				defaultLocation = $(this).parent();
+				this.style.top  = this.getBoundingClientRect().top;
+				this.style.left = this.getBoundingClientRect().left;
+				console.log(this.style.top + " + " + this.style.left);
+				$(this).addClass('inDrag');
+				$('#manage-menu > div').append($(this));
 			}
 			
 			this.ontouchend = function(event) {
 
-				var type = isOverType(this.cloneButton);
+				var type = isOverType(this);
 
 				if( type != null) {
 					// todo :change the location of the file
@@ -54,21 +49,22 @@ define( function (require) {
 					$(this).attr('type', newType);
 					$(this).appendTo(sorted_sounds);
 
-				} 
+				} else {
+					$(this).appendTo(defaultLocation);
+				}
 
-				this.cloneButton.remove();
-
-				$(this).removeClass('cloned');
 				$(this).removeClass('inDrag');		
+				this.style.top = "";
+				this.style.left = "";	
 
 			}
 
 			this.ontouchmove = function(event) {
 
-				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
+				var rectTimeline = document.querySelectorAll( "#manage-menu > div")[0].getBoundingClientRect();
 
-				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
-				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+				this.style.top = (event.touches[0].clientY - rectTimeline.top) + "px";
+				this.style.left = (event.touches[0].clientX - rectTimeline.left + timeline.scrollLeft) + "px";
 
 			}
 
