@@ -694,7 +694,7 @@ header{
 		&.cloned{
 			&:after{
 				content: "";
-				background-color: #aaa;
+				background-color: #aaa!important;
 				position: relative;
 				top: 4px;
 				display: inline-block;
