@@ -45,19 +45,53 @@ ul {
   100% {
     background-position: 0 66%; } }
 
-/*@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
-@-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
-@-webkit-keyframes load_three { 20%{opacity:0;}40%{opacity:1;}}
-@-webkit-keyframes load_four  { 30%{opacity:0;}50%{opacity:1;}}
-@-webkit-keyframes load_five  { 40%{opacity:0;}60%{opacity:1;}}
-@-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
-@-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
-@-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}*/
-@-webkit-keyframes loadButton {
-  0% {
-    background-position: 0 0; }
-  100% {
-    background-position: 0 66%; } }
+@-webkit-keyframes load_one {
+  00% {
+    opacity: 0; }
+  20% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_two {
+  10% {
+    opacity: 0; }
+  30% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_three {
+  20% {
+    opacity: 0; }
+  40% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_four {
+  30% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_five {
+  40% {
+    opacity: 0; }
+  60% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_six {
+  50% {
+    opacity: 0; }
+  70% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_seven {
+  60% {
+    opacity: 0; }
+  80% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_eight {
+  70% {
+    opacity: 0; }
+  90% {
+    opacity: 1; } }
 
 #overlay-traitement.active {
   display: block; }
@@ -115,24 +149,25 @@ ul {
     margin-right: auto;
     text-align: center; }
   .loader .button {
-    -webkit-animation: loadButton 0s infinite steps(2, end);
-    background-color: inherit; }
+    width: 80px;
+    height: 80px;
+    opacity: 0; }
     .loader .button[type="type-1"] {
-      -webkit-animation-duration: 1s; }
+      -webkit-animation: load_one 3s infinite; }
     .loader .button[type="type-2"] {
-      -webkit-animation-duration: 2s; }
+      -webkit-animation: load_two 3s infinite; }
     .loader .button[type="type-3"] {
-      -webkit-animation-duration: 3s; }
+      -webkit-animation: load_three 3s infinite; }
     .loader .button[type="type-4"] {
-      -webkit-animation-duration: 4s; }
+      -webkit-animation: load_four 3s infinite; }
     .loader .button[type="type-5"] {
-      -webkit-animation-duration: 5s; }
+      -webkit-animation: load_five 3s infinite; }
     .loader .button[type="type-6"] {
-      -webkit-animation-duration: 6s; }
+      -webkit-animation: load_six 3s infinite; }
     .loader .button[type="type-7"] {
-      -webkit-animation-duration: 7s; }
+      -webkit-animation: load_seven 3s infinite; }
     .loader .button[type="type-8"] {
-      -webkit-animation-duration: 8s; }
+      -webkit-animation: load_eight 3s infinite; }
 
 .button {
   background-image: url("../img/buttons_sprite.png");
@@ -338,13 +373,16 @@ header {
   width: 100%;
   height: 100%;
   position: absolute;
+  padding-top: 20px;
   left: 0px;
   top: 0px;
-  text-align: center; }
+  text-align: center;
+  overflow-y: scroll; }
   #songsSelector #choose-song {
     display: inline-block;
-    width: 100%;
-    height: auto; }
+    width: 40%;
+    height: auto;
+    text-align: left; }
     #songsSelector #choose-song div .button span {
       font-size: 32px;
       font-family: "Orange";
@@ -372,6 +410,10 @@ header {
       #songsSelector #choose-song .button.active {
         background-position: 0 33%;
         opacity: 1; }
+  #songsSelector .validate_btn {
+    display: block;
+    text-align: center;
+    margin: 0 auto; }
 
 #panel-record #recordScreen {
   position: relative;
@@ -585,7 +627,8 @@ header {
     margin: 0px;
     padding: 0px;
     display: inline-block;
-    position: relative; }
+    position: relative;
+    text-align: left; }
   #manage-menu #sound_to_sort {
     float: left;
     width: 33%;

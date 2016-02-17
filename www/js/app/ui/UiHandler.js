@@ -20,6 +20,7 @@ define(function( require ) {
 
 	UiHandler.prototype.initCollectionManager = function () {
 		this.collectionUi = new CollectionUi();
+		openPanel('#songsSelector');
 	}
 
 	UiHandler.prototype.reloadSoundElements = function () {

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Mini Mélo</title>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+    
+    
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    
+  </head>
+  <body>
+
+     <div class="loader">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Mini mélo</h2>
+        </div>
+      </div>
+
+      <div class="row load-line">
+        <div class="col-xs-12 text-center">
+          <div class="button instrument" type="type-1"></div>
+          <div class="button instrument" type="type-2"></div>
+          <div class="button instrument" type="type-3"></div>
+          <div class="button instrument" type="type-4"></div>
+          <div class="button instrument" type="type-5"></div>
+          <div class="button instrument" type="type-6"></div>
+          <div class="button instrument" type="type-7"></div>
+          <div class="button instrument" type="type-8"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="app">
+
+      <div class="row panel" id="panel-compose">
+        <div class="col-xs-1 buttons_left" id="buttons-songs">
+        </div>
+        
+        <div class="col-xs-11 main">
+          <h1 id="application-name" >Mini Mélo</h1>
+          <!-- GENERAL MENU BUTTON -->
+          <div id="general-menu-button" class="square_btn menu_btn"></div>
+              <div id="timeline">
+                <div id="line"></div>
+                <div id="timeInfo"></div>
+                <div id="tracks">
+                  <div id="track-1" class="track"></div>
+                  <div id="track-2" class="track"></div>
+                  <div id="track-3" class="track"></div>
+                  <div id="track-4" class="track"></div>
+                </div>
+              </div>
+        
+
+            <div id="deck-buttons" class="row">
+              <div class="col-xs-3">
+                  <div class="round_btn plus_btn button" id="showSongsSelector"></div>
+                  <div id="trash" class="clear round_btn trash_btn"></div>
+              </div>
+
+              <div class="col-xs-6">
+                <!-- <div class="round_btn begin_btn" id="begin"></div> -->
+                <div class="round_btn play_btn" id="play_stop"></div>
+                <!-- <div class="round_btn end_btn" id="end"></div> -->
+              </div>
+
+              <div class="col-xs-3">
+                <div id="unzoom" class="round_btn unzoom_btn "></div>
+                <div id="zoom" class="round_btn zoom_btn "></div>
+              </div>
+
+            </div>
+
+        </div>
+
+      </div>
+
+      <div id="panel-record" class="panel">
+        <div id="recordScreen">
+          <div id='selector'></div>
+          <div id="lineRecord"></div>
+          <canvas id="canvasRecord"></canvas>
+        </div>
+        <div id="record-controls">
+          <div class="player_controls">
+            <div class="round_btn red_rec_btn" id="recordButton" action="record"></div>
+            <div class="round_btn play_btn" id="playRecord"></div>
+            <div class="round_btn scissors_btn" id="cutRecord"></div>
+          </div>
+          <div class="panel_controls">
+            <div class="round_btn close_btn button" id="closeRecorder"></div>
+            <div class="round_btn validate_btn button" id="saveRecord"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="songsSelector" class="panel active">
+        <div id="choose-song"></div>
+        <div class="round_btn validate_btn button" id="validSongSelection"></div>
+      </div>
+
+      <!-- GENERAL MENU -->
+      <div id="general-menu">
+        <ul>
+          <li>
+            <div class="square_btn sub-menu-btn save_btn" menu="save-menu"></div>
+            <p>Sauvegarder</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn export_btn" menu="export-menu"></div>
+            <p>Exporter</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn load_btn" menu="load-menu"></div>
+            <p>Charger une composition</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn new_btn" menu="new-menu"></div>
+            <p>nouvelle composition</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn micro_btn" menu="micro-menu"></div>
+            <p>Enregistrer un son</p>
+          </li>
+          <li>
+            <div class="square_btn sub-menu-btn manage_btn" menu="manage-menu"></div>
+            <p>Gérer les sons</p>
+          </li>
+          <li>
+            <div class="round_btn question_btn" id="general-menu-help"></div>
+          </li>
+        </ul>
+      </div>
+      <div id="general-menu-overlay"></div>
+
+      <div id="save-menu" class="sub-menu">
+        <h2>SAUVEGARDER</h2>
+        <p>Choisis un titre!</p>
+        <input type="text" id="save-menu-input"/>
+        <div id="save-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="export-menu" class="sub-menu">
+        <h2>EXPORTER</h2>
+        <p>Choisis un titre!</p>
+        <input type="text" id="export-menu-input"/>
+        <div id="export-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="load-menu" class="sub-menu">
+        <h2>Charger</h2>
+        <p>Choisis une composition à charger</p>
+        <ul id="load-menu-list"></ul>
+        <div id="load-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="new-menu" class="sub-menu">
+        <h2>NOUVEAU</h2>
+        <p>Veux-tu commencer une nouvelle composition?</p>
+        <div id="new-menu-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="success-export" class="sub-menu">
+        <h2>Success</h2>
+        <div id="success-export-validate" class="round_btn validate_btn"></div>
+      </div>
+      <div id="traitement-popup" class="sub-menu">
+        <h2>Traitement en cours ...</h2>
+        <div id="success-traitement-validate" class="loader1"></div>
+      </div>
+      <!-- <div id="micro-menu" class="sub-menu">
+        <p>MICRO</p>
+      </div> -->
+      <div id="manage-menu" class="sub-menu">
+        <div>
+          <div id="sound_to_sort" class="sorter">
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+            <div class="square_btn toSort"></div>
+          </div>
+
+          <div id="sorting_colors" class="sorter">
+            <div type="type-1" class="pool"></div>
+            <div type="type-2" class="pool"></div>
+            <div type="type-3" class="pool"></div>
+            <div type="type-4" class="pool"></div>
+            <div type="type-5" class="pool"></div>
+            <div type="type-6" class="pool"></div>
+            <div type="type-7" class="pool"></div>
+            <div type="type-8" class="pool"></div>
+          </div>
+
+          <div id="sorted_sounds" class="sorter">
+            <div class="square_btn toSort" type="type-1"></div>
+            <div class="square_btn toSort" type="type-5"></div>
+            <div class="square_btn toSort" type="type-8"></div>
+          </div>
+        </div>
+      </div>
+      <!-- END GENERAL MENU -->
+
+
+    </div>
+
+<!--      <div class="modal fade" id="songsSelector" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                  <div id="choose-song"></div>
+                  <div>
+                    <div class="round_btn validate_btn button" data-dismiss="modal"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div> -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/lib/lame.min.js"></script>
+    <script type="text/javascript" src="js/lib/requirejs.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.js"></script>
+    <script type="text/javascript" src="js/lib/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>  
+  </body>
+</html>

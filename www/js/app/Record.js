@@ -220,28 +220,8 @@ define(function( require ) {
 			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
-			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/undefined", function (fileSystem) {
+			ResourcesHandler.saveRecord(blobMp3,fileName);
 
-				fileSystem.getFile(fileName, {create: true, exclusive: false}, function(fileEntry){
-								
-				fileEntry.createWriter(function(writer){
-					writer.onwriteend=function(evt){
-						console.log("audio enregistre "+fileName);
-						$("#overlay-traitement").removeClass("active");
-						$("#success-export").addClass("active");
-						$('.panel').removeClass('active');
-						$('#panel-compose').addClass('active');
-					}
-				    writer.write(blobMp3);
-
-				}, fail);
-
-			}, fail);
-
-			}, function(error){
-				console.log(error);
-			});
-			ResourcesHandler.filesHandler.saveRecord(blobMp3,fileName);
 		};
 	}
 
