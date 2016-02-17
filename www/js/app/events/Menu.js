@@ -25,7 +25,7 @@ define(function( require ) {
 		$('#save-menu-validate')        .click( self.saveComposition )
 		$('#export-menu-validate')      .click( self.exportComposition );
 		$('#load-menu-validate')        .click( self.loadSaveMenu );
-		$('#new-menu-validate')         .click( self.newComposition );
+		$('#new-menu-validate')         .click(function(){ self.newComposition() });
 		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
 		$("#success-export-validate").click(self.closeGeneralMenu);
 	}
