@@ -42,7 +42,7 @@ ul {
   0% {
     background-position: 0 0; }
   100% {
-    background-position: 0 33%; } }
+    background-position: 0 66%; } }
 
 /*@-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
 @-webkit-keyframes load_two   { 10%{opacity:0;}30%{opacity:1;}}
@@ -53,8 +53,10 @@ ul {
 @-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
 @-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}*/
 @-webkit-keyframes loadButton {
-  to {
-    background-position: 0 33%; } }
+  0% {
+    background-position: 0 0; }
+  100% {
+    background-position: 0 66%; } }
 
 .loader {
   position: absolute;
@@ -72,24 +74,24 @@ ul {
     margin-right: auto;
     margin-top: 50px; }
   .loader .button {
-    -webkit-animation: loadButton 1s infinite steps(1, start);
+    -webkit-animation: loadButton 0s infinite steps(2, end);
     background-color: inherit; }
     .loader .button[type="type-1"] {
-      -webkit-animation-delay: 0s; }
+      -webkit-animation-duration: 1s; }
     .loader .button[type="type-2"] {
-      -webkit-animation-delay: 1s; }
+      -webkit-animation-duration: 2s; }
     .loader .button[type="type-3"] {
-      -webkit-animation-delay: 2s; }
+      -webkit-animation-duration: 3s; }
     .loader .button[type="type-4"] {
-      -webkit-animation-delay: 3s; }
+      -webkit-animation-duration: 4s; }
     .loader .button[type="type-5"] {
-      -webkit-animation-delay: 4s; }
+      -webkit-animation-duration: 5s; }
     .loader .button[type="type-6"] {
-      -webkit-animation-delay: 5s; }
+      -webkit-animation-duration: 6s; }
     .loader .button[type="type-7"] {
-      -webkit-animation-delay: 6s; }
+      -webkit-animation-duration: 7s; }
     .loader .button[type="type-8"] {
-      -webkit-animation-delay: 7s; }
+      -webkit-animation-duration: 8s; }
 
 .button, .song, .pool {
   /* RED */
