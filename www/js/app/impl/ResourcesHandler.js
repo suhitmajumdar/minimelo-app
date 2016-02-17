@@ -8,8 +8,8 @@ define(function( require ){
 
 
 	// distinction between not indexed and not classified ( ie usable sounds that are not in a collection )
-	var unwantedTypes     = ['indefini', 'save', 'record'];
-	var unclassifiedTypes = ['indefini', 'record'];
+	var unwantedTypes     = ['undefined', 'save', 'record'];
+	var unclassifiedTypes = ['undefined', 'record'];
 	
 	var audioCtx    = new AudioContext();
 
@@ -18,13 +18,15 @@ define(function( require ){
 		this.songsByType     = {};
 
 		this.sourceInPreview = null;
-		this.filesHandler    = new FilesHandler();
 		this.songInPreview   = null;
+		this.filesHandler    = new FilesHandler();
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
 
-		this.songs.sort(compare);
+		this.songs.sort(byUrl);
+		this.songs.sort(byType);
+		this.songsByType = {};
 
 		for (var index in this.songs) {
 			var song = this.songs[index];
@@ -40,7 +42,7 @@ define(function( require ){
 		if(this.sourceInPreview != null) {
 			this.sourceInPreview.stop();
 		}
-		this.songInPreview=this.getSong(idSong);
+		this.songInPreview = this.getSong(idSong);
 
 		if(this.songInPreview.buffer != null) {
 			this.sourceInPreview = this.getSong(idSong).play();
@@ -48,7 +50,7 @@ define(function( require ){
 			var self = this;
 
 			this.songInPreview.loadForPreview().then( function(song) {
-				if(song==self.songInPreview){
+				if(song == self.songInPreview){
 					self.sourceInPreview = song.play();
 				}
 				self.buffer=null;
@@ -102,11 +104,7 @@ define(function( require ){
 
 		return notClassified;
 	}
-
-	ResourcesHandler.prototype.getInstance = function() {
-		return this;
-	}
-
+	
 	ResourcesHandler.prototype.getSong = function ( id ) {
 		var length = this.songs.length;
 		for (var i = length - 1; i >= 0; i--) {

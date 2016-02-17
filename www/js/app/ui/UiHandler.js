@@ -22,6 +22,10 @@ define(function( require ) {
 		this.collectionUi = new CollectionUi();
 	}
 
+	UiHandler.prototype.reloadSoundElements = function () {
+		this.soundElements.reload();
+	}
+
 	UiHandler.prototype.initSoundElements = function() {
 		this.soundElements = new SoundElements();
 	}
@@ -42,11 +46,7 @@ define(function( require ) {
 		$('.track').css('width', Timeline.getDurationInPx());
 	}
 
-	// UiHandler.prototype.setTimelapse = function () {
-	// 	Timeline.setTimelapse();
-	// }
-
-	UiHandler.prototype.initRecorder=function(){
+	UiHandler.prototype.initRecorder = function(){
 		
 		$('#canvasRecord').attr('width',$('#recordScreen').width());
 		$('#canvasRecord').attr('height',$('#recordScreen').height());

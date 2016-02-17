@@ -31,6 +31,13 @@ ul {
     -webkit-user-select: none;
     cursor: pointer; }
 
+/* -------------- Loader1 -------------- */
+@-webkit-keyframes loader1 {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
 @-webkit-keyframes load-song-modal {
   0% {
     background-position: 0 0; }
@@ -38,11 +45,51 @@ ul {
     background-position: 0 33%; } }
 
 @-webkit-keyframes load_one {
+  00% {
+    opacity: 0; }
+  20% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_two {
   10% {
     opacity: 0; }
-  15% {
-    opacity: 0.5; }
+  30% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_three {
   20% {
+    opacity: 0; }
+  40% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_four {
+  30% {
+    opacity: 0; }
+  50% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_five {
+  40% {
+    opacity: 0; }
+  60% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_six {
+  50% {
+    opacity: 0; }
+  70% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_seven {
+  60% {
+    opacity: 0; }
+  80% {
+    opacity: 1; } }
+
+@-webkit-keyframes load_eight {
+  70% {
+    opacity: 0; }
+  90% {
     opacity: 1; } }
 
 @-webkit-keyframes songToDropAnimation {
@@ -52,62 +99,6 @@ ul {
     transform: scale(1.1); }
   100% {
     transform: scale(1); } }
-
-@-webkit-keyframes load_two {
-  20% {
-    opacity: 0; }
-  25% {
-    opacity: 0.5; }
-  30% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_three {
-  30% {
-    opacity: 0; }
-  35% {
-    opacity: 0.5; }
-  40% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_four {
-  40% {
-    opacity: 0; }
-  45% {
-    opacity: 0.5; }
-  50% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_five {
-  50% {
-    opacity: 0; }
-  55% {
-    opacity: 0.5; }
-  60% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_six {
-  60% {
-    opacity: 0; }
-  65% {
-    opacity: 0.5; }
-  70% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_seven {
-  70% {
-    opacity: 0; }
-  75% {
-    opacity: 0.5; }
-  80% {
-    opacity: 1; } }
-
-@-webkit-keyframes load_eight {
-  80% {
-    opacity: 0; }
-  85% {
-    opacity: 0.5; }
-  90% {
-    opacity: 1; } }
 
 .loader {
   position: absolute;
@@ -199,6 +190,10 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
+  .buttons_left .button.active, #choose-song .button.active {
+    background-position: 0 33%; }
+  .buttons_left .button.disabled, #choose-song .button.disabled {
+    background-color: grey; }
 
 .app {
   width: 100%;
@@ -233,15 +228,7 @@ ul {
     box-sizing: border-box;
     background-image: url("../img/texture_crayon-1.png");
     background-repeat-x: repeat;
-    border-radius: 3px;
-    /* RED */
-    /* ORANGE */
-    /* YELLOW */
-    /* CLEAR GREEN */
-    /* DARK  GREEN */
-    /* DARK  BLUE */
-    /* CLEAR BLUE */
-    /* PURPLE */ }
+    border-radius: 3px; }
     .app .song.active {
       opacity: 0.6; }
     .app .song.inDrag {
@@ -407,6 +394,7 @@ header {
     overflow-x: auto;
     width: 100%; }
     #songsSelector #choose-song .container-line > div[type] {
+      background-color: transparent;
       display: inline-block; }
       #songsSelector #choose-song .container-line > div[type] .button {
         padding: 10px; }
@@ -430,7 +418,7 @@ header {
   margin: 40px auto 50px;
   border: solid 1px black; }
   #panel-record #recordScreen #selector {
-    background: blue;
+    background: rgba(223, 223, 223, 0.9);
     height: 100%;
     width: 1px;
     display: inline-block;
@@ -449,7 +437,7 @@ header {
     position: relative;
     left: 0px;
     top: 0px;
-    background: rgba(2, 34, 3, 0.2); }
+    background: rgba(223, 223, 223, 0.2); }
 
 #panel-record #record-controls {
   text-align: center; }
@@ -606,6 +594,33 @@ header {
     transition-duration: .3s; }
     .sub-menu #load-menu-validate.active {
       opacity: 1; }
+  .sub-menu h2 {
+    font-family: "Orange"; }
+  .sub-menu .loader1 {
+    position: relative;
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+    border: 3px solid rgba(0, 0, 0, 0.7);
+    top: 28%;
+    top: -webkit-calc(50% - 43px);
+    top: calc(50% - 43px);
+    left: 35%;
+    left: -webkit-calc(50% - 43px);
+    left: calc(50% - 43px);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webkit-animation: loader1 3s linear infinite;
+    animation: loader1 3s linear infinite; }
+  .sub-menu .loader1:after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 20px;
+    width: 11px;
+    height: 11px;
+    border-radius: 10px;
+    background-color: #000; }
 
 #manage-menu {
   width: 80%;
@@ -619,6 +634,9 @@ header {
     z-index: 5; }
   #manage-menu .button.inDrag {
     position: absolute; }
+  #manage-menu .button.cloned:after {
+    content: "";
+    background-color: #ddd; }
   #manage-menu #sorted_sounds {
     overflow-y: scroll;
     text-align: right;
@@ -646,6 +664,15 @@ header {
     background-size: cover;
     display: inline-block;
     position: relative; }
+    #manage-menu .button.cloned:after {
+      content: "";
+      background-color: #aaa;
+      position: relative;
+      top: 4px;
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      z-index: -1; }
   #manage-menu #sorting_colors {
     display: inline-block;
     float: left;
@@ -663,6 +690,30 @@ header {
       border-radius: 16px;
       transition-property: background-color;
       transition-duration: .3s; }
+
+[type="type-1"] {
+  background-color: rgba(235, 56, 22, 0.8); }
+
+[type="type-2"] {
+  background-color: rgba(255, 120, 0, 0.8); }
+
+[type="type-3"] {
+  background-color: rgba(255, 228, 0, 0.8); }
+
+[type="type-4"] {
+  background-color: rgba(170, 244, 0, 0.8); }
+
+[type="type-5"] {
+  background-color: rgba(0, 161, 52, 0.8); }
+
+[type="type-6"] {
+  background-color: rgba(0, 133, 255, 0.8); }
+
+[type="type-7"] {
+  background-color: rgba(132, 214, 255, 0.8); }
+
+[type="type-8"] {
+  background-color: rgba(155, 0, 128, 0.8); }
 
 .square_btn {
   background-image: url("../img/buttons_sprite.png");

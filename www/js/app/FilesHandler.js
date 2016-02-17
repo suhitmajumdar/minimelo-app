@@ -24,7 +24,6 @@ define( function ( require ) {
 			});
 
 		}).then(function(directories){
-			console.log(directories);
 			var promises = [];
 			for (var i = 0; i < directories.length; i++) {
 				var directory   = directories[i];
@@ -76,13 +75,11 @@ define( function ( require ) {
 				});
 
 			}).then(function(directories){
-				console.log(directories);
 				var promises = [];
 				for (var i = 0; i < directories.length; i++) {
 					var directory   = directories[i];
 
 					var promise = new Promise(function(resolve,reject){
-						console.log(entryToCopy,'entryToCopy');
 						directory.copyTo(entryToCopy,directory.name,resolve,reject);
 					}).then(function(data){
 						console.log(data);
@@ -97,49 +94,7 @@ define( function ( require ) {
 				return Promise.all(promises);
 
 			});
-		});
-
-		// return new Promise(function(resolve,reject){
-		// 	window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory,success,fail);
-		// }).then(function(entryToCopy){
-
-		// 	return new Promise(function (resolve, reject) {
-
-		// 	window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/www/audio", resolve, reject);
-			
-		// 	}).then(function(fileSystem){
-		// 		var directoryReader = fileSystem.createReader();
-
-		// 		return new Promise(function(resolve,reject){
-		// 			directoryReader.readEntries(resolve,reject);
-		// 		});
-
-		// 	}).then(function(directories){
-		// 		console.log(directories);
-		// 		var promises = [];
-		// 		for (var i = 0; i < directories.length; i++) {
-		// 			var directory   = directories[i];
-
-		// 			var promise = new Promise(function(resolve,reject){
-		// 				directory.copyTo(entryToCopy,directory.name,resolve,reject);
-		// 			}).then(function(data){
-		// 				console.log(data);
-		// 			},function(error){
-		// 				console.log(error);
-		// 			});
-
-		// 			promises.push(promise);
-
-		// 		}
-
-		// 		return Promise.all(promises);
-
-		// 	});
-		// });
-		
-
-
-		
+		});	
 
 	}
 

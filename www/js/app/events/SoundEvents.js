@@ -8,8 +8,8 @@ define(function(require) {
 		this.initSoundClick();
 	}
 
-
 	SoundEvents.prototype.initSoundClick = function (){
+		// natify this
 		$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
 
 			var idSong = $(this).attr('data-song-id');
@@ -24,6 +24,7 @@ define(function(require) {
 	SoundEvents.prototype.initDragAndDrop = function () {
 
 		var self=this;
+		
 		timeline.ontouchmove=function (event){
 			
 			var clientX=event.touches[0].clientX;
