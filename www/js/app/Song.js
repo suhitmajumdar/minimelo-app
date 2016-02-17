@@ -2,9 +2,9 @@ define(function( require ) {
 	
 	'use strict';
 
-	var audioCtx = new AudioContext();
-	
 	var lastId   = 0;
+	var audioCtx = new AudioContext();
+
 
 	function Song( type, url ) {
 		this.id        = lastId++;
@@ -42,12 +42,12 @@ define(function( require ) {
 		}).then(function(e){
 			var arrayBuffer = e.target.result;
 			return new Promise(function(resolve,reject){
-				audioCtx.decodeAudioData(arrayBuffer,resolve,reject);  
+				audioCtx.decodeAudioData(arrayBuffer, resolve, reject);
 			});
 		}).then(
 
-			function(audioBuffer){
-				self.buffer=audioBuffer;
+			function( audioBuffer ){
+				self.buffer = audioBuffer;
 			},
 			function(){
 				console.log("Impossible de lire "+self.url);
@@ -68,6 +68,7 @@ define(function( require ) {
 	}
 
 	Song.prototype.playWithTime = function ( time ) {
+
 		if ( this.buffer == null ) {
 			throw "PlayWithTime error : buffer is not set, the sound has not been loaded.";
 		}

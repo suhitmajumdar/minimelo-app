@@ -62,13 +62,15 @@ define(function( require ) {
 		);
 		
 	}
+
 	Record.prototype.stopRecord = function(){
 		this.streamRecord.stop();
 		this.microphone.disconnect();
 		this.scriptNode.disconnect();
-
+		
 		this.recordBuffer = audioCtx.createBuffer(1, this.arrayData.length, audioCtx.sampleRate);
 		var output = this.recordBuffer.getChannelData(0);
+
 		for (var i = 0; i < this.arrayData.length; i++) {
 			output[i] = this.arrayData[i];
 		}
@@ -110,12 +112,12 @@ define(function( require ) {
 	}
 
 	Record.prototype.playRecord = function(){
-		var self=this;
-		if(this.playing==true){
+		var self = this;
+
+		if(this.playing == true){
 			this.recorToPlay.stop();
 			clearInterval(this.idPlayInterval);
-		}
-		else{
+		} else {
 			this.recorToPlay = audioCtx.createBufferSource();
 			this.recorToPlay.buffer = this.recordBuffer;
 			this.recorToPlay.start(0);
@@ -152,12 +154,12 @@ define(function( require ) {
 	}
 
 	Record.prototype.getPositionOnSong=function(x){
-		var pxInSecond=this.recordBuffer.duration/canvasRecord.width;
+		var pxInSecond = this.recordBuffer.duration/canvasRecord.width;
 		return x*pxInSecond;
 	}
 
 	Record.prototype.getXOnSong=function(sec){
-		var pxInSecond=this.recordBuffer.duration/canvasRecord.width;
+		var pxInSecond = this.recordBuffer.duration/canvasRecord.width;
 		return sec/pxInSecond;
 	}
 
@@ -174,9 +176,9 @@ define(function( require ) {
 
 	Record.prototype.cutRecord=function(){
 
-		var startPos=this.getStartSample();
-		var stopPos=this.getStopSample();
-		var duration=this.getDurationSample();
+		var startPos = this.getStartSample();
+		var stopPos = this.getStopSample();
+		var duration = this.getDurationSample();
 
 		var channels = this.recordBuffer.numberOfChannels;
 		var frameCount = this.recordBuffer.sampleRate * duration;

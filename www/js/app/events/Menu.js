@@ -7,6 +7,7 @@ define(function( require ) {
 	var ui = null
 	var events = null
 	var modifiedCollection = false;
+	
 	function Menu( eventsHandler ) {
 
 		this.selectedSaveToLoad = null;
