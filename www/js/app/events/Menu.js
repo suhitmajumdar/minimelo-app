@@ -86,8 +86,11 @@ define(function( require ) {
 	Menu.prototype.displayCollectionManager = function () {
 		ui.initCollectionManager();
 		new CollectionEvents();
+
 		openPanel('#manage-menu');
         this.closeGeneralMenu();		
+
+		events.soundEvents.initSoundClick();
 	}
 
 	Menu.prototype.loadSubMenu = function (name){

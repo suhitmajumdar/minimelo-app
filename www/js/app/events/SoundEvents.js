@@ -16,15 +16,36 @@ define(function(require) {
 
 	SoundEvents.prototype.initSoundClick = function (){
 		// natify this
-		$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
+		// $( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
 
-			var idSong = $(this).attr('data-song-id');
-			ResourcesHandler.playPreview(idSong);
+		// 	var idSong = $(this).attr('data-song-id');
+		// 	ResourcesHandler.playPreview(idSong);
 
-			$(this).parent().find('.button').removeClass("active");
+		// 	$(this).parent().find('.button').removeClass("active");
 			
-			$(this).addClass("active");
-		});
+		// 	$(this).addClass("active");
+		// });
+
+		var buttonsPreview=document.querySelectorAll('.button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)');
+
+		for (var i = 0; i < buttonsPreview.length; i++) {
+			
+			buttonsPreview[i].onmousedown=function(event){
+				console.log(this);
+
+				var idSong = parseInt(this.getAttribute('data-song-id'));
+
+				ResourcesHandler.playPreview(idSong);
+
+				var siblings=this.parentNode.querySelectorAll('.button');
+				for (var k = 0; k < siblings.length; k++) {
+					siblings[k].classList.remove('active');
+				};
+				
+				this.classList.add('active');
+			}
+
+		};
 	}
 
 	SoundEvents.prototype.initDragAndDrop = function () {
@@ -183,7 +204,7 @@ define(function(require) {
 			var buttonSong=this;
 			buttonSong.ontouchstart=function(event){
 
-				if(!$(this).hasClass('disabled'))
+				if(this.getAttribute('data-song-id')!=null)
 				{
 					var divSong=self.createDivSong(this);
 					this.songToPlace=divSong;
