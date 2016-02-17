@@ -14,7 +14,7 @@ define( function ( require ) {
 
 		return new Promise(function (resolve, reject) {
 
-			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo", resolve, reject);
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory, resolve, reject);
 			
 		}).then(function(fileSystem){
 			var directoryReader = fileSystem.createReader();
