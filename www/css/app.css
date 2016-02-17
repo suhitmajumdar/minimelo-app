@@ -564,6 +564,7 @@ header {
   .sub-menu h2 {
     font-family: "Orange"; }
   .sub-menu .loader1 {
+    display: none;
     position: relative;
     height: 80px;
     width: 80px;

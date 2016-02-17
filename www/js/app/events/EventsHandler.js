@@ -4,10 +4,11 @@ define(function( require ) {
 	var Timeline 		 = require('app/Timeline');
 	var Menu 			 = require('events/Menu');
 	var SoundEvents		 = require('events/SoundEvents');
+	var Record		     = require('app/Record');
 
-	function EventsHandler(uiHandler, record){
+	function EventsHandler(uiHandler){
 		this.uiHandler = uiHandler;
-		this.record = record;
+		this.record = new Record();
 		this.menu   = new Menu( this );
 
 		this.initSoundEvents();

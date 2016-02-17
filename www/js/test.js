@@ -109,3 +109,12 @@ var promise = new Promise(function (resolve, reject) {
 
 			});
 		});
+
+
+		var idInterval={
+			id:
+		};
+	    idInterval=setInterval(function(){
+			// clearInterval(this);
+			// console.log("test");
+		}.bind(idInterval));
