@@ -16,8 +16,9 @@ define(function( require ){
 		this.songsByType     = {};
 
 		this.sourceInPreview = null;
-		this.songInPreview   = null;
 		this.filesHandler    = new FilesHandler();
+
+		this.songInPreview   = null;
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
@@ -110,6 +111,28 @@ define(function( require ){
 				return this.songs[i];
 		}
 		return null;
+	}
+
+	ResourcesHandler.prototype.saveRecord = function (blobData,fileName) {
+		var self = this;
+		return this.filesHandler.saveRecord(blobData,fileName).then(function(fileEntryForSong){
+			var song = new Song("record", fileEntryForSong.nativeURL);
+			song.fileEntry = fileEntryForSong;
+			self.songs.push(song);
+			self.postProcessing();
+			console.log(self);
+		});
+	}
+
+	ResourcesHandler.prototype.saveComposition = function (blobData,fileName) {
+		var self=this;
+		return this.filesHandler.saveComposition(blobData,fileName).then(function(fileEntryForSong){
+			var song = new Song("save", fileEntryForSong.nativeURL);
+			song.fileEntry = fileEntryForSong;
+			self.songs.push(song);
+			self.postProcessing();
+			console.log(self);
+		});
 	}
 
 	return ResourcesHandler;

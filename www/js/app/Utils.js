@@ -74,3 +74,8 @@ jQuery.fn.extend({
 		$(this).addClass('qsopen');
     }
 });
+
+function openPanel(idPanel){
+	$('.panel').removeClass('active');
+	$(idPanel).addClass('active');
+}

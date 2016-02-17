@@ -53,7 +53,7 @@ ul{
 
 @-webkit-keyframes load-song-modal{
 	0% {background-position:0 0;}
-	100% {background-position:0 33%;}
+	100% {background-position:0 66%;}
 }
 
 @-webkit-keyframes load_one   { 00%{opacity:0;}20%{opacity:1;}}
@@ -64,12 +64,6 @@ ul{
 @-webkit-keyframes load_six   { 50%{opacity:0;}70%{opacity:1;}}
 @-webkit-keyframes load_seven { 60%{opacity:0;}80%{opacity:1;}}
 @-webkit-keyframes load_eight {	70%{opacity:0;}90%{opacity:1;}}
-
-@-webkit-keyframes songToDropAnimation {
-	0%   {transform:scale(1);}
-	50%   {transform:scale(1.1);}
-	100% {transform:scale(1);}
-}
 
 .loader{
 	position:absolute;
@@ -88,19 +82,11 @@ ul{
 				margin-right:auto;
 				margin-top:50px;}
 
-	.button{display:inline-block;
-			text-align:center;
-			opacity:0;
+	.button{
 			width:80px;
 			height:80px;
-			background-image:url("../img/buttons_sprite.png");
-			background-size: cover;
-
-			&.active{
-				background-position:0 33%;
-			}
-
-	    	&[type="type-1"]{ 
+			opacity: 0;
+	    	&[type="type-1"]{
 	    		-webkit-animation: load_one 3s infinite;
 	    	}
 
@@ -147,16 +133,11 @@ ul{
 
 
 .button{
-	&.disabled{
-		background-color: grey;
-	}
-	&.active{
-		background-position:0 33%;
-	}
+	
 }
 
 
-.buttons_left .button, #choose-song .button {
+.button {
 	background-image: url("../img/buttons_sprite.png");
 	background-size: 100%;
 	width: 57px;
@@ -164,6 +145,7 @@ ul{
 	background-repeat: no-repeat;
 	position:relative;
 	font-size:0px;
+	display: inline-block;
 
 	span{font-size:32px;
 	font-family:"Orange";
@@ -173,6 +155,15 @@ ul{
 	width:100%;
 	padding-left:8px;}
 
+	&.disabled{
+		background-color: grey;
+	}
+	&.active{
+		background-position:0 33%;
+	}
+/*<<<<<<< HEAD
+=======
+
 
 	&.active{
 		background-position:0 33%;
@@ -182,6 +173,7 @@ ul{
 		background-color: grey;
 	}
 
+>>>>>>> managingSound*/
 }
 
 .app{
@@ -241,16 +233,40 @@ ul{
 			/*position: fixed;*/
 			z-index: 4;
 		}
+		/* RED */
+		&[type="type-1"]{
+			border: 5px solid $red;
+		}
 
-		&[type="type-1"]{ border: 5px solid $red;}
-		&[type="type-2"]{ border: 5px solid $orange; }
-		&[type="type-3"]{ border: 5px solid $yellow;}
-		&[type="type-4"]{ border: 5px solid $clear_green;}
-		&[type="type-5"]{ border: 5px solid $dark_green;}
-		&[type="type-6"]{ border: 5px solid $dark_blue;}
-		&[type="type-7"]{ border: 5px solid $clear_blue;}
-		&[type="type-8"]{ border: 5px solid $purple;}
+		/* ORANGE */
+		&[type="type-2"]{
+			border: 5px solid $orange; 
+		 }
 
+		/* YELLOW */
+		&[type="type-3"]{
+			border: 5px solid $yellow;
+		}
+		/* CLEAR GREEN */
+		&[type="type-4"]{
+			border: 5px solid $clear_green;
+		}
+		 /* DARK  GREEN */
+		&[type="type-5"]{
+			border: 5px solid $dark_green;
+		}
+		/* DARK  BLUE */
+		&[type="type-6"]{
+			border: 5px solid $dark_blue;
+		}
+		/* CLEAR BLUE */
+		&[type="type-7"]{ 
+			border: 5px solid $clear_blue;
+		}
+		/* PURPLE */
+		&[type="type-8"]{
+			border: 5px solid $purple;
+		}
 		span{
 			font-size:32px;
 			font-family:"Orange";
@@ -384,17 +400,21 @@ header{
 	&::-webkit-scrollbar-track {
 		border-radius: 10px;
 	}
-
-	.track {
-		border-top: 1px solid #3F496E;
-		width:400px;
-		height: 23.5%;
+	#tracks{
+		height: 94%;
 		position: relative;
+		.track {
+			border-top: 1px solid #3F496E;
+			width:400px;
+			height: 25%;
+			position: relative;
 
-		&:last-of-type{
-			border-bottom: 1px solid #3F496E;
+			&:last-of-type{
+				border-bottom: 1px solid #3F496E;
+			}
 		}
 	}
+	
 
 	#line{
 		top: 0px;
@@ -411,24 +431,20 @@ header{
 
 /*CSS MODAL*/
 #songsSelector{
-	
-	.modal-dialog {
-		width: 100%;
-		height: 100%;
-		margin: 0;
-		.modal-content{
-			height: 100%;
-
-			.modal-body{
-				text-align: center;
-			}
-		}
-	}
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	padding-top: 20px;
+	left: 0px;
+	top: 0px;
+	text-align: center;
+	overflow-y: scroll;
 
 	#choose-song{
 		display: inline-block;
+		width: 50%;
 		text-align: left;
-		width: 100%;
+
 
 		div .button span{font-size:32px;
 					font-family:"Orange";
@@ -467,6 +483,11 @@ header{
 
 		}
 
+	}
+	.validate_btn{
+		display: block;
+		text-align: center;
+		margin: 0 auto;
 	}
 }
 
@@ -722,6 +743,7 @@ header{
   h2{font-family:"Orange";}
 
   .loader1{
+  	display: none;
 	position: relative;
 	height: 80px;
 	width: 80px;
@@ -770,32 +792,28 @@ header{
 
 	.button.inDrag {
 		position: absolute;
-	}
-	.button.cloned:after {
-		content:"";
-		background-color: #ddd;
+		z-index: 6;
+		background-color: #fff;
+
 	}
 
-	#sorted_sounds {
+	.sorter{
 		overflow-y: scroll;
-		text-align: right;
-		display: inline-block;
-		float: left;
 		width: 33%;
 		height: 100%;
-		box-sizing: border-box;
+		margin: 0px;
+		padding: 0px;
+		display: inline-block;
 		position: relative;
+		text-align: left;
 	}
 
 	#sound_to_sort{
-		text-align: left;
-		display: inline-block;
 		float: left;
 		width: 33%;
 		height: 100%;
 		margin: 0;
 		padding: 10px;
-		box-sizing: border-box;
 		&.selected{
 			background-color: #ccc;
 		}
@@ -804,32 +822,21 @@ header{
 	.button {
 		width: 55px;
 		height: 55px;
-		background-image:url("../img/buttons_sprite.png");
-		background-size: cover;
-		display: inline-block;
-		position:relative;
-
 		&.cloned{
 			&:after{
 				content: "";
-				background-color: #aaa;
 				position: relative;
 				top: 4px;
 				display: inline-block;
 				width:50px;
 				height: 50px;
 				z-index: -1;
+				background-color: #aaa;
 			}
 		}
-
 	}
 
 	#sorting_colors{
-	display: inline-block;
-	float: left;
-	width: 33%;
-	height: 100%;
-	box-sizing: border-box;
 
 		.pool{
 			display: inline-block;
@@ -847,14 +854,14 @@ header{
 
 }
 
-[type="type-1"]{ background-color: $red; }
+/*[type="type-1"]{ background-color: $red; }
 [type="type-2"]{ background-color: $orange; }
 [type="type-3"]{ background-color: $yellow; }
 [type="type-4"]{ background-color: $clear_green; }
 [type="type-5"]{ background-color: $dark_green; }
 [type="type-6"]{ background-color: $dark_blue; }
 [type="type-7"]{ background-color: $clear_blue; }
-[type="type-8"]{ background-color: $purple; }
+[type="type-8"]{ background-color: $purple; }*/
 
 .square_btn{
 	background-image: url("../img/buttons_sprite.png");
