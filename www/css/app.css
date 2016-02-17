@@ -601,10 +601,9 @@ header {
     height: 100%;
     z-index: 5; }
   #manage-menu .button.inDrag {
-    position: absolute; }
-  #manage-menu .button.cloned:after {
-    content: "";
-    background-color: #ddd; }
+    position: absolute;
+    z-index: 6;
+    background-color: #fff; }
   #manage-menu .sorter {
     overflow-y: scroll;
     width: 33%;
@@ -626,13 +625,13 @@ header {
     height: 55px; }
     #manage-menu .button.cloned:after {
       content: "";
-      background-color: #aaa;
       position: relative;
       top: 4px;
       display: inline-block;
       width: 50px;
       height: 50px;
-      z-index: -1; }
+      z-index: -1;
+      background-color: #aaa; }
   #manage-menu #sorting_colors .pool {
     display: inline-block;
     width: 50%;

@@ -787,10 +787,9 @@ header{
 
 	.button.inDrag {
 		position: absolute;
-	}
-	.button.cloned:after {
-		content:"";
-		background-color: #ddd;
+		z-index: 6;
+		background-color: #fff;
+
 	}
 
 	.sorter{
@@ -820,13 +819,13 @@ header{
 		&.cloned{
 			&:after{
 				content: "";
-				background-color: #aaa;
 				position: relative;
 				top: 4px;
 				display: inline-block;
 				width:50px;
 				height: 50px;
 				z-index: -1;
+				background-color: #aaa;
 			}
 		}
 	}
