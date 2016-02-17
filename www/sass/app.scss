@@ -114,10 +114,6 @@ ul{
 		border-radius: 10px;
 		background-color: #000;
 	}
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 }
 
 .loader{
@@ -425,8 +421,8 @@ header{
 
 	#choose-song{
 		display: inline-block;
-		
 		width: 100%;
+		height: auto;
 
 		div .button span{font-size:32px;
 					font-family:"Orange";
@@ -849,7 +845,7 @@ header{
 
 .round_btn{
 	display: inline-block;
-	width: 50px;
+	width: 49px;
 	height: 50px;
 	background-image: url("../img/buttons_sprite.png");
 	background-size: cover;
