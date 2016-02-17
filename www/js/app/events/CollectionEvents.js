@@ -33,8 +33,9 @@ define( function (require) {
 
 				$(landMark).addClass('inDrag');
 				$('#manage-menu').prepend(landMark);
-				this.cloneButton=landMark[0];
+				this.cloneButton = landMark[0];
 				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
+
 				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
 				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
 			}
@@ -44,7 +45,6 @@ define( function (require) {
 				var type = isOverType(this.cloneButton);
 
 				if( type != null) {
-					console.log("we has a type");
 					// todo :change the location of the file
 					var newType = type.getAttribute('type');
 					var song = ResourcesHandler.getSong($(this).attr("data-song-id"));
@@ -54,16 +54,12 @@ define( function (require) {
 					$(this).attr('type', newType);
 					$(this).appendTo(sorted_sounds);
 
-				} else {
-					//$(this).appendTo(defaultLocation);
-				}
-				this.cloneButton.remove();
-				console.log("clone removed!")
-				$(this).removeClass('cloned');
+				} 
 
+				this.cloneButton.remove();
+
+				$(this).removeClass('cloned');
 				$(this).removeClass('inDrag');		
-				this.style.top = "";
-				this.style.left = "";	
 
 			}
 

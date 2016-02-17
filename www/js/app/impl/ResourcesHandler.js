@@ -18,12 +18,14 @@ define(function( require ){
 		this.songsByType     = {};
 
 		this.sourceInPreview = null;
-		this.filesHandler     = new FilesHandler();
+		this.filesHandler    = new FilesHandler();
 	}
 
 	ResourcesHandler.prototype.postProcessing = function () {
 
-		this.songs.sort(compare);
+		this.songs.sort(byUrl);
+		this.songs.sort(byType);
+		this.songsByType = {};
 
 		for (var index in this.songs) {
 			var song = this.songs[index];

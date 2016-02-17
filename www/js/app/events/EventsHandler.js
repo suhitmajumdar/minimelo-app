@@ -8,14 +8,19 @@ define(function( require ) {
 	function EventsHandler(uiHandler, record){
 		this.uiHandler = uiHandler;
 		this.record = record;
-		this.menu   = new Menu(uiHandler);
+		this.menu   = new Menu( this );
 
-		this.initModalEvents();
-		this.soundEvents = new SoundEvents();
+		this.initSoundEvents();
 
 		this.initDeckButtons();
 		this.initRecorderEvents();
 		this.initValidQuickSelect();
+	}
+
+	EventsHandler.prototype.initSoundEvents = function () {
+		this.initModalEvents();
+		this.soundEvents = new SoundEvents();
+		this.soundEvents.initEventsButtonsSong();
 	}
 
 	EventsHandler.prototype.initRecorderEvents = function(){
@@ -72,6 +77,7 @@ define(function( require ) {
 		}
 
 		saveRecord.onclick=function(){
+			$("#traitement-popup").addClass("active");
 			self.record.saveRecord();
 		}
 
@@ -106,6 +112,7 @@ define(function( require ) {
 					$(this).removeClass('play_btn');
 					$(this).addClass('stop_btn');
 					Timeline.play();
+
 				} else {
 					$(this).removeClass('stop_btn');
 					$(this).addClass('play_btn');

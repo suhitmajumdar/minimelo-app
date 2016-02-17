@@ -24,6 +24,7 @@ define(function(require) {
 	SoundEvents.prototype.initDragAndDrop = function () {
 
 		var self=this;
+		
 		timeline.ontouchmove=function (event){
 			
 			var clientX=event.touches[0].clientX;
