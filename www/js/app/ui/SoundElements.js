@@ -23,7 +23,7 @@ define(function( require ) {
 		for ( var type in types ) {
 			var buttonSong = $('<div class="button disabled soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
-			buttonSong.append("<span class='numberSong'></span>")
+			buttonSong.append("<span class='numberSong'>?</span>")
 
 			$('#buttons-songs').append(buttonSong);
 

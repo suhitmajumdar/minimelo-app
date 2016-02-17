@@ -186,8 +186,6 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
-  .button.disabled {
-    background-color: grey; }
   .button.active {
     background-position: 0 33%; }
 
