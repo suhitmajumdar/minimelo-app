@@ -186,6 +186,8 @@ ul {
     text-align: center;
     width: 100%;
     padding-left: 8px; }
+  .button.disabled {
+    background-color: grey; }
   .button.active {
     background-position: 0 33%; }
 
@@ -532,7 +534,7 @@ header {
   top: 0px;
   right: 0px;
   transition: transform;
-  z-index: 2;
+  z-index: 1;
   transform: translateX(100%);
   transition-duration: 0.3s;
   width: 100%;

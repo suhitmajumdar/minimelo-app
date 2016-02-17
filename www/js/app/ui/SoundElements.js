@@ -21,7 +21,7 @@ define(function( require ) {
 		var types = ResourcesHandler.getActivesTypes();
 
 		for ( var type in types ) {
-			var buttonSong = $('<div class="button disabled soundChoose"></div>');
+			var buttonSong = $('<div class="button soundChoose"></div>');
 			buttonSong.attr('type', types[type]);
 			buttonSong.append("<span class='numberSong'>?</span>")
 
