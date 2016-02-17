@@ -220,15 +220,15 @@ define(function( require ) {
 			var blobMp3=e.data;
 			var fileName=self.generateFileName();
 
-			window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/undefined", function (fileSystem) {
 
 				fileSystem.getFile(fileName, {create: true, exclusive: false}, function(fileEntry){
 								
 				fileEntry.createWriter(function(writer){
 					writer.onwriteend=function(evt){
 						console.log("audio enregistre "+fileName);
-						$("#success-export").addClass("active");
 						$("#overlay-traitement").removeClass("active");
+						$("#success-export").addClass("active");
 						$('.panel').removeClass('active');
 						$('#panel-compose').addClass('active');
 					}

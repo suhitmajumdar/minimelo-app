@@ -72,15 +72,19 @@ ul{
 	100% {transform:scale(1);}
 }
 
-div#overlay-traitement.active{display:block;}
 
-div#overlay-traitement {
+#overlay-traitement.active{display:block;}
+
+#overlay-traitement{
+	position:absolute;
+	z-index:99999;
 	width: 100%;
+	min-height:100%;
+	background-color: rgba(255,255,255,0.6);
 	display:none;
-	min-height: 100%;
-	background: rgba(255,255,255,0.6);
-	position: absolute;
-	z-index: 999999;
+
+	#traitement-popup{opacity:1;
+	visibility: visible;}
 
 	.loader1{
 	position: relative;
@@ -112,7 +116,10 @@ div#overlay-traitement {
 		border-radius: 10px;
 		background-color: #000;
 	}
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 }
 
 .loader{
@@ -630,14 +637,14 @@ header{
 	top: 10%;
 	width: 500px;
 	padding: 20px 10px 30px;
-  box-shadow: rgba(0,0,0,0.2) -5px 0 5px;
-  background-color: $white;
-  visibility: hidden;
+  	box-shadow: rgba(0,0,0,0.2) -5px 0 5px;
+  	background-color: $white;
+  	visibility: hidden;
 	text-align: center;
-  z-index: 2;
-  opacity: 0;
-  transition-duration: .3s;
-  &.active{
+  	z-index: 2;
+  	opacity: 0;
+  	transition-duration: .3s;
+  	&.active{
 	visibility: visible;
 	opacity: 1;
   }

@@ -101,6 +101,7 @@ ul {
   100% {
     transform: scale(1); } }
 
+<<<<<<< Updated upstream
 div#overlay-traitement.active {
   display: block; }
 
@@ -112,6 +113,22 @@ div#overlay-traitement {
   position: absolute;
   z-index: 999999; }
   div#overlay-traitement .loader1 {
+=======
+#overlay-traitement.active {
+  display: block; }
+
+#overlay-traitement {
+  position: absolute;
+  z-index: 99999;
+  width: 100%;
+  min-height: 100%;
+  background-color: rgba(255, 255, 255, 0.6);
+  display: none; }
+  #overlay-traitement #traitement-popup {
+    opacity: 1;
+    visibility: visible; }
+  #overlay-traitement .loader1 {
+>>>>>>> Stashed changes
     position: relative;
     height: 80px;
     width: 80px;
@@ -127,7 +144,11 @@ div#overlay-traitement {
     transform-origin: 50% 50%;
     -webkit-animation: loader1 3s linear infinite;
     animation: loader1 3s linear infinite; }
+<<<<<<< Updated upstream
   div#overlay-traitement .loader1:after {
+=======
+  #overlay-traitement .loader1:after {
+>>>>>>> Stashed changes
     content: "";
     position: absolute;
     top: -5px;
