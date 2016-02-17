@@ -14,6 +14,7 @@ body {
   margin: 0px;
   padding: 0px;
   width: 100%;
+  font-weight: 100;
   background-color: #ffffff; }
 
 @font-face {
@@ -109,12 +110,13 @@ ul {
   .loader h2 {
     text-align: center;
     font-size: 100px;
-    font-family: "Orange"; }
+    font-family: "Orange";
+    font-weight: 100; }
   .loader .load-line {
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px; }
+    text-align: center; }
   .loader .button {
     display: inline-block;
     text-align: center;
@@ -180,7 +182,9 @@ ul {
     overflow: visible;
     font-family: "Orange";
     margin: 0px;
-    padding: 10px; }
+    padding-top: 10px;
+    padding-bottom: 0px;
+    font-weight: 100; }
   .app .panel {
     height: 100%;
     width: 100%;
@@ -414,8 +418,8 @@ header {
   padding-bottom: 20px; }
   #deck-buttons div:nth-of-type(3) {
     text-align: right; }
-  #deck-buttons div:nth-of-type(1) p {
-    font-family: "Orange"; }
+  #deck-buttons div:nth-of-type(2) {
+    text-align: center; }
   #deck-buttons img {
     margin-left: 10px;
     width: 40px;
@@ -545,7 +549,9 @@ header {
     .sub-menu #load-menu-validate.active {
       opacity: 1; }
   .sub-menu h2 {
-    font-family: "Orange"; }
+    font-family: "Orange";
+    font-weight: 100;
+    font-size: 36px; }
   .sub-menu .loader1 {
     position: relative;
     height: 80px;
@@ -710,7 +716,8 @@ header {
   height: 50px;
   background-image: url("../img/buttons_sprite.png");
   background-size: cover;
-  background-position: 0 67%; }
+  background-position: 0 67%;
+  margin-top: 2px; }
   .round_btn.active {
     background-position: 0 100%; }
     .round_btn.active:after {

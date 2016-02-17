@@ -5,6 +5,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	function Timeline() {
 		this.songsInPlay = [];
+		this.idIntervalScroll = null;
 
 		this.tempo       = 90;
 		this.bars        = 20;
@@ -22,6 +23,10 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	}
 
+	Timeline.prototype.stopIntervalScroll = function(){
+		clearInterval(this.idIntervalScroll);
+	}
+
   	Timeline.prototype.play = function () {
 
 		var self = this;
@@ -32,7 +37,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		self.debutSong=self.audioCtx.currentTime;
 		$("#timeline").scrollLeft(0);
 
-		self.lineTimeOut = setInterval(function(){
+			self.lineTimeOut = setInterval(function(){
 			var playingTime = self.audioCtx.currentTime-self.debutSong;
 			var timeInTimeline = self.secondsToPxInTimeline(playingTime);
 			$("#line").css('width',timeInTimeline);
@@ -40,9 +45,13 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			var middleTimeline = timeline.getBoundingClientRect().right/2;
 			var positionLine = line.getBoundingClientRect().right;
 
-			if (positionLine >= middleTimeline)
-				$("#timeline").animate({scrollLeft : '+=200'}, 'slow');
+			if (positionLine >= middleTimeline)	{
+				$("#timeline").animate({scrollLeft: '+=200'}, 'slow');
+			}
+				
 		},100)
+
+
 
 		$('.track .song').each(function(){
 			
@@ -116,39 +125,44 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 		var lastRatio=this.ratioSecondPixel;
 
-		
+		if(this.songsInPlay.length == 0){
 
-		if(this.ratioSecondPixel<=300)
-		{
+			if(this.ratioSecondPixel<=300)
+			{
 
-			this.ratioSecondPixel+=10;
+				this.ratioSecondPixel+=10;
 
-			$(".track").each(function(){
-				var widthPiste = $(this).width();
-				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
-				$(this).css('width',newWidth);
-			});
+				$(".track").each(function(){
+					var widthPiste = $(this).width();
+					var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+					$(this).css('width',newWidth);
+				});
 
-			this.redrawSongs(lastRatio);
+				this.redrawSongs(lastRatio);
+			}
 		}
 	}
 
 	Timeline.prototype.unzoom=function(){
 		var self=this;
 
-		var lastRatio=this.ratioSecondPixel;
+		if(this.songsInPlay.length == 0){
 
-		if(this.ratioSecondPixel>=15)
-		{
-			this.ratioSecondPixel-=10;
+		
+			var lastRatio=this.ratioSecondPixel;
 
-			$(".track").each(function(){
-				var widthPiste = $(this).width();
-				var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
-				$(this).css('width',newWidth);
-			});
+			if(this.ratioSecondPixel>=15)
+			{
+				this.ratioSecondPixel-=10;
 
-			this.redrawSongs(lastRatio);
+				$(".track").each(function(){
+					var widthPiste = $(this).width();
+					var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+					$(this).css('width',newWidth);
+				});
+
+				this.redrawSongs(lastRatio);
+			}
 		}	
 	}
 
@@ -162,6 +176,20 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			$(this).css('width',self.ratioSecondPixel*song.getDuration());
 			$(this).css('left',self.ratioSecondPixel*$(this).position().left/lastRatio);
 		});
+		this.setTimelapse();
+	}
+
+	Timeline.prototype.setTimelapse=function(){
+		$('#timeInfo').css('width', this.getDurationInPx());
+		$('#timeInfo').empty();
+		var everyTwentySecond=this.secondsToPxInTimeline(20);
+		var second=0;
+		for (var i = 0; i < this.getDurationInPx(); i+=everyTwentySecond) {
+			var lapseLine=$('<div class="lapseLine"><span>'+second+'</span></div>');
+			lapseLine.css('left',i);
+			$('#timeInfo').append(lapseLine);
+			second+=20;
+		};
 	}
 
 	Timeline.prototype.getDurationInPx=function(){
