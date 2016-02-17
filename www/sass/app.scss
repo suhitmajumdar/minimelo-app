@@ -89,25 +89,9 @@ ul{
 		margin-right:auto;
 		text-align:center;
 	}
-/*
-<<<<<<< HEAD
-	.button{display:inline-block;
-			text-align:center;
-			opacity:0;
-			width:80px;
-			height:80px;
-			background-image:url("../img/buttons_sprite.png");
-			background-size: cover;
-
-			&.active{
-				background-position:0 33%;
-			}
-
-=======*/
 	.button{
 			-webkit-animation: loadButton 0s infinite steps(2,end);
 			background-color: inherit;
-/*>>>>>>> managing_sound_files*/
 	    	&[type="type-1"]{ -webkit-animation-duration:  1s ;}
 			&[type="type-2"]{ -webkit-animation-duration:  2s ;}
 			&[type="type-3"]{ -webkit-animation-duration:  3s ;}

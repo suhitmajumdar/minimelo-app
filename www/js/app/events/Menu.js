@@ -47,24 +47,6 @@ define(function( require ) {
 			modifiedCollection = false;
 		}
 	}
-
-	/*Menu.prototype.getSaveName = function(){
-		alert('penser à aller chercher le nom de la sauvegarde')
-		return "saveName";
-	}
-	Menu.prototype.getExportName = function(){
-		var name = "";
-		if(name == ""){
-			name = this.getSaveName();
-		}
-		return name;
-	}
-
-	Menu.prototype.loadExportMenu = function(){
-		name = this.getExportName()
-		$('#export-menu-input').val(name)
-	}*/
-
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
 		if(name!=null && name!=""){
@@ -113,9 +95,6 @@ define(function( require ) {
 
 	Menu.prototype.loadSubMenu = function (name){
 		switch(name){
-			case 'export-menu':
-				//this.loadExportMenu();
-				break;
 			case 'new-menu':
 				break;
 			case 'micro-menu':
