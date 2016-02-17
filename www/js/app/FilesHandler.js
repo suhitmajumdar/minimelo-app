@@ -21,7 +21,6 @@ define( function ( require ) {
 
 	function FilesHandler() {
 		this.filesDirectories  = {};
-		
 	}
 
 	FilesHandler.prototype.loadSongs = function( soundsArray ) {
@@ -134,33 +133,99 @@ define( function ( require ) {
 
 	FilesHandler.prototype.saveFile = function(blobData,fileName,directory) {
 		
+		var fileEntryForSong=null;
 
 		return new Promise(function(resolve,reject){
-			console.log(blobData,fileName,directory);
 			window.resolveLocalFileSystemURL(directory,resolve,reject);
 		}).then(function(fileSystem){
-			console.log(fileSystem);
 			return new Promise(function(resolve,reject){
 				fileSystem.getFile(fileName,{create: true, exclusive: false},resolve,reject);
 			})
 		}).then(function(fileEntry){
-			console.log(fileEntry);
+			fileEntryForSong=fileEntry;
 			return new Promise(function(resolve,reject){
 				fileEntry.createWriter(resolve,reject);
 			});
 		}).then(function(writer){
-			console.log(writer);
 			return new Promise(function(resolve,reject){
 				writer.onwriteend=resolve;
 				writer.write(blobData);
 			});
-		}).then(function(){
-			console.log("audio enregistre "+fileName);
+		}).then(function(evt){
+			// console.log("audio enregistre "+fileName);
+			// var song = new Song("record", fileEntryForSong.nativeURL);
+			// song.fileEntry = fileEntryForSong;
 			$("#success-export").addClass("active");
 			$("#traitement-popup").removeClass("active");
 			$('.panel').removeClass('active');
 			$('#panel-compose').addClass('active');
+
+			return Promise.resolve(fileEntryForSong);
+
 		});
+
+
+
+		// return new Promise(function(resolve,reject){
+		// 	console.log(blobData,fileName,directory);
+		// 	window.resolveLocalFileSystemURL(directory,resolve,reject);
+		// }).then(function(fileSystem){
+		// 	console.log(fileSystem);
+		// 	return new Promise(function(resolve,reject){
+		// 		fileSystem.getFile(fileName,{create: true, exclusive: false},resolve,reject);
+		// 	})
+		// }).then(function(fileEntry){
+		// 	console.log(fileEntry);
+		// 	return new Promise(function(resolve,reject){
+		// 		fileEntry.createWriter(resolve,reject);
+		// 	}).then(function(writer){
+		// 	console.log(writer);
+		// 	console.log(fileEntry);
+
+		// 	return new Promise(function(resolve,reject){
+		// 		writer.onwriteend=resolve;
+		// 		writer.write(blobData);
+
+		// 		var song = new Song(this.name, file.nativeURL);
+		// 		song.fileEntry = fileEntry;
+		// 		soundsArray.push(song);
+
+		// 	});
+		// }).then(function(){
+		// 	console.log("audio enregistre "+fileName);
+		// 	$("#success-export").addClass("active");
+		// 	$("#traitement-popup").removeClass("active");
+		// 	$('.panel').removeClass('active');
+		// 	$('#panel-compose').addClass('active');
+		// });;
+		// })
+
+		// return new Promise(function(resolve,reject){
+		// 	console.log(blobData,fileName,directory);
+		// 	window.resolveLocalFileSystemURL(directory,resolve,reject);
+		// }).then(function(fileSystem){
+		// 	console.log(fileSystem);
+		// 	return new Promise(function(resolve,reject){
+		// 		fileSystem.getFile(fileName,{create: true, exclusive: false},resolve,reject);
+		// 	})
+		// }).then(function(fileEntry){
+		// 	console.log(fileEntry);
+		// 	return new Promise(function(resolve,reject){
+		// 		fileEntry.createWriter(resolve,reject);
+		// 	});
+		// }).then(function(writer){
+		// 	console.log(writer);
+		// 	return new Promise(function(resolve,reject){
+		// 		writer.onwriteend=resolve;
+		// 		writer.write(blobData);
+		// 	});
+		// }).then(function(){
+		// 	console.log("audio enregistre "+fileName);
+		// 	$("#success-export").addClass("active");
+		// 	$("#traitement-popup").removeClass("active");
+		// 	$('.panel').removeClass('active');
+		// 	$('#panel-compose').addClass('active');
+		// });
 
 		// window.resolveLocalFileSystemURL(directory, function (fileSystem) {
 

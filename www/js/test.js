@@ -118,3 +118,8 @@ var promise = new Promise(function (resolve, reject) {
 			// clearInterval(this);
 			// console.log("test");
 		}.bind(idInterval));
+
+
+
+		var ressources = require('app/RessourcesHandler');
+		console.log(ressources);

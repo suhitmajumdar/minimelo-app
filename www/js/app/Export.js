@@ -111,7 +111,7 @@ define(function( require ) {
       worker.onmessage = function( event ) {
         var blobMp3=event.data;
 
-        ResourcesHandler.filesHandler.saveComposition(blobMp3,nameComposition);
+        ResourcesHandler.saveComposition(blobMp3,nameComposition);
 
       };
 

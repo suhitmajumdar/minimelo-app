@@ -119,5 +119,27 @@ define(function( require ){
 		return null;
 	}
 
+	ResourcesHandler.prototype.saveRecord = function (blobData,fileName) {
+		var self = this;
+		return this.filesHandler.saveRecord(blobData,fileName).then(function(fileEntryForSong){
+			var song = new Song("record", fileEntryForSong.nativeURL);
+			song.fileEntry = fileEntryForSong;
+			self.songs.push(song);
+			self.postProcessing();
+			console.log(self);
+		});
+	}
+
+	ResourcesHandler.prototype.saveComposition = function (blobData,fileName) {
+		var self=this;
+		return this.filesHandler.saveComposition(blobData,fileName).then(function(fileEntryForSong){
+			var song = new Song("save", fileEntryForSong.nativeURL);
+			song.fileEntry = fileEntryForSong;
+			self.songs.push(song);
+			self.postProcessing();
+			console.log(self);
+		});
+	}
+
 	return ResourcesHandler;
 });

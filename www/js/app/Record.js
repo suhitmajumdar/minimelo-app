@@ -219,7 +219,7 @@ define(function( require ) {
 		worker.onmessage = function( e ) {
 			var blobMp3=e.data;
 			var fileName=self.generateFileName();
-			ResourcesHandler.filesHandler.saveRecord(blobMp3,fileName);
+			ResourcesHandler.saveRecord(blobMp3,fileName);
 		};
 	}
 
