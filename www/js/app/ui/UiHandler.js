@@ -15,6 +15,7 @@ define(function( require ) {
 		this.initTimelineHeight();
 		this.initTracks();
 		this.initRecorder();
+		Timeline.setTimelapse();
 	} 
 
 	UiHandler.prototype.initCollectionManager = function () {

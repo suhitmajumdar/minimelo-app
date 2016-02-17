@@ -111,7 +111,7 @@ define(function( require ) {
       worker.onmessage = function( event ) {
         var blobMp3=event.data;
 
-        window.resolveLocalFileSystemURL("file:///sdcard/Minimelo/indefini", function (fileSystem) {
+        window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory+"/indefini", function (fileSystem) {
 
           fileSystem.getFile(nameComposition, {create: true, exclusive: false}, function(fileEntry){
                   

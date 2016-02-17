@@ -54,6 +54,50 @@ define( function ( require ) {
 
 	}
 
+	FilesHandler.prototype.initDefaultsSongs = function( soundsArray ) {
+		
+		return new Promise(function(resolve,reject){
+			
+			window.resolveLocalFileSystemURL(cordova.file.externalDataDirectory,resolve,reject);
+		
+		}).then(function(entryToCopy){
+
+				
+			return new Promise(function (resolve, reject) {
+
+			window.resolveLocalFileSystemURL(cordova.file.applicationDirectory+"/www/audio", resolve, reject);
+			
+			}).then(function(fileSystem){
+				var directoryReader = fileSystem.createReader();
+
+				return new Promise(function(resolve,reject){
+					directoryReader.readEntries(resolve,reject);
+				});
+
+			}).then(function(directories){
+				var promises = [];
+				for (var i = 0; i < directories.length; i++) {
+					var directory   = directories[i];
+
+					var promise = new Promise(function(resolve,reject){
+						directory.copyTo(entryToCopy,directory.name,resolve,reject);
+					}).then(function(data){
+						console.log(data);
+					},function(error){
+						console.log(error);
+					});
+
+					promises.push(promise);
+
+				}
+
+				return Promise.all(promises);
+
+			});
+		});	
+
+	}
+
 	FilesHandler.prototype.loadTestSongs = function() {
 
 		var self = this;
@@ -66,6 +110,26 @@ define( function ( require ) {
 				self.songs.push(new Song(type, urlSong));
 			}
 		}
+	}
+
+	FilesHandler.prototype.moveSound = function (sound,destination) {
+    	return new Promise(
+    		function(resolve,reject){
+				sound.fileEntry.moveTo(destination, sound.fileEntry.name, success, fail); 
+    		}
+    	);
+	}
+
+	FilesHandler.prototype.saveRecord = function () {
+
+	}
+
+	FilesHandler.prototype.saveComposition = function () {
+
+	}
+
+	function saveFile ( file, path ) {
+
 	}
 
 	return FilesHandler;

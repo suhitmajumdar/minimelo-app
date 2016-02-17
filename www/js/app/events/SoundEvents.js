@@ -8,8 +8,8 @@ define(function(require) {
 		this.initSoundClick();
 	}
 
-
 	SoundEvents.prototype.initSoundClick = function (){
+		// natify this
 		$( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
 
 			var idSong = $(this).attr('data-song-id');

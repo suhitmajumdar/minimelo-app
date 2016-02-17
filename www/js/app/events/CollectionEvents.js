@@ -27,6 +27,7 @@ define( function (require) {
 			var defaultLocation = $(this).parent();
 
 			this.ontouchstart = function(event) {
+
 				//We add a fake button at his place to show it was here
 				var landMark = $(this).clone();
 				$(this).addClass("cloned");
@@ -38,6 +39,7 @@ define( function (require) {
 
 				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
 				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+
 			}
 			
 			this.ontouchend = function(event) {

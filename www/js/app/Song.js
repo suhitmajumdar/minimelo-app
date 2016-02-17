@@ -57,13 +57,13 @@ define(function( require ) {
 
 	}
 
-	Song.prototype.playForPreview = function ( ) {
+	Song.prototype.loadForPreview = function ( ) {
 		var self = this;
 
 		return self.load().then(function(){
-			var source = self.play();
-			self.buffer = null;
-			return Promise.resolve(source);
+			// var source = self.play();
+			// self.buffer = null;
+			return Promise.resolve(self);
 		});
 	}
 

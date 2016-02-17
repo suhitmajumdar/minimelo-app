@@ -13,13 +13,13 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 		this.audioCtx    = new AudioContext();
 
-		this.nbSongPlayed=0;
+		this.songPlayedCount = 0;
 
-		this.ratioSecondPixel=20;
+		this.ratioSecondPixel = 20;
 
-		this.debutSong=0;
-		this.lineTimeOut=0;
-		this.duration=180;
+		this.debutSong = 0;
+		this.lineTimeOut = 0;
+		this.duration = 180;
 
 	}
 
@@ -31,10 +31,10 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 		var self = this;
 
-		self.nbSongPlayed=0;
-		self.songsInPlay=[];
+		self.songPlayedCount = 0;
+		self.songsInPlay = [];
 
-		self.debutSong=self.audioCtx.currentTime;
+		self.debutSong = self.audioCtx.currentTime;
 		$("#timeline").scrollLeft(0);
 
 			self.lineTimeOut = setInterval(function(){
@@ -84,16 +84,17 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 			sourcePlaying.onended=function(){
 
-				self.nbSongPlayed++;
+				self.songPlayedCount++;
 				this.songRef.classList.remove('active');
 
-				if(self.nbSongPlayed == self.songsInPlay.length)
+				if(self.songPlayedCount == self.songsInPlay.length)
 				{
 					$('#play_stop').removeClass('stop_btn');
 					$('#play_stop').addClass('play_btn');
 					clearInterval(self.lineTimeOut);
 					$("#line").css('width',0);
 					$("#timeline").scrollLeft(0);
+					self.songsInPlay = [];
 				}
 			}
 
@@ -112,19 +113,21 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		$("#line").css('width',0);
   	}
 
-	Timeline.prototype.secondsToPxInTimeline =function (second){
+	Timeline.prototype.secondsToPxInTimeline = function (second){
 		return second*this.ratioSecondPixel;
 	}
 
-	Timeline.prototype.pxToSecondsInTimeline =function (px){
+	Timeline.prototype.pxToSecondsInTimeline = function (px){
 		return px/this.ratioSecondPixel;
 	}
 
-	Timeline.prototype.zoom=function(){
-		var self=this;
+	Timeline.prototype.zoom = function(){
+		if(this.songsInPlay.length == 0){
 
-		var lastRatio=this.ratioSecondPixel;
+			var self = this;
+			var lastRatio = this.ratioSecondPixel;
 
+<<<<<<< HEAD
 		if(this.songsInPlay.length == 0){
 
 			if(this.ratioSecondPixel<=300)
@@ -138,18 +141,36 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 					$(this).css('width',newWidth);
 				});
 
+=======
+			if(this.ratioSecondPixel<=300)
+			{
+
+				this.ratioSecondPixel+=10;
+
+				$(".track").each(function(){
+					var widthPiste = $(this).width();
+					var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
+					$(this).css('width',newWidth);
+				});
+
+>>>>>>> origin/master
 				this.redrawSongs(lastRatio);
 			}
 		}
 	}
 
-	Timeline.prototype.unzoom=function(){
-		var self=this;
+	Timeline.prototype.unzoom = function(){
+		if(this.songsInPlay.length == 0){
 
+<<<<<<< HEAD
 		if(this.songsInPlay.length == 0){
 
 		
 			var lastRatio=this.ratioSecondPixel;
+=======
+			var self = this;
+			var lastRatio = this.ratioSecondPixel;
+>>>>>>> origin/master
 
 			if(this.ratioSecondPixel>=15)
 			{
@@ -162,34 +183,51 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 				});
 
 				this.redrawSongs(lastRatio);
+<<<<<<< HEAD
 			}
 		}	
+=======
+			}	
+		}
+>>>>>>> origin/master
 	}
 
 	Timeline.prototype.redrawSongs=function(lastRatio){
-		var self=this;
+		var self = this;
 
 		$('.track .song').each(function()
 		{	
-			var idSong=$(this).attr('data-song-id');
-			var song=ResourcesHandler.getSong(idSong);
+			var idSong = $(this).attr('data-song-id');
+			var song = ResourcesHandler.getSong(idSong);
 			$(this).css('width',self.ratioSecondPixel*song.getDuration());
 			$(this).css('left',self.ratioSecondPixel*$(this).position().left/lastRatio);
 		});
 		this.setTimelapse();
 	}
 
+<<<<<<< HEAD
 	Timeline.prototype.setTimelapse=function(){
 		$('#timeInfo').css('width', this.getDurationInPx());
 		$('#timeInfo').empty();
 		var everyTwentySecond=this.secondsToPxInTimeline(20);
 		var second=0;
+=======
+	Timeline.prototype.setTimelapse = function(){
+		$('#timeInfo').css('width', this.getDurationInPx());
+		$('#timeInfo').empty();
+		var everyTwentySecond = this.secondsToPxInTimeline(20);
+		var second = 0;
+>>>>>>> origin/master
 		for (var i = 0; i < this.getDurationInPx(); i+=everyTwentySecond) {
 			var lapseLine=$('<div class="lapseLine"><span>'+second+'</span></div>');
 			lapseLine.css('left',i);
 			$('#timeInfo').append(lapseLine);
 			second+=20;
+<<<<<<< HEAD
 		};
+=======
+		}
+>>>>>>> origin/master
 	}
 
 	Timeline.prototype.getDurationInPx=function(){
