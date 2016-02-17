@@ -690,37 +690,6 @@ header{
 	padding: 0;
 	margin-bottom: 15px;
   }
-  #load-menu-list{
-	  max-height: 150px;
-	  overflow-y: scroll;
-  }
-  .load-menu-save{
-	float:left;
-	  padding: 10px;
-	  border: solid 1px #222;
-	  border-radius: 3px;
-	  box-shadow: rgba(0,0,0,.3) 2px 2px 2px;
-	  margin: 0 5px 5px;
-	  background-color: $white;
-	  transition-duration: .2s;
-	  &:hover{
-		background-color: #eee;
-	  }
-	  &.active{
-		background-color: #ddd;
-		&:hover{
-		  background-color: #ddd;
-		}
-	  }
-  }
-  #load-menu-validate{
-	opacity: .2;
-	transition-property: opacity;
-	transition-duration: .3s;
-	&.active{
-	  opacity: 1;
-	}
-  }
 
   h2{
   	font-family:"Orange";

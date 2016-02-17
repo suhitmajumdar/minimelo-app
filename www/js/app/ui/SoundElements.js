@@ -29,7 +29,7 @@ define(function( require ) {
 
 		}
 
-		$('#songsSelector').modal('show');
+		//$('#songsSelector').modal('show');
 	}
 
 	SoundElements.prototype.initButtonsModal = function () {

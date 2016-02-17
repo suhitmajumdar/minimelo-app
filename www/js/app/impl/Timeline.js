@@ -127,9 +127,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 			var self = this;
 			var lastRatio = this.ratioSecondPixel;
 
-<<<<<<< HEAD
-		if(this.songsInPlay.length == 0){
-
 			if(this.ratioSecondPixel<=300)
 			{
 
@@ -140,20 +137,6 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 					var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
 					$(this).css('width',newWidth);
 				});
-
-=======
-			if(this.ratioSecondPixel<=300)
-			{
-
-				this.ratioSecondPixel+=10;
-
-				$(".track").each(function(){
-					var widthPiste = $(this).width();
-					var newWidth=widthPiste*self.ratioSecondPixel/lastRatio;
-					$(this).css('width',newWidth);
-				});
-
->>>>>>> origin/master
 				this.redrawSongs(lastRatio);
 			}
 		}
@@ -162,15 +145,8 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 	Timeline.prototype.unzoom = function(){
 		if(this.songsInPlay.length == 0){
 
-<<<<<<< HEAD
-		if(this.songsInPlay.length == 0){
-
-		
-			var lastRatio=this.ratioSecondPixel;
-=======
 			var self = this;
 			var lastRatio = this.ratioSecondPixel;
->>>>>>> origin/master
 
 			if(this.ratioSecondPixel>=15)
 			{
@@ -183,13 +159,8 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 				});
 
 				this.redrawSongs(lastRatio);
-<<<<<<< HEAD
-			}
-		}	
-=======
 			}	
 		}
->>>>>>> origin/master
 	}
 
 	Timeline.prototype.redrawSongs=function(lastRatio){
@@ -205,29 +176,17 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 		this.setTimelapse();
 	}
 
-<<<<<<< HEAD
-	Timeline.prototype.setTimelapse=function(){
-		$('#timeInfo').css('width', this.getDurationInPx());
-		$('#timeInfo').empty();
-		var everyTwentySecond=this.secondsToPxInTimeline(20);
-		var second=0;
-=======
 	Timeline.prototype.setTimelapse = function(){
 		$('#timeInfo').css('width', this.getDurationInPx());
 		$('#timeInfo').empty();
 		var everyTwentySecond = this.secondsToPxInTimeline(20);
 		var second = 0;
->>>>>>> origin/master
 		for (var i = 0; i < this.getDurationInPx(); i+=everyTwentySecond) {
 			var lapseLine=$('<div class="lapseLine"><span>'+second+'</span></div>');
 			lapseLine.css('left',i);
 			$('#timeInfo').append(lapseLine);
 			second+=20;
-<<<<<<< HEAD
-		};
-=======
 		}
->>>>>>> origin/master
 	}
 
 	Timeline.prototype.getDurationInPx=function(){

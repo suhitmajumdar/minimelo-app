@@ -573,30 +573,6 @@ header {
     list-style-type: none;
     padding: 0;
     margin-bottom: 15px; }
-  .sub-menu #load-menu-list {
-    max-height: 150px;
-    overflow-y: scroll; }
-  .sub-menu .load-menu-save {
-    float: left;
-    padding: 10px;
-    border: solid 1px #222;
-    border-radius: 3px;
-    box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
-    margin: 0 5px 5px;
-    background-color: #ffffff;
-    transition-duration: .2s; }
-    .sub-menu .load-menu-save:hover {
-      background-color: #eee; }
-    .sub-menu .load-menu-save.active {
-      background-color: #ddd; }
-      .sub-menu .load-menu-save.active:hover {
-        background-color: #ddd; }
-  .sub-menu #load-menu-validate {
-    opacity: .2;
-    transition-property: opacity;
-    transition-duration: .3s; }
-    .sub-menu #load-menu-validate.active {
-      opacity: 1; }
   .sub-menu h2 {
     font-family: "Orange";
     font-weight: 100;

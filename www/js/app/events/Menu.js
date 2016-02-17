@@ -22,9 +22,7 @@ define(function( require ) {
 				self.closeGeneralMenu();
 		});
 
-		$('#save-menu-validate')        .click( self.saveComposition )
 		$('#export-menu-validate')      .click( self.exportComposition );
-		$('#load-menu-validate')        .click( self.loadSaveMenu );
 		$('#new-menu-validate')         .click(function(){ self.newComposition() });
 		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
 		$("#success-export-validate").click(self.closeGeneralMenu);
@@ -50,43 +48,11 @@ define(function( require ) {
 		}
 	}
 
-	Menu.prototype.getSaveName = function(){
+	/*Menu.prototype.getSaveName = function(){
 		alert('penser à aller chercher le nom de la sauvegarde')
 		return "saveName";
 	}
-
-	Menu.prototype.loadSaveMenu = function(){
-		$('#save-menu-input').val( this.getSaveName() );
-	}
-
-	Menu.prototype.isAvailableSaveName = function(name){
-		alert("Penser à vérizier si un nom est déjà pris dans les sauvegardes")
-		return true;
-	}
-
-	Menu.prototype.checkSaveName = function(name){
-		if(name == null || name ==""){
-			alert("Donnez un nom à votre sauvegarde");
-		}else{
-			if(isAvailableSaveName(name) == false){
-				alert("ce nom est déjà pris");
-			}
-			else{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	Menu.prototype.saveComposition = function(){
-		var name = $('#save-menu-input').val();
-		if(this.checkSaveName(name)){
-			alert("penser à sauvegarder la composition...")
-		}
-	}
-
 	Menu.prototype.getExportName = function(){
-		alert('Penser à aller chercher si il y a un export name')
 		var name = "";
 		if(name == ""){
 			name = this.getSaveName();
@@ -94,10 +60,10 @@ define(function( require ) {
 		return name;
 	}
 
-	Menu.prototype.loadExportMenufunction = function(){
+	Menu.prototype.loadExportMenu = function(){
 		name = this.getExportName()
 		$('#export-menu-input').val(name)
-	}
+	}*/
 
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
@@ -113,45 +79,12 @@ define(function( require ) {
 		}
 	}
 
-	Menu.prototype.getSavedCompositionList = function (){
-		alert("penser à aller chercher la liste des compositions");
-		return ["saveA","saveB","savEnger"];
-	}
-
-	Menu.prototype.loadLoadMenu = function (){
-		var fileList = this.getSavedCompositionList();
-		var domList = $('#load-menu-list').empty();
-
-		for(var i=0; i<fileList.length; i++){
-			var s = $('<li class="load-menu-save">'+fileList[i]+'</li>');
-			s.appendTo(domList);
-		}
-
-		$('.load-menu-save').click(function(){
-			$('.load-menu-save, #load-menu-validate').removeClass('active');
-			if( $(this).hasClass('active') ){
-				this.selectedSaveToLoad = null;
-			}
-			else{
-				$(this).addClass('active');
-				this.selectedSaveToLoad = $(this).text();
-			}
-		});
-	}
-
-	Menu.prototype.loadstart = function (name){
-		if(this.selectedSaveToLoad!=null){
-			alert("Penser à charger une sauvegarde")
-		}
-	}
-
 	Menu.prototype.newComposition = function (){
 		//On vide la timeline
 		$(".track").empty();
 		$("#export-menu-input").val("");
 		this.closeGeneralMenu();
 
-		//On efface les noms de sauvegarde et d'exportation
 	}
 
 	Menu.prototype.launchRecordView = function (){
@@ -180,14 +113,8 @@ define(function( require ) {
 
 	Menu.prototype.loadSubMenu = function (name){
 		switch(name){
-			case 'save-menu':
-				this.loadSaveMenu();
-				break;
 			case 'export-menu':
-				this.loadExportMenu();
-				break;
-			case 'load-menu':
-				this.loadLoadMenu();
+				//this.loadExportMenu();
 				break;
 			case 'new-menu':
 				break;
