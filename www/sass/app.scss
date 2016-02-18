@@ -218,13 +218,15 @@ ul{
 	.panel {
 		height: 100%;
 		width: 100%;
-		opacity: 0;
 		position: absolute;
+		visibility: hidden;
 		top: 0px;
 		left: 0px;
+		opacity: 0;
 		&.active{
-			opacity:1;
 			z-index: 1;
+			visibility: visible;
+			opacity: 1;
 		}
 	}
 
@@ -746,16 +748,13 @@ header{
 
 #manage-menu{
 	margin: 0.5rem;
-	height: 85%;
 
 	.button.inDrag {
 		position: absolute;
 		z-index: 6;
-		background-color: #fff;
-
 	}
 
-	&>div[id] {
+	.sorter {
 		overflow-y: scroll;
 		width: 33%;
 		height: 100%;
@@ -764,12 +763,14 @@ header{
 		display: inline-block;
 		position: relative;
 		text-align: left;
+		vertical-align: top;
+	}
+
+	#sorters-container{
+		height: 85%;
 	}
 
 	#sound_to_sort{
-		float: left;
-		width: 33%;
-		height: 100%;
 		margin: 0;
 		&.selected{
 			background-color: #ccc;
@@ -788,21 +789,20 @@ header{
 
 		.pool{
 			display: inline-block;
-			width: 50%;
-			height: 25%;
+			width: 48%;
+			height: 23%;
 			margin: 0;
 			padding: 0;
-			float: left;
 			border: solid 3px $white;
 			border-radius: 16px;
-			transition-property: background-color;
-			transition-duration: .3s;
+			text-align: left;
 		}
 	}
 
 	.panel_controls {
 		text-align: right;
-		margin-right: 3rem;
+		padding-right: 30px;
+		height: 25%;
 	}
 
 

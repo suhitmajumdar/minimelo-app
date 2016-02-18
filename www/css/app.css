@@ -210,13 +210,15 @@ ul {
   .app .panel {
     height: 100%;
     width: 100%;
-    opacity: 0;
     position: absolute;
+    visibility: hidden;
     top: 0px;
-    left: 0px; }
+    left: 0px;
+    opacity: 0; }
     .app .panel.active {
-      opacity: 1;
-      z-index: 1; }
+      z-index: 1;
+      visibility: visible;
+      opacity: 1; }
   .app .song {
     position: absolute;
     height: 100%;
@@ -607,13 +609,11 @@ header {
     background-color: #000; }
 
 #manage-menu {
-  margin: 0.5rem;
-  height: 85%; }
+  margin: 0.5rem; }
   #manage-menu .button.inDrag {
     position: absolute;
-    z-index: 6;
-    background-color: #fff; }
-  #manage-menu > div[id] {
+    z-index: 6; }
+  #manage-menu .sorter {
     overflow-y: scroll;
     width: 33%;
     height: 100%;
@@ -621,11 +621,11 @@ header {
     padding: 0px;
     display: inline-block;
     position: relative;
-    text-align: left; }
+    text-align: left;
+    vertical-align: top; }
+  #manage-menu #sorters-container {
+    height: 85%; }
   #manage-menu #sound_to_sort {
-    float: left;
-    width: 33%;
-    height: 100%;
     margin: 0; }
     #manage-menu #sound_to_sort.selected {
       background-color: #ccc; }
@@ -636,18 +636,17 @@ header {
       background-color: #ccc; }
   #manage-menu #sorting_colors .pool {
     display: inline-block;
-    width: 50%;
-    height: 25%;
+    width: 48%;
+    height: 23%;
     margin: 0;
     padding: 0;
-    float: left;
     border: solid 3px #ffffff;
     border-radius: 16px;
-    transition-property: background-color;
-    transition-duration: .3s; }
+    text-align: left; }
   #manage-menu .panel_controls {
     text-align: right;
-    margin-right: 3rem; }
+    padding-right: 30px;
+    height: 25%; }
 
 [type="type-1"] {
   background-color: rgba(235, 56, 22, 0.8); }

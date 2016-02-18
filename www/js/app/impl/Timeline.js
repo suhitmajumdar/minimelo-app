@@ -2,7 +2,7 @@ define(['app/ResourcesHandler'], function(ResourcesHandler) {
 
 	'use strict';
 
-  	var audioCtx = new AudioContext();
+  	// var audioCtx = new AudioContext();
 
 	function Timeline() {
 		this.songsInPlay = [];

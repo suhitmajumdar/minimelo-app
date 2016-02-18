@@ -77,14 +77,14 @@ define( function ( require ) {
 		
 		}).then(function(entryToCopy){
 
-			console.log(entryToCopy);
+			// console.log(entryToCopy);
 				
 			return new Promise(function (resolve, reject) {
 
 			window.resolveLocalFileSystemURL(directoriesUrl.originalApplication, resolve, reject);
 			
 			}).then(function(fileSystem){
-				console.log(fileSystem);
+				// console.log(fileSystem);
 				var directoryReader = fileSystem.createReader();
 
 				return new Promise(function(resolve,reject){
@@ -99,9 +99,9 @@ define( function ( require ) {
 					var promise = new Promise(function(resolve,reject){
 						directory.copyTo(entryToCopy,directory.name,resolve,reject);
 					}).then(function(data){
-						console.log(data);
+						// console.log(data);
 					},function(error){
-						console.log(error);
+						// console.log(error);
 					});
 
 					promises.push(promise);

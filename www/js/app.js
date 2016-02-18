@@ -9,10 +9,12 @@ requirejs.config({
 	}
 });
 
+var audioCtx = new AudioContext();
+
 $(document).ready(function() {
 
-	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler', 'app/Record','app/Export'], 
-		function(Timeline, Utils, UiHandler, EventsHandler, Resources, Record, Export) {
+	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler'], 
+		function(Timeline, Utils, UiHandler, EventsHandler, Resources) {
 
 		'use strict';
 

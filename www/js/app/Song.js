@@ -1,11 +1,8 @@
 define(function( require ) {
 	
 	'use strict';
-
+	
 	var lastId   = 0;
-	var audioCtx = new AudioContext();
-	var timeLastPlay = null;
-
 
 	function Song( type, url ) {
 		this.id        = lastId++;
@@ -14,6 +11,7 @@ define(function( require ) {
 		this.buffer    = null;
 		this.startTime = 0;
 		this.stopTime  = 0;
+		// this.audioCtx  = new AudioContext();
 	}
 
 	Song.prototype.load = function () {
@@ -34,22 +32,21 @@ define(function( require ) {
 			return new Promise(function(resolve,reject){
 				var reader = new FileReader();
 
-				reader.onloadend = resolve;
+                reader.onloadend = resolve;
 
-				reader.readAsArrayBuffer(file);
+                reader.readAsArrayBuffer(file);
 				
 			});
 
 		}).then(function(e){
 			var arrayBuffer = e.target.result;
-			return new Promise(function(resolve,reject) {
-				timeLastPlay = new Date().getTime();
-				audioCtx.decodeAudioData(arrayBuffer, resolve, reject);
+			return new Promise(function(resolve,reject){
+				audioCtx.decodeAudioData(arrayBuffer,resolve,reject);  
 			});
 		}).then(
 
-			function( audioBuffer ){
-				self.buffer = audioBuffer;
+			function(audioBuffer){
+				self.buffer=audioBuffer;
 			},
 			function(){
 				console.log("Impossible de lire "+self.url);
@@ -68,17 +65,10 @@ define(function( require ) {
 	}
 
 	Song.prototype.playWithTime = function ( time ) {
-
 		if ( this.buffer == null ) {
 			throw "PlayWithTime error : buffer is not set, the sound has not been loaded.";
 		}
 
-		if(new Date().getTime()-timeLastPlay>30000){   // Time passed since last playing is greater than 30 secs
-			audioCtx.close();
-			audioCtx = new AudioContext();
-		}
-
-		timeLastPlay = new Date().getTime();
 		var source    = audioCtx.createBufferSource();
 		source.buffer = this.buffer;
 		source.connect(audioCtx.destination);

@@ -15,7 +15,6 @@ define(function( require ) {
 
 		this.initDeckButtons();
 		this.initRecorderEvents();
-		this.initValidQuickSelect();
 		this.initCollectionManagerEvents();
 	}
 
@@ -23,6 +22,7 @@ define(function( require ) {
 		this.initModalEvents();
 		this.soundEvents = new SoundEvents();
 		this.soundEvents.initEventsButtonsSong();
+		this.initValidQuickSelect();
 	}
 
 	EventsHandler.prototype.initRecorderEvents = function(){
@@ -173,26 +173,33 @@ define(function( require ) {
 	}
 
 	EventsHandler.prototype.initValidQuickSelect=function (){
-		$( document ).on( "mousedown", "#buttons-songs .button .validate_btn", function() {
-    		
-    		var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
-    		if(btnSelected.length>0){
+		var btnsValidQuickSelect=document.querySelectorAll('#buttons-songs .button .validate_btn');
+		
+		for (var i = 0; i < btnsValidQuickSelect.length; i++) {
+			var btnValid=btnsValidQuickSelect[i];
+			
+			btnValid.onmousedown=function(event)
+			{
+				var btnSelected=$(this).prevAll('.button.active:not(.disabled)');
+    			if(btnSelected.length>0){
 
-	    		var idSong = btnSelected.find(" > span").text();
-	    		var dataIdSong = btnSelected.attr('data-song-id');
+		    		var idSong = btnSelected.find(" > span").text();
+		    		var dataIdSong = btnSelected.attr('data-song-id');
 
-	    		var buttonToSwitch=$(this).parent().parent();
-	    		buttonToSwitch.find('span.numberSong').text(idSong);
-	    		buttonToSwitch.attr('data-song-id',dataIdSong);
-	    		buttonToSwitch.removeClass('qsopen');
-	    		buttonToSwitch.removeClass('disabled');
-	    		buttonToSwitch.removeClass('active');
-	    		ResourcesHandler.loadSong(dataIdSong);
-    		}
-    		$('.quick-select').removeClass('active');
-    		$('.qsopen').removeClass('qsopen');
-	       
-    	});
+		    		var buttonToSwitch=$(this).parent().parent();
+		    		buttonToSwitch.find('span.numberSong').text(idSong);
+		    		buttonToSwitch.attr('data-song-id',dataIdSong);
+		    		buttonToSwitch.removeClass('qsopen');
+		    		buttonToSwitch.removeClass('disabled');
+		    		buttonToSwitch.removeClass('active');
+		    		ResourcesHandler.loadSong(dataIdSong);
+
+	    		}
+	    		$('.quick-select').removeClass('active');
+	    		$('.qsopen').removeClass('qsopen');
+			}
+
+		};
 	}
 
 	EventsHandler.prototype.reloadSoundElements = function ( events ) {
