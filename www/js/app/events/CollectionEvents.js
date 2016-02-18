@@ -24,24 +24,30 @@ define( function (require) {
 	CollectionEvents.prototype.dragAndDrop = function () {
 
 		$('#manage-menu > div[id] .button').each(function() {
+			var cloneButton = null;
 			this.ontouchstart = function(event) {
+				if(!$(this).hasClass('disabled')){
+					//We add a fake button at his place to show it was here
+					var landMark = $(this).clone();
 
-				//We add a fake button at his place to show it was here
-				var landMark = $(this).clone();
-				$(this).addClass("cloned");
+					$(this).addClass("cloned");
 
-				$(landMark).addClass('inDrag');
-				$('#manage-menu').prepend(landMark);
-				this.cloneButton = landMark[0];
-				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
+					$(landMark).addClass('inDrag');
+					if(cloneButton==null){
+						$('#manage-menu').prepend(landMark);
+						console.log("clonning");
+						cloneButton = landMark[0];
+					}
+					var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
 
-				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
-				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+					cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
+					cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+				}
 			}
 			
 			this.ontouchend = function(event) {
 
-				var type = isOverType(this.cloneButton);
+				var type = isOverType(cloneButton);
 
 				if( type != null) {
 					// todo :change the location of the file
@@ -55,10 +61,12 @@ define( function (require) {
 
 				} 
 
-				this.cloneButton.remove();
-
 				$(this).removeClass('cloned');
 				$(this).removeClass('inDrag');		
+
+				console.log("killing clone")
+				cloneButton.remove();
+				cloneButton=null;
 
 			}
 
