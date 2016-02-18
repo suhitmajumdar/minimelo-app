@@ -263,18 +263,20 @@ define(function(require) {
 			buttonSong.ontouchmove=function(event){
 				this.setAttribute('move',true);
 				
-				var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
+				if(this.songToPlace!=null){
+					var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
 
-				var finalPosition = self.correctPosition(this.songToPlace,position);
+					var finalPosition = self.correctPosition(this.songToPlace,position);
 
-				this.songToPlace.style.left = finalPosition.x+"px";
-				this.songToPlace.style.top  = finalPosition.y+"px";
+					this.songToPlace.style.left = finalPosition.x+"px";
+					this.songToPlace.style.top  = finalPosition.y+"px";
 
-				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
-				
-				if(trackOverlayed != null){
-					var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
-					this.songToPlace.setAttribute('overOtherSong',overSong);
+					var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
+					
+					if(trackOverlayed != null){
+						var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
+						this.songToPlace.setAttribute('overOtherSong',overSong);
+					}
 				}
 			}
 
