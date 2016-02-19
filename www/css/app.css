@@ -382,7 +382,7 @@ header {
   overflow-y: scroll; }
   #songsSelector #choose-song {
     display: inline-block;
-    width: 40%;
+    width: 90%;
     height: auto;
     text-align: left; }
     #songsSelector #choose-song div .button span {
