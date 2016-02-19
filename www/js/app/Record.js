@@ -185,9 +185,6 @@ define(function( require ) {
 		var frameStart = this.recordBuffer.sampleRate * startPos;
 		var frameEnd = this.recordBuffer.sampleRate * stopPos;
 
-		console.log(frameCount);
-		console.log(this.recordBuffer.sampleRate);
-
 		var myArrayBuffer = audioCtx.createBuffer(channels, frameCount, this.recordBuffer.sampleRate);
 
 		for (var channel = 0; channel < channels; channel++) {
@@ -226,11 +223,6 @@ define(function( require ) {
 
 		};
 	}
-
-	function fail(error) {
-		console.log(error.code);
-	}
-
 
 	return Record;
 

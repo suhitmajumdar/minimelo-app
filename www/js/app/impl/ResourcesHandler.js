@@ -119,7 +119,6 @@ define(function( require ){
 			song.fileEntry = fileEntryForSong;
 			self.songs.push(song);
 			self.postProcessing();
-			console.log(self);
 		});
 	}
 
@@ -130,7 +129,6 @@ define(function( require ){
 			song.fileEntry = fileEntryForSong;
 			self.songs.push(song);
 			self.postProcessing();
-			console.log(self);
 		});
 	}
 

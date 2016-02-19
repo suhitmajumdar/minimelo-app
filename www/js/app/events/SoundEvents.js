@@ -15,23 +15,12 @@ define(function(require) {
 	}
 
 	SoundEvents.prototype.initSoundClick = function (){
-		// natify this
-		// $( document ).on( "mousedown", ".button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)", function() {
-
-		// 	var idSong = $(this).attr('data-song-id');
-		// 	ResourcesHandler.playPreview(idSong);
-
-		// 	$(this).parent().find('.button').removeClass("active");
-			
-		// 	$(this).addClass("active");
-		// });
 
 		var buttonsPreview=document.querySelectorAll('.button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)');
 
 		for (var i = 0; i < buttonsPreview.length; i++) {
 			
 			buttonsPreview[i].onmousedown=function(event){
-				console.log(this);
 
 				var idSong = parseInt(this.getAttribute('data-song-id'));
 
@@ -204,12 +193,15 @@ define(function(require) {
 			var buttonSong=this;
 			buttonSong.ontouchstart=function(event){
 
+				this.songToPlace=null;
 				if(this.getAttribute('data-song-id')!=null)
 				{
-					var divSong=self.createDivSong(this);
-					this.songToPlace=divSong;
-					// $('#tracks').prepend(this.songToPlace);
-					tracksDiv.insertBefore(this.songToPlace,tracksDiv.childNodes[0]);
+					if(!this.classList.contains('qsopen')){
+						var divSong=self.createDivSong(this);
+						this.songToPlace=divSong;
+						tracksDiv.insertBefore(this.songToPlace,tracksDiv.childNodes[0]);
+					}
+					
 				}
 				$(this).attr('touchstartTime',Date.now());
 				$(this).attr('move','false');
@@ -252,8 +244,6 @@ define(function(require) {
 					self.setDragOnSong(this.songToPlace);
 					this.songToPlace.setAttribute('track' , trackOverlayed.id);
 
-					//$(trackOverlayed).prepend(this.songToPlace);
-					// trackOverlayed.insertBefore(this.songToPlace, trackOverlayed.childNodes[0]); 
 					trackOverlayed.appendChild(this.songToPlace); 
 					isDropped = true;
 				}
@@ -265,7 +255,7 @@ define(function(require) {
 					}
 				}
 
-				if(!isDropped){
+				if(!isDropped && this.songToPlace){
 					$(this.songToPlace).remove();
 				}
 
@@ -273,18 +263,20 @@ define(function(require) {
 			buttonSong.ontouchmove=function(event){
 				this.setAttribute('move',true);
 				
-				var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
+				if(this.songToPlace!=null){
+					var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
 
-				var finalPosition = self.correctPosition(this.songToPlace,position);
+					var finalPosition = self.correctPosition(this.songToPlace,position);
 
-				this.songToPlace.style.left = finalPosition.x+"px";
-				this.songToPlace.style.top  = finalPosition.y+"px";
+					this.songToPlace.style.left = finalPosition.x+"px";
+					this.songToPlace.style.top  = finalPosition.y+"px";
 
-				var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
-				
-				if(trackOverlayed != null){
-					var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
-					this.songToPlace.setAttribute('overOtherSong',overSong);
+					var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
+					
+					if(trackOverlayed != null){
+						var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
+						this.songToPlace.setAttribute('overOtherSong',overSong);
+					}
 				}
 			}
 

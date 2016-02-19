@@ -22,10 +22,14 @@ define( function (require) {
 	}
 
 	CollectionEvents.prototype.dragAndDrop = function () {
+		var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
 
-		$('#manage-menu > div[id] .button').each(function() {
-			var cloneButton = null;
+		$('#manage-menu .sorter .button').each(function() {
+			// var cloneButton = null;
 			this.ontouchstart = function(event) {
+
+				this.cloneButton=null;
+
 				if(!$(this).hasClass('disabled')){
 					//We add a fake button at his place to show it was here
 					var landMark = $(this).clone();
@@ -33,49 +37,46 @@ define( function (require) {
 					$(this).addClass("cloned");
 
 					$(landMark).addClass('inDrag');
-					if(cloneButton==null){
-						$('#manage-menu').prepend(landMark);
-						console.log("clonning");
-						cloneButton = landMark[0];
-					}
+					this.cloneButton = landMark[0];
+
+					
+					$('#manage-menu').prepend(this.cloneButton);
+
 					var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
 
-					cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
-					cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+					this.cloneButton.style.top = -1000 + "px";
+					this.cloneButton.style.left = -1000 + "px";
 				}
 			}
 			
 			this.ontouchend = function(event) {
+				if(this.cloneButton!=null){
+					
+					var type = isOverType(this.cloneButton);
 
-				var type = isOverType(cloneButton);
+					if( type != null) {
 
-				if( type != null) {
-					// todo :change the location of the file
-					var newType = type.getAttribute('type');
-					var song = ResourcesHandler.getSong($(this).attr("data-song-id"));
+						var newType = type.getAttribute('type');
+						var song = ResourcesHandler.getSong($(this).attr("data-song-id"));
 
-					song.type = newType;
+						song.type = newType;
 
-					$(this).attr('type', newType);
-					$(this).appendTo(sorted_sounds);
+						$(this).attr('type', newType);
+					} 
 
-				} 
-
-				$(this).removeClass('cloned');
-				$(this).removeClass('inDrag');		
-
-				console.log("killing clone")
-				cloneButton.remove();
-				cloneButton=null;
-
+					$(this).removeClass('cloned');
+					this.cloneButton.remove();
+					this.cloneButton=null;
+				}
 			}
 
 			this.ontouchmove = function(event) {
 
-				var rectMenu = document.querySelector( "#manage-menu").getBoundingClientRect();
-
-				this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
-				this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+				if(this.cloneButton!=null){
+					
+					this.cloneButton.style.top = (event.touches[0].clientY - rectMenu.top) + "px";
+					this.cloneButton.style.left = (event.touches[0].clientX - rectMenu.left) + "px";
+				}
 
 			}
 

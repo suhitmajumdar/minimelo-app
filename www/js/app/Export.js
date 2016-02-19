@@ -4,7 +4,6 @@ define(function( require ) {
 
   var ResourcesHandler = require('app/ResourcesHandler');
   var Timeline = require('app/Timeline');
-  var audioCtx = new AudioContext();
 
   function Export () {
     this.tracks=[];
@@ -46,23 +45,6 @@ define(function( require ) {
     }
     return endTrack;
   }
-
-  // Export.prototype.playBufferTest=function(arraybuffer){
-  //   var buffer = audioCtx.createBuffer(1, arraybuffer.length, audioCtx.sampleRate);
-  //   var data =buffer.getChannelData(0);
-  //   for (var i = 0; i < data.length; i++) {
-  //     data[i]=arraybuffer[i];
-  //   };
-
-  //   var source = audioCtx.createBufferSource();
-  //   // set the buffer in the AudioBufferSourceNode
-  //   source.buffer = buffer;
-  //   // connect the AudioBufferSourceNode to the
-  //   // destination so we can hear the sound
-  //   source.connect(audioCtx.destination);
-  //   // start the source playing
-  //   source.start();
-  // }
 
   Export.prototype.mergeAllBuffers = function(){
     var tracksBuffer=[];
@@ -117,10 +99,6 @@ define(function( require ) {
 
   }
 
-  function fail(error) {
-    console.log(error.code);
-  }
-
   Export.prototype.buildTracks = function ()
   {
     this.tracks=[];
@@ -144,7 +122,6 @@ define(function( require ) {
       this.tracks.push(trackSongs);
     
     };
-    console.log(this);
   }
 
   Export.prototype.exportMp3 = function (nameComposition){
@@ -152,21 +129,6 @@ define(function( require ) {
     var finalBuffer = this.mergeAllBuffers();
     this.saveAsMp3(finalBuffer,nameComposition);
   }
-
-  // Export.prototype.playTrackTest=function(idTrack){
-  //   this.buildTracks();
-  //   var track=this.tracks[idTrack];
-  //   var bufferTrack= this.mergeTrack(track);
-  //   console.log(track);
-  //   // console.log(bufferTrack);
-  //   this.playBufferTest(bufferTrack);
-  // }
-
-  // Export.prototype.playExportTest=function(){
-  //   this.buildTracks();
-  //   var finalBuffer = this.mergeAllBuffers();
-  //   this.playBufferTest(finalBuffer);
-  // }
 
   return Export;
 
