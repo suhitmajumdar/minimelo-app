@@ -9,8 +9,6 @@ You can use the defaults sounds or record your voice or sounds to play with them
 
 To run Minimelo, you will need an android 5.0+ device.
 
-However, you can try the app in your browser by running a simple server on the www folder.
-
 ### Quickstart
 
 You can install cordova by following instructions [here](https://cordova.apache.org/#getstarted)
