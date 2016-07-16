@@ -5,7 +5,7 @@ define(function( require ) {
 
 	var ui = null
 	var events = null
-	
+
 	function Menu( eventsHandler ) {
 
 		this.selectedSaveToLoad = null;
@@ -21,10 +21,11 @@ define(function( require ) {
 				self.closeGeneralMenu();
 		});
 
+		$('#general-menu .sub-menu-btn').click( function() { self.openSubMenu($(this).attr('menu')) });
+
 		$('#export-menu-validate')      .click( self.exportComposition );
-		$('#new-menu-validate')         .click(function(){ self.newComposition() });
-		$('#general-menu .sub-menu-btn').click( function () { self.openSubMenu($(this).attr('menu')) });
-		$("#success-export-validate").click(self.closeGeneralMenu);
+		$('#new-menu-validate')         .click( self.newComposition );
+		$("#success-export-validate")   .click( self.closeGeneralMenu );
 	}
 
 	Menu.prototype.openGeneralMenu = function(){
@@ -36,39 +37,17 @@ define(function( require ) {
 		$('#general-menu').toggleClass('helpActive');
 	}
 
-	Menu.prototype.closeGeneralMenu = function() {
-		$('#general-menu').removeClass('helpActive').removeClass('active');
-		$('#general-menu-overlay').removeClass('active');
-		$('.sub-menu').removeClass('active');
-	}
-
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
-		if(name!=null && name!=""){
+		if(name!=null && name!="") {
 			$("#overlay-traitement").addClass("active");
 			$("#export-menu").removeClass("active");
 			var Export = require('app/Export');
 			var exportTimeline = new Export();
             exportTimeline.exportMp3(name+".mp3");
-		}
-		else{
+		}	else {
 			alert("Donnez un nom à votre musique")
 		}
-	}
-
-	Menu.prototype.newComposition = function (){
-		//On vide la timeline
-		$(".track").empty();
-		$("#export-menu-input").val("");
-		this.closeGeneralMenu();
-
-	}
-
-	Menu.prototype.launchRecordView = function (){
-		//alert('Penser à aller sur la vue de record')
-
-		openPanel('#panel-record');
-        this.closeGeneralMenu();
 	}
 
 	Menu.prototype.launchSoundManagementView = function (){
@@ -76,21 +55,11 @@ define(function( require ) {
 	}
 
 	Menu.prototype.openSubMenu = function (menuName){
+		$('.sub-menu-btn').removeClass('active');
 		$('.sub-menu').removeClass('active');
-		$('#general-menu *[menu]').addClass('active');
-		$('#general-menu *[menu=' + menuName + ']').addClass('active');
+		$('[menu=' + menuName + ']').addClass('active');
 		$('#'+menuName).addClass('active');
 		this.loadSubMenu( menuName );
-	}
-
-	Menu.prototype.displayCollectionManager = function () {
-		ui.initCollectionManager();
-		new CollectionEvents();
-
-		openPanel('#manage-menu');
-        this.closeGeneralMenu();		
-
-		events.soundEvents.initSoundClick();
 	}
 
 	Menu.prototype.loadSubMenu = function (name){
@@ -98,13 +67,45 @@ define(function( require ) {
 			case 'new-menu':
 				break;
 			case 'micro-menu':
-            	this.launchRecordView();
+        this.launchRecordView();
 				break;
 			case 'manage-menu':
 				this.displayCollectionManager();
 				break;
+			default:
+				break;
 		}
 	}
+
+	Menu.prototype.displayCollectionManager = function () {
+		ui.initCollectionManager();
+		new CollectionEvents();
+
+		openPanel('#manage-menu');
+    closeGeneralMenu();
+
+		events.soundEvents.initSoundClick();
+	}
+
+	Menu.prototype.newComposition = function () {
+		$(".track").empty();
+		$("#export-menu-input").val("");
+		console.log(this);
+		closeGeneralMenu();
+	}
+
+	Menu.prototype.launchRecordView = function (){
+		openPanel('#panel-record');
+		closeGeneralMenu();
+	}
+
+	closeGeneralMenu = function() {
+		$('#general-menu').removeClass('helpActive').removeClass('active');
+		$('#general-menu-overlay').removeClass('active');
+		$('.sub-menu-btn').removeClass('active');
+		$('.sub-menu').removeClass('active');
+	}
+
 
 	return Menu;
 
