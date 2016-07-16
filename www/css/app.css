@@ -21,7 +21,7 @@ body {
   font-family: "Orange";
   src: url(../fonts/orange_juice.ttf); }
 
-/*General style elements*/
+/*General style elements */
 aside {
   width: 20%; }
 
@@ -236,8 +236,8 @@ ul {
     .app .song.todelete {
       opacity: 0.5; }
     .app .song.songToPlace {
-      /*-webkit-animation: songToDropAnimation 1s infinite;*/
-      /*position: fixed;*/
+      /*-webkit-animation: songToDropAnimation 1s infinite; */
+      /*position: fixed; */
       z-index: 4; }
     .app .song[type="type-1"] {
       border: 5px solid rgba(235, 56, 22, 0.8); }
@@ -370,7 +370,7 @@ header {
     border-right: 1px solid rgba(97, 102, 127, 0.7);
     background: #eef0fa; }
 
-/*CSS MODAL*/
+/*CSS MODAL */
 #songsSelector {
   width: 100%;
   height: 100%;
@@ -419,7 +419,7 @@ header {
 
 #panel-record #recordScreen {
   position: relative;
-  /*width: 100%;*/
+  /*width: 100%; */
   height: 200px;
   width: 90%;
   margin: 40px auto 50px;
@@ -466,7 +466,7 @@ header {
     bottom: 10px;
     width: 100%; }
 
-/*---------*/
+/*--------- */
 #deck-buttons {
   padding-top: 10px; }
   #deck-buttons div:nth-of-type(3) {
@@ -529,7 +529,6 @@ header {
     margin-top: 20px; }
 
 #general-menu-overlay {
-  /* display: block; */
   height: 100%;
   background-color: transparent;
   position: absolute;
@@ -678,6 +677,11 @@ header {
   width: 55px;
   height: 55px;
   display: inline-block; }
+  .square_btn.active {
+    background-position: 0 33%; }
+    .square_btn.active:after {
+      top: 10px;
+      left: -5px; }
   .square_btn:after {
     content: "";
     background-image: url("../img/square_icon_sprite.png");
