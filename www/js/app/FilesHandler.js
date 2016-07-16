@@ -4,7 +4,7 @@ define( function ( require ) {
 	var Song = require('app/Song');
 
 	var directoriesUrl = {
-		"undifined": cordova.file.externalDataDirectory+"undifined",
+		"undefined": cordova.file.externalDataDirectory+"undefined",
 		"save": cordova.file.externalDataDirectory+"save",
 		"record": cordova.file.externalDataDirectory+"record",
 		"type-1": cordova.file.externalDataDirectory+"type-1",
