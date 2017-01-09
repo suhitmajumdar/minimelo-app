@@ -170,19 +170,16 @@ ul
 
   h2
     text-align: center
-    font-size: 100px
+    font-size: 5em
     font-family: "Orange"
     font-weight: 100
 
   .load-line
-    width: 80%
-    margin-left: auto
-    margin-right: auto
     text-align: center
 
   .button
-    width: 80px
-    height: 80px
+    width: 5rem
+    height: 5rem
     opacity: 0
 
     &[type="type-1"]
@@ -212,8 +209,8 @@ ul
 .button
   background-image: url("../img/buttons_sprite.png")
   background-size: 100%
-  width: 57px
-  height: 57px
+  width: 5rem
+  height: 5rem
   background-repeat: no-repeat
   position: relative
   font-size: 0px
@@ -257,14 +254,14 @@ ul
     height: 100%
     width: 100%
     position: absolute
-    visibility: hidden
+    display: none
     top: 0px
     left: 0px
     opacity: 0
 
     &.active
       z-index: 1
-      visibility: visible
+      display: block
       opacity: 1
 
   .song
@@ -460,23 +457,34 @@ header
   padding-top: 20px
   left: 0px
   top: 0px
-  text-align: center
   overflow-y: scroll
 
   #choose-song
-    display: inline-block
-    width: 90%
-    height: auto
+    display: block
+    margin: 0 auto
+    width: 95%
     text-align: left
 
-    div .button span
-      font-size: 32px
-      font-family: "Orange"
-      position: absolute
-      top: 4px
-      text-align: center
-      width: 100%
-      left: 0px
+    div .button
+      width: 3rem
+      height: 3rem
+      background-image: url("../img/buttons_sprite.png")
+      background-size: cover
+      display: inline-block
+      opacity: 0.3
+
+      &.active
+        background-position: 0 33%
+        opacity: 1
+
+      span
+        font-size: 2rem
+        font-family: "Orange"
+        position: absolute
+        left: 0
+        top: 0
+        text-align: center
+        width: 100%
 
     .container-line
       overflow-x: auto
@@ -488,19 +496,6 @@ header
 
         .button
           padding: 10px
-
-    .button
-      width: 55px
-      height: 55px
-      background-image: url("../img/buttons_sprite.png")
-      background-size: cover
-      display: inline-block
-      position: relative
-      opacity: 0.3
-
-      &.active
-        background-position: 0 33%
-        opacity: 1
 
   .validate_btn
     display: block
@@ -749,6 +744,8 @@ header
     position: relative
     text-align: left
     vertical-align: top
+    &:nth-child(2)
+      width: 32%
 
   #sorters-container
     height: 85%
@@ -760,9 +757,6 @@ header
       background-color: #ccc
 
   .button
-    width: 55px
-    height: 55px
-
     &.cloned
       background-color: #ccc
 
@@ -809,9 +803,6 @@ header
 .square_btn
   background-image: url("../img/buttons_sprite.png")
   background-size: cover
-  width: 55px
-  height: 55px
-  display: inline-block
   &.active
     background-position: 0 33%
     &:after
