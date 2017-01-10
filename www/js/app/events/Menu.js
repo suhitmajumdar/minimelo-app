@@ -39,15 +39,23 @@ define(function( require ) {
 
 	Menu.prototype.exportComposition = function (){
 		var name = $('#export-menu-input').val();
+
 		if(name!=null && name!="") {
 			$("#overlay-traitement").addClass("active");
 			$("#export-menu").removeClass("active");
 			var Export = require('app/Export');
 			var exportTimeline = new Export();
-            exportTimeline.exportMp3(name+".mp3");
+      if (exportTimeline.tracks.length == 0)
+        alert('Cette composition est vide !');
+      else
+        exportTimeline.exportMp3(name+".mp3");
 		}	else {
 			alert("Donnez un nom à votre musique")
 		}
+
+    $("#overlay-traitement").removeClass("active");
+    closeGeneralMenu();
+
 	}
 
 	Menu.prototype.launchSoundManagementView = function (){
