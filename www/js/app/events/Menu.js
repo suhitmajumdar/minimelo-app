@@ -18,14 +18,14 @@ define(function( require ) {
 
 		$('#general-menu-overlay').click(function(){
 			if(!$("#overlay-traitement").hasClass("active"))
-				self.closeGeneralMenu();
+				closeGeneralMenu();
 		});
 
 		$('#general-menu .sub-menu-btn').click( function() { self.openSubMenu($(this).attr('menu')) });
 
 		$('#export-menu-validate')      .click( self.exportComposition );
 		$('#new-menu-validate')         .click( self.newComposition );
-		$("#success-export-validate")   .click( self.closeGeneralMenu );
+		$("#success-export-validate")   .click( closeGeneralMenu );
 	}
 
 	Menu.prototype.openGeneralMenu = function(){
@@ -90,7 +90,6 @@ define(function( require ) {
 	Menu.prototype.newComposition = function () {
 		$(".track").empty();
 		$("#export-menu-input").val("");
-		console.log(this);
 		closeGeneralMenu();
 	}
 
