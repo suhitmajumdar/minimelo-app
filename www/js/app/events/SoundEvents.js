@@ -19,7 +19,7 @@ define(function(require) {
 		var buttonsPreview=document.querySelectorAll('.button[data-song-id]:not(.disabled):not(.qsopen):not(.soundChoose)');
 
 		for (var i = 0; i < buttonsPreview.length; i++) {
-			
+
 			buttonsPreview[i].onmousedown=function(event){
 
 				var idSong = parseInt(this.getAttribute('data-song-id'));
@@ -30,7 +30,7 @@ define(function(require) {
 				for (var k = 0; k < siblings.length; k++) {
 					siblings[k].classList.remove('active');
 				};
-				
+
 				this.classList.add('active');
 			}
 
@@ -40,18 +40,18 @@ define(function(require) {
 	SoundEvents.prototype.initDragAndDrop = function () {
 
 		var self=this;
-		
+
 		tracksDiv.ontouchmove=function (event){
-			
+
 			var clientX=event.touches[0].clientX;
 			var clientY=event.touches[0].clientY;
-			
+
 			var songDragged=self.getSoundDragged();
 
 			if(songDragged!=null)
 			{
 				event.preventDefault();
-				
+
 				var scrollLeft = timelineDiv.scrollLeft;
 
 				var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
@@ -74,7 +74,7 @@ define(function(require) {
 			}
 		}
 
-		tracksDiv.ontouchend=function(event){
+		tracksDiv.ontouchend = function(event){
 
 			var songDragged = self.getSoundDragged();
 
@@ -90,10 +90,10 @@ define(function(require) {
 				else{
 					var leftOriginal  = $(songDragged).attr('posSongX');
 					var pisteOriginal = $(songDragged).attr('track');
-					
+
 					$("#"+pisteOriginal).append(songDragged);
 					$(songDragged).css('left',leftOriginal+"px");
-					
+
 					$(songDragged).removeClass('inDrag');
 					$(songDragged).attr('overOtherSong',false);
 				}
@@ -107,12 +107,9 @@ define(function(require) {
 
 		divSong.ontouchstart=function(event){
 
-			if($(this).hasClass('todelete'))
-			{
+			if($(this).hasClass('todelete')) {
 				$(this).remove();
-			}
-			else
-			{
+			} else {
 				var	clientX=event.touches[0].clientX;
 				var clientY=event.touches[0].clientY;
 
@@ -121,7 +118,7 @@ define(function(require) {
 				var leftSong         = this.getBoundingClientRect().left;
 				var topSongTouch     = clientY - topSong;
 				var leftSongTouch    = clientX - leftSong;
-				
+
 
 				$(this).addClass('inDrag');
 				$(this).removeClass('songToPlace');
@@ -131,7 +128,7 @@ define(function(require) {
 				// $('#tracks').prepend(this);
 				tracksDiv.insertBefore(this,tracksDiv.childNodes[0]);
 				$(this).css('top',topTracksTouch - topSongTouch);
-				
+
 				$(this).attr('posSourisX',leftSongTouch);
 				$(this).attr('posSourisY',topSongTouch);
 
@@ -143,14 +140,14 @@ define(function(require) {
 		var trackOverlayed = null;
 		var divRect        = div.getBoundingClientRect();
 		var centerYDiv     = divRect.top+divRect.height/2;
-		
-		
+
+
 
 		var i=0;
 		while(i<tracks.length && trackOverlayed==null){
 
 			var trackRect   = tracks[i].getBoundingClientRect();
-			
+
 			if( centerYDiv >= trackRect.top && centerYDiv <= trackRect.bottom){
 				trackOverlayed=tracks[i];
 			}
@@ -166,21 +163,21 @@ define(function(require) {
 		var divRectSong = songDiv.getBoundingClientRect();
 		var leftSong    = divRectSong.left;
 		var rightSong   = divRectSong.right;
-		
+
 		var songsInTrack = trackOverlayed.querySelectorAll('.song:not(.inDrag)');
 
 		var i=0;
 		while(i<songsInTrack.length && !overSong){
 
 			var songToCompareRect  = songsInTrack[i].getBoundingClientRect();
-			
+
 			if(! (songToCompareRect.right <= leftSong || songToCompareRect.left >= rightSong ) ){
-			
+
 				overSong=true;
 			}
 			i++;
 		}
-		
+
 		return overSong;
 	}
 
@@ -191,19 +188,21 @@ define(function(require) {
 		$('.button.soundChoose').each(function(){
 
 			var buttonSong=this;
-			buttonSong.ontouchstart=function(event){
+			buttonSong.ontouchstart = function(event){
 
 				this.songToPlace=null;
-				if(this.getAttribute('data-song-id')!=null)
-				{
+				if(this.getAttribute('data-song-id')!=null) {
 					if(!this.classList.contains('qsopen')){
 						var divSong=self.createDivSong(this);
 						this.songToPlace=divSong;
 						tracksDiv.insertBefore(this.songToPlace,tracksDiv.childNodes[0]);
 					}
-					
+
+				} else {
+          $(this).openQuickSelect();
 				}
-				$(this).attr('touchstartTime',Date.now());
+
+				$(this).attr('touchstartTime', Date.now());
 				$(this).attr('move','false');
 
 			}
@@ -228,7 +227,7 @@ define(function(require) {
 				else if(trackOverlayed != null && !overOtherSong ){
 
 					var xOnPiste = event.changedTouches[0].clientX-trackOverlayed.getBoundingClientRect().left;
-					
+
 					if(xOnPiste < 0){
 						xOnPiste = 0;
 					}
@@ -238,18 +237,18 @@ define(function(require) {
 
 					this.songToPlace.style.left = xOnPiste + "px";
 					this.songToPlace.style.top  = 0 + "px";
-					
+
 					this.songToPlace.classList.remove('songToPlace');
-					
+
 					self.setDragOnSong(this.songToPlace);
 					this.songToPlace.setAttribute('track' , trackOverlayed.id);
 
-					trackOverlayed.appendChild(this.songToPlace); 
+					trackOverlayed.appendChild(this.songToPlace);
 					isDropped = true;
 				}
 				else
 				{
-					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && !hasMoved){ 
+					if( !$(this).hasClass('disabled') && !$(this).hasClass('qsopen') && !hasMoved){
 						var idSong = $(this).attr('data-song-id');
 						ResourcesHandler.playPreview(idSong);
 					}
@@ -262,7 +261,7 @@ define(function(require) {
 			}
 			buttonSong.ontouchmove=function(event){
 				this.setAttribute('move',true);
-				
+
 				if(this.songToPlace!=null){
 					var position = self.getPostionOnTracks(event.touches[0].clientX,event.touches[0].clientY);
 
@@ -272,7 +271,7 @@ define(function(require) {
 					this.songToPlace.style.top  = finalPosition.y+"px";
 
 					var trackOverlayed = self.getTrackOverlayed(this.songToPlace);
-					
+
 					if(trackOverlayed != null){
 						var overSong = self.isMovedOverSong(this.songToPlace,trackOverlayed);
 						this.songToPlace.setAttribute('overOtherSong',overSong);
@@ -281,7 +280,7 @@ define(function(require) {
 			}
 
 		});
-		
+
 	}
 
 	SoundEvents.prototype.correctPosition=function(divDragged,position){
@@ -326,7 +325,7 @@ define(function(require) {
 		var widthSong  = Timeline.secondsToPxInTimeline(song.getDuration());
 		var heightSong = tracks[0].offsetHeight;
 		var numberSong = soundButton.querySelector('span.numberSong').innerHTML;
-		
+
 
 		divSong.setAttribute('type',song.type);
 		divSong.innerHTML    = "<span class='numberSong'>" + numberSong + "</span>";
@@ -336,7 +335,7 @@ define(function(require) {
 		divSong.style.height = heightSong + "px";
 		divSong.classList.add('song');
 		divSong.classList.add('songToPlace');
-				
+
 		return divSong;
 	}
 
