@@ -13,7 +13,7 @@ var audioCtx = new AudioContext();
 
 $(document).ready(function() {
 
-	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler'], 
+	require(['app/Timeline', 'app/Utils', 'ui/UiHandler', 'events/EventsHandler', 'app/ResourcesHandler'],
 		function(Timeline, Utils, UiHandler, EventsHandler, Resources) {
 
 		'use strict';
@@ -22,6 +22,7 @@ $(document).ready(function() {
 
 			init : function () {
 				document.addEventListener("deviceready", this.onDeviceReady, false);
+        document.addEventListener("pause", this.onDevicePaused, false);
 			},
 
 			onDeviceReady : function () {
@@ -30,7 +31,7 @@ $(document).ready(function() {
 				var eventsHandler = new EventsHandler(uiHandler); // todo :init this after load songs to avoid spending more time
 
 				Resources.filesHandler.initDefaultsSongs().then(function(){
-					
+
 					Resources.filesHandler.loadSongs(Resources.songs).then(function(data) {
 						Resources.postProcessing();
 						uiHandler.initSoundElements();
@@ -39,10 +40,15 @@ $(document).ready(function() {
 					});
 
 				});
-				
+
 				uiHandler.initUI();
 
-			}
+			},
+
+      onDevicePaused : function () {
+        Timeline.stop();
+      }
+
 		};
 
 		application.init();
