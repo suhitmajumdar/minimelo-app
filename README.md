@@ -49,5 +49,5 @@ then run :
 
 ## Thanks 
 
-Special thanks to the LAME.JS team, their work is available [here](https://github.com/zhuker/lamejs), you can also check [their website](www.mp3dev.org) 
+Special thanks to the LAME.JS team, their work is available [here](https://github.com/zhuker/lamejs), you can also check [their website](http://lame.sourceforge.net/) 
 
